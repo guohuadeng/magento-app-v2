@@ -1,0 +1,12 @@
+{
+  "name": "kikuu",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.0-rc.4"
+  },
+  "dependencies": {
+    "font-awesome": "~4.3.0",
+    "jquery": "~2.1.4",
+    "ionic-material": "~0.3.0"
+  }
+}

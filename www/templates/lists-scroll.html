@@ -1,0 +1,71 @@
+<ion-view view-title="Home">
+    <ion-nav-title>
+        <img class="padding-left" src="img/logo.png">
+    </ion-nav-title>
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-android-menu" menu-toggle="left"><span ng-if="!user" class="badge badge-assertive"></span></button>
+        <button class="button button-icon"><img src="img/flags/Tanzania.png" height="18"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <a href="#app/search" class="button button-icon ion-android-search"></a>
+        <a href="#app/frame/cart" class="button button-icon ion-android-cart"></a>
+    </ion-nav-buttons>
+    <ion-content>
+        <md-tabs md-selected="selectedIndex" md-stretch-tabs="never" md-border-bottom>
+            <md-tab ng-repeat="tab in tabs" label="{{tab.name}}">
+                <md-content class="md-padding">
+                    <ion-scroll style="height:100%">
+                        <ion-refresher
+                                pulling-text="Pull to refresh..."
+                                on-refresh="doRefresh($index)">
+                        </ion-refresher>
+                        <ion-list class="products-grid {{tab.class_name}}">
+                            <div class="product" ng-repeat="product in tab.lists">
+                                <div class="product-inner">
+                                    <a href="#app/productDetail/{{product.entity_id}}">
+                                        <div class="product-image">
+                                            <img src="{{product.image_url}}"
+                                                 alt="{{product.name}}">
+                                        </div>
+                                    </a>
+
+                                    <div class="product-info">
+                                        <div class="product-name">
+                                            {{product.name}}
+                                        </div>
+
+                                        <div class="product-price">
+                                            <div class="price-box">
+                                            <span class="special-price">
+                                                <span class="special-price">
+                                                    <span class="price">
+                                                        {{product.symbol}}{{product.final_price_with_tax | number:0}}
+                                                    </span>
+                                                    &nbsp;
+                                                    <span class="old-price">
+                                                        {{product.symbol}}{{product.regular_price_with_tax | number:0}}
+                                                    </span>
+                                                </span>
+                                            </span>
+                                            <span class="discount {{price_percent_class}}">
+                                                <span class="price">
+                                                    {{product | discount}}
+                                                </span>
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ion-list>
+                        <ion-infinite-scroll
+                                ng-if="tab.hasInit && !tab.loadOver"
+                                on-infinite="loadMore($index)"
+                                distance="10%">
+                        </ion-infinite-scroll>
+                    </ion-scroll>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </ion-content>
+</ion-view>

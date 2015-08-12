@@ -1,0 +1,192 @@
+<ion-view view-title="Product Detail">
+  <ion-content class="product-container">
+	<!-- img swiper -->
+    <div class="product-swiper-container">
+      <ion-slide-box delegate-handle="image-viewer" show-pager="true">
+        <ion-slide ng-repeat="img in productImg" ng-init="updateSlider()">
+        	<img ng-src="{{img.url}}">
+        </ion-slide>
+      </ion-slide-box>
+  	</div>
+		<!-- end img swiper -->
+		<!-- product base card -->  
+    <div class="card padding-horizontal">
+    <h4>{{product.name}}</h4>
+    <div class="price-box">			
+				<span class="special-price"><span class="price">{{product.symbol}}&nbsp;{{product.final_price_with_tax}}</span>
+				</span>
+				<span class="old-price padding-horizontal">{{product.regular_price_with_tax}}</span>      
+      <div ng-if="product.is_in_stock" class="availability in-stock"><span>Availability: In stock</span><span class="shipping">Free Shipping</span></div>
+      <div ng-if="!product.is_in_stock" class="availability out-of-stock"><span>Availability: Out of stock</span></div>
+		</div>      
+        
+   		   
+    </div>     
+		<!-- end product base card -->  
+		<!-- product option-->       
+    <div class="card">
+		<form method="post" id="product_addtocart_form">    
+      <div class="no-none">
+        <input type="hidden" name="product" value="{{product.entity_id}}">
+      </div>
+   		<dl class="list product-option-container">
+      	<div class="qty-holder">      
+          <div class="item item-input-inset">
+            <label class="item item-input">
+                <span class="input-label">Quantity<span><em class="assertive">*</em>
+            </label>
+            <div class="button-bar">
+              <button class="button btn-minus ion-minus button-small button-outline button-light" ng-click="qty=qty-1"></button> 
+              <label class="item-input">
+                <input type="number" name="qty" id="qty"  value="{{qty | minqty}}" title="Qty">
+              </label>
+              <button class="button btn-plus ion-plus button-small button-outline button-light"  ng-click="qty=qty+1"></button> 
+            </div>
+          </div>    
+      	</div>
+        
+        <div ng-repeat="option in productOption"  ng-switch on="option.custom_option_type">                  
+					<!-- field option-->   
+            <div class="form__field" ng-switch-when="field">            
+              <label class="item item-input">
+                <span class="input-label">
+              	{{option.custom_option_title}}
+                <em ng-if="option.is_require" class="assertive">*</em>
+                &nbsp;+{{product.symbol}}&nbsp;{{option.price}}&nbsp;
+                </span>
+              </label>        
+              <label class="item item-input padding-left">
+                <input type="text" onchange="opConfig.reloadPrice()" id="options_{{option.option_id}}_text" class="form__textfield textfield product-custom-option" name="options[{{option.option_id}}]" value="">
+              </label>
+            </div>	 
+					<!--end field option-->   
+                    
+					<!-- drop_down option-->   
+            <div class="form__field" ng-switch-when="drop_down">            
+              <label class="item item-input item-select">
+                <div class="input-label">
+                {{option.custom_option_title}}
+                <em ng-if="option.is_require==1" class="assertive">*</em>
+                </div>
+                <select name="options[{{option.option_id}}]" id="select_{{option.option_id}}" class="select-dark product-custom-option validation-failed" title="" onchange="opConfig.reloadPrice()">
+                  <option value="">-- Please Select --</option>
+                  <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">
+                  {{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}</option>
+                </select>
+              </label>
+            </div>	                    
+					<!-- end drop_down option-->   
+            
+					<!-- check option-->   
+            <div class="form__field"  ng-switch-when="checkbox">	
+              <label class="item">
+              	{{option.custom_option_title}}
+                <em ng-if="option.is_require==1" class="assertive">*</em>
+              </label>	
+	              <ul id="options-{{option.option_id}}-list" class="list padding-left"> 
+                  <li class="item item-checkbox checkbox-dark" ng-repeat="item in option.custom_option_value">
+                    <label for="options_{{item.option_id}}_{{$index+2}}
+" class="checkbox">
+                    <input type="checkbox" class="product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{item.option_id}}][]" id="options_{{item.option_id}}_{{$index+2}}" value="{{item.option_type_id}}" price="{{item.price}}">
+                    </label>
+                    {{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}
+                  </li>
+                  </ul>
+            </div>          
+					<!--end check option-->   
+            
+					<!-- radio option--> 
+            <div class="form__field"  ng-switch-when="radio">	            
+              <label class="item">
+              	{{option.custom_option_title}}
+			          <em ng-if="option.is_require==1" class="assertive">*</em>
+              </label>		
+              <div id="options-{{option.option_id}}-list" class="list padding-left">
+                <label class="item item-radio" ng-repeat="item in option.custom_option_value">
+                  <input type="radio" class="product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{item.option_id}}]" id="options_{{item.option_id}}_{{$index+2}}" value="{{item.option_type_id}}" price="{{item.price}}">
+                    <div class="item-content" for="options_{{item.option_id}}_{{$index+2}}">
+                    	{{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}
+                    </div>
+                    <i class="radio-icon icon-left ion-checkmark"></i>
+                </label>
+              </div>
+            </div>	    
+					<!--end radio option-->
+
+					<!-- area option-->
+            <div class="form__field" ng-switch-when="area">
+              <label class="item">                      
+                <span class="input-label">
+              	{{option.custom_option_title}}                
+                <em ng-if="option.is_require==1" class="assertive">*</em>
+                &nbsp;+{{product.symbol}}&nbsp;{{option.price}}&nbsp;
+                </span>
+                <div class="item">
+                <textarea onchange="opConfig.reloadPrice()" id="options_{{option.option_id}}_text" class="form__textarea product-custom-option" name="options[{{option.option_id}}]">
+                </textarea>         
+                </div>
+              </label>  
+            </div>	
+					<!--end area option-->        
+               
+					<!-- multiple option--,因为不美观，暂时不用             
+            <div class="form__field"  ng-switch-when="multiple">	
+              <label class="item">{{option.custom_option_title}}</label>	
+                  <div class="input-box">
+                    <select name="options[{{option.option_id}}][]" id="select_{{option.option_id}}" class="multiselect product-custom-option" title="" multiple="multiple" onchange="opConfig.reloadPrice()">
+                    <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">{{item.title}} +{{product.symbol}}&nbsp;{{item.price}}</option>
+                    </select>
+                  </div>
+            </div>
+					<!--end multiple option--> 
+            
+          <div class="item input-box"  ng-switch-when="multiple">
+          	Multiple option not support, Please use check option
+          </div>
+          <div class="item input-box"  ng-switch-when="date">
+          	Date option not support
+          </div>
+          <div class="item input-box"  ng-switch-when="date_time">
+          	DateTime option not support          
+          </div>
+          <div class="item input-box"  ng-switch-when="time">
+          	Time option not support
+          </div>
+          <div class="item input-box"  ng-switch-when="file">
+          	File option not support          
+          </div>
+        </div>
+      </dl> 
+    </form>
+    </div>
+		<!-- end product option-->  
+              
+		<ion-tabs class="tabs-ligth tabs-standard">
+	    <ion-tab title="Description" id="tab_description_tabbed_contents">
+      	<div class="list padding"  ng-bind-html="product.description | unsafe">
+        </div>
+			</ion-tab>
+	    <ion-tab title="Additional" id="tab_description_tabbed_attribute">
+      	<div class="list padding">
+          <div class="row">
+            <div class="col">Weight:</div>
+            <div class="col col-75">{{product.weight}}&nbsp;g</div>
+          </div>
+          <div class="row" ng-repeat="item in product.additional">
+            <div class="col">{{item.label}}:</div>
+            <div class="col col-75">{{item.value}}</div>
+          </div>
+        </div>
+			</ion-tab>
+    </ion-tabs>      
+      
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  
+  </ion-content>
+  
+  <div class="bar bar-footer bar-stable add-to-cart">
+    <a class="add-to-cart-left button button-outline button-assertive ion-android-cart" href="#app/frame/cart">&nbsp;{{items_qty}}</a>
+    <button class="button add-to-cart-right button-assertive" type="submit" ng-click="doCartAdd()">Add to Cart</button>  
+  </div>
+</ion-view>
