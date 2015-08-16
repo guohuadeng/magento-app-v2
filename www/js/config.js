@@ -1,15 +1,17 @@
-var isRelease = 0; //改环境图省事，设置为0则为开发环境，1为生产
+var isRelease = 0; //改环境图省事，设置为0则为开发环境，1为生产，-2为本地web
 
 var baseUrl = 'http://www.kikuu.com/en',
     baseSite = 'http://www.kikuu.com/m';
 
-if (isRelease == 0 )	{
+if (isRelease === 0 )	{
 	baseUrl = 'http://demo.sunpop.cn/en';
     baseSite = 'http://demo.sunpop.cn/m';
-}
-if (isRelease == -1 )	{
+} else if (isRelease === -1 )	{
 	baseUrl = 'http://lvee.sunpop.cn/en';
     baseSite = 'http://lvee.sunpop.cn/m';
+} else if (isRelease == -2 )	{
+    baseUrl = '/en';
+    baseSite = '/m';
 }
 
 angular.module('app.config', [])

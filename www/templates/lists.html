@@ -11,7 +11,7 @@
         <a href="#app/frame/cart" class="button button-icon ion-android-cart"></a>
     </ion-nav-buttons>
     <ion-content scroll="false" overflow-scroll="true">
-        <md-tabs md-selected="selectedIndex" md-stretch-tabs="never" md-border-bottom>
+        <md-tabs md-selected="selectedIndex" md-stretch-tabs="never" md-border-bottom md-autoselect>
             <md-tab ng-repeat="tab in tabs" label="{{tab.name}}">
                 <md-content class="md-padding">
                     <ion-scroll style="height:100%" overflow-scroll="true" direction="y" locking="true">
@@ -30,12 +30,12 @@
                                                    alt="{{product.name}}">
                                           </div>
                                       </a>
-  
+
                                       <div class="product-info">
                                           <div class="product-name">
                                               {{product.name}}
                                           </div>
-  
+
                                           <div class="product-price">
                                               <div class="price-box">
                                               <span class="special-price">
@@ -73,12 +73,12 @@
                                                    alt="{{product.name}}">
                                           </div>
                                       </a>
-  
+
                                       <div class="product-info">
                                           <div class="product-name">
                                               {{product.name}}
                                           </div>
-  
+
                                           <div class="product-price">
                                               <div class="price-box">
                                               <span class="special-price">

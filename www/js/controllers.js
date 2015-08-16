@@ -6,12 +6,12 @@ angular.module('app.controllers', [])
             $ionicLoading.show({
                 template: 'Loading...'
             });
-						/*
-            $timeout(function () {
-								$scope.showAlert('Alert!','Can not load data! Please check your network');
-                $ionicLoading.hide(); //close the popup after 3 seconds for some reason
-            }, 10000);
-						*/
+            /*
+             $timeout(function () {
+             $scope.showAlert('Alert!','Can not load data! Please check your network');
+             $ionicLoading.hide(); //close the popup after 3 seconds for some reason
+             }, 10000);
+             */
         };
         $scope.hideLoading = function () {
             $ionicLoading.hide();
@@ -27,10 +27,10 @@ angular.module('app.controllers', [])
                 template: '<input autofocus class="padding-left" type="text" ng-model="loginData.username">',
                 title: 'Enter your email',
                 subTitle: 'This would take a little longer. Please wait...',
-								inputType: 'email',
-                scope: $scope,	
+                inputType: 'email',
+                scope: $scope,
                 buttons: [
-                    { text: 'Cancel' },
+                    {text: 'Cancel'},
                     {
                         text: '<b>Submit</b>',
                         type: 'button-assertive',
@@ -39,7 +39,7 @@ angular.module('app.controllers', [])
                                 //don't allow the user to close unless he enters wifi password
                                 e.preventDefault();
                             } else {
-																$scope.loginData.email = $scope.loginData.username
+                                $scope.loginData.email = $scope.loginData.username
                                 $scope.showLoading();
                                 $rootScope.service.get('forgotpwd', $scope.loginData, function (res) {
                                     if (res.code == '0x0000') {
@@ -68,15 +68,15 @@ angular.module('app.controllers', [])
         };
         $scope.showLogin = function () {
             // An elaborate, custom popup
-						$scope.loginData.password = '';
-						$scope.$apply();
+            $scope.loginData.password = '';
+            $scope.$apply();
             var myPopup = $ionicPopup.show({
                 templateUrl: 'templates/login.html',
                 title: 'Login - Registered User',
-								cssClass: 'login-container',
+                cssClass: 'login-container',
                 scope: $scope,
                 buttons: [
-                    { text: 'Cancel' },
+                    {text: 'Cancel'},
                     {
                         text: 'Login',
                         type: 'button-assertive',
@@ -85,18 +85,18 @@ angular.module('app.controllers', [])
                                 //don't allow the user to close unless he enters wifi password
                                 e.preventDefault();
                             } else {
-																$scope.doLogin();
+                                $scope.doLogin();
                                 return $scope.registerData.email;
                             }
                         }
                     }
                 ]
             });
-						$scope.hideLogin = function () {
-									console.log('login close');
-									myPopup.close();
-									return $scope.loginData.username;
-						};
+            $scope.hideLogin = function () {
+                console.log('login close');
+                myPopup.close();
+                return $scope.loginData.username;
+            };
             myPopup.then(function (res) {
                 console.log('Tapped!', res);
             });
@@ -146,8 +146,10 @@ angular.module('app.controllers', [])
                 cssClass: 'popupFullscreen',
                 scope: $scope,
                 buttons: [
-                    { text: 'Enter Kikuu',
-                        type: 'button-energized'}
+                    {
+                        text: 'Enter Kikuu',
+                        type: 'button-energized'
+                    }
                 ]
             });
             myPopup.then(function (res) {
@@ -178,9 +180,9 @@ angular.module('app.controllers', [])
         $scope.getUser();
         // 菜单处理
         $rootScope.service.get('menus', function (menus) {
-					angular.forEach(menus, function(data){
-						//data.item_height = '235';
-						});
+            angular.forEach(menus, function (data) {
+                //data.item_height = '235';
+            });
             $scope.menus = [
                 {
                     cmd: 'daily_sale',
@@ -218,9 +220,9 @@ angular.module('app.controllers', [])
         $ionicModal.fromTemplateUrl('templates/login.html', {
             scope: $scope
         }).then(function (modal) {
-                $scope.modal = modal;
-                $ionicTabsDelegate.select(0);
-            });
+            $scope.modal = modal;
+            $ionicTabsDelegate.select(0);
+        });
 
         // Triggered in the login modal to close it
         $scope.closeLogin = function () {
@@ -237,21 +239,21 @@ angular.module('app.controllers', [])
         };
 
         // Perform the login action when the user submits the login form
-        $scope.doLogin = function () {					
+        $scope.doLogin = function () {
             $scope.showLoading();
             $rootScope.service.get('login', $scope.loginData, function (res) {
                 if (res.code || res.message) {
-                    $scope.showAlert('Alert!',res.message || res.code);			
-				            $scope.hideLoading();
+                    $scope.showAlert('Alert!', res.message || res.code);
+                    $scope.hideLoading();
                     return;
                 }
                 $scope.user = res;
                 $scope.modal.hide();
-		            $scope.hideLoading();
-            });								
+                $scope.hideLoading();
+            });
         };
 
-        $scope.doLogout = function () {				
+        $scope.doLogout = function () {
             $scope.showLoading();
             $rootScope.service.get('logout', $scope.getUser);
             $timeout($scope.hideLoading(), 1000);
@@ -319,7 +321,7 @@ angular.module('app.controllers', [])
             if (tab.category_id) {
                 params.categoryid = +tab.category_id;
             }
-						$scope.showLoading();
+            $scope.showLoading();
             $rootScope.service.get('products', params, function (lists) {
                 if (type === 'load') {
                     if (lists) {
@@ -336,8 +338,8 @@ angular.module('app.controllers', [])
                     callback();
                 }
             });
-						
-						$scope.hideLoading();		
+
+            $scope.hideLoading();
         };
 
         // 根据菜单生成 tabs
@@ -376,13 +378,13 @@ angular.module('app.controllers', [])
         };
     })
     //产品统一用这个名 Product-xx
-    .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicPopup, $ionicSlideBoxDelegate,$ionicScrollDelegate, $cordovaSocialSharing) {	
+    .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicPopup, $ionicSlideBoxDelegate, $ionicScrollDelegate, $cordovaSocialSharing) {
         $scope.showLoading();
         $scope.productid = $stateParams.productid;
         $scope.qty = 1;
         $scope.showShare = true;
         $scope.updateSlider = function () {
-					$ionicSlideBoxDelegate.$getByHandle('image-viewer').update();		
+            $ionicSlideBoxDelegate.$getByHandle('image-viewer').update();
         };
         //取购物车商品数量
         $rootScope.service.get('cartGetQty', {
@@ -403,7 +405,7 @@ angular.module('app.controllers', [])
                 $scope.productImg = lists;
                 $scope.$apply();
             });
-        	//取商品选项
+            //取商品选项
             if (results.has_custom_options) {
                 $rootScope.service.get('productOption', {
                     productid: $stateParams.productid
@@ -413,9 +415,9 @@ angular.module('app.controllers', [])
                 });
             }
             $scope.$apply();
-        		$scope.hideLoading();
+            $scope.hideLoading();
         });
-				//分享
+        //分享
         $scope.onShare = function () {
             $cordovaSocialSharing.share($scope.product.name, $scope.product.name, '', $scope.product.url_key);
         };
@@ -423,15 +425,15 @@ angular.module('app.controllers', [])
         $scope.imageFullscreen = function () {
             $scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
             var myt = '<ion-content overflow-scroll="true">'
-								+'<ion-slide-box delegate-handle="image-fullscreen-viewer" on-slide-changed="noZoom()" show-pager="true" active-slide="'
-                + $ionicSlideBoxDelegate.currentIndex() 
-								+ '"><ion-slide ng-repeat="img in productImg" ng-init="updateFullscreenSlider()">'
-								+'<ion-scroll overflow-scroll="true" delegate-handle="image-scroll" zooming="true" direction="xy" locking="false" scrollbar-x="false" scrollbar-y="false" min-zoom="1" id="scrolly"  style="width: 100%; height: 100%;">'
-								+'<img id="zoomImg" class="fullwidth" ng-src="{{img.url}}"  on-double-tap="zoomProductImg()">'
-								+'<span></span>'
-								+'</ion-scroll>'
-								+'</ion-slide></ion-slide-box>';
-								+'</ion-content>';
+                + '<ion-slide-box delegate-handle="image-fullscreen-viewer" on-slide-changed="noZoom()" show-pager="true" active-slide="'
+                + $ionicSlideBoxDelegate.currentIndex()
+                + '"><ion-slide ng-repeat="img in productImg" ng-init="updateFullscreenSlider()">'
+                + '<ion-scroll overflow-scroll="true" delegate-handle="image-scroll" zooming="true" direction="xy" locking="false" scrollbar-x="false" scrollbar-y="false" min-zoom="1" id="scrolly"  style="width: 100%; height: 100%;">'
+                + '<img id="zoomImg" class="fullwidth" ng-src="{{img.url}}"  on-double-tap="zoomProductImg()">'
+                + '<span></span>'
+                + '</ion-scroll>'
+                + '</ion-slide></ion-slide-box>';
+            +'</ion-content>';
             // An elaborate, custom popup
             var myPopup = $ionicPopup.show({
                 template: myt,
@@ -442,46 +444,49 @@ angular.module('app.controllers', [])
                         text: '< ',
                         type: 'button-light',
                         onTap: function (e) {
-														$ionicSlideBoxDelegate.previous();
-											      e.preventDefault();
-                            }
-                     },
-                    { text: 'Close' ,
-                        type: 'button-light',},
-                    { text: '>',
+                            $ionicSlideBoxDelegate.previous();
+                            e.preventDefault();
+                        }
+                    },
+                    {
+                        text: 'Close',
+                        type: 'button-light',
+                    },
+                    {
+                        text: '>',
                         type: 'button-light',
                         onTap: function (e) {
-														$ionicSlideBoxDelegate.next();
-											      e.preventDefault();
-                            } 
-										},
+                            $ionicSlideBoxDelegate.next();
+                            e.preventDefault();
+                        }
+                    },
                 ]
             });
-						$scope.updateFullscreenSlider = function ()	{
-								$ionicSlideBoxDelegate.$getByHandle('image-fullscreen-viewer').update();							
-							};
-						var toggle = 1;
-						$scope.zoomProductImg = function ()	{
-								if (toggle==1) {
-									toggle = 2;
-									$ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(toggle);
-								}
-								else if (toggle==2) {
-									toggle = 1;
-									$ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(toggle);
-								}							
-							};
-						$scope.noZoom = function ()	{
-								$ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(1);							
-							}
-							
+            $scope.updateFullscreenSlider = function () {
+                $ionicSlideBoxDelegate.$getByHandle('image-fullscreen-viewer').update();
+            };
+            var toggle = 1;
+            $scope.zoomProductImg = function () {
+                if (toggle == 1) {
+                    toggle = 2;
+                    $ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(toggle);
+                }
+                else if (toggle == 2) {
+                    toggle = 1;
+                    $ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(toggle);
+                }
+            };
+            $scope.noZoom = function () {
+                $ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(1);
+            }
+
             myPopup.then(function (res) {
                 console.log('Tapped!', res);
             });
         };
         //end 全屏幕图片
 
-				//增减数量操作
+        //增减数量操作
         $scope.qtyAdd = function () {
             $scope.qty = $scope.qty + 1;
         };
@@ -489,7 +494,7 @@ angular.module('app.controllers', [])
             if ($scope.qty > 1)
                 $scope.qty = $scope.qty - 1;
         };
-				//end 增减数量操作
+        //end 增减数量操作
         // Perform the add to cart
         $scope.doCartAdd = function () {
             var queryString = $('#product_addtocart_form').formSerialize();
