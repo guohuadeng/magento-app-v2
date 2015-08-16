@@ -167,14 +167,12 @@ angular.module('app.controllers', [])
         $scope.getWebsite = function () {
             $rootScope.service.get('website', function (website) {
                 $scope.website = website;
-                $scope.$apply();
             });
         };
         // 用户信息
         $scope.getUser = function () {
             $rootScope.service.get('user', function (user) {
                 $scope.user = user;
-                $scope.$apply();
             });
         };
         $scope.getUser();
@@ -333,7 +331,6 @@ angular.module('app.controllers', [])
                     tab.lists = lists;
                 }
                 tab.hasInit = true;
-                $scope.$apply();
                 if (typeof callback === 'function') {
                     callback();
                 }
@@ -346,7 +343,6 @@ angular.module('app.controllers', [])
         $scope.$on('menusData', function (e, menus) {
             $scope.menus = menus;
             $scope.tabs = menus.slice(0);
-            $scope.$apply();
             $scope.selectedIndex = 0;
         });
         $scope.$on('setCatalog', function (e, index) {
@@ -391,7 +387,6 @@ angular.module('app.controllers', [])
             product: $stateParams.productid
         }, function (res) {
             $scope.items_qty = res.items_qty;
-            $scope.$apply();
         });
         //取商品详情
         $rootScope.service.get('productDetail', {
@@ -403,7 +398,6 @@ angular.module('app.controllers', [])
                 product: $stateParams.productid
             }, function (lists) {
                 $scope.productImg = lists;
-                $scope.$apply();
             });
             //取商品选项
             if (results.has_custom_options) {
@@ -411,10 +405,8 @@ angular.module('app.controllers', [])
                     productid: $stateParams.productid
                 }, function (option) {
                     $scope.productOption = option;
-                    $scope.$apply();
                 });
             }
-            $scope.$apply();
             $scope.hideLoading();
         });
         //分享
@@ -510,7 +502,6 @@ angular.module('app.controllers', [])
                 if (res.result == 'success') {
                     $scope.showAlert('Success', res.items_qty + '&nbsp;items already in your cart.');
                     $scope.items_qty = res.items_qty;
-                    $scope.$apply();
                     return;
                 }
             });
@@ -534,7 +525,6 @@ angular.module('app.controllers', [])
         $scope.text = $stateParams.text;
         $rootScope.service.get('search', {q: $stateParams.text}, function (results) {
             $scope.results = results;
-            $scope.$apply();
         });
     })
     //register选项

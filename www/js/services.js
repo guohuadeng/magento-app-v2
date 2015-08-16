@@ -1,4 +1,4 @@
-function Service($rootScope, Config) {
+function Service($rootScope, $http, Config) {
 
     var api = {
         website: Config.baseUrl + '/restconnect/store/websiteinfo',
@@ -28,25 +28,20 @@ function Service($rootScope, Config) {
     };
 
     $rootScope.service = {
-        get: function (key, params, callback) {
+        get: function (key, params, success, error) {
             if (typeof params === 'function') {
-                callback = params;
+                error = success;
+                success = params;
                 params = null;
             }
 
             var url = api[key];
 
-            $.get(url, params, function (res) {
-                if (typeof callback === 'function') {
-                    try {
-                        callback($.parseJSON(res));
-                    } catch (e) {
-                        callback();
-                    }
-                }
-            });
+            $http.get(url, params).then(function (res) {
+                success(res.data);
+            }, error);
         },
-        post: function (key, params, callback) {
+        post: function (key, params, success, error) {
             if (typeof params === 'function') {
                 callback = params;
                 params = null;
@@ -54,15 +49,9 @@ function Service($rootScope, Config) {
 
             var url = api[key];
 
-            $.post(url, params, function (res) {
-                if (typeof callback === 'function') {
-                    try {
-                        callback($.parseJSON(res));
-                    } catch (e) {
-                        callback();
-                    }
-                }
-            });
+            $.post(url, params).then(function (res) {
+                success(res.data);
+            }, error);
         }
     }
 }
