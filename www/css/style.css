@@ -712,3 +712,20 @@ em {
     height: 4em;
     width: 100%;
 }
+
+.select-options {
+    line-height: 50px;
+}
+
+.select-options span {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+.select-options span.selected {
+    background: #ff0000;
+    color: #fff;
+}

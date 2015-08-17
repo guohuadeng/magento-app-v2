@@ -485,6 +485,10 @@ angular.module('app.controllers', [])
             if ($scope.qty > 1)
                 $scope.qty = $scope.qty - 1;
         };
+        $scope.selectOptions = {};
+        $scope.selectOption = function (name) {
+            $scope.selectOptions[name] = this.item.option_type_id;
+        };
         //end 增减数量操作
         // Perform the add to cart
         $scope.doCartAdd = function () {

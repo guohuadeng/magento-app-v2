@@ -37,7 +37,7 @@
 		<!-- end product base card -->  
 		<!-- product option-->       
     <div class="">
-		<form method="post" id="product_addtocart_form">    
+    <form method="post" id="product_addtocart_form">
       <div class="no-none">
         <input type="hidden" name="product" value="{{product.entity_id}}">
       </div>
@@ -49,12 +49,14 @@
                 <em class="assertive">*</em>
             </label>
             
-            <span class="input-number-decrement" ng-click="qtyMinus()">–</span><input class="input-number" type="text" name="qty" id="qty" ng-model="qty" min=1 max=99 title="Qty"><span class="input-number-increment" ng-click="qtyAdd()">+</span>                        
+            <span class="input-number-decrement" ng-click="qtyMinus()">–</span>
+              <input class="input-number" type="text" name="qty" id="qty" ng-model="qty" min=1 max=99 title="Qty">
+            <span class="input-number-increment" ng-click="qtyAdd()">+</span>
           </div>    
       	</div>
         
         <div ng-repeat="option in productOption"  ng-switch on="option.custom_option_type">                  
-					<!-- field option-->   
+			<!-- field option-->
             <div class="form__field" ng-switch-when="field">            
               <label class="item item-input">
                 <span class="input-label">
@@ -68,23 +70,25 @@
                 <input type="text" onchange="opConfig.reloadPrice()" id="options_{{option.option_id}}_text" class="form__textfield textfield product-custom-option" name="options[{{option.option_id}}]" value="">
               </label>
             </div>	 
-					<!--end field option-->   
+			<!--end field option-->
                     
 					<!-- drop_down option-->   
             <div class="form__field" ng-switch-when="drop_down">            
-              <label class="item item-input item-select">
+              <label class="item item-input">
                 <div class="input-label">
                 {{option.custom_option_title}}
                 <em ng-if="option.is_require==1" class="assertive">*</em>
                 </div>
-                <select name="options[{{option.option_id}}]" id="select_{{option.option_id}}" class="select-dark product-custom-option validation-failed" title="" onchange="opConfig.reloadPrice()">
-                  <option value="">-- Please Select --</option>
-                  <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">
-                  {{item.title}}&nbsp;
-                  <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price | number:0}}</em>
-                  </option>
-                </select>
               </label>
+                <div class="select-options">
+                  <input type="hidden" name="options{{option.option_id}}" value="{{selectOptions.custom_option_value}}">
+                  <span ng-repeat="item in option.custom_option_value" data-value="{{item.option_type_id}}"
+                        class="{{selectOptions.custom_option_value === item.option_type_id ? 'selected' : ''}}"
+                        ng-click="selectOption('custom_option_value')">
+                    {{item.title}}&nbsp;
+                    <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price | number:0}}</em>
+                  </span>
+                </div>
             </div>	                    
 					<!-- end drop_down option-->   
             
