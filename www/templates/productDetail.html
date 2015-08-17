@@ -81,9 +81,11 @@
                 </div>
               </label>
                 <div class="select-options">
-                  <input type="hidden" name="options{{option.option_id}}" value="{{selectOptions.custom_option_value}}">
+                  <input type="hidden" name="options[{{option.option_id}}]"
+                         value="{{selectOptions['custom_option_value' + option.option_id]}}">
                   <span ng-repeat="item in option.custom_option_value" data-value="{{item.option_type_id}}"
-                        class="{{selectOptions.custom_option_value === item.option_type_id ? 'selected' : ''}}"
+                        class="{{selectOptions['custom_option_value' +
+                        $parent.option.option_id] === item.option_type_id ? 'selected' : ''}}"
                         ng-click="selectOption('custom_option_value')">
                     {{item.title}}&nbsp;
                     <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price | number:0}}</em>
