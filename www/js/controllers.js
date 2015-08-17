@@ -172,7 +172,7 @@ angular.module('app.controllers', [])
         // 用户信息
         $scope.getUser = function () {
             $rootScope.service.get('user', function (user) {
-                $scope.user = user;
+                $scope.user = typeof user === 'object' ? user : null;
             });
         };
         $scope.getUser();
@@ -277,7 +277,6 @@ angular.module('app.controllers', [])
                 $scope.showAlert('Alert!', 'Please confirm you password!');
                 return;
             }
-            ;
             $scope.showLoading();
             $rootScope.service.get('register', $scope.registerData, function (res) {
                 if (res[0]) {
@@ -470,7 +469,7 @@ angular.module('app.controllers', [])
             };
             $scope.noZoom = function () {
                 $ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(1);
-            }
+            };
 
             myPopup.then(function (res) {
                 console.log('Tapped!', res);

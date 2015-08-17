@@ -37,7 +37,9 @@ function Service($rootScope, $http, Config) {
 
             var url = api[key];
 
-            $http.get(url, params).then(function (res) {
+            $http.get(url, {
+                params: params
+            }).then(function (res) {
                 success(res.data);
             }, error);
         },
@@ -49,7 +51,9 @@ function Service($rootScope, $http, Config) {
 
             var url = api[key];
 
-            $.post(url, params).then(function (res) {
+            $.post(url, {
+                params: params
+            }).then(function (res) {
                 success(res.data);
             }, error);
         }
