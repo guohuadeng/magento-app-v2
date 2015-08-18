@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+     <modules>
+        <SkyMazon_RestConnect>
+            <active>true</active>
+            <codePool>local</codePool>
+        </SkyMazon_RestConnect>
+     </modules>
+</config>

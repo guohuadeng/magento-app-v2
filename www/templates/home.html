@@ -1,0 +1,39 @@
+<ion-view view-title="Logo Here">
+    <ion-content>
+			<!-- img swiper -->
+      <div class="homebanner-swiper-container">
+        <ion-slide-box delegate-handle="image-viewer" show-pager="true">
+          <ion-slide>
+            <img ng-src="img/b1.png""><span></span>
+          </ion-slide>
+          <ion-slide>
+            <img ng-src="img/b2.png""><span></span>
+          </ion-slide>
+          <ion-slide>
+            <img ng-src="img/b3.png""><span></span>
+          </ion-slide>
+        </ion-slide-box>
+      </div>
+      <!-- end img swiper -->
+        <div class="list list-inset">
+            <label class="item item-input">
+		          <i class="icon ion-search placeholder-icon"></i>
+              <input autofocus type="text" placeholder="请输入查询关键字" id="search-input" ng-model="model.text">
+            </label>            
+            <button class="button button-full button-assertive" ng-click="onSearch()">快速查询</button>
+        </div>
+        
+        <div class="padding-horizontal">            
+          <div class="button-bar">
+            <a class="button button-light icon icon-top ion-ios-search-strong"><br>产品查询</a>
+            <a class="button button-light icon icon-top ion-ios-pricetags-outline"><br>最新促销</a>
+            <a class="button button-light icon icon-top ion-ios-star-outline"><br>常用产品</a>
+          </div>
+          <div class="button-bar">
+            <a class="button button-light icon icon-top ion-clipboard"><br>证书下载</a>
+            <a class="button button-light icon icon-top ion-ios-location"><br>附近经销商</a>
+            <a class="button button-light icon icon-top ion-android-checkbox-outline"><br>问卷调查</a>
+          </div>
+        </div>
+    </ion-content>
+</ion-view>

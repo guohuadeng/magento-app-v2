@@ -34,6 +34,14 @@ angular.module('app', [
                 templateUrl: 'templates/menu.html',
                 controller: 'AppCtrl'
             })
+            .state('app.home', {
+                url: '/home',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/home.html'
+                    }
+                }
+            })
             .state('app.login', {
                 url: '/login',
                 views: {

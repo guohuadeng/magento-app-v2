@@ -41,11 +41,15 @@
         </ion-header-bar>
         <ion-content class="menus-content">
             <ion-list>
-                  <a nav-clear menu-close href="#app/lists"
-                     ng-click="setCatalog(0)"
+                  <a nav-clear menu-close href="#app/home"
                      ng-class="{'button-assertive': getActiveClass(0)}"
                   	 class="button button-full button-light icon icon-left ion-ios-home-outline">
                       <span class="padding-horizontal">Home</span>
+                  </a>
+                  <a nav-clear menu-close href="#app/lists"
+                     ng-click="setCatalog(0)"
+                  	 class="button button-full button-light">
+                      <span class="padding-horizontal">List</span>
                   </a>
                 <span ng-if="user">
                   <a menu-toggle="left" href="#app/frame/account"
