@@ -487,7 +487,7 @@ angular.module('app.controllers', [])
         };
         $scope.selectOptions = {};
         $scope.selectOption = function (name) {
-            $scope.selectOptions[name] = this.item.option_type_id;
+            $scope.selectOptions[name + this.$parent.option.option_id] = this.item.option_type_id;
         };
         //end 增减数量操作
         // Perform the add to cart
