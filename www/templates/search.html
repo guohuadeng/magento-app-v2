@@ -1,13 +1,16 @@
 <ion-view view-title="Search">
     <ion-content>
-        <div class="list list-inset">
-            <label class="item item-input">
-		          <i class="icon ion-search placeholder-icon"></i>
-              <input type="text" placeholder="Please input the key word" id="search-input" ng-model="model.text">
-            </label>
-        </div>
-        <div class="padding">
-            <button class="button button-full button-assertive" ng-click="onSearch()">SEARCH</button>
-        </div>
+        <form ng-submit="onSearch()">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input autofocus type="text" placeholder="Please input the key word"
+                           ng-model="searchData.text">
+                </label>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-full button-assertive">SEARCH</button>
+            </div>
+        </form>
     </ion-content>
 </ion-view>

@@ -435,22 +435,25 @@ angular.module('app.controllers', [])
         };
     })
 
-    //产品选项
-    .controller('ProductOptionCtrl', function ($scope, $stateParams) {
-
-    })
-
+    // 搜索
     .controller('SearchCtrl', function ($scope, $location) {
-        $scope.model = {};
-        //angular.element('#search-input').trigger('focus');
+        $scope.searchData = {};
         $scope.onSearch = function () {
-            $location.path('app/search/' + $scope.model.text);
+            if (!$scope.searchData.text) {
+                return;
+            }
+            $location.path('app/search/' + $scope.searchData.text);
         };
     })
 
+    // 搜索结果
     .controller('SearchResultCtrl', function ($scope, $rootScope, $stateParams) {
         $scope.text = $stateParams.text;
-        $rootScope.service.get('search', {q: $stateParams.text}, function (results) {
+        $scope.showLoading();
+        $rootScope.service.get('search', {
+            q: $stateParams.text
+        }, function (results) {
+            $scope.hideLoading();
             $scope.results = results;
         });
     })
