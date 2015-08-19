@@ -222,7 +222,7 @@ em {
 }
 
 .login-container .popup-buttons {
-    top: 160px;
+    top: 200px;
     position: relative;
 }
 .login-container .tab-nav {
@@ -239,6 +239,17 @@ em {
 
 .register-container .item-radio .item-content {
     padding: 6px 34px 16px 16px
+}
+
+.forgot-pwd-container .popup {
+    width: 90%;
+    height: 250px;
+    background-color: #FFF;
+}
+
+.forgot-pwd-container .popup-buttons {
+    top: 110px;
+    position: relative;
 }
 
 /* end login and register */

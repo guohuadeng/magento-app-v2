@@ -42,14 +42,6 @@ angular.module('app', [
                     }
                 }
             })
-            .state('app.login', {
-                url: '/login',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/login.html'
-                    }
-                }
-            })
             .state('app.register', {
                 url: '/register',
                 views: {

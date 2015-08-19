@@ -1,147 +1,33 @@
 angular.module('app.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, $ionicSlideBoxDelegate, $ionicTabsDelegate, $ionicLoading, $ionicPopup, $timeout) {
-        //取数据时的loading mask
+    // 菜单
+    .controller('AppCtrl', function ($scope, $rootScope,
+                                     $ionicModal, $ionicSlideBoxDelegate,
+                                     $ionicTabsDelegate, $ionicLoading,
+                                     $ionicPopup, $timeout) {
+        // Loading
         $scope.showLoading = function () {
             $ionicLoading.show({
                 template: 'Loading...'
             });
-            /*
-             $timeout(function () {
-             $scope.showAlert('Alert!','Can not load data! Please check your network');
-             $ionicLoading.hide(); //close the popup after 3 seconds for some reason
-             }, 10000);
-             */
         };
         $scope.hideLoading = function () {
             $ionicLoading.hide();
         };
 
-        //各种弹出信息
-        // Triggered on a button click, or some other target
-        $scope.showPopupForgotPwd = function (_title, _content) {
-            $scope.data = {};
-
-            // An elaborate, custom popup
-            var myPopup = $ionicPopup.prompt({
-                template: '<input autofocus class="padding-left" type="text" ng-model="loginData.username">',
-                title: 'Enter your email',
-                subTitle: 'This would take a little longer. Please wait...',
-                inputType: 'email',
-                scope: $scope,
-                buttons: [
-                    {text: 'Cancel'},
-                    {
-                        text: '<b>Submit</b>',
-                        type: 'button-assertive',
-                        onTap: function (e) {
-                            if (!$scope.loginData.username) {
-                                //don't allow the user to close unless he enters wifi password
-                                e.preventDefault();
-                            } else {
-                                $scope.loginData.email = $scope.loginData.username
-                                $scope.showLoading();
-                                $rootScope.service.get('forgotpwd', $scope.loginData, function (res) {
-                                    if (res.code == '0x0000') {
-                                        $scope.showAlert('Success', res.message);
-                                        $scope.hideLoading();
-                                        return;
-                                    }
-                                    else {
-                                        $scope.showAlert('Alert!', 'Error code:' + res.code + '</br>' + res.message);
-                                        $scope.hideLoading();
-                                        return;
-                                    }
-                                });
-                                return $scope.registerData.email;
-                            }
-                        }
-                    }
-                ]
-            });
-            myPopup.then(function (res) {
-                console.log('Tapped!', res);
-            });
-            $timeout(function () {
-                myPopup.close(); //close the popup after 3 seconds for some reason
-            }, 30000);
-        };
-        $scope.showLogin = function () {
-            // An elaborate, custom popup
-            $scope.loginData.password = '';
-            $scope.$apply();
-            var myPopup = $ionicPopup.show({
-                templateUrl: 'templates/login.html',
-                title: 'Login - Registered User',
-                cssClass: 'login-container',
-                scope: $scope,
-                buttons: [
-                    {text: 'Cancel'},
-                    {
-                        text: 'Login',
-                        type: 'button-assertive',
-                        onTap: function (e) {
-                            if (!$scope.loginData.username) {
-                                //don't allow the user to close unless he enters wifi password
-                                e.preventDefault();
-                            } else {
-                                $scope.doLogin();
-                                return $scope.registerData.email;
-                            }
-                        }
-                    }
-                ]
-            });
-            $scope.hideLogin = function () {
-                console.log('login close');
-                myPopup.close();
-                return $scope.loginData.username;
-            };
-            myPopup.then(function (res) {
-                console.log('Tapped!', res);
-            });
-        };
-        // A confirm dialog
-        $scope.showConfirmExit = function () {
-            var confirmPopup = $ionicPopup.confirm({
-                title: 'Confirm',
-                template: 'Are you sure to exit the Kikuu App?',
-                okType: 'button-assertive'
-            });
-            confirmPopup.then(function (res) {
-                if (res) {
-                    console.log('You are exit');
-                    navigator.app.exitApp();
-                } else {
-                    console.log('You are not sure');
-                }
-            });
-        };
-
-        // An alert dialog
+        // Alert dialog
         $scope.showAlert = function (_title, _content) {
-            var alertPopup = $ionicPopup.alert({
+            $ionicPopup.alert({
                 title: _title,
                 template: _content,
                 okType: 'button-assertive'
             });
-            alertPopup.then(function (res) {
-                console.log('title');
-            });
         };
-
-        //end 各种弹出信息
 
         //首次欢迎页
         $scope.welcome = function () {
-            var myt = '<ion-slide-box show-pager="true">'
-                + '<ion-slide><img class="fullwidth" ng-src="img/spash1.png"></ion-slide>'
-                + '<ion-slide><img class="fullwidth" ng-src="img/spash2.png"></ion-slide>'
-                + '<ion-slide><img class="fullwidth" ng-src="img/spash3.png"></ion-slide>'
-                + '</ion-slide-box>';
-            // An elaborate, custom popup
-            var myPopup = $ionicPopup.show({
-                template: myt,
+            $ionicPopup.show({
+                templateUrl: 'templates/welcome.html',
                 title: '',
                 cssClass: 'popupFullscreen',
                 scope: $scope,
@@ -152,9 +38,6 @@ angular.module('app.controllers', [])
                     }
                 ]
             });
-            myPopup.then(function (res) {
-                console.log('Tapped!', res);
-            });
         };
         if (!localStorage['first-use']) {
             localStorage['first-use'] = true;
@@ -162,25 +45,24 @@ angular.module('app.controllers', [])
                 $scope.welcome();
             }, 50);
         }
-        //end 首次欢迎页
+
         // 网站列表信息
         $scope.getWebsite = function () {
             $rootScope.service.get('website', function (website) {
                 $scope.website = website;
             });
         };
-        // 用户信息
+
+        // 获取用户信息
         $scope.getUser = function () {
             $rootScope.service.get('user', function (user) {
                 $scope.user = typeof user === 'object' ? user : null;
             });
         };
         $scope.getUser();
+
         // 菜单处理
         $rootScope.service.get('menus', function (menus) {
-            angular.forEach(menus, function (data) {
-                //data.item_height = '235';
-            });
             $scope.menus = [
                 {
                     cmd: 'daily_sale',
@@ -208,54 +90,106 @@ angular.module('app.controllers', [])
             return $scope.selectedIndex === index;
         };
 
-        // Form data for the login modal
-        $scope.loginData = {};
+        // 登录
+        $scope.showLogin = function () {
+            $scope.loginData = {};
 
-        // Form data for the register modal
-        $scope.registerData = {};
+            var popup = $ionicPopup.show({
+                templateUrl: 'templates/login.html',
+                title: 'Login - Registered User',
+                cssClass: 'login-container',
+                scope: $scope,
+                buttons: [
+                    {text: 'Cancel'},
+                    {
+                        text: 'Login',
+                        type: 'button-assertive',
+                        onTap: function (e) {
+                            e.preventDefault();
+                            if (!$scope.loginData.username || !$scope.loginData.password) {
+                                return;
+                            }
 
-        // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('templates/login.html', {
-            scope: $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-            $ionicTabsDelegate.select(0);
-        });
+                            $scope.showLoading();
+                            $rootScope.service.get('login', $scope.loginData, function (res) {
+                                $scope.hideLoading();
 
-        // Triggered in the login modal to close it
-        $scope.closeLogin = function () {
-            $scope.modal.hide();
+                                if (res.code || res.message) {
+                                    $scope.showAlert('Alert!', res.message || res.code);
+                                    return;
+                                }
+                                $scope.user = res;
+                                popup.close();
+                            });
+                        }
+                    }
+                ]
+            });
+            $scope.hideLogin = function () {
+                popup.close();
+            };
         };
 
-        // Open the login modal
-        $scope.login = function () {
-            $scope.modal.show();
-        };
-        // Open the register modal
-        $scope.register = function () {
-            $scope.modal.hide();
-        };
+        // 忘记密码
+        $scope.showPopupForgotPwd = function () {
+            $scope.pwdData = {};
 
-        // Perform the login action when the user submits the login form
-        $scope.doLogin = function () {
-            $scope.showLoading();
-            $rootScope.service.get('login', $scope.loginData, function (res) {
-                if (res.code || res.message) {
-                    $scope.showAlert('Alert!', res.message || res.code);
-                    $scope.hideLoading();
-                    return;
-                }
-                $scope.user = res;
-                $scope.modal.hide();
-                $scope.hideLoading();
+            var popup = $ionicPopup.show({
+                templateUrl: 'templates/forgotPwd.html',
+                title: 'Enter your email',
+                cssClass: 'forgot-pwd-container',
+                scope: $scope,
+                buttons: [
+                    {text: 'Cancel'},
+                    {
+                        text: '<b>Submit</b>',
+                        type: 'button-assertive',
+                        onTap: function (e) {
+                            e.preventDefault();
+                            if (!$scope.pwdData.email) {
+                                return;
+                            }
+
+                            $scope.showLoading();
+                            $rootScope.service.get('forgotpwd', $scope.pwdData, function (res) {
+                                $scope.hideLoading();
+                                if (res.code == '0x0000') {
+                                    $scope.showAlert('Success', res.message);
+                                    popup.close();
+                                    return;
+                                }
+                                $scope.showAlert('Alert!', 'Error code:' + res.code + '</br>' + res.message);
+                            });
+                        }
+                    }
+                ]
             });
         };
 
+        // 退出登录
         $scope.doLogout = function () {
             $scope.showLoading();
             $rootScope.service.get('logout', $scope.getUser);
             $timeout($scope.hideLoading(), 1000);
         };
+
+        // 退出应用
+        $scope.showExit = function () {
+            $ionicPopup.confirm({
+                title: 'Confirm',
+                template: 'Are you sure to exit the Kikuu App?',
+                okType: 'button-assertive'
+            }).then(function (res) {
+                if (res) {
+                    navigator.app.exitApp();
+                }
+            });
+        };
+    })
+
+    // 注册
+    .controller('registerCtrl', function ($scope, $rootScope, $timeout, $location) {
+        $scope.registerData = {};
 
         $scope.validationCodeDisabled = false;
         $scope.getValidationCode = function () {
@@ -273,34 +207,26 @@ angular.module('app.controllers', [])
         };
 
         $scope.doRegister = function () {
-            if (!($scope.registerData.password == $scope.registerData.confirmation)) {
+            if ($scope.registerData.password !== $scope.registerData.confirmation) {
                 $scope.showAlert('Alert!', 'Please confirm you password!');
                 return;
             }
+
             $scope.showLoading();
             $rootScope.service.get('register', $scope.registerData, function (res) {
+                $scope.hideLoading();
+
                 if (res[0]) {
-                    $scope.showAlert('Success!', 'Welcome! User register success.\n Please login.');
-                    $scope.doLogout();
-                    $scope.loginData.username = $scope.registerData.email;
-                    $scope.login();
-                    $scope.hideLoading();
+                    $scope.showAlert('Success!', 'Welcome! User register success.');
+                    $scope.getUser();
+                    $location.path('#app/register');
                     return;
                 }
-                else {
-                    $scope.showAlert('Alert!', res[2]);
-                    $scope.hideLoading();
-                    return;
-                }
+                $scope.showAlert('Alert!', res[2]);
             });
         };
-
-        $scope.exit = function () {
-            if (confirm('Are you sure to exit the Kikuu app?')) {
-                navigator.app.exitApp();
-            }
-        };
     })
+
     //列表
     .controller('ListsCtrl', function ($scope, $rootScope) {
         var getList = function (tab, type, callback) {
@@ -372,6 +298,7 @@ angular.module('app.controllers', [])
             });
         };
     })
+
     //产品统一用这个名 Product-xx
     .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicPopup, $ionicSlideBoxDelegate, $ionicScrollDelegate, $cordovaSocialSharing) {
         $scope.showLoading();
@@ -529,16 +456,6 @@ angular.module('app.controllers', [])
         $rootScope.service.get('search', {q: $stateParams.text}, function (results) {
             $scope.results = results;
         });
-    })
-    //register选项
-    .controller('registerCtrl', function ($scope, $rootScope) {
-        $scope.registerData.default_mobile_number = '';
-        $scope.registerData.email = '';
-        $scope.registerData.firstname = '';
-        $scope.registerData.lastname = '';
-        $scope.registerData.gender = '';
-        $scope.registerData.password = '';
-        $scope.registerData.validation_code = '';
     })
 
     .controller('FrameCtrl', function ($scope, $sce, $stateParams, Config) {

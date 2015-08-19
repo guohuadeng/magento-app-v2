@@ -3,7 +3,9 @@
         <img class="padding-left" src="img/logo.png">
     </ion-nav-title>
     <ion-nav-buttons side="left">
-        <button class="button button-icon ion-android-menu" menu-toggle="left"><span ng-if="!user" class="badge badge-assertive"></span></button>
+        <button class="button button-icon ion-android-menu" menu-toggle="left">
+            <span ng-if="!user" class="badge badge-assertive"></span>
+        </button>
         <button class="button button-icon"><img src="img/flags/Tanzania.png" height="18"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
@@ -21,23 +23,24 @@
                         </ion-refresher>
                         <!-- 单列大图 -->
                         <div ng-if="tab.class_name=='one-line'">
-                          <ion-list class="products-grid one-line">
-                              <div class="product" collection-repeat="product in tab.lists" collection-item-height="338">
-                                  <div class="product-inner">
-                                      <a href="#app/productDetail/{{product.entity_id}}">
-                                          <div class="product-image">
-                                              <img src="{{product.image_url}}"
-                                                   alt="{{product.name}}">
-                                          </div>
-                                      </a>
+                            <ion-list class="products-grid one-line">
+                                <div class="product" collection-repeat="product in tab.lists"
+                                     collection-item-height="338">
+                                    <div class="product-inner">
+                                        <a href="#app/productDetail/{{product.entity_id}}">
+                                            <div class="product-image">
+                                                <img src="{{product.image_url}}"
+                                                     alt="{{product.name}}">
+                                            </div>
+                                        </a>
 
-                                      <div class="product-info">
-                                          <div class="product-name">
-                                              {{product.name}}
-                                          </div>
+                                        <div class="product-info">
+                                            <div class="product-name">
+                                                {{product.name}}
+                                            </div>
 
-                                          <div class="product-price">
-                                              <div class="price-box">
+                                            <div class="product-price">
+                                                <div class="price-box">
                                               <span class="special-price">
                                                   <span class="special-price">
                                                       <span class="price">
@@ -54,33 +57,33 @@
                                                       {{product | discount}}
                                                   </span>
                                               </span>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </ion-list>
-                          </div>
+                        </div>
                         <!-- end 单列大图 -->
                         <!-- 双列 -->
                         <div ng-if="tab.is_active">
-                          <ion-list class="products-grid">
-                              <div class="product" ng-repeat="product in tab.lists" collection-item-height="235">
-                                  <div class="product-inner">
-                                      <a href="#app/productDetail/{{product.entity_id}}">
-                                          <div class="product-image">
-                                              <img src="{{product.image_url}}"
-                                                   alt="{{product.name}}">
-                                          </div>
-                                      </a>
+                            <ion-list class="products-grid">
+                                <div class="product" ng-repeat="product in tab.lists" collection-item-height="235">
+                                    <div class="product-inner">
+                                        <a href="#app/productDetail/{{product.entity_id}}">
+                                            <div class="product-image">
+                                                <img src="{{product.image_url}}"
+                                                     alt="{{product.name}}">
+                                            </div>
+                                        </a>
 
-                                      <div class="product-info">
-                                          <div class="product-name">
-                                              {{product.name}}
-                                          </div>
+                                        <div class="product-info">
+                                            <div class="product-name">
+                                                {{product.name}}
+                                            </div>
 
-                                          <div class="product-price">
-                                              <div class="price-box">
+                                            <div class="product-price">
+                                                <div class="price-box">
                                               <span class="special-price">
                                                   <span class="special-price">
                                                       <span class="price">
@@ -97,13 +100,13 @@
                                                       {{product | discount}}
                                                   </span>
                                               </span>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </ion-list>
-                          </div>
+                        </div>
                         <!-- end 双列 -->
                         <ion-infinite-scroll
                                 ng-if="tab.hasInit && !tab.loadOver"
