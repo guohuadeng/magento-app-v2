@@ -227,7 +227,7 @@ angular.module('app.controllers', [])
         };
     })
 
-    //列表
+    // 列表
     .controller('ListsCtrl', function ($scope, $rootScope) {
         var getList = function (tab, type, callback) {
             if (type === 'load') {
@@ -299,32 +299,31 @@ angular.module('app.controllers', [])
         };
     })
 
-    //产品统一用这个名 Product-xx
-    .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicPopup, $ionicSlideBoxDelegate, $ionicScrollDelegate, $cordovaSocialSharing) {
+    // 产品详情
+    .controller('productDetailCtrl', function ($scope, $rootScope,
+                                               $stateParams, $ionicPopup,
+                                               $ionicSlideBoxDelegate, $ionicScrollDelegate,
+                                               $cordovaSocialSharing) {
         $scope.showLoading();
-        $scope.productid = $stateParams.productid;
         $scope.qty = 1;
-        $scope.showShare = true;
+
         $scope.updateSlider = function () {
             $ionicSlideBoxDelegate.$getByHandle('image-viewer').update();
         };
-        //取购物车商品数量
+
+        // 物车商品数量
         $rootScope.service.get('cartGetQty', {
             product: $stateParams.productid
         }, function (res) {
             $scope.items_qty = res.items_qty;
         });
-        //取商品详情
+
+        // 商品详情
         $rootScope.service.get('productDetail', {
             productid: $stateParams.productid
         }, function (results) {
             $scope.product = results;
 
-            $rootScope.service.get('productImg', {
-                product: $stateParams.productid
-            }, function (lists) {
-                $scope.productImg = lists;
-            });
             //取商品选项
             if (results.has_custom_options) {
                 $rootScope.service.get('productOption', {
@@ -335,61 +334,34 @@ angular.module('app.controllers', [])
             }
             $scope.hideLoading();
         });
-        //分享
+
+        // 商品图片
+        $rootScope.service.get('productImg', {
+            product: $stateParams.productid
+        }, function (lists) {
+            $scope.productImg = lists;
+        });
+
+        // 分享
         $scope.onShare = function () {
             $cordovaSocialSharing.share($scope.product.name, $scope.product.name, '', $scope.product.url_key);
         };
-        //全屏幕图片
+
+        // 全屏幕图片
         $scope.imageFullscreen = function () {
-            $scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
-            var myt = '<ion-content overflow-scroll="true">'
-                + '<ion-slide-box delegate-handle="image-fullscreen-viewer" on-slide-changed="noZoom()" show-pager="true" active-slide="'
-                + $ionicSlideBoxDelegate.currentIndex()
-                + '"><ion-slide ng-repeat="img in productImg" ng-init="updateFullscreenSlider()">'
-                + '<ion-scroll overflow-scroll="true" delegate-handle="image-scroll" zooming="true" direction="xy" locking="false" scrollbar-x="false" scrollbar-y="false" min-zoom="1" id="scrolly"  style="width: 100%; height: 100%;">'
-                + '<img id="zoomImg" class="fullwidth" ng-src="{{img.url}}"  on-double-tap="zoomProductImg()">'
-                + '<span></span>'
-                + '</ion-scroll>'
-                + '</ion-slide></ion-slide-box>';
-            +'</ion-content>';
-            // An elaborate, custom popup
-            var myPopup = $ionicPopup.show({
-                template: myt,
-                cssClass: 'popupFullscreen',
-                scope: $scope,
-                buttons: [
-                    {
-                        text: '< ',
-                        type: 'button-light',
-                        onTap: function (e) {
-                            $ionicSlideBoxDelegate.previous();
-                            e.preventDefault();
-                        }
-                    },
-                    {
-                        text: 'Close',
-                        type: 'button-light',
-                    },
-                    {
-                        text: '>',
-                        type: 'button-light',
-                        onTap: function (e) {
-                            $ionicSlideBoxDelegate.next();
-                            e.preventDefault();
-                        }
-                    },
-                ]
-            });
+            var toggle = 1;
+
+            $scope.getCurrentSlideIndex = function () {
+                return $ionicSlideBoxDelegate.currentIndex();
+            };
             $scope.updateFullscreenSlider = function () {
                 $ionicSlideBoxDelegate.$getByHandle('image-fullscreen-viewer').update();
             };
-            var toggle = 1;
             $scope.zoomProductImg = function () {
-                if (toggle == 1) {
+                if (toggle === 1) {
                     toggle = 2;
                     $ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(toggle);
-                }
-                else if (toggle == 2) {
+                } else {
                     toggle = 1;
                     $ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(toggle);
                 }
@@ -397,27 +369,52 @@ angular.module('app.controllers', [])
             $scope.noZoom = function () {
                 $ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(1);
             };
-
-            myPopup.then(function (res) {
-                console.log('Tapped!', res);
+            $ionicPopup.show({
+                templateUrl: 'templates/productImg.html',
+                cssClass: 'popupFullscreen',
+                scope: $scope,
+                buttons: [
+                    {
+                        text: '< ',
+                        type: 'button-light',
+                        onTap: function (e) {
+                            e.preventDefault();
+                            $ionicSlideBoxDelegate.previous();
+                        }
+                    },
+                    {
+                        text: 'Close',
+                        type: 'button-light'
+                    },
+                    {
+                        text: '>',
+                        type: 'button-light',
+                        onTap: function (e) {
+                            e.preventDefault();
+                            $ionicSlideBoxDelegate.next();
+                        }
+                    }
+                ]
             });
         };
-        //end 全屏幕图片
 
-        //增减数量操作
+        // 增减数量操作
         $scope.qtyAdd = function () {
-            $scope.qty = $scope.qty + 1;
+            $scope.qty++;
         };
         $scope.qtyMinus = function () {
-            if ($scope.qty > 1)
-                $scope.qty = $scope.qty - 1;
+            if ($scope.qty > 1) {
+                $scope.qty--;
+            }
         };
+
+        // 选择列表
         $scope.selectOptions = {};
         $scope.selectOption = function (name) {
             $scope.selectOptions[name + this.$parent.option.option_id] = this.item.option_type_id;
         };
-        //end 增减数量操作
-        // Perform the add to cart
+
+        // 增加到购物车
         $scope.doCartAdd = function () {
             var queryString = $('#product_addtocart_form').formSerialize();
             if (!($scope.qty > 1)) {
@@ -436,8 +433,8 @@ angular.module('app.controllers', [])
                 }
             });
         };
-        // End Perform the add to cart
     })
+
     //产品选项
     .controller('ProductOptionCtrl', function ($scope, $stateParams) {
 

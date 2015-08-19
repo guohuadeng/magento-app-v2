@@ -1,0 +1,17 @@
+<ion-content overflow-scroll="true">
+    <ion-slide-box delegate-handle="image-fullscreen-viewer"
+                   on-slide-changed="noZoom()"
+                   show-pager="true"
+                   active-slide="getCurrentSlideIndex()">
+        <ion-slide ng-repeat="img in productImg" ng-init="updateFullscreenSlider()">
+            <ion-scroll overflow-scroll="true" delegate-handle="image-scroll"
+                        zooming="true" direction="xy"
+                        locking="false" scrollbar-x="false"
+                        scrollbar-y="false" min-zoom="1"
+                        style="width: 100%; height: 100%;">
+                <img class="fullwidth" ng-src="{{img.url}}" on-double-tap="zoomProductImg()">
+                <span></span>
+            </ion-scroll>
+        </ion-slide>
+    </ion-slide-box>
+</ion-content>
