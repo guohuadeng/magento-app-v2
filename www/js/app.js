@@ -35,10 +35,58 @@ angular.module('app', [
                 controller: 'AppCtrl'
             })
             .state('app.home', {
-                url: '/home',
+                url: '/home', //首页
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/home.html'
+                    }
+                }
+            })
+            .state('app.searchAdv', {
+                url: '/searchAdv', //产品查询
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/searchAdv.html'
+                    }
+                }
+            })
+            .state('app.listSale', {
+                url: '/listSale', //最新促销
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/listSale.html'
+                    }
+                }
+            })
+            .state('app.listFavor', {
+                url: '/listFavor', //常用产品
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/listFavor.html'
+                    }
+                }
+            })
+            .state('app.certDownload', {
+                url: '/certDownload', //证书下载
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/certDownload.html'
+                    }
+                }
+            })
+            .state('app.searchAgent', {
+                url: '/searchAgent', //附近经销商
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/searchAgent.html'
+                    }
+                }
+            })
+            .state('app.survey', {
+                url: '/survey', //问卷调查
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/survey.html'
                     }
                 }
             })
