@@ -4,7 +4,7 @@ angular.module('app.controllers', [])
     .controller('AppCtrl', function ($scope, $rootScope,
                                      $ionicModal, $ionicSlideBoxDelegate,
                                      $ionicTabsDelegate, $ionicLoading,
-                                     $ionicPopup, $timeout) {
+                                     $ionicPopup, $timeout, $location) {
         // Loading
         $scope.showLoading = function () {
             $ionicLoading.show({
@@ -66,21 +66,27 @@ angular.module('app.controllers', [])
             $scope.menus = [
                 {
                     cmd: 'daily_sale',
-                    name: 'Daily Sale',
+                    name: '最新促销',
                     class_name: 'one-line',
-                    item_height: '338'
+                    icon: 'ion-ios-pricetags-outline'
+                },
+                {
+                    cmd: 'new',
+                    name: '常用产品',
+                    class_name: 'one-line',
+                    icon: 'ion-ios-star-outline'
+                },
+                {
+                    cmd: 'download',
+                    name: '证书下载',
+                    class_name: 'one-line',
+                    icon: 'ion-clipboard'
                 }
-                /* 客户要求，去掉New Arrival
-                 {
-                 cmd: 'best_seller',
-                 name: 'New Arrival',
-                 class_name: 'one-line'
-                 }
-                 */
             ].concat(menus);
             $scope.$broadcast('menusData', $scope.menus);
         });
         $scope.setCatalog = function (index) {
+            $location.path('#app/list');
             $scope.$broadcast('setCatalog', index);
         };
         $scope.$on('selectedIndex', function (e, index) {
@@ -228,34 +234,39 @@ angular.module('app.controllers', [])
     })
 
     // 列表
-    .controller('ListsCtrl', function ($scope, $rootScope) {
-        var getList = function (tab, type, callback) {
-            if (type === 'load') {
-                tab.page++;
+    .controller('ListsCtrl', function ($scope, $rootScope, $stateParams) {
+        $scope.listTitle = {
+            daily_sale: '最新促销',
+            new: '常用产品',
+            cert_download: '证书下载'
+        }[$stateParams.cmd];
+        $scope.listPge = 1;
+        console.log($scope.listTitle);
+
+        var getList = function (func, callback) {
+            if (func === 'load') {
+                page++;
             } else {
-                tab.page = 1;
+                page = 1;
             }
 
             var params = {
                 limit: 20,
-                page: tab.page,
-                cmd: tab.cmd || 'catalog'
+                page: $scope.listPge,
+                cmd: $stateParams.cmd || 'catalog'
             };
-            if (tab.category_id) {
-                params.categoryid = +tab.category_id;
-            }
+
             $scope.showLoading();
             $rootScope.service.get('products', params, function (lists) {
-                if (type === 'load') {
+                if (func === 'load') {
                     if (lists) {
-                        tab.lists = tab.lists.concat(lists);
+                        $scope.lists = $scope.lists.concat(lists);
                     } else {
-                        tab.loadOver = true;
+                        $scope.loadOver = true;
                     }
                 } else {
-                    tab.lists = lists;
+                    $scope.lists = lists;
                 }
-                tab.hasInit = true;
                 if (typeof callback === 'function') {
                     callback();
                 }
@@ -264,39 +275,18 @@ angular.module('app.controllers', [])
             $scope.hideLoading();
         };
 
-        // 根据菜单生成 tabs
-        $scope.$on('menusData', function (e, menus) {
-            $scope.menus = menus;
-            $scope.tabs = menus.slice(0);
-            $scope.selectedIndex = 0;
-        });
-        $scope.$on('setCatalog', function (e, index) {
-            $scope.selectedIndex = index;
-        });
-        $scope.$watch('selectedIndex', function () {
-            if (!$scope.tabs) {
-                return;
-            }
-            var tab = $scope.tabs[$scope.selectedIndex];
-
-            $scope.$emit('selectedIndex', $scope.selectedIndex);
-
-            if (tab.hasInit) {
-                return;
-            }
-            getList(tab, 'refresh');
-        });
-
         $scope.doRefresh = function (index) {
-            getList($scope.tabs[index], 'refresh', function () {
+            getList('refresh', function () {
                 $scope.$broadcast('scroll.refreshComplete');
             });
         };
         $scope.loadMore = function (index) {
-            getList($scope.tabs[index], 'load', function () {
+            getList('load', function () {
                 $scope.$broadcast('scroll.infiniteScrollComplete');
             });
         };
+
+        getList('refresh');
     })
 
     // 产品详情

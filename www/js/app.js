@@ -42,43 +42,20 @@ angular.module('app', [
                     }
                 }
             })
-            .state('app.searchAdv', {
-                url: '/searchAdv', //产品查询
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/searchAdv.html'
-                    }
-                }
-            })
-            .state('app.listSale', {
-                url: '/listSale', //最新促销
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/listSale.html'
-                    }
-                }
-            })
-            .state('app.listFavor', {
-                url: '/listFavor', //常用产品
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/listFavor.html'
-                    }
-                }
-            })
-            .state('app.certDownload', {
-                url: '/certDownload', //证书下载
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/certDownload.html'
-                    }
-                }
-            })
             .state('app.searchAgent', {
                 url: '/searchAgent', //附近经销商
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/searchAgent.html'
+                    }
+                }
+            })
+            .state('app.lists', {
+                url: '/lists/:cmd',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/lists.html',
+                        controller: 'ListsCtrl'
                     }
                 }
             })
@@ -104,15 +81,6 @@ angular.module('app', [
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/setting.html'
-                    }
-                }
-            })
-            .state('app.lists', {
-                url: '/lists',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/lists.html',
-                        controller: 'ListsCtrl'
                     }
                 }
             })
@@ -162,7 +130,7 @@ angular.module('app', [
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/lists');
+        $urlRouterProvider.otherwise('/app/home');
     })
 
     .directive('onFinishRender', function ($timeout) {
