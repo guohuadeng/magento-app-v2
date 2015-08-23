@@ -15,5 +15,7 @@ var en_US = {
     settings: 'Settings',
     logout: 'Logout',
     exit: 'Exit',
-    welcome: 'Welcome'
+    welcome: 'Welcome',
+    enter_the_key: 'Please enter the key',
+    quick_search: 'Quick Search'
 };

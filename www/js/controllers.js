@@ -199,11 +199,11 @@ angular.module('app.controllers', [])
     })
 
     // 列表
-    .controller('ListsCtrl', function ($scope, $rootScope, $stateParams) {
+    .controller('ListsCtrl', function ($scope, $rootScope, $stateParams, $translate) {
         $scope.listTitle = {
-            daily_sale: '最新促销',
-            new: '常用产品',
-            cert_download: '证书下载'
+            daily_sale: 'latest_promotions',
+            new: 'common_products',
+            cert_download: 'cert_download'
         }[$stateParams.cmd];
         $scope.listPge = 1;
 

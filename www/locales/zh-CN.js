@@ -15,5 +15,7 @@ var zh_CN = {
     settings: '设置',
     logout: '注销',
     exit: '退出',
-    welcome: '欢迎使用'
+    welcome: '欢迎使用',
+    enter_the_key: '请输入查询关键字',
+    quick_search: '快速查询'
 };

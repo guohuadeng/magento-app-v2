@@ -1,48 +1,48 @@
 <ion-view view-title="{{'home' | translate}}">
-  <ion-nav-title>
-    <img class="padding-left" src="img/logo.png">
-  </ion-nav-title>
+    <ion-nav-title>
+        <img class="padding-left" src="img/logo.png">
+    </ion-nav-title>
     <ion-content>
-			<!-- img swiper -->
-      <div class="homebanner-swiper-container">
-        <ion-slide-box delegate-handle="image-viewer" show-pager="true">
-          <ion-slide>
-            <img class="fullwidth" ng-src="img/b1.png"><span></span>
-          </ion-slide>
-          <ion-slide>
-            <img class="fullwidth" ng-src="img/b2.png"><span></span>
-          </ion-slide>
-          <ion-slide>
-            <img class="fullwidth" ng-src="img/b3.png"><span></span>
-          </ion-slide>
-        </ion-slide-box>
-      </div>
-      <!-- end img swiper -->
+        <!-- img swiper -->
+        <div class="homebanner-swiper-container">
+            <ion-slide-box delegate-handle="image-viewer" show-pager="true">
+                <ion-slide>
+                    <img class="fullwidth" ng-src="img/b1.png"><span></span>
+                </ion-slide>
+                <ion-slide>
+                    <img class="fullwidth" ng-src="img/b2.png"><span></span>
+                </ion-slide>
+                <ion-slide>
+                    <img class="fullwidth" ng-src="img/b3.png"><span></span>
+                </ion-slide>
+            </ion-slide-box>
+        </div>
+        <!-- end img swiper -->
         <div class="list list-inset">
             <label class="item item-input">
-		          <i class="icon ion-search placeholder-icon"></i>
-              <input autofocus type="text" placeholder="请输入查询关键字" id="search-input" ng-model="model.text">
-            </label>            
-            <button class="button button-full button-assertive" ng-click="onSearch()">快速查询</button>
+                <i class="icon ion-search placeholder-icon"></i>
+                <input autofocus type="text" placeholder="{{'enter_the_key' | translate}}" ng-model="model.text">
+            </label>
+            <button class="button button-full button-assertive" ng-click="onSearch()">{{'quick_search' | translate}}</button>
         </div>
-        
-        <div class="padding-horizontal">            
-          <div class="button-bar">
-            <a href="#app/search" class="button button-light icon icon-top ion-ios-search-strong"><br>
-              {{'product_search' | translate}}</a>
-            <a href="#app/lists/daily_sale" class="button button-light icon icon-top ion-ios-pricetags-outline"><br>
-              {{'latest_promotions' | translate}}</a>
-            <a href="#app/lists/new" class="button button-light icon icon-top ion-ios-star-outline"><br>
-              {{'common_products' | translate}}</a>
-          </div>
-          <div class="button-bar">
-            <a href="#app/lists/cert_download" class="button button-light icon icon-top ion-clipboard"><br>
-              {{'cert_download' | translate}}</a>
-            <a href="#app/searchAgent" class="button button-light icon icon-top ion-ios-location"><br>
-              {{'near_agents' | translate}}</a>
-            <a href="#app/survey" class="button button-light icon icon-top ion-android-checkbox-outline"><br>
-              {{'survey' | translate}}</a>
-          </div>
+
+        <div class="padding-horizontal">
+            <div class="button-bar">
+                <a href="#app/search" class="button button-light icon icon-top ion-ios-search-strong"><br>
+                    {{'product_search' | translate}}</a>
+                <a href="#app/lists/daily_sale" class="button button-light icon icon-top ion-ios-pricetags-outline"><br>
+                    {{'latest_promotions' | translate}}</a>
+                <a href="#app/lists/new" class="button button-light icon icon-top ion-ios-star-outline"><br>
+                    {{'common_products' | translate}}</a>
+            </div>
+            <div class="button-bar">
+                <a href="#app/lists/cert_download" class="button button-light icon icon-top ion-clipboard"><br>
+                    {{'cert_download' | translate}}</a>
+                <a href="#app/searchAgent" class="button button-light icon icon-top ion-ios-location"><br>
+                    {{'near_agents' | translate}}</a>
+                <a href="#app/survey" class="button button-light icon icon-top ion-android-checkbox-outline"><br>
+                    {{'survey' | translate}}</a>
+            </div>
         </div>
     </ion-content>
 </ion-view>
