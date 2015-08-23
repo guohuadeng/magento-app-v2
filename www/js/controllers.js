@@ -61,41 +61,6 @@ angular.module('app.controllers', [])
         };
         $scope.getUser();
 
-        // 菜单处理
-        $rootScope.service.get('menus', function (menus) {
-            $scope.menus = [
-                {
-                    cmd: 'daily_sale',
-                    name: '最新促销',
-                    class_name: 'one-line',
-                    icon: 'ion-ios-pricetags-outline'
-                },
-                {
-                    cmd: 'new',
-                    name: '常用产品',
-                    class_name: 'one-line',
-                    icon: 'ion-ios-star-outline'
-                },
-                {
-                    cmd: 'download',
-                    name: '证书下载',
-                    class_name: 'one-line',
-                    icon: 'ion-clipboard'
-                }
-            ].concat(menus);
-            $scope.$broadcast('menusData', $scope.menus);
-        });
-        $scope.setCatalog = function (index) {
-            $location.path('#app/list');
-            $scope.$broadcast('setCatalog', index);
-        };
-        $scope.$on('selectedIndex', function (e, index) {
-            $scope.selectedIndex = index;
-        });
-        $scope.getActiveClass = function (index) {
-            return $scope.selectedIndex === index;
-        };
-
         // 登录
         $scope.showLogin = function () {
             $scope.loginData = {};
@@ -241,7 +206,6 @@ angular.module('app.controllers', [])
             cert_download: '证书下载'
         }[$stateParams.cmd];
         $scope.listPge = 1;
-        console.log($scope.listTitle);
 
         var getList = function (func, callback) {
             if (func === 'load') {

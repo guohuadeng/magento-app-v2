@@ -20,8 +20,9 @@
         <ion-header-bar class="menus bar-light">
           <span ng-if="!user">
             <h3 class="padding">
-                <a class="ion-person padding-left" menu-close ng-click="showLogin()">&nbsp;&nbsp;登录</a>&nbsp;|
-                <em><a menu-toggle="left" href="#app/register">注册</a></em>
+                <a class="ion-person padding-left" menu-close ng-click="showLogin()">&nbsp;&nbsp;
+                    {{'login' | translate}}</a>&nbsp;|
+                <em><a menu-toggle="left" href="#app/register">{{'register' | translate}}</a></em>
             </h3>
           </span>
           <span ng-if="user">
@@ -45,67 +46,67 @@
                 <a nav-clear menu-close href="#app/home"
                    ng-class="{'button-assertive': getActiveClass(0)}"
                    class="button button-full button-light icon icon-left ion-ios-home-outline">
-                    <span class="padding-horizontal">首页</span>
+                    <span class="padding-horizontal">{{'home' | translate}}</span>
                 </a>
                 <a nav-clear menu-close href="#app/search"
                    class="button button-full button-light icon icon-left ion-ios-search-strong">
-                    <span class="padding-horizontal">产品查询</span>
+                    <span class="padding-horizontal">{{'product_search' | translate}}</span>
                 </a>
                 <a nav-clear menu-close href="#app/lists/daily_sale"
                    class="button button-full button-light icon icon-left ion-ios-pricetags-outline">
-                    <span class="padding-horizontal">最新促销</span>
+                    <span class="padding-horizontal">{{'latest_promotions' | translate}}</span>
                 </a>
                 <a nav-clear menu-close href="#app/lists/new"
                    class="button button-full button-light icon icon-left ion-ios-star-outline">
-                    <span class="padding-horizontal">常用产品</span>
+                    <span class="padding-horizontal">{{'common_products' | translate}}</span>
                 </a>
                 <a nav-clear menu-close href="#app/lists/cert_download"
                    class="button button-full button-light icon icon-left ion-clipboard">
-                    <span class="padding-horizontal">证书下载</span>
+                    <span class="padding-horizontal">{{'cert_download' | translate}}</span>
                 </a>
                 <a nav-clear menu-close href="#app/searchAgent"
                    class="button button-full button-light icon icon-left ion-ios-location">
-                    <span class="padding-horizontal">附近经销商</span>
+                    <span class="padding-horizontal">{{'near_agents' | translate}}</span>
                 </a>
                 <a nav-clear menu-close href="#app/survey"
                    class="button button-full button-light icon icon-left ion-android-checkbox-outline">
-                    <span class="padding-horizontal">问卷调查</span>
+                    <span class="padding-horizontal">{{'survey' | translate}}</span>
                 </a>
                 <span ng-if="user">
                   <a menu-toggle="left" href="#app/frame/account"
                      class="button button-full button-light icon icon-left ion-ios-cloud-outline">
-                      <span class="padding-horizontal">My Account</span>
+                      <span class="padding-horizontal">{{'my_account' | translate}}</span>
                   </a>
                   <a menu-toggle="left" href="#app/frame/order"
                      class="button button-full button-light icon icon-left ion-ios-list-outline">
-                      <span class="padding-horizontal">My Orders</span>
+                      <span class="padding-horizontal">{{'my_orders' | translate}}</span>
                   </a>
                   <a menu-toggle="left" href="#app/frame/address"
                      class="button button-full button-light icon icon-left ion-ios-location-outline">
-                      <span class="padding-horizontal">My Address Book</span>
+                      <span class="padding-horizontal">{{'address_book' | translate}}</span>
                   </a>
                   <a menu-toggle="left" href="#app/frame/wishlist"
                      class="button button-full button-light icon icon-left ion-android-favorite-outline">
-                      <span class="padding-horizontal">My Wishlish</span>
+                      <span class="padding-horizontal">{{'wish_list' | translate}}</span>
                   </a>         
                   <div class="item item-divider"></div>
                 </span>
                 <div class="item item-divider"></div>
                 <a menu-toggle="left" href="#app/setting" class="item icon icon-left ion-ios-gear-outline">
-                    <span class="padding-horizontal">Setting</span>
+                    <span class="padding-horizontal">{{'settings' | translate}}</span>
                     <img src="img/flags/Tanzania.png" height="18">
                 </a>
                 <a menu-close ng-if="!!user" ng-click="doLogout()"
                    class="item icon icon-left ion-log-out">
-                    <span class="padding-horizontal">Logout</span>
+                    <span class="padding-horizontal">{{'logout' | translate}}</span>
                 </a>
                 <a ng-click="showExit()"
                    class="item icon icon-left ion-android-exit">
-                    <span class="padding-horizontal">Exit</span>
+                    <span class="padding-horizontal">{{'exit' | translate}}</span>
                 </a>
                 <a ng-show="0" menu-close ng-click="welcome()"
                    class="item icon icon-left ion-android-exit">
-                    <span class="padding-horizontal">welcome</span>
+                    <span class="padding-horizontal">{{'welcome' | translate}}</span>
                 </a>
             </ion-list>
         </ion-content>

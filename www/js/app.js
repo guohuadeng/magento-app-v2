@@ -1,7 +1,7 @@
 // Ionic Starter App
 // 'app' is the name of this angular module (also set in a <body> attribute in index.html)
 angular.module('app', [
-        'ionic', 'ngMaterial', 'ngCordova',
+        'ionic', 'ngCordova', 'pascalprecht.translate',
         'app.config', 'app.controllers',
         'app.filters'
     ])
@@ -20,7 +20,7 @@ angular.module('app', [
         Service($rootScope, $http, Config);
     })
 
-    .config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $translateProvider) {
 				$ionicConfigProvider.backButton.text('Back').icon('ion-chevron-left');
 				$ionicConfigProvider.scrolling.jsScrolling(true);
 				$ionicConfigProvider.tabs.position(top);
@@ -131,6 +131,10 @@ angular.module('app', [
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/home');
+
+        $translateProvider.translations('cn', zh_CN);
+        $translateProvider.translations('en', en_US);
+        $translateProvider.preferredLanguage('cn');
     })
 
     .directive('onFinishRender', function ($timeout) {

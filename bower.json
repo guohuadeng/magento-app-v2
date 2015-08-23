@@ -7,6 +7,7 @@
   "dependencies": {
     "font-awesome": "~4.3.0",
     "jquery": "~2.1.4",
-    "ionic-material": "~0.3.0"
+    "ionic-material": "~0.3.0",
+    "angular-translate": "~2.7.2"
   }
 }
