@@ -9,7 +9,7 @@
                 </button>
             </ion-nav-buttons>
             <ion-nav-buttons side="right">
-                <a href="#app/lists" class="button button-icon nav-clear menu-close ion-ios-home-outline"></a>
+                <a href="#app/home" class="button button-icon nav-clear menu-close ion-ios-home-outline"></a>
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view name="menuContent" animation="none"></ion-nav-view>
@@ -20,8 +20,8 @@
         <ion-header-bar class="menus bar-light">
           <span ng-if="!user">
             <h3 class="padding">
-                <a class="ion-person padding-left" menu-close ng-click="showLogin()">&nbsp;Login</a>&nbsp;|&nbsp;
-                <em><a menu-toggle="left" href="#app/register">Register</a></em>
+                <a class="ion-person padding-left" menu-close ng-click="showLogin()">&nbsp;&nbsp;登录</a>&nbsp;|
+                <em><a menu-toggle="left" href="#app/register">注册</a></em>
             </h3>
           </span>
           <span ng-if="user">
@@ -45,7 +45,31 @@
                 <a nav-clear menu-close href="#app/home"
                    ng-class="{'button-assertive': getActiveClass(0)}"
                    class="button button-full button-light icon icon-left ion-ios-home-outline">
-                    <span class="padding-horizontal">Home</span>
+                    <span class="padding-horizontal">首页</span>
+                </a>
+                <a nav-clear menu-close href="#app/searchAdv"
+                   class="button button-full button-light icon icon-left ion-ios-search-strong">
+                    <span class="padding-horizontal">产品查询</span>
+                </a>
+                <a nav-clear menu-close href="#app/listSale"
+                   class="button button-full button-light icon icon-left ion-ios-pricetags-outline">
+                    <span class="padding-horizontal">最新促销</span>
+                </a>
+                <a nav-clear menu-close href="#app/listFavor"
+                   class="button button-full button-light icon icon-left ion-ios-star-outline">
+                    <span class="padding-horizontal">常用产品</span>
+                </a>
+                <a nav-clear menu-close href="#app/certDownload"
+                   class="button button-full button-light icon icon-left ion-clipboard">
+                    <span class="padding-horizontal">证书下载</span>
+                </a>
+                <a nav-clear menu-close href="#app/searchAgent"
+                   class="button button-full button-light icon icon-left ion-ios-location">
+                    <span class="padding-horizontal">附近经销商</span>
+                </a>
+                <a nav-clear menu-close href="#app/survey"
+                   class="button button-full button-light icon icon-left ion-android-checkbox-outline">
+                    <span class="padding-horizontal">问卷调查</span>
                 </a>
                 <a nav-clear menu-close href="#app/lists"
                    ng-click="setCatalog(0)"
