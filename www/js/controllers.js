@@ -293,7 +293,7 @@ angular.module('app.controllers', [])
     .controller('productDetailCtrl', function ($scope, $rootScope,
                                                $stateParams, $ionicPopup,
                                                $ionicSlideBoxDelegate, $ionicScrollDelegate,
-                                               $cordovaSocialSharing) {
+                                               $cordovaSocialSharing, $ionicSideMenuDelegate) {
         $scope.showLoading();
         $scope.qty = 1;
 

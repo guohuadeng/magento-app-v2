@@ -11,6 +11,10 @@
     display: none;
 }
 
+ion-view.hide-menu-icon .buttons-left {
+    display: none;
+}
+
 /* tabs */
 .md-default-theme {
     height: 100%;
