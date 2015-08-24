@@ -6,7 +6,7 @@ var en_US = {
     latest_promotions: 'Latest Promotions',
     common_products: 'Common Products',
     cert_download: 'Cert Download',
-    near_agents: 'Near Agents',
+    search_agent: 'Near Agents',
     survey: 'Survey',
     my_account: 'My Account',
     my_orders: 'My Orders',

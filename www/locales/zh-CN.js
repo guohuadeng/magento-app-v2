@@ -6,7 +6,7 @@ var zh_CN = {
     latest_promotions: '最新促销',
     common_products: '常用产品',
     cert_download: '证书下载',
-    near_agents: '附近经销商',
+    search_agent: '附近经销商',
     survey: '问卷调查',
     my_account: '我的账号',
     my_orders: '我的订单',
