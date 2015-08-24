@@ -1,4 +1,4 @@
-var isRelease = -2; //改环境图省事，设置为0则为开发环境，1为生产，-2为本地web
+var isRelease = 0; //改环境图省事，设置为0则为开发环境，1为生产，-2为本地web
 
 var baseUrl = 'http://www.kikuu.com/en',
     baseSite = 'http://www.kikuu.com/m';
