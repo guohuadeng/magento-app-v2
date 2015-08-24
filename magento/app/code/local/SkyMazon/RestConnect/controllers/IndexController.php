@@ -98,6 +98,62 @@ class SkyMazon_RestConnect_IndexController extends Mage_Core_Controller_Front_Ac
 				echo json_encode ( $productlist );
 				// ------------------------------首页 促销商品 END-------------------------------------//
 				break;
+			case 'best_seller' : // OK
+			             // ------------------------------最新商品 BEGIN-------------------------------------//
+			    $order = ($this->getRequest ()->getParam ( 'order' )) ? ($this->getRequest ()->getParam ( 'order' )) : 'entity_id';
+				$dir = ($this->getRequest ()->getParam ( 'dir' )) ? ($this->getRequest ()->getParam ( 'dir' )) : 'desc';                 // ------------------------------首页 预特价商品 BEGIN------------------------------//
+				$page = ($this->getRequest ()->getParam ( 'page' )) ? ($this->getRequest ()->getParam ( 'page' )) : 1;
+				$limit = ($this->getRequest ()->getParam ( 'limit' )) ? ($this->getRequest ()->getParam ( 'limit' )) : 5;
+				$todayDate = Mage::app ()->getLocale ()->date ()->toString ( Varien_Date::DATETIME_INTERNAL_FORMAT );
+				$_products = Mage::getModel ( 'catalog/product' )->getCollection ()->addAttributeToSelect ( '*'/* array (
+		'name',
+		'special_price',
+		'news_from_date' 
+) */ )->addAttributeToFilter ( 'status', 1 )->addAttributeToFilter ( 'news_from_date', array (
+						'or' => array (
+								0 => array (
+										'date' => true,
+										'to' => $todayDate 
+								),
+								1 => array (
+										'is' => new Zend_Db_Expr ( 'null' ) 
+								) 
+						) 
+				), 'left' )->addAttributeToFilter ( 'news_to_date', array (
+						'or' => array (
+								0 => array (
+										'date' => true,
+										'from' => $todayDate 
+								),
+								1 => array (
+										'is' => new Zend_Db_Expr ( 'null' ) 
+								) 
+						) 
+				), 'left' )->addAttributeToFilter ( array (
+						array (
+								'attribute' => 'news_from_date',
+								'is' => new Zend_Db_Expr ( 'not null' ) 
+						),
+						array (
+								'attribute' => 'news_to_date',
+								'is' => new Zend_Db_Expr ( 'not null' ) 
+						) 
+				) )->addAttributeToFilter ( 'visibility', array (
+						'in' => array (
+								2,
+								4 
+						) 
+				) )->addAttributeToSort ( 'news_from_date', 'desc' )->addAttributeToSort ( $order, $dir )/* ->setPage ( $page, $limit ) */;
+				$pages = $_products->setPageSize ( $limit )->getLastPageNumber ();
+				// $count=$collection->getSize();
+				if ($page <= $pages) {
+					$_products->setPage ( $page, $limit );
+					$products = $_products->getItems ();
+					$productlist = $this->getProductlist ( $products );
+				}
+				echo json_encode ( $productlist );
+				// ------------------------------首页 最新商品 END--------------------------------//
+				break;
 			case 'new' : // OK
 			             // ------------------------------最新商品 BEGIN-------------------------------------//
 			    $order = ($this->getRequest ()->getParam ( 'order' )) ? ($this->getRequest ()->getParam ( 'order' )) : 'entity_id';
