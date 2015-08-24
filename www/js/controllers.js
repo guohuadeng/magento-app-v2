@@ -4,7 +4,8 @@ angular.module('app.controllers', [])
     .controller('AppCtrl', function ($scope, $rootScope,
                                      $ionicModal, $ionicSlideBoxDelegate,
                                      $ionicTabsDelegate, $ionicLoading,
-                                     $ionicPopup, $timeout, $location) {
+                                     $ionicPopup, $timeout, $location,
+                                     $ionicSideMenuDelegate) {
         // Loading
         $scope.showLoading = function () {
             $ionicLoading.show({
@@ -22,6 +23,10 @@ angular.module('app.controllers', [])
                 template: _content,
                 okType: 'button-assertive'
             });
+        };
+
+        $scope.menuClose = function () {
+            $ionicSideMenuDelegate.toggleLeft(false);
         };
 
         //首次欢迎页

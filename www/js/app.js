@@ -42,20 +42,28 @@ angular.module('app', [
                     }
                 }
             })
-            .state('app.searchAgent', {
-                url: '/searchAgent', //附近经销商
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/searchAgent.html'
-                    }
-                }
-            })
             .state('app.lists', {
                 url: '/lists/:cmd',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/lists.html',
                         controller: 'ListsCtrl'
+                    }
+                }
+            })
+            .state('app.certDownload', {
+                url: '/certDownload', //附近经销商
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/certDownload.html'
+                    }
+                }
+            })
+            .state('app.searchAgent', {
+                url: '/searchAgent', //附近经销商
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/searchAgent.html'
                     }
                 }
             })
