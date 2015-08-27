@@ -1,5 +1,5 @@
 <?php
-class SkyMazon_RestConnect_CustomerController extends Mage_Core_Controller_Front_Action {
+class Sunpop_RestConnect_CustomerController extends Mage_Core_Controller_Front_Action {
 	const XML_PATH_REGISTER_EMAIL_TEMPLATE = 'customer/create_account/email_template';
 	const XML_PATH_REGISTER_EMAIL_IDENTITY = 'customer/create_account/email_identity';
 	const XML_PATH_REMIND_EMAIL_TEMPLATE = 'customer/password/remind_email_template';

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
      <modules>
-        <SkyMazon_RestConnect>
+        <Sunpop_RestConnect>
             <active>true</active>
             <codePool>local</codePool>
-        </SkyMazon_RestConnect>
+        </Sunpop_RestConnect>
      </modules>
 </config>

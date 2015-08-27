@@ -1,5 +1,5 @@
 <?php
-class SkyMazon_RestConnect_IndexController extends Mage_Core_Controller_Front_Action {
+class Sunpop_RestConnect_IndexController extends Mage_Core_Controller_Front_Action {
 	public function indexAction() {
 		Mage::app ()->cleanCache ();
 		$cmd = ($this->getRequest ()->getParam ( 'cmd' )) ? ($this->getRequest ()->getParam ( 'cmd' )) : 'daily_sale';

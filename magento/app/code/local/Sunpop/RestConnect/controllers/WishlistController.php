@@ -1,5 +1,5 @@
 <?php
-class SkyMazon_RestConnect_WishlistController extends Mage_Core_Controller_Front_Action {
+class Sunpop_RestConnect_WishlistController extends Mage_Core_Controller_Front_Action {
 	public function addToWishlistAction() {
 		$response = array ();
 		if (! Mage::getStoreConfigFlag ( 'wishlist/general/active' )) {

@@ -1,5 +1,5 @@
 <?php
-class SkyMazon_RestConnect_StoreController extends Mage_Core_Controller_Front_Action {
+class Sunpop_RestConnect_StoreController extends Mage_Core_Controller_Front_Action {
 	public function websiteInfoAction() {
 		// Mage::app ()->getWebsites ();
 		// Mage::app ()->getStores ();

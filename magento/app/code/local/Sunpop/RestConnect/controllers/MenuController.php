@@ -1,5 +1,5 @@
 <?php
-class SkyMazon_RestConnect_MenuController extends Mage_Core_Controller_Front_Action {
+class Sunpop_RestConnect_MenuController extends Mage_Core_Controller_Front_Action {
 	public function suggestAction() {
 		// echo 'HelloWorld!';
 		// $categoryid = $this->getRequest ()->getParam ( 'categoryid' );

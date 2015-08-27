@@ -1,5 +1,5 @@
 <?php
-class SkyMazon_RestConnect_ItemController extends Mage_Core_Controller_Front_Action {
+class Sunpop_RestConnect_ItemController extends Mage_Core_Controller_Front_Action {
 	/**
 	 * Current product object
 	 *

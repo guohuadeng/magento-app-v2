@@ -1,5 +1,5 @@
 <?php
-class SkyMazon_RestConnect_ItemsController extends Mage_Core_Controller_Front_Action {
+class Sunpop_RestConnect_ItemsController extends Mage_Core_Controller_Front_Action {
 	protected $_keepFrame = true;
 	protected $_keepAspectRatio = true; // false stretch the image
 	public function getItemsAction() {

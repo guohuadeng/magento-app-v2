@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <config>
 	<modules>
-		<SkyMazon_RestConnect>
+		<Sunpop_RestConnect>
 			<version>0.1.0</version>
-		</SkyMazon_RestConnect>
+		</Sunpop_RestConnect>
 	</modules>
 	<frontend>
 		<routers>
 			<restconnect>
 				<use>standard</use>
 				<args>
-					<module>SkyMazon_RestConnect</module>
+					<module>Sunpop_RestConnect</module>
 					<frontName>restconnect</frontName>
 				</args>
 			</restconnect>

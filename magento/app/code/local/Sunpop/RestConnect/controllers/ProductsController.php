@@ -1,5 +1,5 @@
 <?php
-class SkyMazon_RestConnect_ProductsController extends Mage_Core_Controller_Front_Action {
+class Sunpop_RestConnect_ProductsController extends Mage_Core_Controller_Front_Action {
 	public function getcustomoptionAction() {
 		$baseCurrency = Mage::app ()->getStore ()->getBaseCurrency ()->getCode ();
 		$currentCurrency = Mage::app ()->getStore ()->getCurrentCurrencyCode ();
