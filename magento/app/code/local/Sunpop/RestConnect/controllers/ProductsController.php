@@ -82,10 +82,10 @@ class Sunpop_RestConnect_ProductsController extends Mage_Core_Controller_Front_A
 				'regular_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
 				'final_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
 				'storeUrl' => $storeUrl,
-				'description' => $description,
 				'symbol' => Mage::app ()->getLocale ()->currency ( Mage::app ()->getStore ()->getCurrentCurrencyCode () )->getSymbol () ,
 				'weight'=>$product->getWeight(),
-				'additional'=>$addtionatt
+				'additional'=>$addtionatt,
+				'description' => $description
 		);
 		echo json_encode ( $productdetail );
 	}

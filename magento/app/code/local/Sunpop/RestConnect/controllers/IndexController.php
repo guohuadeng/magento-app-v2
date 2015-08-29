@@ -19,7 +19,7 @@ class Sunpop_RestConnect_IndexController extends Mage_Core_Controller_Front_Acti
 								'position ' => $_category->getPosition (),
 								'level ' => $_category->getLevel (),
 								'url_key' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getUrlPath (),
-								'thumbnail_url' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getThumbnailUrl (),
+								'thumbnail_url' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getThumbnailUrl (),								
 								'image_url' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getImageUrl (),
 								'children' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getAllChildren () 
 						);
@@ -283,6 +283,8 @@ class Sunpop_RestConnect_IndexController extends Mage_Core_Controller_Front_Acti
 					'special_from_date' => $product->getSpecialFromDate (),
 					'special_to_date' => $product->getSpecialToDate (),
 					'image_url' => $product->getImageUrl (),
+					'image_cache_url' => Mage::getModel ( 'catalog/product_media_config' )->getMediaUrl( $product->getThumbnail() ),
+							//also use getSmallImage() or getThumbnail() 
 					'url_key' => $product->getProductUrl (),
 					'regular_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
 					'final_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),

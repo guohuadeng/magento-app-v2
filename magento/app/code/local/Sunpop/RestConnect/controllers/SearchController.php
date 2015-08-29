@@ -6,12 +6,53 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
 	protected function _getSession() {
 		return Mage::getSingleton ( 'catalog/session' );
 	}
+	public function getfilterAction() {
+ 		$layer = Mage::getModel("catalog/layer");  
+        $rootCategory=Mage::getModel('catalog/category')->load(Mage::app()->getStore()->getRootCategoryId());  
+        $layer->setCurrentCategory($rootCategory);  
+        $attributes = $layer->getFilterableAttributes();  
+        
+        $this->_filterableAttributesExists=array();  
+        foreach ($attributes as $attribute) {
+        	$datas = '';
+        	$collection = Mage::getResourceModel('eav/entity_attribute_option_collection')
+        	->setPositionOrder('asc')
+        	->setAttributeFilter($attribute->getSource()->getAttribute()->getId())
+        	->setStoreFilter($attribute->getSource()->getAttribute()->getStoreId())
+        	->load();
+        	/*$optionCollection = Mage::getResourceModel('eav/entity_attribute_option_collection')
+        	->setAttributeFilter($attribute->getSource()->getAttribute()->getId())
+        	->setPositionOrder('desc', true)
+        	->load();*/
+        	$attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
+        	$defaultValues = $attribute->getSource()->getAttribute()->getDefaultValue();
+        	$_labels = $attribute->getSource()->getAttribute()->getStoreLabels();
+
+        	if ($attributeType == 'select' || $attributeType == 'multiselect') {
+        		$defaultValues = explode(',', $defaultValues);
+        	} else {
+        		$defaultValues = array();
+        	}
+        	$options = $collection->getData();
+        	foreach($options as $option){
+	        	if (in_array($option['option_id'], $defaultValues)){
+	        		$option['isdefault'] =1;
+	        	}
+	        	$datas[] = $option;
+        	}
+        	$datas['label'] = $_labels;
+        	$this->_filterableAttributes[$attribute->getAttributeCode()]=$datas;
+        }  
+        krsort($this->_filterableAttributes);  
+        echo json_encode($this->_filterableAttributes);
+		
+	}
 	public function indexAction() {
 		$query = Mage::helper ( 'catalogsearch' )->getQuery ();
 		/* @var $query Mage_CatalogSearch_Model_Query */
 		$query->setStoreId ( Mage::app ()->getStore ()->getId () );
 		// $query->getQueryText()打印搜索关键词
-		// var_dump($query->getQueryText());
+		//var_dump($query->getQueryText());exit;
 		if ($query->getQueryText () != '') {
 			if (Mage::helper ( 'catalogsearch' )->isMinQueryLength ()) {
 				$query->setId ( 0 )->setIsActive ( 1 )->setIsProcessed ( 1 );
