@@ -4,20 +4,20 @@
 
         <form>
             <label class="item item-input">
-                <span class="input-label">Email</span>
-                <input autofocus type="email" placeholder="Email" ng-model="loginData.username">
+                <span class="input-label">{{'email' | translate}}</span>
+                <input autofocus type="email" placeholder="{{'email' | translate}}" ng-model="loginData.username">
             </label>
             <label class="item item-input">
-                <span class="input-label">Password</span>
-                <input type="password" placeholder="password" ng-model="loginData.password">
+                <span class="input-label">{{'password' | translate}}</span>
+                <input type="password" placeholder="{{'password' | translate}}" ng-model="loginData.password">
             </label>
 
             <div class="padding">
-                <a ng-click="showPopupForgotPwd()">Forgot Your Password?</a>
+                <a ng-click="showPopupForgotPwd()">{{'forgot_password' | translate}}</a>
             </div>
             <div class="padding">
                 <a menu-toggle="left" ng-click="hideLogin()" href="#app/register">
-                    New Customers? &nbsp;Create an Account.
+                    {{'new_account' | translate}}
                 </a>
             </div>
         </form>

@@ -1,49 +1,29 @@
-<ion-view view-title="New Customer">
+<ion-view view-title="{{'new_customer' | translate}}">
     <ion-content overflow-scroll="false" class="register-container">
         <form ng-submit="doRegister()">
             <div class="list padding">
-                <label class="item">Country/Region</label>
-                <label class="item item-radio">
-                    <input type="radio" name="store_group_id" value="1" checked="checked">
-
-                    <div class="item-content">
-                        <span class="padding-horizontal">Tanzania</span>
-                        <img src="img/flags/Tanzania.png" height="18">
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" name="store_group_id" value="3" disabled="disabled">
-
-                    <div class="item-content">
-                        <span class="padding-horizontal">Ethiopia</span>
-                        <img src="img/flags/Ethiopia.png" height="18">
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-
                 <!-- 短信验证.form__field -->
                 <label class="item item-input">
-                    <span class="input-label">Mobile*</span>
+                    <span class="input-label">{{'mobile' | translate}}*</span>
                     <input autofocus type="tel"
-                           placeholder="Input your mobile number"
+                           placeholder="{{'mobile_tip' | translate}}"
                            ng-model="registerData.default_mobile_number">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Validcode*</span>
-                    <input type="text" placeholder="Validation Code*"
+                    <span class="input-label">{{'validation_code' | translate}}*</span>
+                    <input type="text" placeholder="{{'validation_code' | translate}}"
                            ng-model="registerData.validation_Code">
                 </label>
                 <label class="item">
                     <button class="button button-outline button-assertive"
-                            value="Get Validation Code"
+                            value="{{'get_validation_code' | translate}}"
                             ng-click="getValidationCode()"
                             ng-disabled="validationCodeDisabled">
                         <em ng-if="validationCodeDisabled">
-                            [{{validationCode}}]Wait...({{validateSeconds}}s)
+                            [{{validationCode}}]{{'wait' | translate}}({{validateSeconds}}{{'second' | translate}})
                         </em>
                         <em ng-if="!validationCodeDisabled">
-                            Get Validation Code
+                            {{'get_validation_code' | translate}}
                         </em>
                     </button>
                 </label>
@@ -52,32 +32,32 @@
                 <div class="item item-divider">
                 </div>
                 <label class="item item-input">
-                    <span class="input-label">Email*</span>
-                    <input type="text" placeholder="Email*"
+                    <span class="input-label">{{'email' | translate}}*</span>
+                    <input type="text" placeholder="{{'email' | translate}}"
                            ng-model="registerData.email">
                 </label>
 
                 <label class="item item-input">
-                    <span class="input-label">First Name*</span>
-                    <input type="text" placeholder="First Name*"
+                    <span class="input-label">{{'first_name' | translate}}*</span>
+                    <input type="text" placeholder="{{'first_name' | translate}}"
                            ng-model="registerData.firstname">
                 </label>
 
                 <label class="item item-input">
-                    <span class="input-label">Last Name*</span>
-                    <input type="text" placeholder="Last Name*"
+                    <span class="input-label">{{'last_name' | translate}}*</span>
+                    <input type="text" placeholder="{{'last_name' | translate}}"
                            ng-model="registerData.lastname">
                 </label>
 
 
                 <label class="item item-input">
-                    <span class="input-label">Gender*</span>
+                    <span class="input-label">{{'gender' | translate}}*</span>
                     <label class="item item-radio">
                         <input name="gender" type="radio" value="1"
                                ng-model="registerData.gender"
                                checked>
 
-                        <div class="item-content icon-left ion-male">&nbsp;Male</div>
+                        <div class="item-content icon-left ion-male"> {{'male' | translate}}</div>
                         <i class="radio-icon ion-checkmark"></i>
                     </label>
                     <label class="item item-radio">
@@ -85,26 +65,26 @@
                                ng-model="registerData.gender"
                                checked>
 
-                        <div class="item-content icon-left ion-female">&nbsp;FeMale</div>
+                        <div class="item-content icon-left ion-female"> {{'female' | translate}}</div>
                         <i class="radio-icon ion-checkmark"></i>
                     </label>
                 </label>
 
                 <label class="item item-input">
-                    <span class="input-label">Password*</span>
-                    <input type="password" placeholder="Password*"
+                    <span class="input-label">{{'password' | translate}}*</span>
+                    <input type="password" placeholder="{{'password' | translate}}"
                            ng-model="registerData.password">
                 </label>
 
                 <label class="item item-input">
-                    <span class="input-label">Confirm*</span>
-                    <input type="password" placeholder="Confirm Password*"
+                    <span class="input-label">{{'confirm' | translate}}*</span>
+                    <input type="password" placeholder="{{'confirm_password' | translate}}"
                            ng-model="registerData.confirmation">
                 </label>
 
                 <label class="item">
                     <button class="button button-full button-assertive"
-                            type="submit">Submit
+                            type="submit"> {{'submit' | translate}}
                     </button>
                 </label>
             </div>

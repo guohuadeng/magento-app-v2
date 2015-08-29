@@ -5,7 +5,12 @@ angular.module('app.controllers', [])
                                      $ionicModal, $ionicSlideBoxDelegate,
                                      $ionicTabsDelegate, $ionicLoading,
                                      $ionicPopup, $timeout, $location,
-                                     $ionicSideMenuDelegate) {
+                                     $ionicSideMenuDelegate, $translate) {
+
+        $translate(Object.keys(zh_CN)).then(function (translations) {
+            $scope.translations = translations;
+        });
+
         // Loading
         $scope.showLoading = function () {
             $ionicLoading.show({
@@ -72,13 +77,13 @@ angular.module('app.controllers', [])
 
             var popup = $ionicPopup.show({
                 templateUrl: 'templates/login.html',
-                title: 'Login - Registered User',
+                title: $scope.translations.login_title,
                 cssClass: 'login-container',
                 scope: $scope,
                 buttons: [
-                    {text: 'Cancel'},
+                    {text: $scope.translations.cancel},
                     {
-                        text: 'Login',
+                        text: $scope.translations.login,
                         type: 'button-assertive',
                         onTap: function (e) {
                             e.preventDefault();
