@@ -2,11 +2,10 @@
 // 'app' is the name of this angular module (also set in a <body> attribute in index.html)
 angular.module('app', [
         'ionic', 'ngCordova', 'pascalprecht.translate',
-        'app.config', 'app.controllers',
-        'app.filters'
+        'app.controllers', 'app.filters'
     ])
 
-    .run(function ($ionicPlatform, $rootScope, $http, Config) {
+    .run(function ($ionicPlatform, $rootScope, $http) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -17,7 +16,7 @@ angular.module('app', [
                 StatusBar.styleDefault();
             }
         });
-        Service($rootScope, $http, Config);
+        Service($rootScope, $http);
     })
 
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $translateProvider) {
@@ -88,7 +87,8 @@ angular.module('app', [
                 url: '/setting',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/setting.html'
+                        templateUrl: 'templates/setting.html',
+                        controller: 'settingCtrl'
                     }
                 }
             })
@@ -142,7 +142,7 @@ angular.module('app', [
 
         $translateProvider.translations('cn', zh_CN);
         $translateProvider.translations('en', en_US);
-        $translateProvider.preferredLanguage('cn');
+        $translateProvider.preferredLanguage(Config.getLocale());
     })
 
     .directive('onFinishRender', function ($timeout) {

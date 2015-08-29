@@ -2,7 +2,7 @@
 <ion-content scroll="false" overflow-scroll="true">
         <ion-scroll style="height:100%" overflow-scroll="true" direction="y" locking="true">
             <ion-refresher
-                    pulling-text="Pull to refresh..."
+                    pulling-text="{{'pull_to_refresh' | translate}}"
                     on-refresh="doRefresh($index)">
             </ion-refresher>
             <ion-list class="products-grid one-line">

@@ -1,4 +1,5 @@
 var zh_CN = {
+    colon: '：',
     login: '登录',
     register: '注册',
     home: '首页',
@@ -38,5 +39,14 @@ var zh_CN = {
     female: '女',
     confirm: '确认密码',
     confirm_password: '确认密码',
-    submit: '提交'
+    submit: '提交',
+    search: '搜索',
+    no_product_found: '没有找到任何产品。',
+    pull_to_refresh: '下拉刷新……',
+    language: '语言',
+    simplified_chinese: '简体中文',
+    english: '英文',
+    about: '关于',
+    check_update: '检查更新',
+    version: '版本'
 };

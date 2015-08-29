@@ -1,4 +1,5 @@
 var en_US = {
+    colon: ': ',
     login: 'Login',
     register: 'Register',
     home: 'Home',
@@ -38,5 +39,14 @@ var en_US = {
     female: 'FeMale',
     confirm: 'Confirm',
     confirm_password: 'Confirm password',
-    submit: 'Submit'
+    submit: 'Submit',
+    search: 'Search',
+    no_product_found: 'No product found.',
+    pull_to_refresh: 'Pull to refresh...',
+    language: 'Language',
+    simplified_chinese: 'Simplified Chinese',
+    english: 'English',
+    about: 'About',
+    check_update: 'Check for new update',
+    version: 'Version'
 };

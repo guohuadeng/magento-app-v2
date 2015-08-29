@@ -208,6 +208,16 @@ angular.module('app.controllers', [])
         };
     })
 
+    // 设置
+    .controller('settingCtrl', function ($scope, $rootScope, $translate) {
+        $scope.locale = Config.getLocale();
+        $scope.changeLocale = function (locale) {
+            $scope.locale = locale;
+            $translate.use(locale);
+            Config.setLocale(locale);
+        };
+    })
+
     // 列表
     .controller('ListsCtrl', function ($scope, $rootScope, $stateParams, $translate) {
         $scope.listTitle = {
@@ -422,12 +432,12 @@ angular.module('app.controllers', [])
         });
     })
 
-    .controller('FrameCtrl', function ($scope, $sce, $stateParams, Config) {
+    .controller('FrameCtrl', function ($scope, $sce, $stateParams) {
         $scope.trustSrc = function (src) {
             return $sce.trustAsResourceUrl(src);
         };
 
         var frame = Config.frames[$stateParams.page];
         $scope.title = frame.title;
-        $scope.src = frame.src;
+        $scope.src = Config.baseSite + frame.src;
     });
