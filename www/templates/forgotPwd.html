@@ -4,11 +4,11 @@
 
         <form>
             <label class="item item-input">
-                <span class="input-label">Email</span>
+                <span class="input-label">{{'email' | translate}}*</span>
                 <input autofocus class="padding-left" type="email" ng-model="pwdData.email">
             </label>
             <div class="padding">
-                This would take a little longer. Please wait...
+                {{'wait_tip' | translate}}
             </div>
         </form>
     </div>

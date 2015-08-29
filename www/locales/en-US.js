@@ -24,6 +24,7 @@ var en_US = {
     password: 'Password',
     forgot_password: 'Forgot Your Password?',
     new_account: 'New Customers? Create an Account.',
+    ok: 'OK',
     cancel: 'Cancel',
     new_customer: 'New Customer',
     mobile: 'Mobile',
@@ -48,5 +49,13 @@ var en_US = {
     english: 'English',
     about: 'About',
     check_update: 'Check for new update',
-    version: 'Version'
+    version: 'Version',
+    enter_app: 'Enter App',
+    wait_tip: 'This would take a little longer. Please wait...',
+    enter_email: 'Enter your email',
+    success: 'Success',
+    alert: 'Alert',
+    confirm: 'Confirm',
+    error_code: 'Error code',
+    exit_tip: 'Are you sure to exit the App?'
 };

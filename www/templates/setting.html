@@ -3,19 +3,12 @@
         <ul class="list">
             <li class="item">
                 <h2>{{'language' | translate}}</h2>
-                <label class="item item-radio">
-                    <input ng-click="changeLocale('cn')" type="radio" name="locale" ng-model="locale" value="cn">
+                <label class="item item-radio" ng-repeat="language in languages">
+                    <input ng-click="changeLocale()" type="radio" name="locale"
+                           ng-model="locale" value="{{language.store_code}}">
 
                     <div class="item-content">
-                        <span class="padding-horizontal">{{'simplified_chinese' | translate}}</span>
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input ng-click="changeLocale('en')" type="radio" name="locale" ng-model="locale" value="en">
-
-                    <div class="item-content">
-                        <span class="padding-horizontal">{{'english' | translate}}</span>
+                        <span class="padding-horizontal">{{language.name}}</span>
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>

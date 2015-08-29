@@ -24,6 +24,7 @@ var zh_CN = {
     password: '密码',
     forgot_password: '忘记密码？',
     new_account: '新用户？创建账号。',
+    ok: '确定',
     cancel: '取消',
     new_customer: '新用户',
     mobile: '手机',
@@ -48,5 +49,13 @@ var zh_CN = {
     english: '英文',
     about: '关于',
     check_update: '检查更新',
-    version: '版本'
+    version: '版本',
+    enter_app: '进入应用',
+    wait_tip: '这需要一点时间，请稍候……',
+    enter_email: '输入您的邮箱',
+    success: '成功',
+    alert: '提示',
+    confirm: '确认',
+    error_code: '错误码',
+    exit_tip: '是否确定退出该应用？'
 };

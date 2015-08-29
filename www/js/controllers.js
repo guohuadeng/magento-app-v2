@@ -14,7 +14,7 @@ angular.module('app.controllers', [])
         // Loading
         $scope.showLoading = function () {
             $ionicLoading.show({
-                template: 'Loading...'
+                template: ''
             });
         };
         $scope.hideLoading = function () {
@@ -43,7 +43,7 @@ angular.module('app.controllers', [])
                 scope: $scope,
                 buttons: [
                     {
-                        text: 'Enter Kikuu',
+                        text: $scope.translations.enter_app,
                         type: 'button-energized'
                     }
                 ]
@@ -55,13 +55,6 @@ angular.module('app.controllers', [])
                 $scope.welcome();
             }, 50);
         }
-
-        // 网站列表信息
-        $scope.getWebsite = function () {
-            $rootScope.service.get('website', function (website) {
-                $scope.website = website;
-            });
-        };
 
         // 获取用户信息
         $scope.getUser = function () {
@@ -117,13 +110,13 @@ angular.module('app.controllers', [])
 
             var popup = $ionicPopup.show({
                 templateUrl: 'templates/forgotPwd.html',
-                title: 'Enter your email',
+                title: $scope.translations.enter_email,
                 cssClass: 'forgot-pwd-container',
                 scope: $scope,
                 buttons: [
-                    {text: 'Cancel'},
+                    {text: $scope.translations.cancel},
                     {
-                        text: '<b>Submit</b>',
+                        text: $scope.translations.submit,
                         type: 'button-assertive',
                         onTap: function (e) {
                             e.preventDefault();
@@ -135,11 +128,12 @@ angular.module('app.controllers', [])
                             $rootScope.service.get('forgotpwd', $scope.pwdData, function (res) {
                                 $scope.hideLoading();
                                 if (res.code == '0x0000') {
-                                    $scope.showAlert('Success', res.message);
+                                    $scope.showAlert($scope.translations.success, res.message);
                                     popup.close();
                                     return;
                                 }
-                                $scope.showAlert('Alert!', 'Error code:' + res.code + '</br>' + res.message);
+                                $scope.showAlert($scope.translations.alert, $scope.translations.error_code +
+                                    res.code + '</br>' + res.message);
                             });
                         }
                     }
@@ -157,9 +151,13 @@ angular.module('app.controllers', [])
         // 退出应用
         $scope.showExit = function () {
             $ionicPopup.confirm({
-                title: 'Confirm',
-                template: 'Are you sure to exit the Kikuu App?',
-                okType: 'button-assertive'
+                title: $scope.translations.confirm,
+                template: $scope.translations.exit_tip,
+                okType: 'button-assertive',
+                buttons: [
+                    {text: $scope.translations.cancel},
+                    {text: $scope.translations.ok}
+                ]
             }).then(function (res) {
                 if (res) {
                     navigator.app.exitApp();
@@ -210,11 +208,23 @@ angular.module('app.controllers', [])
 
     // 设置
     .controller('settingCtrl', function ($scope, $rootScope, $translate) {
+        // 网站列表信息
+        $scope.getWebsite = function () {
+            $rootScope.service.get('website', function (website) {
+                $scope.languages = [];
+                for (var l in website['1'].webside['1'].view) {
+                    $scope.languages.push(website['1'].webside['1'].view[l]);
+                }
+            });
+        };
+        $scope.getWebsite();
+
         $scope.locale = Config.getLocale();
-        $scope.changeLocale = function (locale) {
-            $scope.locale = locale;
-            $translate.use(locale);
-            Config.setLocale(locale);
+
+        $scope.changeLocale = function () {
+            $scope.locale = this.language.store_code;
+            $translate.use($scope.locale);
+            Config.setLocale($scope.locale);
         };
     })
 
