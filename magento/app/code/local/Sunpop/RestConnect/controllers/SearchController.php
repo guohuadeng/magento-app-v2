@@ -17,118 +17,11 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
 		return Mage::getSingleton ( 'catalog/session' );
 	}
 	
-	public function getsearchoptionAction(){
-		//$andor1,$andor2 值是 'AND' 或 'OR' 默认 AND
-		//$is_searchable,$is_visible_in_advanced_search,$used_for_sort_by 值是 0 或 1
-		$andor1 = $this->getRequest()->getParam('andor1') !== null ? $this->getRequest()->getParam('andor1') : 'and';
-		$andor2 = $this->getRequest()->getParam('andor2') !== null ? $this->getRequest()->getParam('andor2') : 'and';
-		
-		$is_searchable = $this->getRequest()->getParam('is_searchable') !== null ? $this->getRequest()->getParam('is_searchable') : 1;
-		$is_visible_in_advanced_search = $this->getRequest()->getParam('is_visible_in_advanced_search') !== null ? $this->getRequest()->getParam('is_visible_in_advanced_search') : 1;
-		$used_for_sort_by = $this->getRequest()->getParam('used_for_sort_by') !== null ? $this->getRequest()->getParam('used_for_sort_by') : 1;
-		
-		$is_searchable_where = 'additional_table.is_searchable = ' . $is_searchable;
-	
-		$is_visible_in_advanced_search_where = 'is_visible_in_advanced_search = ' . $is_visible_in_advanced_search;
-	
-		$used_for_sort_by_where = 'additional_table.used_for_sort_by = ' . $used_for_sort_by;
-
-		$where = $is_searchable_where .' '. $andor1 .' '. $is_visible_in_advanced_search_where .' '. $andor2 .' '. $used_for_sort_by_where;
-
-		$attributes = Mage::getResourceModel('catalog/product_attribute_collection')
-					->addVisibleFilter();
-		
-		$attributes->getSelect()->where(sprintf('(%s)',$where));
-		$attributes->load();
-		
-		foreach ($attributes as $attribute) {
-        	$datas = '';
-        	$collection = Mage::getResourceModel('eav/entity_attribute_option_collection')
-        	->setPositionOrder('asc')
-        	->setAttributeFilter($attribute->getSource()->getAttribute()->getId())
-        	->setStoreFilter($attribute->getSource()->getAttribute()->getStoreId())
-        	->load();
-        	
-        	$attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
-        	$defaultValues = $attribute->getSource()->getAttribute()->getDefaultValue();
-        	$_labels = $attribute->getSource()->getAttribute()->getStoreLabels();
-
-        	if ($attributeType == 'select' || $attributeType == 'multiselect') {
-        		$defaultValues = explode(',', $defaultValues);
-        	} else {
-        		$defaultValues = array();
-        	}
-        	$options = $collection->getData();
-        	$datas['label'] = $_labels;
-        	foreach($options as $option){
-	        	if (in_array($option['option_id'], $defaultValues)){
-	        		$option['isdefault'] =1;
-	        	}
-	        	$datas[] = $option;
-        	}
-        	
-        	$this->_searchableAttributes[$attribute->getAttributeCode()]=$datas;
-        }  
-        krsort($this->_searchableAttributes);  
-        echo Mage::helper('core')->jsonEncode($this->_searchableAttributes);
-					
-	}
-	
-	public function getfilterAction() {
-		//http://domainname/restconnect/search/getfilter/categoryid/1
-		//categoryid
-		$categoryid = $this->getRequest()->getParam('categoryid');
- 		$layer = Mage::getModel("catalog/layer");
- 		if($categoryid){
-        	$rootCategory=Mage::getModel('catalog/category')->load($categoryid); 
- 		}else{
- 			$rootCategory=Mage::getModel('catalog/category')->load(Mage::app()->getStore()->getRootCategoryId());
- 		}
-        $layer->setCurrentCategory($rootCategory);  
-        $attributes = $layer->getFilterableAttributes();  
-        
-        $this->_filterableAttributesExists=array();  
-        foreach ($attributes as $attribute) {
-        	$datas = '';
-        	$collection = Mage::getResourceModel('eav/entity_attribute_option_collection')
-        	->setPositionOrder('asc')
-        	->setAttributeFilter($attribute->getSource()->getAttribute()->getId())
-        	->setStoreFilter($attribute->getSource()->getAttribute()->getStoreId())
-        	->load();
-        	
-        	$attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
-        	$defaultValues = $attribute->getSource()->getAttribute()->getDefaultValue();
-        	$_labels = $attribute->getSource()->getAttribute()->getStoreLabels();
-
-        	if ($attributeType == 'select' || $attributeType == 'multiselect') {
-        		$defaultValues = explode(',', $defaultValues);
-        	} else {
-        		$defaultValues = array();
-        	}
-        	$options = $collection->getData();
-        	$datas['label'] = $_labels;
-        	foreach($options as $option){
-	        	if (in_array($option['option_id'], $defaultValues)){
-	        		$option['isdefault'] =1;
-	        	}
-	        	$datas[] = $option;
-        	}
-        	
-        	$this->_filterableAttributes[$attribute->getAttributeCode()]=$datas;
-        }  
-        krsort($this->_filterableAttributes);  
-        echo Mage::helper('core')->jsonEncode($this->_filterableAttributes);
-		
-	}
 	public function indexAction() {
-
-
 		$order = ($this->getRequest ()->getParam ( 'order' )) ? ($this->getRequest ()->getParam ( 'order' )) : 'entity_id';
 		$dir = ($this->getRequest ()->getParam ( 'dir' )) ? ($this->getRequest ()->getParam ( 'dir' )) : 'desc';
 		$page = ($this->getRequest ()->getParam ( 'page' )) ? ($this->getRequest ()->getParam ( 'page' )) : 1;
-		$limit = ($this->getRequest ()->getParam ( 'limit' )) ? ($this->getRequest ()->getParam ( 'limit' )) : 5;
-		
-		
+		$limit = ($this->getRequest ()->getParam ( 'limit' )) ? ($this->getRequest ()->getParam ( 'limit' )) : 20;
 		
 		$query = Mage::helper ( 'catalogsearch' )->getQuery ();
 		/* @var $query Mage_CatalogSearch_Model_Query */
@@ -157,18 +50,13 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
 			$result = $query->getResultCollection ();
 			
 			//pages
-			$result->setPageSize($limit);
-				
+			$result->setPageSize($limit);				
 			$result->setCurPage($page);
-
 
 			//sort
 			//$ud = 'ASC' | 'DESC'
-			$result->addAttributeToSort($order,$dir);
-
-				
-			$result->load();
-				
+			$result->addAttributeToSort($order,$dir);				
+			$result->load();				
 			$lastpagenumber = $result->getLastPageNumber();
 				
 				
@@ -214,6 +102,114 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
 			// $this->_redirectReferer ();
 		}
 	}
+
+	public function getfilterAction() {
+		//http://domainname/restconnect/search/getfilter/categoryid/1
+		//categoryid
+		$categoryid = $this->getRequest()->getParam('categoryid');
+		$layer = Mage::getModel("catalog/layer");
+		if($categoryid){
+			$rootCategory=Mage::getModel('catalog/category')->load($categoryid);
+		}else{
+			$rootCategory=Mage::getModel('catalog/category')->load(Mage::app()->getStore()->getRootCategoryId());
+		}
+		$layer->setCurrentCategory($rootCategory);
+		$attributes = $layer->getFilterableAttributes();
+	
+		$this->_filterableAttributesExists=array();
+		foreach ($attributes as $attribute) {
+			$datas = '';
+			$collection = Mage::getResourceModel('eav/entity_attribute_option_collection')
+			->setPositionOrder('asc')
+			->setAttributeFilter($attribute->getSource()->getAttribute()->getId())
+			->setStoreFilter($attribute->getSource()->getAttribute()->getStoreId())
+			->load();
+			 
+			$attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
+			$defaultValues = $attribute->getSource()->getAttribute()->getDefaultValue();
+			$_labels = $attribute->getSource()->getAttribute()->getStoreLabels();
+	
+			if ($attributeType == 'select' || $attributeType == 'multiselect') {
+				$defaultValues = explode(',', $defaultValues);
+			} else {
+				$defaultValues = array();
+			}
+			$options = $collection->getData();
+			$datas['label'] = $_labels;
+			foreach($options as $option){
+				if (in_array($option['option_id'], $defaultValues)){
+					$option['isdefault'] =1;
+				}
+				$datas[] = $option;
+			}
+			 
+			$this->_filterableAttributes[$attribute->getAttributeCode()]=$datas;
+		}
+		krsort($this->_filterableAttributes);
+		echo Mage::helper('core')->jsonEncode($this->_filterableAttributes);
+	
+	}
+	
+	public function getsearchadvoptionAction(){
+		//取出现在高级搜索里的选项
+		//$andor1,$andor2 值是 'AND' 或 'OR' 默认 AND
+		//$is_searchable,$is_visible_in_advanced_search,$used_for_sort_by 值是 0 或 1
+		$andor1 = $this->getRequest()->getParam('andor1') !== null ? $this->getRequest()->getParam('andor1') : 'and';
+		$andor2 = $this->getRequest()->getParam('andor2') !== null ? $this->getRequest()->getParam('andor2') : 'and';
+		
+		$is_searchable = $this->getRequest()->getParam('is_searchable') !== null ? $this->getRequest()->getParam('is_searchable') : 1;
+		$is_visible_in_advanced_search = $this->getRequest()->getParam('is_visible_in_advanced_search') !== null ? $this->getRequest()->getParam('is_visible_in_advanced_search') : 1;
+		$used_for_sort_by = $this->getRequest()->getParam('used_for_sort_by') !== null ? $this->getRequest()->getParam('used_for_sort_by') : 1;
+		
+		$is_searchable_where = 'additional_table.is_searchable = ' . $is_searchable;
+	
+		$is_visible_in_advanced_search_where = 'is_visible_in_advanced_search = ' . $is_visible_in_advanced_search;
+	
+		$used_for_sort_by_where = 'additional_table.used_for_sort_by = ' . $used_for_sort_by;
+
+		//$where = $is_searchable_where .' '. $andor1 .' '. $is_visible_in_advanced_search_where .' '. $andor2 .' '. $used_for_sort_by_where;
+		//改为只出现高级搜索的
+		$where =  $is_visible_in_advanced_search_where;
+		
+		$attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+					->addVisibleFilter();
+		
+		$attributes->getSelect()->where(sprintf('(%s)',$where));
+		$attributes->load();
+		
+		foreach ($attributes as $attribute) {
+        	$datas = '';
+        	$collection = Mage::getResourceModel('eav/entity_attribute_option_collection')
+        	->setPositionOrder('asc')
+        	->setAttributeFilter($attribute->getSource()->getAttribute()->getId())
+        	->setStoreFilter($attribute->getSource()->getAttribute()->getStoreId())
+        	->load();
+        	
+        	$attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
+        	$defaultValues = $attribute->getSource()->getAttribute()->getDefaultValue();
+        	$_labels = $attribute->getSource()->getAttribute()->getStoreLabels();
+
+        	if ($attributeType == 'select' || $attributeType == 'multiselect') {
+        		$defaultValues = explode(',', $defaultValues);
+        	} else {
+        		$defaultValues = array();
+        	}
+        	$options = $collection->getData();
+        	$datas['label'] = $_labels;
+        	foreach($options as $option){
+	        	if (in_array($option['option_id'], $defaultValues)){
+	        		$option['isdefault'] =1;
+	        	}
+	        	$datas[] = $option;
+        	}
+        	
+        	$this->_searchableAttributes[$attribute->getAttributeCode()]=$datas;
+        }  
+        krsort($this->_searchableAttributes);  
+        echo Mage::helper('core')->jsonEncode($this->_searchableAttributes);
+					
+	}
+	
 	public function testAction() {
 		$query = Mage::helper ( 'catalogSearch' )->getQuery ();
 		$searcher = Mage::getSingleton ( 'catalogsearch/advanced' )->addFilters ( array (

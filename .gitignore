@@ -2,6 +2,7 @@
 # http://git-scm.com/docs/gitignore
 # 自定义的不公开文件
 s.*
+~*.*
 node_modules/
 platforms/
 plugins/
