@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Sunpop_Storelocator>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Cms/>
+            </depends>
+        </Sunpop_Storelocator>
+    </modules>
+</config>

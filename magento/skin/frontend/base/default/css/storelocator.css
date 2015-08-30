@@ -1,0 +1,95 @@
+.storelist h2 { 
+    color: #e76200;
+    float: left;
+}
+
+.storelist li { 
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 2px;
+}
+
+.storelist li:hover { 
+    background:#E0E0E0;
+}
+
+@media only screen and (min-width: 771px) {
+.left         { float:left !important; }
+.right        { float:right !important; }
+.map_container {
+    width: 67%;
+}
+
+.store_detail, .store_list{ 
+    width:30%;
+}
+}
+
+.store_detail{ 
+    word-wrap: normal;
+}
+
+.store_detail h2 { 
+    color: #e76200;
+}
+
+.store_detail td { 
+    vertical-align:top;
+}
+
+.store_detail td.label { 
+    width: 50%;
+    padding-bottom: 10px;
+}
+
+.store_detail td.weekday { 
+    padding-right: 5px;
+}
+
+.store_detail img {
+	width: 100%
+}
+
+.distance {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.address-input-text {
+    width: 300px;
+}
+
+.loader {
+    position:fixed;
+    top:45%;
+    left:50%;
+    width:150px;
+    margin-left:-105px;
+    padding:15px;
+    background:#fff4e9;
+    border:2px solid #f1af73;
+    color:#d85909;
+    font-weight:bold;
+    text-align:center;
+    z-index:1000;
+}
+
+.loader img {
+    margin: 0 auto;
+}
+
+#map {
+	height: 400px; 
+}
+
+#street_view {
+	height: 400px; 
+	display: none
+}
