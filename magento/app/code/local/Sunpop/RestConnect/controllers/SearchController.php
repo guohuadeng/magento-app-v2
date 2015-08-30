@@ -1,14 +1,89 @@
 <?php
 /**
- * Catalog Search Controller
+ * * NOTICE OF LICENSE
+ * * This source file is subject to the Open Software License (OSL 3.0)
+ *
+ * Author: Ivan Deng
+ * QQ: 300883
+ * Email: 300883@qq.com
+ * @copyright  Copyright (c) 2008-2015 Sunpop Ltd. (http://www.sunpop.cn)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/**
+ * Quick Search Controller
  */
 class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Action {
 	protected function _getSession() {
 		return Mage::getSingleton ( 'catalog/session' );
 	}
+	
+	public function getsearchoptionAction(){
+		//$andor1,$andor2 值是 'AND' 或 'OR' 默认 AND
+		//$is_searchable,$is_visible_in_advanced_search,$used_for_sort_by 值是 0 或 1
+		$andor1 = $this->getRequest()->getParam('andor1') !== null ? $this->getRequest()->getParam('andor1') : 'and';
+		$andor2 = $this->getRequest()->getParam('andor2') !== null ? $this->getRequest()->getParam('andor2') : 'and';
+		
+		$is_searchable = $this->getRequest()->getParam('is_searchable') !== null ? $this->getRequest()->getParam('is_searchable') : 1;
+		$is_visible_in_advanced_search = $this->getRequest()->getParam('is_visible_in_advanced_search') !== null ? $this->getRequest()->getParam('is_visible_in_advanced_search') : 1;
+		$used_for_sort_by = $this->getRequest()->getParam('used_for_sort_by') !== null ? $this->getRequest()->getParam('used_for_sort_by') : 1;
+		
+		$is_searchable_where = 'additional_table.is_searchable = ' . $is_searchable;
+	
+		$is_visible_in_advanced_search_where = 'is_visible_in_advanced_search = ' . $is_visible_in_advanced_search;
+	
+		$used_for_sort_by_where = 'additional_table.used_for_sort_by = ' . $used_for_sort_by;
+
+		$where = $is_searchable_where .' '. $andor1 .' '. $is_visible_in_advanced_search_where .' '. $andor2 .' '. $used_for_sort_by_where;
+
+		$attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+					->addVisibleFilter();
+		
+		$attributes->getSelect()->where(sprintf('(%s)',$where));
+		$attributes->load();
+		
+		foreach ($attributes as $attribute) {
+        	$datas = '';
+        	$collection = Mage::getResourceModel('eav/entity_attribute_option_collection')
+        	->setPositionOrder('asc')
+        	->setAttributeFilter($attribute->getSource()->getAttribute()->getId())
+        	->setStoreFilter($attribute->getSource()->getAttribute()->getStoreId())
+        	->load();
+        	
+        	$attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
+        	$defaultValues = $attribute->getSource()->getAttribute()->getDefaultValue();
+        	$_labels = $attribute->getSource()->getAttribute()->getStoreLabels();
+
+        	if ($attributeType == 'select' || $attributeType == 'multiselect') {
+        		$defaultValues = explode(',', $defaultValues);
+        	} else {
+        		$defaultValues = array();
+        	}
+        	$options = $collection->getData();
+        	$datas['label'] = $_labels;
+        	foreach($options as $option){
+	        	if (in_array($option['option_id'], $defaultValues)){
+	        		$option['isdefault'] =1;
+	        	}
+	        	$datas[] = $option;
+        	}
+        	
+        	$this->_searchableAttributes[$attribute->getAttributeCode()]=$datas;
+        }  
+        krsort($this->_searchableAttributes);  
+        echo Mage::helper('core')->jsonEncode($this->_searchableAttributes);
+					
+	}
+	
 	public function getfilterAction() {
- 		$layer = Mage::getModel("catalog/layer");  
-        $rootCategory=Mage::getModel('catalog/category')->load(Mage::app()->getStore()->getRootCategoryId());  
+		//http://domainname/restconnect/search/getfilter/categoryid/1
+		//categoryid
+		$categoryid = $this->getRequest()->getParam('categoryid');
+ 		$layer = Mage::getModel("catalog/layer");
+ 		if($categoryid){
+        	$rootCategory=Mage::getModel('catalog/category')->load($categoryid); 
+ 		}else{
+ 			$rootCategory=Mage::getModel('catalog/category')->load(Mage::app()->getStore()->getRootCategoryId());
+ 		}
         $layer->setCurrentCategory($rootCategory);  
         $attributes = $layer->getFilterableAttributes();  
         
@@ -20,10 +95,7 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
         	->setAttributeFilter($attribute->getSource()->getAttribute()->getId())
         	->setStoreFilter($attribute->getSource()->getAttribute()->getStoreId())
         	->load();
-        	/*$optionCollection = Mage::getResourceModel('eav/entity_attribute_option_collection')
-        	->setAttributeFilter($attribute->getSource()->getAttribute()->getId())
-        	->setPositionOrder('desc', true)
-        	->load();*/
+        	
         	$attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
         	$defaultValues = $attribute->getSource()->getAttribute()->getDefaultValue();
         	$_labels = $attribute->getSource()->getAttribute()->getStoreLabels();
@@ -34,25 +106,33 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
         		$defaultValues = array();
         	}
         	$options = $collection->getData();
+        	$datas['label'] = $_labels;
         	foreach($options as $option){
 	        	if (in_array($option['option_id'], $defaultValues)){
 	        		$option['isdefault'] =1;
 	        	}
 	        	$datas[] = $option;
         	}
-        	$datas['label'] = $_labels;
+        	
         	$this->_filterableAttributes[$attribute->getAttributeCode()]=$datas;
         }  
         krsort($this->_filterableAttributes);  
-        echo json_encode($this->_filterableAttributes);
+        echo Mage::helper('core')->jsonEncode($this->_filterableAttributes);
 		
 	}
 	public function indexAction() {
+
+
+		$order = ($this->getRequest ()->getParam ( 'order' )) ? ($this->getRequest ()->getParam ( 'order' )) : 'entity_id';
+		$dir = ($this->getRequest ()->getParam ( 'dir' )) ? ($this->getRequest ()->getParam ( 'dir' )) : 'desc';
+		$page = ($this->getRequest ()->getParam ( 'page' )) ? ($this->getRequest ()->getParam ( 'page' )) : 1;
+		$limit = ($this->getRequest ()->getParam ( 'limit' )) ? ($this->getRequest ()->getParam ( 'limit' )) : 5;
+		
+		
+		
 		$query = Mage::helper ( 'catalogsearch' )->getQuery ();
 		/* @var $query Mage_CatalogSearch_Model_Query */
 		$query->setStoreId ( Mage::app ()->getStore ()->getId () );
-		// $query->getQueryText()打印搜索关键词
-		//var_dump($query->getQueryText());exit;
 		if ($query->getQueryText () != '') {
 			if (Mage::helper ( 'catalogsearch' )->isMinQueryLength ()) {
 				$query->setId ( 0 )->setIsActive ( 1 )->setIsProcessed ( 1 );
@@ -74,7 +154,24 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
 			
 			Mage::helper ( 'catalogsearch' )->checkNotes ();
 			// $collection = Mage::getModel ( "catalogsearch/query" )->getResultCollection ();
-			$collection = $query->getResultCollection ();
+			$result = $query->getResultCollection ();
+			
+			//pages
+			$result->setPageSize($limit);
+				
+			$result->setCurPage($page);
+
+
+			//sort
+			//$ud = 'ASC' | 'DESC'
+			$result->addAttributeToSort($order,$dir);
+
+				
+			$result->load();
+				
+			$lastpagenumber = $result->getLastPageNumber();
+				
+				
 			$i = 1;
 // 			foreach ( $collection as $o ) {
 // 				echo "<strong>Product Order:" . $i . "</strong><br/>";
@@ -89,7 +186,7 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
 			// $this->renderLayout ();
 			$baseCurrency = Mage::app ()->getStore ()->getBaseCurrency ()->getCode ();
 		    $currentCurrency = Mage::app ()->getStore ()->getCurrentCurrencyCode ();
-			foreach($collection as $product){
+			foreach($result as $product){
 			    $product = Mage::getModel ( 'catalog/product' )->load (  $product->getId () );
 			    $productlist [] = array (
         			'entity_id' => $product->getId (),
@@ -107,7 +204,9 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
     			);
     			$i ++;
 			}
-			echo json_encode($productlist);
+			$returndata['productlist'] = $productlist;
+			$returndata['lastpagenumber'] = $lastpagenumber;
+			echo Mage::helper('core')->jsonEncode($returndata);
 			if (! Mage::helper ( 'catalogsearch' )->isMinQueryLength ()) {
 				$query->save ();
 			}

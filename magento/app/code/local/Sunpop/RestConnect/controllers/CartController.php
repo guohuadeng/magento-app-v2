@@ -1,4 +1,14 @@
 <?php
+/**
+ * * NOTICE OF LICENSE
+ * * This source file is subject to the Open Software License (OSL 3.0)
+ *
+ * Author: Ivan Deng
+ * QQ: 300883
+ * Email: 300883@qq.com
+ * @copyright  Copyright (c) 2008-2015 Sunpop Ltd. (http://www.sunpop.cn)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
 class Sunpop_RestConnect_CartController extends Mage_Core_Controller_Front_Action {
 	public function getaddurlAction() {
 		$productid = $this->getRequest ()->getParam ( 'productid' );
