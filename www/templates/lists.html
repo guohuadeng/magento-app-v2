@@ -3,7 +3,7 @@
         <ion-scroll style="height:100%" overflow-scroll="true" direction="y" locking="true">
             <ion-refresher
                     pulling-text="{{'pull_to_refresh' | translate}}"
-                    on-refresh="doRefresh($index)">
+                    on-refresh="doRefresh()">
             </ion-refresher>
             <ion-list class="products-grid one-line">
                 <div class="product" collection-repeat="product in lists"
@@ -46,8 +46,8 @@
                 </div>
             </ion-list>
             <ion-infinite-scroll
-                    ng-if="tab.hasInit && !tab.loadOver"
-                    on-infinite="loadMore($index)"
+                    ng-if="!$scope.loadOver"
+                    on-infinite="loadMore()"
                     distance="15%">
             </ion-infinite-scroll>
         </ion-scroll>

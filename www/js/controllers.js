@@ -236,12 +236,14 @@ angular.module('app.controllers', [])
             cert_download: 'cert_download'
         }[$stateParams.cmd];
         $scope.listPge = 1;
+        $scope.hasInit = false;
+        $scope.loadOver = false;
 
         var getList = function (func, callback) {
             if (func === 'load') {
-                page++;
+                $scope.listPge++;
             } else {
-                page = 1;
+                $scope.listPge = 1;
             }
 
             var params = {
@@ -259,6 +261,7 @@ angular.module('app.controllers', [])
                         $scope.loadOver = true;
                     }
                 } else {
+                    $scope.hasInit = true;
                     $scope.lists = lists;
                 }
                 if (typeof callback === 'function') {
@@ -269,12 +272,16 @@ angular.module('app.controllers', [])
             $scope.hideLoading();
         };
 
-        $scope.doRefresh = function (index) {
+        $scope.doRefresh = function () {
             getList('refresh', function () {
                 $scope.$broadcast('scroll.refreshComplete');
             });
         };
-        $scope.loadMore = function (index) {
+        $scope.loadMore = function () {
+            if (!$scope.hasInit) {
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                return;
+            }
             getList('load', function () {
                 $scope.$broadcast('scroll.infiniteScrollComplete');
             });
