@@ -18,7 +18,7 @@
 /**
  * Store Locator Model
  *
- * @author     Ivan Deng <300883@qq.com>
+ * @author     Qun WU <info@Sunpopwebsolutions.com>
  */
 class Sunpop_Storelocator_Model_Storelocator extends Mage_Core_Model_Abstract
 {

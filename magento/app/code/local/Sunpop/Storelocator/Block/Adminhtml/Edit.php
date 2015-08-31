@@ -18,7 +18,7 @@
 /**
  * Store Locator Adminhtml Edit Block
  *
- * @author     Ivan Deng <300883@qq.com>
+ * @author     Qun WU <info@Sunpopwebsolutions.com>
  */
 class Sunpop_Storelocator_Block_Adminhtml_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {

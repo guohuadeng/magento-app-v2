@@ -1,15 +1,5 @@
 <?php
 /**
- * * NOTICE OF LICENSE
- * * This source file is subject to the Open Software License (OSL 3.0)
- *
- * Author: Ivan Deng
- * QQ: 300883
- * Email: 300883@qq.com
- * @copyright  Copyright (c) 2008-2015 Sunpop Ltd. (http://www.sunpop.cn)
- * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- */
-/**
  * Catalog Search Controller
  */
 class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_Action {
@@ -17,6 +7,62 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 		return Mage::getSingleton ( 'catalog/session' );
 	}
 
+	public function getsearchadvoptionAction(){
+		//$andor1,$andor2 值是 'AND' 或 'OR' 默认 AND
+		//$is_searchable,$is_visible_in_advanced_search,$used_for_sort_by 值是 0 或 1
+		//$where = $is_searchable_where .' '. $andor1 .' '. $is_visible_in_advanced_search_where .' '. $andor2 .' '. $used_for_sort_by_where;
+		//$andor1 = $this->getRequest()->getParam('andor1') !== null ? $this->getRequest()->getParam('andor1') : 'and';
+		$andor2 = $this->getRequest()->getParam('andor2') !== null ? $this->getRequest()->getParam('andor2') : 'and';
+	
+		//$is_searchable = $this->getRequest()->getParam('is_searchable') !== null ? $this->getRequest()->getParam('is_searchable') : 1;
+		$is_visible_in_advanced_search = $this->getRequest()->getParam('is_visible_in_advanced_search') !== null ? $this->getRequest()->getParam('is_visible_in_advanced_search') : 1;
+		$used_for_sort_by = $this->getRequest()->getParam('used_for_sort_by') !== null ? $this->getRequest()->getParam('used_for_sort_by') : 1;
+	
+		//$is_searchable_where = 'additional_table.is_searchable = ' . $is_searchable;
+	
+		$is_visible_in_advanced_search_where = 'is_visible_in_advanced_search = ' . $is_visible_in_advanced_search;
+	
+		$used_for_sort_by_where = 'additional_table.used_for_sort_by = ' . $used_for_sort_by;
+	
+		//$where = $is_searchable_where .' '. $andor1 .' '. $is_visible_in_advanced_search_where .' '. $andor2 .' '. $used_for_sort_by_where;
+		$where = $is_visible_in_advanced_search_where.' '. $andor2 .' '. $used_for_sort_by_where;
+		$attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+		->addVisibleFilter();
+		$attributes->getSelect()->where(sprintf('(%s)',$where));
+		$attributes->load();
+	
+		foreach ($attributes as $attribute) {
+			$datas = '';
+			$collection = Mage::getResourceModel('eav/entity_attribute_option_collection')
+			->setPositionOrder('asc')
+			->setAttributeFilter($attribute->getSource()->getAttribute()->getId())
+			->setStoreFilter($attribute->getSource()->getAttribute()->getStoreId())
+			->load();
+			 
+			$attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
+			$defaultValues = $attribute->getSource()->getAttribute()->getDefaultValue();
+			$_labels = $attribute->getSource()->getAttribute()->getStoreLabels();
+	
+			if ($attributeType == 'select' || $attributeType == 'multiselect') {
+				$defaultValues = explode(',', $defaultValues);
+			} else {
+				$defaultValues = array();
+			}
+			$options = $collection->getData();
+			$datas['label'] = $_labels;
+			foreach($options as $option){
+				if (in_array($option['option_id'], $defaultValues)){
+					$option['isdefault'] =1;
+				}
+				$datas[] = $option;
+			}
+			 
+			$this->_searchableAttributes[$attribute->getAttributeCode()]=$datas;
+		}
+		krsort($this->_searchableAttributes);
+		echo Mage::helper('core')->jsonEncode($this->_searchableAttributes);
+			
+	}
 	public function indexAction() {
 		//http://domainname/restconnect/searchadv/index/name/aaa/description/bbbb/short_description/ccc/sku/123/price/2to6/tax_class_id/1,2,3
 		//		/pagesize/6/
@@ -38,7 +84,7 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 		$order = ($this->getRequest ()->getParam ( 'order' )) ? ($this->getRequest ()->getParam ( 'order' )) : 'entity_id';
 		$dir = ($this->getRequest ()->getParam ( 'dir' )) ? ($this->getRequest ()->getParam ( 'dir' )) : 'desc';
 		$page = ($this->getRequest ()->getParam ( 'page' )) ? ($this->getRequest ()->getParam ( 'page' )) : 1;
-		$limit = ($this->getRequest ()->getParam ( 'limit' )) ? ($this->getRequest ()->getParam ( 'limit' )) : 5;
+		$limit = ($this->getRequest ()->getParam ( 'limit' )) ? ($this->getRequest ()->getParam ( 'limit' )) : 20;
 	
 		$farray = array();//构建一个addFilters 数组参数
 		if($this->getRequest ()->getParam ( 'name' )) $farray['name'] = $this->getRequest ()->getParam ( 'name' );
@@ -67,8 +113,16 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 		}
 		$searcher = Mage::getSingleton ( 'catalogsearch/advanced' )->addFilters ( $farray );
 
-		$result = $searcher->getProductCollection();
-		
+		$result = $searcher->getProductCollection()
+				->addAttributeToFilter ( 'status', 1 )
+				->addAttributeToFilter ( 'visibility', array (
+						'neq' => 1 
+				) );
+		if($categoryid = $this->getRequest()->getParam('categoryid')){
+			$_category = Mage::getModel('catalog/category')->load($categoryid);
+			$result->addCategoryFilter($_category);
+		}
+		//var_dump(get_class_methods($result));exit;
 		//pages
 		
 		$result->setPageSize($limit);

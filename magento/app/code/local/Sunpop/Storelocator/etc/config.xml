@@ -78,14 +78,13 @@
                     <frontName>storelocator</frontName>
                 </args>
             </storelocator>
-        </routers>
-        <layout>
+        </routers><layout>
             <updates>
                 <storelocator>
                     <file>storelocator.xml</file>
                 </storelocator>
             </updates>
-        </layout>
+        </layout>  
     </frontend>
     <admin>
         <routers>
@@ -140,5 +139,16 @@
     </adminhtml>    
     <default>
 
-    </default>    
+    </default>  
+    <adminhtml>
+        <translate>
+            <modules>
+                <storelocato>
+                    <files>
+                        <default>Sunpop_Storelocator.csv</default>
+                    </files>
+                </storelocato>
+            </modules>
+        </translate>
+    </adminhtml>  
 </config>

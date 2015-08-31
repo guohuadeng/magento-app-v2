@@ -18,7 +18,7 @@
 /**
  * Store Locator Adminhtml Controller
  *
- * @author      Ivan Deng <300883@qq.com>
+ * @author      Qun WU <info@Sunpopwebsolutions.com>
  */
 class Sunpop_Storelocator_AdminhtmlController extends Mage_Adminhtml_Controller_Action
 {

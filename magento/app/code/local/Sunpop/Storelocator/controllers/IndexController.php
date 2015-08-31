@@ -18,7 +18,7 @@
 /**
  * Store Locator Controller
  *
- * @author      Ivan Deng <300883@qq.com>
+ * @author      Qun WU <info@Sunpopwebsolutions.com>
  */
 class Sunpop_Storelocator_IndexController extends Mage_Core_Controller_Front_Action
 {
@@ -92,7 +92,7 @@ class Sunpop_Storelocator_IndexController extends Mage_Core_Controller_Front_Act
     	// Get parameters from URL
     	$center_lat = $this->getRequest()->getParam('lat');
     	$center_lng = $this->getRequest()->getParam('lng');
-    	$radius = $this->getRequest()->getParam('radius');
+    	$radius = $this->getRequest()->getParam('radius') ? $this->getRequest()->getParam('radius') : 200;
 
     	// Start XML file, create parent node
     
