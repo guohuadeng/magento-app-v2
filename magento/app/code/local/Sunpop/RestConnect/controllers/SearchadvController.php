@@ -25,7 +25,7 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 		$used_for_sort_by_where = 'additional_table.used_for_sort_by = ' . $used_for_sort_by;
 	
 		//$where = $is_searchable_where .' '. $andor1 .' '. $is_visible_in_advanced_search_where .' '. $andor2 .' '. $used_for_sort_by_where;
-		$where = $is_visible_in_advanced_search_where.' '. $andor2 .' '. $used_for_sort_by_where;
+		$where = $is_visible_in_advanced_search_where;
 		$attributes = Mage::getResourceModel('catalog/product_attribute_collection')
 		->addVisibleFilter();
 		$attributes->getSelect()->where(sprintf('(%s)',$where));
