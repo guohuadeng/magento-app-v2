@@ -426,7 +426,7 @@ angular.module('app.controllers', [])
         };
     })
 
-    // 搜索
+    // 快速搜索
     .controller('SearchCtrl', function ($scope, $location) {
         $scope.searchData = {};
         $scope.onSearch = function () {
@@ -449,6 +449,16 @@ angular.module('app.controllers', [])
         });
     })
 
+    // 高级搜索
+    .controller('SearchAdvCtrl', function ($scope, $location) {
+        $scope.searchData = {};
+        $scope.onSearch = function () {
+            if (!$scope.searchData.text) {
+                return;
+            }
+            $location.path('app/searchadv/' + $scope.searchData.text);
+        };
+    })
     .controller('FrameCtrl', function ($scope, $sce, $stateParams) {
         $scope.trustSrc = function (src) {
             return $sce.trustAsResourceUrl(src);

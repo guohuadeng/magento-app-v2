@@ -102,7 +102,7 @@ angular.module('app', [
                 }
             })
             .state('app.search', {
-                url: '/search',
+                url: '/search',//快速查询
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/search.html',
@@ -116,6 +116,15 @@ angular.module('app', [
                     'menuContent': {
                         templateUrl: 'templates/searchResult.html',
                         controller: 'SearchResultCtrl'
+                    }
+                }
+            })
+            .state('app.searchAdv', {
+                url: '/searchAdv',//高级查询
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/searchAdv.html',
+                        controller: 'SearchAdvCtrl'
                     }
                 }
             })

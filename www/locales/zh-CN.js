@@ -4,6 +4,7 @@ var zh_CN = {
     register: '注册',
     home: '首页',
     product_search: '产品查询',
+    product_searchadv: '高级查询',
     latest_promotions: '最新促销',
     common_products: '常用产品',
     cert_download: '证书下载',

@@ -1,5 +1,15 @@
 <?php
 /**
+ * * NOTICE OF LICENSE
+ * * This source file is subject to the Open Software License (OSL 3.0)
+ *
+ * Author: Ivan Deng
+ * QQ: 300883
+ * Email: 300883@qq.com
+ * @copyright  Copyright (c) 2008-2015 Sunpop Ltd. (http://www.sunpop.cn)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/**
  * Catalog Search Controller
  */
 class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_Action {
@@ -7,7 +17,7 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 		return Mage::getSingleton ( 'catalog/session' );
 	}
 
-	public function getsearchadvoptionAction(){
+	public function getfieldAction(){
 		//$andor1,$andor2 值是 'AND' 或 'OR' 默认 AND
 		//$is_searchable,$is_visible_in_advanced_search,$used_for_sort_by 值是 0 或 1
 		//$where = $is_searchable_where .' '. $andor1 .' '. $is_visible_in_advanced_search_where .' '. $andor2 .' '. $used_for_sort_by_where;
@@ -42,6 +52,7 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 			$attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
 			$defaultValues = $attribute->getSource()->getAttribute()->getDefaultValue();
 			$_labels = $attribute->getSource()->getAttribute()->getStoreLabels();
+			$_attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
 	
 			if ($attributeType == 'select' || $attributeType == 'multiselect') {
 				$defaultValues = explode(',', $defaultValues);
@@ -50,6 +61,7 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 			}
 			$options = $collection->getData();
 			$datas['label'] = $_labels;
+			$datas['attributeType'] = $_attributeType;
 			foreach($options as $option){
 				if (in_array($option['option_id'], $defaultValues)){
 					$option['isdefault'] =1;

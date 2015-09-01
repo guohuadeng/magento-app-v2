@@ -4,6 +4,7 @@ var en_US = {
     register: 'Register',
     home: 'Home',
     product_search: 'Product Search',
+    product_searchadv: 'Advance Search',
     latest_promotions: 'Latest Promotions',
     common_products: 'Common Products',
     cert_download: 'Cert Download',

@@ -11,6 +11,7 @@ function Service($rootScope, $http) {
         logout: '/customer/account/logout',
         register: '/restconnect/customer/register',
         search: '/restconnect/search',
+        searchAdvField: '/restconnect/searchadv/getfield',
         productDetail: '/restconnect/products/getproductdetail',
         productImg: '/restconnect/products/getPicLists',
         productOption: '/restconnect/products/getcustomoption',

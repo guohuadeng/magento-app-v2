@@ -148,67 +148,7 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
 		krsort($this->_filterableAttributes);
 		echo Mage::helper('core')->jsonEncode($this->_filterableAttributes);
 	
-	}
-	
-	public function getsearchadvoptionAction(){
-		//取出现在高级搜索里的选项
-		//$andor1,$andor2 值是 'AND' 或 'OR' 默认 AND
-		//$is_searchable,$is_visible_in_advanced_search,$used_for_sort_by 值是 0 或 1
-		$andor1 = $this->getRequest()->getParam('andor1') !== null ? $this->getRequest()->getParam('andor1') : 'and';
-		$andor2 = $this->getRequest()->getParam('andor2') !== null ? $this->getRequest()->getParam('andor2') : 'and';
-		
-		$is_searchable = $this->getRequest()->getParam('is_searchable') !== null ? $this->getRequest()->getParam('is_searchable') : 1;
-		$is_visible_in_advanced_search = $this->getRequest()->getParam('is_visible_in_advanced_search') !== null ? $this->getRequest()->getParam('is_visible_in_advanced_search') : 1;
-		$used_for_sort_by = $this->getRequest()->getParam('used_for_sort_by') !== null ? $this->getRequest()->getParam('used_for_sort_by') : 1;
-		
-		$is_searchable_where = 'additional_table.is_searchable = ' . $is_searchable;
-	
-		$is_visible_in_advanced_search_where = 'is_visible_in_advanced_search = ' . $is_visible_in_advanced_search;
-	
-		$used_for_sort_by_where = 'additional_table.used_for_sort_by = ' . $used_for_sort_by;
-
-		//$where = $is_searchable_where .' '. $andor1 .' '. $is_visible_in_advanced_search_where .' '. $andor2 .' '. $used_for_sort_by_where;
-		//改为只出现高级搜索的
-		$where =  $is_visible_in_advanced_search_where;
-		
-		$attributes = Mage::getResourceModel('catalog/product_attribute_collection')
-					->addVisibleFilter();
-		
-		$attributes->getSelect()->where(sprintf('(%s)',$where));
-		$attributes->load();
-		
-		foreach ($attributes as $attribute) {
-        	$datas = '';
-        	$collection = Mage::getResourceModel('eav/entity_attribute_option_collection')
-        	->setPositionOrder('asc')
-        	->setAttributeFilter($attribute->getSource()->getAttribute()->getId())
-        	->setStoreFilter($attribute->getSource()->getAttribute()->getStoreId())
-        	->load();
-        	
-        	$attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
-        	$defaultValues = $attribute->getSource()->getAttribute()->getDefaultValue();
-        	$_labels = $attribute->getSource()->getAttribute()->getStoreLabels();
-
-        	if ($attributeType == 'select' || $attributeType == 'multiselect') {
-        		$defaultValues = explode(',', $defaultValues);
-        	} else {
-        		$defaultValues = array();
-        	}
-        	$options = $collection->getData();
-        	$datas['label'] = $_labels;
-        	foreach($options as $option){
-	        	if (in_array($option['option_id'], $defaultValues)){
-	        		$option['isdefault'] =1;
-	        	}
-	        	$datas[] = $option;
-        	}
-        	
-        	$this->_searchableAttributes[$attribute->getAttributeCode()]=$datas;
-        }  
-        krsort($this->_searchableAttributes);  
-        echo Mage::helper('core')->jsonEncode($this->_searchableAttributes);
-					
-	}
+	}	
 	
 	public function testAction() {
 		$query = Mage::helper ( 'catalogSearch' )->getQuery ();
