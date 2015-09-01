@@ -255,7 +255,7 @@ angular.module('app.controllers', [])
             $scope.showLoading();
             $rootScope.service.get('products', params, function (lists) {
                 if (func === 'load') {
-                    if (lists) {
+                    if (Array.isArray(lists) && lists.length) {
                         $scope.lists = $scope.lists.concat(lists);
                     } else {
                         $scope.loadOver = true;
@@ -278,7 +278,7 @@ angular.module('app.controllers', [])
             });
         };
         $scope.loadMore = function () {
-            if (!$scope.hasInit) {
+            if (!$scope.hasInit || $scope.loadOver) {
                 $scope.$broadcast('scroll.infiniteScrollComplete');
                 return;
             }
