@@ -2,7 +2,7 @@
 // 'app' is the name of this angular module (also set in a <body> attribute in index.html)
 angular.module('app', [
         'ionic', 'ngCordova', 'pascalprecht.translate',
-        'app.controllers', 'app.filters'
+        'app.controllers', 'app.filters', 'ionicLazyLoad'
     ])
 
     .run(function ($ionicPlatform, $rootScope, $http) {

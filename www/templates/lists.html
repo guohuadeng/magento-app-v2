@@ -1,6 +1,6 @@
 <ion-view view-title="{{listTitle | translate}}">
-<ion-content scroll="false" overflow-scroll="true">
-        <ion-scroll style="height:100%" overflow-scroll="true" direction="y" locking="true">
+    <ion-content scroll="false" overflow-scroll="true">
+        <ion-content lazy-scroll style="height:100%" overflow-scroll="true" direction="y" locking="true">
             <ion-refresher
                     pulling-text="{{'pull_to_refresh' | translate}}"
                     on-refresh="doRefresh()">
@@ -11,8 +11,9 @@
                     <div class="product-inner">
                         <a href="#app/productDetail/{{product.entity_id}}">
                             <div class="product-image">
-                                <img src="{{product.image_url}}"
-                                     alt="{{product.name}}">
+                                <img image-lazy-src="{{product.image_url}}"
+                                     lazy-scroll-resize="true"
+                                     image-lazy-loader="lines">
                             </div>
                         </a>
 
@@ -49,6 +50,6 @@
                     on-infinite="loadMore()"
                     distance="15%">
             </ion-infinite-scroll>
-        </ion-scroll>
+        </ion-content>
     </ion-content>
 </ion-view>
