@@ -57,5 +57,12 @@ var en_US = {
     alert: 'Alert',
     confirm: 'Confirm',
     error_code: 'Error code',
-    exit_tip: 'Are you sure to exit the App?'
+    exit_tip: 'Are you sure to exit the App?',
+    product_detail: 'Product Detail',
+    in_stock: 'Availability: In stock',
+    out_of_stock: 'Availability: Out of stock',
+    free_shipping: 'Free Shipping',
+    quantity: 'Quantity',
+    product_description: 'Product Description',
+    add_to_cart: 'Add to Cart'
 };

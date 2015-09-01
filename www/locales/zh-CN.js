@@ -57,5 +57,12 @@ var zh_CN = {
     alert: '提示',
     confirm: '确认',
     error_code: '错误码',
-    exit_tip: '是否确定退出该应用？'
+    exit_tip: '是否确定退出该应用？',
+    product_detail: '商品详情',
+    in_stock: '库存：有货',
+    out_of_stock: '库存：无货',
+    free_shipping: '免运费',
+    quantity: '数量',
+    product_description: '商品描述',
+    add_to_cart: '加入购物车'
 };

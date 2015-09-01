@@ -1,4 +1,4 @@
-<ion-view view-title="Product Detail">
+<ion-view view-title="{{'product_detail' | translate}}">
     <ion-nav-bar class="bar-stable">
         <ion-nav-back-button class="button-icon ion-arrow-left-c">
         </ion-nav-back-button>
@@ -32,10 +32,10 @@
           </span>
                 <span class="old-price padding-horizontal">{{product.regular_price_with_tax | number:0}}</span>
 
-                <div ng-if="product.is_in_stock" class="availability in-stock"><span>Availability: In stock</span><em
-                        class="shipping">Free Shipping</em></div>
+                <div ng-if="product.is_in_stock" class="availability in-stock"><span>{{'in_stock' | translate}}</span><em
+                        class="shipping">{{'free_shipping' | translate}}</em></div>
                 <div ng-if="!product.is_in_stock" class="availability out-of-stock">
-                    <span>Availability: Out of stock</span></div>
+                    <span>{{'out_of_stock' | translate}}</span></div>
             </div>
         </div>
         <!-- end product base card -->
@@ -49,7 +49,7 @@
                     <div class="qty-holder">
                         <div class="item item-input-inset">
                             <label class="item item-input">
-                                <span class="input-label">Quantity</span>
+                                <span class="input-label">{{'quantity' | translate}}</span>
                                 <em class="assertive">*</em>
                             </label>
 
@@ -199,7 +199,7 @@
         <!-- end product option-->
         <!-- product descript-->
         <div class="card padding-horizontal">
-            <h5>Product Descript</h5>
+            <h5>{{'product_description' | translate}}</h5>
         </div>
         <div class="padding" ng-bind-html="product.description | unsafe">
         </div>
@@ -212,7 +212,8 @@
     <div class="bar bar-footer bar-stable add-to-cart">
         <a class="add-to-cart-left button button-outline button-assertive ion-android-cart" href="#app/frame/cart">
             &nbsp;{{items_qty}}</a>
-        <button class="button add-to-cart-right button-assertive" type="submit" ng-click="doCartAdd()">Add to Cart
+        <button class="button add-to-cart-right button-assertive" type="submit" ng-click="doCartAdd()">
+            {{'add_to_cart' | translate}}
         </button>
     </div>
 </ion-view>
