@@ -22,6 +22,7 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 		//$is_searchable,$is_visible_in_advanced_search,$used_for_sort_by 值是 0 或 1
 		//$where = $is_searchable_where .' '. $andor1 .' '. $is_visible_in_advanced_search_where .' '. $andor2 .' '. $used_for_sort_by_where;
 		//$andor1 = $this->getRequest()->getParam('andor1') !== null ? $this->getRequest()->getParam('andor1') : 'and';
+		$storeid = $this->getRequest()->getParam('storeid') ? $this->getRequest()->getParam('storeid') : Mage::app()->getStore()->getStoreId();
 		$andor2 = $this->getRequest()->getParam('andor2') !== null ? $this->getRequest()->getParam('andor2') : 'and';
 	
 		//$is_searchable = $this->getRequest()->getParam('is_searchable') !== null ? $this->getRequest()->getParam('is_searchable') : 1;
@@ -52,7 +53,8 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 			$attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
 			$defaultValues = $attribute->getSource()->getAttribute()->getDefaultValue();
 			$_labels = $attribute->getSource()->getAttribute()->getStoreLabels();
-			$_attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
+			//$_label = $_labels[$storeid];
+			$_label = $_labels[$storeid] ? $_labels[$storeid] : $attribute->getSource()->getAttribute()->getFrontendLabel();
 	
 			if ($attributeType == 'select' || $attributeType == 'multiselect') {
 				$defaultValues = explode(',', $defaultValues);
@@ -60,8 +62,8 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 				$defaultValues = array();
 			}
 			$options = $collection->getData();
-			$datas['label'] = $_labels;
-			$datas['attributeType'] = $_attributeType;
+			$datas['label'] = $_label;
+			$datas['attributeType'] = $attributeType;
 			foreach($options as $option){
 				if (in_array($option['option_id'], $defaultValues)){
 					$option['isdefault'] =1;
