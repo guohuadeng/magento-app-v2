@@ -68,7 +68,8 @@ class Sunpop_RestConnect_ProductsController extends Mage_Core_Controller_Front_A
 		$product = Mage::getModel ( "catalog/product" )->load ( $productid );
 		
 		$storeUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); 
-		$description =  nl2br ( $product->getDescription () );
+		//$description =  nl2br ( $product->getDescription () );
+		$description =   $product->getDescription ();
 		$description = str_replace("{{media url=\"",$storeUrl,$description);
 		$description = str_replace("\"}}","",$description);
 		

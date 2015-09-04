@@ -62,14 +62,20 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 				$defaultValues = array();
 			}
 			$options = $collection->getData();
-			$datas['label'] = $_label;
-			$datas['attributeType'] = $attributeType;
+			$optionid = 0;
 			foreach($options as $option){
 				if (in_array($option['option_id'], $defaultValues)){
 					$option['isdefault'] =1;
 				}
-				$datas[] = $option;
+				$options[$optionid] = $option;
+				$optionid++;
 			}
+			
+			$datas['key'] = $attribute->getAttributeCode();
+			$datas['code'] = $attribute->getAttributeCode();
+			$datas['label'] = $_label;
+			$datas['attributeType'] = $attributeType;
+			$datas['attributeValue'] = $options;			
 			 
 			$this->_searchableAttributes[$attribute->getAttributeCode()]=$datas;
 		}

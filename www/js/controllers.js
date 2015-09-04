@@ -450,8 +450,15 @@ angular.module('app.controllers', [])
     })
 
     // 高级搜索
-    .controller('SearchAdvCtrl', function ($scope, $location) {
+    .controller('SearchAdvCtrl', function ($scope, $rootScope, $location) {
         $scope.searchData = {};
+
+        // 取搜索选项
+        //text,textarea,date,boolean,multiselect,select,price,media_image,weee
+        $rootScope.service.get('searchAdvField', {}, function (results) {
+            $scope.fields = results;
+        });
+
         $scope.onSearch = function () {
             if (!$scope.searchData.text) {
                 return;

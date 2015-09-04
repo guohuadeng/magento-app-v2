@@ -1,15 +1,84 @@
 <ion-view view-title="{{'product_searchadv' | translate}}">
     <ion-content>
         <form ng-submit="onSearch()">
-            <div class="list list-inset">
-                <label class="item item-input">
-                    <i class="icon ion-search placeholder-icon"></i>
-                    <input autofocus type="text" placeholder="{{'enter_the_key' | translate}}"
-                           ng-model="searchData.text">
-                </label>
+
+            <div ng-repeat="field in fields" ng-switch on="field.attributeType">
+                <!-- field type: text,textarea,date,boolean,multiselect,select,price,media_image,weee-->
+
+                <!--text option-->
+                <div class="form__field" ng-switch-when="text">
+                    <label class="item item-input">
+                        <span class="input-label">{{field.label}}</span>
+                        <input type="text" name="{{field.code}}" id="{{field.code}}">
+                    </label>
+                </div>
+                <!--end text option-->
+
+                <!--price option-->
+                <div class="form__field" ng-switch-when="price">
+                    <label class="item item-input">
+                        <span class="input-label">{{field.label}}</span>
+                        <input type="text" title="{{field.label}}" name="{{field.code}}[from]" id="{{field.code}}" pattern="\d*">
+                        <span class="separator">-&nbsp;&nbsp;</span>
+                        <input type="text" title="{{field.label}}" name="{{field.code}}[to]" id="{{field.code}}_to" pattern="\d*">
+                    </label>
+                </div>
+                <!--end price option-->
+
+                <!-- select option-->
+                <div class="form__field" ng-switch-when="select">
+                    <label class="item item-input item-select">
+                        <span class="input-label">{{field.label}}</span>
+                        <select name="{{field.code}}" id="{{field.code}} class="select-dark" title="{{field.label}}">
+                            <option value="">{{'All' | translate}}</option>
+                            <option ng-repeat="item in field.attributeValue" value="{{item.option_id}}"">
+                                {{item.value}}
+                            </option>
+                        </select>
+                    </label>
+                </div>
+                <!-- end select option-->
+
+                <!-- boolean option-->
+                <div class="form__field" ng-switch-when="boolean">
+                    <label class="item item-input">
+                        <span class="input-label">{{field.label}}</span>
+                        <label class="item item-radio">
+                            <input name="{{field.code}}" type="radio" value="1">
+
+                            <div class="item-content icon-left ion-android-arrow-dropright"> {{'Yes' | translate}}</div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input name="{{field.code}}" type="radio" value="0">
+
+                            <div class="item-content icon-left ion-android-arrow-dropright"> {{'No' | translate}}</div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                    </label>
+                </div>
+                <!-- end boolean option-->
+
+                <!-- field type: text,textarea,date,boolean,multiselect,select,price,media_image,weee-->
+                <div class="item input-box" ng-switch-when="textarea">
+                    textarea option not support
+                </div>
+                <div class="item input-box" ng-switch-when="date">
+                    Date option not support
+                </div>
+                <div class="item input-box" ng-switch-when="multiselect">
+                    multiselect option not support
+                </div>
+                <div class="item input-box" ng-switch-when="media_image">
+                    media_image option not support
+                </div>
+                <div class="item input-box" ng-switch-when="weee">
+                    weee option not support
+                </div>
             </div>
+
             <div class="padding">
-                <button type="submit" class="button button-full button-assertive">{{'quick_search' | translate}}</button>
+                <button type="submit" class="button button-full button-assertive">{{'search' | translate}}</button>
             </div>
         </form>
     </ion-content>

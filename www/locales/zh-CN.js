@@ -1,4 +1,7 @@
 var zh_CN = {
+    All: '- - 全部 - -',
+    Yes: '是',
+    No: '否',
     colon: '：',
     login: '登录',
     register: '注册',

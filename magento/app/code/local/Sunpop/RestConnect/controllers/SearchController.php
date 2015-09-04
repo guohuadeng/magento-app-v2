@@ -48,6 +48,7 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
         		$defaultValues = array();
         	}
         	$options = $collection->getData();
+			$datas['key'] = $attribute->getAttributeCode();
         	$datas['label'] = $_label;
         	$datas['attributeType'] = $attributeType;
         	foreach($options as $option){
