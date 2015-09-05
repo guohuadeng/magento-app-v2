@@ -38,14 +38,15 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 		//$where = $is_searchable_where .' '. $andor1 .' '. $is_visible_in_advanced_search_where .' '. $andor2 .' '. $used_for_sort_by_where;
 		$where = $is_visible_in_advanced_search_where;
 		$attributes = Mage::getResourceModel('catalog/product_attribute_collection')
-		->addVisibleFilter();
+					->setOrder('main_table.attribute_id', 'asc')
+					->addVisibleFilter();
 		$attributes->getSelect()->where(sprintf('(%s)',$where));
 		$attributes->load();
 	
 		foreach ($attributes as $attribute) {
 			$datas = '';
 			$collection = Mage::getResourceModel('eav/entity_attribute_option_collection')
-			->setPositionOrder('asc')
+			
 			->setAttributeFilter($attribute->getSource()->getAttribute()->getId())
 			->setStoreFilter($attribute->getSource()->getAttribute()->getStoreId())
 			->load();
@@ -63,6 +64,8 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 			}
 			$options = $collection->getData();
 			$optionid = 0;
+			$datas['label'] = $_label;
+			$datas['attributeType'] = $attributeType;
 			foreach($options as $option){
 				if (in_array($option['option_id'], $defaultValues)){
 					$option['isdefault'] =1;
@@ -70,16 +73,15 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 				$options[$optionid] = $option;
 				$optionid++;
 			}
-			
 			$datas['key'] = $attribute->getAttributeCode();
 			$datas['code'] = $attribute->getAttributeCode();
 			$datas['label'] = $_label;
 			$datas['attributeType'] = $attributeType;
-			$datas['attributeValue'] = $options;			
+			$datas['attributeValue'] = $options;	
 			 
 			$this->_searchableAttributes[$attribute->getAttributeCode()]=$datas;
 		}
-		krsort($this->_searchableAttributes);
+		//krsort($this->_searchableAttributes);
 		echo Mage::helper('core')->jsonEncode($this->_searchableAttributes);
 			
 	}
