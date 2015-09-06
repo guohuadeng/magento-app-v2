@@ -291,12 +291,13 @@ angular.module('app.controllers', [])
     })
 
     // 产品详情
-    .controller('productDetailCtrl', function ($scope, $rootScope,
+    .controller('productDetailCtrl', function ($scope, $rootScope, $timeout,
                                                $stateParams, $ionicPopup,
                                                $ionicSlideBoxDelegate, $ionicScrollDelegate,
                                                $cordovaSocialSharing, $ionicSideMenuDelegate) {
         $scope.showLoading();
         $scope.qty = 1;
+        $scope.totalPrice = 0;
 
         $scope.updateSlider = function () {
             $ionicSlideBoxDelegate.$getByHandle('image-viewer').update();
@@ -314,6 +315,8 @@ angular.module('app.controllers', [])
             productid: $stateParams.productid
         }, function (results) {
             $scope.product = results;
+            $scope.totalPrice = +$scope.product.final_price_with_tax;
+            $scope.oldPrice = +$scope.product.regular_price_with_tax;
 
             //取商品选项
             if (results.has_custom_options) {
@@ -321,6 +324,7 @@ angular.module('app.controllers', [])
                     productid: $stateParams.productid
                 }, function (option) {
                     $scope.productOption = option;
+                    $timeout($scope.updatePrice, 0);
                 });
             }
             $scope.hideLoading();
@@ -398,11 +402,46 @@ angular.module('app.controllers', [])
                 $scope.qty--;
             }
         };
+        $scope.$watch('qty', function () {
+            $timeout($scope.updatePrice, 0);
+        });
 
         // 选择列表
         $scope.selectOptions = {};
         $scope.selectOption = function (name) {
             $scope.selectOptions[name + this.$parent.option.option_id] = this.item.option_type_id;
+            $timeout($scope.updatePrice, 0);
+        };
+
+        $scope.updatePrice = function () {
+            if (!$scope.product) {
+                return;
+            }
+            $scope.totalPrice = +$scope.product.final_price_with_tax;
+            $scope.oldPrice = +$scope.product.regular_price_with_tax;
+            // field
+            $('[ng-switch-when="field"]').find('[data-price]').each(function () {
+                $scope.totalPrice += +$(this).data('price');
+                $scope.oldPrice += +$(this).data('price');
+            });
+            //drop_down
+            $('[ng-switch-when="drop_down"] select').each(function () {
+                $scope.totalPrice += +$(this).find(':selected').data('price') || 0;
+                $scope.oldPrice += +$(this).find(':selected').data('price') || 0;
+            });
+            // check
+            $('[ng-switch-when="checkbox"] input:checked').each(function () {
+                $scope.totalPrice += +$(this).data('price') || 0;
+                $scope.oldPrice += +$(this).data('price') || 0;
+            });
+            // radio
+            $('[ng-switch-when="radio"] span.selected').each(function () {
+                $scope.totalPrice += +$(this).data('price') || 0;
+                $scope.oldPrice += +$(this).data('price') || 0;
+            });
+            // qty
+            $scope.totalPrice *= $scope.qty;
+            $scope.oldPrice *= $scope.qty;
         };
 
         // 增加到购物车
@@ -410,7 +449,6 @@ angular.module('app.controllers', [])
             var queryString = $('#product_addtocart_form').formSerialize();
             if (!($scope.qty > 1)) {
                 $scope.qty = 1;
-                $scope.$apply();
             }
             $rootScope.service.get('cartAdd', queryString, function (res) {
                 if (res.result == 'error') {

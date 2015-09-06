@@ -744,3 +744,8 @@ em {
     background: #ff0000;
     color: #fff;
 }
+
+table.thinLineTable th {
+    min-width: 60px;
+    font-weight: bold;
+}
