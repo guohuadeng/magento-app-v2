@@ -9,7 +9,7 @@
                     <div class="form__field" ng-switch-when="text">
                         <label class="item item-input">
                             <span class="input-label">{{field.label}}</span>
-                            <input type="text" name="{{field.code}}" id="{{field.code}}">
+                            <input type="text" name="{{field.code}}">
                         </label>
                     </div>
                     <!--end text option-->
@@ -18,9 +18,9 @@
                     <div class="form__field" ng-switch-when="price">
                         <label class="item item-input">
                             <span class="input-label">{{field.label}}</span>
-                            <input type="text" title="{{field.label}}" name="{{field.code}}[from]" id="{{field.code}}" pattern="\d*">
+                            <input type="text" title="{{field.label}}" name="{{field.code}}[from]" pattern="\d*">
                             <span class="separator">-&nbsp;&nbsp;</span>
-                            <input type="text" title="{{field.label}}" name="{{field.code}}[to]" id="{{field.code}}_to" pattern="\d*">
+                            <input type="text" title="{{field.label}}" name="{{field.code}}[to]" pattern="\d*">
                         </label>
                     </div>
                     <!--end price option-->
@@ -29,9 +29,9 @@
                     <div class="form__field" ng-switch-when="select">
                         <label class="item item-input item-select">
                             <span class="input-label">{{field.label}}</span>
-                            <select name="{{field.code}}" id="{{field.code}} class="select-dark" title="{{field.label}}">
+                            <select name="{{field.code}}" class="select-dark" title="{{field.label}}">
                                 <option value="">{{'All' | translate}}</option>
-                                <option ng-repeat="item in field.attributeValue" value="{{item.option_id}}"">
+                                <option ng-repeat="item in field.attributeValue" value="{{item.option_id}}">
                                     {{item.value}}
                                 </option>
                             </select>

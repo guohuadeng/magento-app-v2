@@ -494,7 +494,12 @@ angular.module('app.controllers', [])
         // 取搜索选项
         //text,textarea,date,boolean,multiselect,select,price,media_image,weee
         $rootScope.service.get('searchAdvField', {}, function (results) {
-            $scope.fields = results;
+            var fields = [];
+
+            for (var key in results) {
+                fields.push(results[key]);
+            }
+            $scope.fields = fields;
         });
 
         $scope.onSearch = function () {
