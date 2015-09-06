@@ -30,7 +30,9 @@ class Sunpop_RestConnect_IndexController extends Mage_Core_Controller_Front_Acti
 								'level ' => $_category->getLevel (),
 								'url_key' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getUrlPath (),
 								'thumbnail_url' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getThumbnailUrl (),								
-								'image_url' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getImageUrl (),
+								'image_url' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getImageUrl (),								
+								'has_children' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->hasChildren (),							
+								'product_count' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getProductCount (),
 								'children' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getAllChildren () 
 						);
 					}
