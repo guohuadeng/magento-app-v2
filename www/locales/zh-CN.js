@@ -6,6 +6,7 @@ var zh_CN = {
     login: '登录',
     register: '注册',
     home: '首页',
+    Categories:'产品目录',
     product_search: '产品查询',
     product_searchadv: '高级查询',
     latest_promotions: '最新促销',

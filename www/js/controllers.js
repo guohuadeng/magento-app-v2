@@ -464,6 +464,17 @@ angular.module('app.controllers', [])
         };
     })
 
+    // 快速搜索Home
+    .controller('HomeCtrl', function ($scope, $location) {
+        $scope.searchData = {};
+        $scope.onSearch = function () {
+            if (!$scope.searchData.text) {
+                return;
+            }
+            $location.path('app/search/' + $scope.searchData.text);
+        };
+    })
+    
     // 快速搜索
     .controller('SearchCtrl', function ($scope, $location) {
         $scope.searchData = {};
@@ -483,13 +494,22 @@ angular.module('app.controllers', [])
             q: $stateParams.text
         }, function (results) {
             $scope.hideLoading();
-            $scope.results = results;
+            $scope.results = results.productlist;
         });
     })
 
     // 高级搜索
     .controller('SearchAdvCtrl', function ($scope, $rootScope, $location) {
         $scope.searchData = {};
+        // 取目录选项
+        $rootScope.service.get('menus', {}, function (results) {
+            var cat_field = [];
+
+            for (var key in results) {
+                cat_field.push(results[key]);
+            }
+            $scope.cat_field = cat_field;
+        });
 
         // 取搜索选项
         //text,textarea,date,boolean,multiselect,select,price,media_image,weee

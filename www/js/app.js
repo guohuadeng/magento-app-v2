@@ -37,7 +37,8 @@ angular.module('app', [
                 url: '/home', //首页
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/home.html'
+                        templateUrl: 'templates/home.html',
+                        controller: 'HomeCtrl'
                     }
                 }
             })

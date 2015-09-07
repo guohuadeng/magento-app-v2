@@ -5,7 +5,7 @@
     <ion-content>
         <!-- img swiper -->
         <div class="homebanner-swiper-container">
-            <ion-slide-box delegate-handle="image-viewer" show-pager="true">
+            <ion-slide-box delegate-handle="image-viewer" show-pager="true" auto-play="true" does-continue="true">
                 <ion-slide>
                     <img class="fullwidth" ng-src="img/b1.png"><span></span>
                 </ion-slide>
@@ -21,7 +21,7 @@
         <div class="list list-inset">
             <label class="item item-input">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input autofocus type="text" placeholder="{{'enter_the_key' | translate}}" ng-model="model.text">
+                <input autofocus type="text" placeholder="{{'enter_the_key' | translate}}" ng-model="searchData.text">
             </label>
             <button class="button button-full button-assertive" ng-click="onSearch()">{{'quick_search' | translate}}</button>
         </div>

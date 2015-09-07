@@ -1,46 +1,56 @@
 <ion-view cache-view="false" view-title="{{'search' | translate}}{{'colon' | translate}} {{text}}">
-    <ion-content>
-        <ion-list class="products-grid one-line">
-            <div class="product" ng-repeat="product in results">
-                <div class="product-inner">
-                    <a href="#app/productDetail/{{product.entity_id}}">
-                        <div class="product-image">
-                            <img src="{{product.image_url}}" alt="{{product.name}}">
-                        </div>
-                    </a>
-
-                    <div class="product-info">
-                        <div class="product-name">
-                            {{product.name}}
-                        </div>
-
-                        <div class="product-price">
-                            <div class="price-box">
-                                <span class="special-price">
-                                    <span class="special-price">
-                                        <span class="price">
-                                            {{product.symbol}}{{product.final_price_with_tax | price}}
-                                        </span>
-                                        &nbsp;
-                                        <span class="old-price">
-                                            {{product.symbol}}{{product.regular_price_with_tax | price}}
-                                        </span>
-                                    </span>
-                                </span>
-                                <span class="discount {{price_percent_class}}">
-                                    <span class="price">
-                                        {{product | discount}}
-                                    </span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product" ng-if="!results">
-                {{'no_product_found' | translate}}
-            </div>
-        </ion-list>
+    <ion-content scroll="false" overflow-scroll="true">
+        <ion-content lazy-scroll style="height:100%" overflow-scroll="true" direction="y" locking="true">   
+            <ion-refresher
+                    pulling-text="{{'pull_to_refresh' | translate}}"
+                    on-refresh="doRefresh()">
+            </ion-refresher> 
+	        <ion-list class="products-grid one-line">
+	            <div class="product" ng-repeat="product in results">
+	                <div class="product-inner">
+	                    <a href="#app/productDetail/{{product.entity_id}}">
+	                        <div class="product-image">
+	                            <img src="{{product.image_url}}" alt="{{product.name}}">
+	                        </div>
+	                    </a>
+	
+	                    <div class="product-info">
+	                        <div class="product-name">
+	                            {{product.name}}
+	                        </div>
+	
+	                        <div class="product-price">
+	                            <div class="price-box">
+	                                <span class="special-price">
+	                                    <span class="special-price">
+	                                        <span class="price">
+	                                            {{product.symbol}}{{product.final_price_with_tax | price}}
+	                                        </span>
+	                                        &nbsp;
+	                                        <span class="old-price">
+	                                            {{product.symbol}}{{product.regular_price_with_tax | price}}
+	                                        </span>
+	                                    </span>
+	                                </span>
+	                                <span class="discount {{price_percent_class}}">
+	                                    <span class="price">
+	                                        {{product | discount}}
+	                                    </span>
+	                                </span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	
+	            <div class="product" ng-if="!results">
+	                {{'no_product_found' | translate}}
+	            </div>
+	        </ion-list>
+            <ion-infinite-scroll
+                    on-infinite="loadMore()"
+                    distance="15%">
+            </ion-infinite-scroll>
+    	</ion-content>
     </ion-content>
 </ion-view>

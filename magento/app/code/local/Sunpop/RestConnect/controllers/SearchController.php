@@ -1,5 +1,15 @@
 <?php
 /**
+ * * NOTICE OF LICENSE
+ * * This source file is subject to the Open Software License (OSL 3.0)
+ *
+ * Author: Ivan Deng
+ * QQ: 300883
+ * Email: 300883@qq.com
+ * @copyright  Copyright (c) 2008-2015 Sunpop Ltd. (http://www.sunpop.cn)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/**
  * Catalog Search Controller
  */
 class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Action {
@@ -70,7 +80,7 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
 		$order = ($this->getRequest ()->getParam ( 'order' )) ? ($this->getRequest ()->getParam ( 'order' )) : 'entity_id';
 		$dir = ($this->getRequest ()->getParam ( 'dir' )) ? ($this->getRequest ()->getParam ( 'dir' )) : 'desc';
 		$page = ($this->getRequest ()->getParam ( 'page' )) ? ($this->getRequest ()->getParam ( 'page' )) : 1;
-		$limit = ($this->getRequest ()->getParam ( 'limit' )) ? ($this->getRequest ()->getParam ( 'limit' )) : 5;
+		$limit = ($this->getRequest ()->getParam ( 'limit' )) ? ($this->getRequest ()->getParam ( 'limit' )) : 20;
 		
 		
 		
