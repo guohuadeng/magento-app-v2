@@ -513,7 +513,6 @@ angular.module('app.controllers', [])
 
     // 搜索结果
     .controller('SearchResultCtrl', function ($scope, $rootScope) {
-        console.log($rootScope.search);
         if (!$rootScope.search) {
             return;
         }
@@ -523,11 +522,48 @@ angular.module('app.controllers', [])
         } else {
             $scope.searchTitle = $scope.translations.product_searchadv;
         }
-        $scope.showLoading();
-        $rootScope.service.get($rootScope.search.type, $rootScope.search.params, function (results) {
-            $scope.hideLoading();
-            $scope.results = results.productlist;
-        });
+
+        $scope.page = 1;
+        var getList = function (func, callback) {
+            if (func === 'load') {
+                $scope.page++;
+            } else {
+                $scope.page = 1;
+            }
+            $rootScope.search.params.page = $scope.page;
+
+            $rootScope.service.get($rootScope.search.type, $rootScope.search.params, function (results) {
+                if (func === 'load') {
+                    if (Array.isArray(results.productlist) && results.productlist.length) {
+                        $scope.results = $scope.results.concat(results.productlist);
+                    } else {
+                        $scope.loadOver = true;
+                    }
+                } else {
+                    $scope.hasInit = true;
+                    $scope.results = results.productlist;
+                }
+                if (typeof callback === 'function') {
+                    callback();
+                }
+            });
+        };
+
+        $scope.doRefresh = function () {
+            getList('refresh', function () {
+                $scope.$broadcast('scroll.refreshComplete');
+            });
+        };
+        $scope.loadMore = function () {
+            if (!$scope.hasInit || $scope.loadOver) {
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                return;
+            }
+            getList('load', function () {
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            });
+        };
+        getList('refresh');
     })
 
     .controller('FrameCtrl', function ($scope, $sce, $stateParams) {
