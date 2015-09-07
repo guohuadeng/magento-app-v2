@@ -13,6 +13,7 @@ function Service($rootScope, $http) {
         search: '/restconnect/search',
         searchAdvField: '/restconnect/searchadv/getfield',
         searchAdv: '/restconnect/searchadv/index',
+        searchAgent: '/storelocator/index/city',
         productDetail: '/restconnect/products/getproductdetail',
         productImg: '/restconnect/products/getPicLists',
         productOption: '/restconnect/products/getcustomoption',

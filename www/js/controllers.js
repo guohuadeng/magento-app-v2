@@ -468,6 +468,9 @@ angular.module('app.controllers', [])
     .controller('HomeCtrl', function ($scope, $rootScope, $location) {
         $scope.searchData = {};
         $scope.onSearch = function () {
+            if (!$scope.searchData.text) {
+                return;
+            }
             $rootScope.search = {
                 type: 'search',
                 params: {
@@ -564,6 +567,43 @@ angular.module('app.controllers', [])
             });
         };
         getList('refresh');
+    })
+
+    // 附近经销商
+    .controller('SearchAgentCtrl', function ($scope, $rootScope, $location) {
+        $scope.searchData = {
+            address: '广州',
+            radius: 200
+        };
+        $scope.onSearch = function () {
+            if (!$scope.searchData.address) {
+                return;
+            }
+            var myGeo = new BMap.Geocoder();
+            myGeo.getPoint($scope.searchData.address, function(point){
+                if (point) {
+                    $rootScope.agent = {
+                        title: $scope.searchData.address,
+                        params: $.extend({}, {
+                            radius: $scope.searchData.radius
+                        }, point)
+                    };
+                    $location.path('app/agents');
+                } else {
+                    alert('没有找到相应地址！');
+                }
+            });
+        };
+    })
+
+    .controller('AgentsCtrl', function ($scope, $rootScope, $location) {
+        if (!$rootScope.agent) {
+            return;
+        }
+        $scope.titleText = $rootScope.agent.title;
+        $rootScope.service.get('searchAgent', $rootScope.agent.params, function (res) {
+            $scope.agentList = res;
+        });
     })
 
     .controller('FrameCtrl', function ($scope, $sce, $stateParams) {

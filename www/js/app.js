@@ -63,7 +63,17 @@ angular.module('app', [
                 url: '/searchAgent', //附近经销商
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/searchAgent.html'
+                        templateUrl: 'templates/searchAgent.html',
+                        controller: 'SearchAgentCtrl'
+                    }
+                }
+            })
+            .state('app.agents', {
+                url: '/agents', //附近经销商列表
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/agents.html',
+                        controller: 'AgentsCtrl'
                     }
                 }
             })

@@ -3,11 +3,11 @@
         <div class="list list-inset">
             <label class="item item-input">
                 <span class="input-label">{{'input_address' | translate}}</span>
-              <input type="text" autofocus placeholder="{{input_address_hint | translate}}" id="address-input" ng-model="address.text">
+              <input type="text" autofocus placeholder="{{input_address_hint | translate}}" ng-model="searchData.address">
             </label>
             <label class="item item-input">
                 <span class="input-label">{{'input_radius' | translate}}</span>
-                <input type="text" placeholder="{{input_radius_hint | translate}}" id="radius-input" ng-model="radius.text" value="200">
+                <input type="text" placeholder="{{input_radius_hint | translate}}" ng-model="searchData.radius" value="200">
             </label>
         </div>
         <div class="padding">

@@ -749,3 +749,30 @@ table.thinLineTable th {
     min-width: 60px;
     font-weight: bold;
 }
+
+.agents {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li.agent {
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    margin: 0;
+}
+
+li.agent h3 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+li.agent p {
+    color: #777;
+    padding: 0;
+    margin: 0;
+}
+
+li.agent p .distance {
+    float: right;
+}

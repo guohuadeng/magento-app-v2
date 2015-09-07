@@ -1,0 +1,12 @@
+<ion-view view-title="{{'search_agent' | translate}}{{'colon' | translate}}{{titleText}}">
+    <ion-content scroll="false" overflow-scroll="true">
+        <ion-content style="height:100%" overflow-scroll="true" direction="y" locking="true">
+            <ul class="agents">
+                <li class="agent" ng-repeat="agent in agentList">
+                    <h3>{{agent.store_name}}</h3>
+                    <p>{{agent.address}}<span class="distance">{{agent.distance | number:0}} km</span></p>
+                </li>
+            </ul>
+        </ion-content>
+    </ion-content>
+</ion-view>
