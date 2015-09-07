@@ -102,17 +102,8 @@ angular.module('app', [
                     }
                 }
             })
-            .state('app.search', {
-                url: '/search',//快速查询
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/search.html',
-                        controller: 'SearchCtrl'
-                    }
-                }
-            })
             .state('app.searchResult', {
-                url: '/search/:text',
+                url: '/searchResult',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/searchResult.html',

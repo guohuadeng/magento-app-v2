@@ -979,6 +979,17 @@ $.fn.formSerialize = function(semantic) {
     return $.param(this.formToArray(semantic));
 };
 
+$.fn.formParams = function(semantic) {
+    //hand off to jQuery.param for proper encoding
+    var array = this.formToArray(semantic),
+        params = {};
+
+    $.each(array, function (i, object) {
+        params[object.name] = object.value;
+    });
+    return params;
+};
+
 /**
  * Serializes all field elements in the jQuery object into a query string.
  * This method will return a string in the format: name1=value1&amp;name2=value2

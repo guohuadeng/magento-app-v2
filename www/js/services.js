@@ -12,6 +12,7 @@ function Service($rootScope, $http) {
         register: '/restconnect/customer/register',
         search: '/restconnect/search',
         searchAdvField: '/restconnect/searchadv/getfield',
+        searchAdv: '/restconnect/searchadv/index',
         productDetail: '/restconnect/products/getproductdetail',
         productImg: '/restconnect/products/getPicLists',
         productOption: '/restconnect/products/getcustomoption',

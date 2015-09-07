@@ -446,7 +446,7 @@ angular.module('app.controllers', [])
 
         // 增加到购物车
         $scope.doCartAdd = function () {
-            var queryString = $('#product_addtocart_form').formSerialize();
+            var queryString = $('#product_addtocart_form').formParams();
             if (!($scope.qty > 1)) {
                 $scope.qty = 1;
             }
@@ -464,38 +464,18 @@ angular.module('app.controllers', [])
         };
     })
 
-    // 快速搜索Home
-    .controller('HomeCtrl', function ($scope, $location) {
-        $scope.searchData = {};
-        $scope.onSearch = function () {
-            if (!$scope.searchData.text) {
-                return;
-            }
-            $location.path('app/search/' + $scope.searchData.text);
-        };
-    })
-    
     // 快速搜索
-    .controller('SearchCtrl', function ($scope, $location) {
+    .controller('HomeCtrl', function ($scope, $rootScope, $location) {
         $scope.searchData = {};
         $scope.onSearch = function () {
-            if (!$scope.searchData.text) {
-                return;
-            }
-            $location.path('app/search/' + $scope.searchData.text);
+            $rootScope.search = {
+                type: 'search',
+                params: {
+                    q: $scope.searchData.text
+                }
+            };
+            $location.path('app/searchResult');
         };
-    })
-
-    // 搜索结果
-    .controller('SearchResultCtrl', function ($scope, $rootScope, $stateParams) {
-        $scope.text = $stateParams.text;
-        $scope.showLoading();
-        $rootScope.service.get('search', {
-            q: $stateParams.text
-        }, function (results) {
-            $scope.hideLoading();
-            $scope.results = results.productlist;
-        });
     })
 
     // 高级搜索
@@ -523,12 +503,33 @@ angular.module('app.controllers', [])
         });
 
         $scope.onSearch = function () {
-            if (!$scope.searchData.text) {
-                return;
-            }
-            $location.path('app/searchadv/' + $scope.searchData.text);
+            $rootScope.search = {
+                type: 'searchAdv',
+                params: $('#searAdv').formParams()
+            };
+            $location.path('app/searchResult');
         };
     })
+
+    // 搜索结果
+    .controller('SearchResultCtrl', function ($scope, $rootScope) {
+        console.log($rootScope.search);
+        if (!$rootScope.search) {
+            return;
+        }
+        if ($rootScope.search.type === 'search') {
+            $scope.searchTitle = $scope.translations.quick_search +
+                $scope.translations.colon + $rootScope.search.params.q;
+        } else {
+            $scope.searchTitle = $scope.translations.product_searchadv;
+        }
+        $scope.showLoading();
+        $rootScope.service.get($rootScope.search.type, $rootScope.search.params, function (results) {
+            $scope.hideLoading();
+            $scope.results = results.productlist;
+        });
+    })
+
     .controller('FrameCtrl', function ($scope, $sce, $stateParams) {
         $scope.trustSrc = function (src) {
             return $sce.trustAsResourceUrl(src);
