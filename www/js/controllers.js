@@ -596,7 +596,7 @@ angular.module('app.controllers', [])
         };
     })
 
-    .controller('AgentsCtrl', function ($scope, $rootScope, $location) {
+    .controller('AgentsCtrl', function ($scope, $rootScope, $ionicPopup) {
         if (!$rootScope.agent) {
             return;
         }
@@ -604,6 +604,20 @@ angular.module('app.controllers', [])
         $rootScope.service.get('searchAgent', $rootScope.agent.params, function (res) {
             $scope.agentList = res;
         });
+
+        $scope.showAgent = function () {
+            $scope.agent = this.agent;
+            $ionicPopup.show({
+                templateUrl: 'templates/agent.html',
+                title: this.agent.store_name,
+                cssClass: 'agent-container',
+                scope: $scope,
+                buttons: [{
+                    text: $scope.translations.ok,
+                    type: 'button-assertive',
+                }]
+            });
+        };
     })
 
     .controller('FrameCtrl', function ($scope, $sce, $stateParams) {

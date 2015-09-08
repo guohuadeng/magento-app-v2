@@ -776,3 +776,13 @@ li.agent p {
 li.agent p .distance {
     float: right;
 }
+
+.agent-container .popup {
+    width: 90%;
+    height: 440px;
+}
+
+.agent-container .popup-buttons {
+    top: 300px;
+    position: relative;
+}

@@ -73,5 +73,10 @@ var zh_CN = {
     free_shipping: '免运费',
     quantity: '数量',
     product_description: '商品描述',
-    add_to_cart: '加入购物车'
+    add_to_cart: '加入购物车',
+    city: '城市',
+    telephone: '电话',
+    fax: '传真',
+    website: '网站',
+    other_information: '其他信息'
 };
