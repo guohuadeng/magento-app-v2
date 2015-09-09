@@ -18,7 +18,8 @@
     "org.apache.cordova.device",
     "org.apache.cordova.console",
     "com.ionic.keyboard",
-    "org.apache.cordova.splashscreen"
+    "org.apache.cordova.splashscreen",
+    "cordova-plugin-whitelist"
   ],
   "cordovaPlatforms": [
     {
@@ -26,5 +27,6 @@
       "locator": "./engine/cordova-android-c0.6.1/"
     },
     "ios"
+    "android"
   ]
 }
