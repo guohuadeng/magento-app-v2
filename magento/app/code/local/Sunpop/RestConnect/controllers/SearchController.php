@@ -117,7 +117,7 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
 			$result->setPageSize($limit);
 				
 			$result->setCurPage($page);
-
+			
 
 			//sort
 			//$ud = 'ASC' | 'DESC'
@@ -162,6 +162,7 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
     			$i ++;
 			}
 			$returndata['productlist'] = $productlist;
+			if($this->getRequest ()->getParam ( 'page' ) > $result->getLastPageNumber()) $returndata['productlist'] = '';
 			$returndata['lastpagenumber'] = $lastpagenumber;
 			echo Mage::helper('core')->jsonEncode($returndata);
 			if (! Mage::helper ( 'catalogsearch' )->isMinQueryLength ()) {

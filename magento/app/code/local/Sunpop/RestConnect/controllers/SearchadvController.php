@@ -103,6 +103,7 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 		//'color' =>
 		//	array (size=1)
 		//	0 => string '5' (length=1)
+		
 		$order = ($this->getRequest ()->getParam ( 'order' )) ? ($this->getRequest ()->getParam ( 'order' )) : 'entity_id';
 		$dir = ($this->getRequest ()->getParam ( 'dir' )) ? ($this->getRequest ()->getParam ( 'dir' )) : 'desc';
 		$page = ($this->getRequest ()->getParam ( 'page' )) ? ($this->getRequest ()->getParam ( 'page' )) : 1;
@@ -182,6 +183,7 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
     		);
 		}
 		$returndata['productlist'] = $productlist;
+		if($this->getRequest ()->getParam ( 'page' ) > $result->getLastPageNumber()) $returndata['productlist'] = '';
 		$returndata['lastpagenumber'] = $lastpagenumber;
 		echo Mage::helper('core')->jsonEncode($returndata);
 	}
