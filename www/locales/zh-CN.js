@@ -68,6 +68,7 @@ var zh_CN = {
     error_code: '错误码',
     exit_tip: '是否确定退出该应用？',
     product_detail: '商品详情',
+    product_additional: '其它参数',
     in_stock: '库存：有货',
     out_of_stock: '库存：无货',
     free_shipping: '免运费',

@@ -69,6 +69,7 @@ var en_US = {
     free_shipping: 'Free Shipping',
     quantity: 'Quantity',
     product_description: 'Product Description',
+    product_additional: 'Additional',
     add_to_cart: 'Add to Cart',
     city: 'City',
     telephone: 'Telephone',

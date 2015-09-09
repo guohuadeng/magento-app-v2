@@ -70,7 +70,7 @@
                                     <em ng-if="option.is_require" class="assertive">*</em>
                                     <em ng-if="option.price > 0">+{{product.symbol}}&nbsp;{{option.price | number:0}}</em>
                                 </span>
-                                <input type="hidden" class="form__textfield textfield product-custom-option"
+                                <input type="text" class="form__textfield textfield product-custom-option"
                                        name="options[{{option.option_id}}]"
                                        data-price="{{option.price}}">
                             </label>
@@ -195,15 +195,27 @@
         </div>
         <!-- end product option-->
         <!-- product descript-->
-        <div class="card padding-horizontal">
-            <h5>{{'product_description' | translate}}</h5>
-        </div>
-        <div class="padding" ng-bind-html="product.description | unsafe">
-        </div>
-        <p>&nbsp;</p>
-
-        <p>&nbsp;</p>
+        <ion-tabs class="tabs-ligth tabs-standard">
+            <ion-tab title="{{'product_description' | translate}}" id="tab_description_tabbed_contents">
+                <div class="list padding"  ng-bind-html="product.description | unsafe">
+                </div>
+            </ion-tab>
+            <ion-tab title="{{'product_additional' | translate}}" id="tab_description_tabbed_attribute">
+                <div class="list padding">
+                    <div class="row">
+                        <div class="col">Weight:</div>
+                        <div class="col col-75">{{product.weight}}&nbsp;g</div>
+                    </div>
+                    <div class="row" ng-repeat="item in product.additional">
+                        <div class="col">{{item.label}}:</div>
+                        <div class="col col-75">{{item.value}}</div>
+                    </div>
+                </div>
+            </ion-tab>
+        </ion-tabs>
+        <br><br>
         <!-- end product descript-->
+
     </ion-content>
 
     <div class="bar bar-footer bar-stable add-to-cart">
