@@ -22,10 +22,6 @@
     "cordova-plugin-whitelist"
   ],
   "cordovaPlatforms": [
-    {
-      "platform": "android",
-      "locator": "./engine/cordova-android-c0.6.1/"
-    },
     "ios"
     "android"
   ]
