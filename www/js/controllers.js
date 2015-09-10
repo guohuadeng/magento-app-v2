@@ -577,13 +577,32 @@ angular.module('app.controllers', [])
     })
 
     // 附近经销商
-    .controller('SearchAgentCtrl', function ($scope, $rootScope, $location) {
+    .controller('SearchAgentCtrl', function ($scope, $rootScope, $location, $cordovaGeolocation) {
         $scope.searchData = {
-            address: '广州',
+            address: $scope.translations.current_position,
             radius: 200
         };
+
         $scope.onSearch = function () {
             if (!$scope.searchData.address) {
+                return;
+            }
+            if ($scope.searchData.address === $scope.translations.current_position) {
+                $cordovaGeolocation.getCurrentPosition({timeout: 10000, enableHighAccuracy: false})
+                    .then(function (position) {
+                        $rootScope.agent = {
+                            title: $scope.searchData.address,
+                            params: $.extend({}, {
+                                radius: $scope.searchData.radius
+                            }, {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            })
+                        };
+                        $location.path('app/agents');
+                    }, function(err) {
+                        alert($scope.translations.position_not_found);
+                    });
                 return;
             }
             var myGeo = new BMap.Geocoder();
@@ -597,7 +616,7 @@ angular.module('app.controllers', [])
                     };
                     $location.path('app/agents');
                 } else {
-                    alert('没有找到相应地址！');
+                    alert($scope.translations.position_not_found);
                 }
             });
         };

@@ -75,5 +75,7 @@ var en_US = {
     telephone: 'Telephone',
     fax: 'Fax',
     website: 'Website',
-    other_information: 'Other Information'
+    other_information: 'Other Information',
+    current_position: 'Current Position',
+    position_not_found: 'Position not found!'
 };

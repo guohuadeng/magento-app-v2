@@ -79,5 +79,7 @@ var zh_CN = {
     telephone: '电话',
     fax: '传真',
     website: '网站',
-    other_information: '其他信息'
+    other_information: '其他信息',
+    current_position: '当前位置',
+    position_not_found: '没有找到相应地址！'
 };
