@@ -5,7 +5,7 @@
                     pulling-text="{{'pull_to_refresh' | translate}}"
                     on-refresh="doRefresh()">
             </ion-refresher>
-            <ion-list class="products-grid one-line">
+            <ion-list class="products-grid">
                 <div class="product" ng-repeat="product in results">
                     <div class="product-inner">
                         <a href="#app/productDetail/{{product.entity_id}}">
@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                <div class="product" ng-if="!results.length">
+                <div class="product" ng-if="noProductFound">
                     {{'no_product_found' | translate}}
                 </div>
             </ion-list>

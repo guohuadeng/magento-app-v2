@@ -5,7 +5,7 @@
                     pulling-text="{{'pull_to_refresh' | translate}}"
                     on-refresh="doRefresh()">
             </ion-refresher>
-            <ion-list class="products-grid one-line">
+            <ion-list class="products-grid {{lineClass}}">
                 <div class="product" collection-repeat="product in lists"
                      collection-item-height="338">
                     <div class="product-inner">

@@ -164,6 +164,17 @@ angular.module('app.controllers', [])
                 }
             });
         };
+
+        // 取搜索选项
+        //text,textarea,date,boolean,multiselect,select,price,media_image,weee
+        $rootScope.service.get('searchAdvField', {}, function (results) {
+            var fields = [];
+
+            for (var key in results) {
+                fields.push(results[key]);
+            }
+            $scope.searchFields = fields;
+        });
     })
 
     // 注册
@@ -232,12 +243,15 @@ angular.module('app.controllers', [])
     .controller('ListsCtrl', function ($scope, $rootScope, $stateParams, $translate) {
         $scope.listTitle = {
             daily_sale: 'latest_promotions',
-            new: 'common_products',
+            'new': 'common_products',
             cert_download: 'cert_download'
         }[$stateParams.cmd];
         $scope.listPge = 1;
         $scope.hasInit = false;
         $scope.loadOver = false;
+        if ($stateParams.cmd === 'daily_sale') {
+            $scope.lineClass = 'one-line';
+        }
 
         var getList = function (func, callback) {
             if (func === 'load') {
@@ -494,17 +508,6 @@ angular.module('app.controllers', [])
             $scope.cat_field = cat_field;
         });
 
-        // 取搜索选项
-        //text,textarea,date,boolean,multiselect,select,price,media_image,weee
-        $rootScope.service.get('searchAdvField', {}, function (results) {
-            var fields = [];
-
-            for (var key in results) {
-                fields.push(results[key]);
-            }
-            $scope.fields = fields;
-        });
-
         $scope.onSearch = function () {
             $rootScope.search = {
                 type: 'searchAdv',
@@ -544,7 +547,11 @@ angular.module('app.controllers', [])
                     }
                 } else {
                     $scope.hasInit = true;
-                    $scope.results = results.productlist;
+                    if (Array.isArray(results.productlist) && results.productlist.length) {
+                        $scope.results = results.productlist;
+                    } else {
+                        $scope.noProductFound = true;
+                    }
                 }
                 if (typeof callback === 'function') {
                     callback();
