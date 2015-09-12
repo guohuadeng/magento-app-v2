@@ -1,10 +1,18 @@
 <ion-view view-title="{{'search_agent' | translate}}">
     <ion-content>
-        <div class="list list-inset">
+        <div class="row">
+            <div class="col col-50">
+                <button class="button-dark icon icon-left ion-ios-location" ng-click="getGeo()">{{'get_position' | translate}}</button>
+            </div>
+            <div class="col col-50"></div>
+        </div>
+        <div class="list product-option-container">
             <label class="item item-input">
                 <span class="input-label">{{'input_address' | translate}}</span>
               <input type="text" autofocus placeholder="{{input_address_hint | translate}}" ng-model="searchData.address">
             </label>
+
+
             <label class="item item-input">
                 <span class="input-label">{{'input_radius' | translate}}</span>
                 <input type="text" placeholder="{{input_radius_hint | translate}}" ng-model="searchData.radius" value="200">

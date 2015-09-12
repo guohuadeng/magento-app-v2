@@ -478,9 +478,21 @@ angular.module('app.controllers', [])
         };
     })
 
-    // 快速搜索
+    // home中，取banner，快速搜索
     .controller('HomeCtrl', function ($scope, $rootScope, $location) {
         $scope.searchData = {};
+
+        // 取首页第一个banner
+        $rootScope.service.get('getBannerBlock', {block:'app_home_banner1'}, function (results) {
+            $scope.banner1 = results;
+
+            var banner1 = [];
+            for (var key in results) {
+                banner1.push(results[key]);
+            }
+            $scope.banner1 = banner1;
+        });
+        //快速搜索
         $scope.onSearch = function () {
             if (!$scope.searchData.text) {
                 return;

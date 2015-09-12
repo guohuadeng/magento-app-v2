@@ -12,7 +12,7 @@ var zh_CN = {
     latest_promotions: '最新促销',
     common_products: '常用产品',
     cert_download: '证书下载',
-    search_agent: '附近经销商',
+    search_agent: '附近商家',
     input_address: '位置',
     input_radius: '距离(公里)',
     input_address_hint: '输入城市或地址',
@@ -51,6 +51,7 @@ var zh_CN = {
     confirm_password: '确认密码',
     submit: '提交',
     search: '搜索',
+    must_select_one: '以下查询条件至少选择一个',
     no_product_found: '没有找到任何产品。',
     pull_to_refresh: '下拉刷新……',
     language: '语言',
@@ -80,6 +81,7 @@ var zh_CN = {
     fax: '传真',
     website: '网站',
     other_information: '其他信息',
+    get_position: '获取位置',
     current_position: '当前位置',
-    position_not_found: '没有找到相应地址！'
+    position_not_found: '没有找到，请检查GPS定位是否开启。\n或直接输入位置！'
 };

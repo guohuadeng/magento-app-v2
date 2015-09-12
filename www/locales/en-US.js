@@ -47,6 +47,7 @@ var en_US = {
     confirm_password: 'Confirm password',
     submit: 'Submit',
     search: 'Search',
+    must_select_one: 'Must Select 1 option at lease',
     no_product_found: 'No product found.',
     pull_to_refresh: 'Pull to refresh...',
     language: 'Language',
@@ -76,6 +77,7 @@ var en_US = {
     fax: 'Fax',
     website: 'Website',
     other_information: 'Other Information',
+    get_position: 'Get Position',
     current_position: 'Current Position',
-    position_not_found: 'Position not found!'
+    position_not_found: 'Position not found!\nPlease check GPS.Or input position.'
 };

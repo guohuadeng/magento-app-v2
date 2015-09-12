@@ -6,7 +6,7 @@
                 <div class="form__field">
                     <label class="item item-input item-select">
                         <span class="input-label">{{'Categories' | translate}}</span>
-                        <select name="category_id" class="select-dark" title="{{cat_field.name}}">
+                        <select name="categoryid" class="select-dark" title="{{cat_field.name}}">
                             <option value="">{{'All' | translate}}</option>
                             <option ng-repeat="item in cat_field" value="{{item.category_id}}">
                                 {{item.name}}
@@ -15,6 +15,10 @@
                     </label>
                 </div>
                 <!-- end category select option-->
+
+                <div class="item item-divider">
+                    {{'must_select_one' | translate}}
+                </div>
 
                 <div ng-repeat="field in searchFields" ng-switch on="field.attributeType">
                     <!-- field type: text,textarea,date,boolean,multiselect,select,price,media_image,weee-->

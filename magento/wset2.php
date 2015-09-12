@@ -539,4 +539,5 @@ foreach ($installer->getAllAttributeSetIds($entity) as $setId) {
 */	 	 
 $installer->endSetup();
 echo __file__;
+echo '2增加产品属性成功';
 ?>

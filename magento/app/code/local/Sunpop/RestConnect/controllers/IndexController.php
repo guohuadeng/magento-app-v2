@@ -21,6 +21,14 @@ class Sunpop_RestConnect_IndexController extends Mage_Core_Controller_Front_Acti
 				$_categorylist = array ();
 				if (count ( $_categories ) > 0) {
 					foreach ( $_categories as $_category ) {
+						//有关虚拟产品目录的处理，暂时只能写死了
+						$is_virtual = $_category->getData('a_cat_virtual');
+						if ($_category->getName() == '证书下载')	{
+							$is_virtual = 1;
+							}
+						else
+							$is_virtual = '0';
+
 						$_helper->getCategoryUrl ( $_category );
 						$_categorylist [] = array (
 								'category_id' => $_category->getId (),
@@ -31,7 +39,9 @@ class Sunpop_RestConnect_IndexController extends Mage_Core_Controller_Front_Acti
 								'url_key' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getUrlPath (),
 								'thumbnail_url' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getThumbnailUrl (),								
 								'image_url' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getImageUrl (),								
-								'has_children' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->hasChildren (),							
+								'has_children' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->hasChildren (),
+								//新增加是否虚拟目录的属性
+								'is_virtual' => $is_virtual,
 								'product_count' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getProductCount (),
 								'children' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getAllChildren () 
 						);
@@ -272,9 +282,26 @@ class Sunpop_RestConnect_IndexController extends Mage_Core_Controller_Front_Acti
 		}
 	}
 	public function getStaticBlockAction(){
+		//http://w.sunpop.cn/cn/restconnect/index/getstaticblock?block=app_home_banner1
 		$block = ($this->getRequest ()->getParam ( 'block' )) ? ($this->getRequest ()->getParam ( 'block' )) : 'footer_links';
-		//echo $this->getResponse()->setBody($this->getLayout()->createBlock('cms/footer_links')->toHtml());
-		echo $this->getLayout()->createBlock('cms/block')->setBlockId($block)->toHtml();
+		$result = $this->getLayout()->createBlock('cms/block')->setBlockId($block)->toHtml();
+		echo $result;
+	}
+	public function getBannerBlockAction(){
+		//将magento的图片列表变成json图片列表，http://w.sunpop.cn/cn/restconnect/index/getstaticblock?block=app_home_banner1
+		$block = ($this->getRequest ()->getParam ( 'block' )) ? ($this->getRequest ()->getParam ( 'block' )) : 'app_home_banner1';
+
+		$storeUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+		$result = $this->getLayout()->createBlock('cms/block')->setBlockId($block)->toHtml();
+		$result = str_replace("{{media url=\"",$storeUrl,$result);
+		$result = str_replace("\"}}","",$result);
+
+		$pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg|\.png]))[\'|\"].*?[\/]?>/";
+        preg_match_all($pattern,$result,$match);
+
+		if(isset($match[1])&&!empty($match[1])){
+			echo json_encode ( $match[1] );
+		}
 	}
 	public function getProductlist($products, $mod = 'product') {
 		$productlist = array ();

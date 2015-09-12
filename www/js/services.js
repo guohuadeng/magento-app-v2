@@ -3,6 +3,8 @@ function Service($rootScope, $http) {
     var api = {
         website: '/restconnect/store/websiteinfo',
         store: '/restconnect/store/storeinfo',
+        getStaticBlock: '/restconnect/index/getstaticblock',
+        getBannerBlock: '/restconnect/index/getbannerblock',
         user: '/restconnect/customer/status',
         forgotpwd: '/restconnect/customer/forgotpwd',
         menus: '/restconnect/?cmd=menu',
