@@ -713,7 +713,10 @@ em {
 
 .product-option-container input,
 .product-option-container select,
-.product-option-container textarea{
+.product-option-container textarea,
+.search-container input,
+.search-container select,
+.search-container textarea{
     border-bottom: 1px solid #ccc;
     color: #777;
     border-radius: 3px;

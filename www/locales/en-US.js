@@ -79,5 +79,7 @@ var en_US = {
     other_information: 'Other Information',
     get_position: 'Get Position',
     current_position: 'Current Position',
-    position_not_found: 'Position not found!\nPlease check GPS.Or input position.'
+    position_not_found: 'Position not found!\nPlease check GPS.Or input position.',
+    list_view: 'List View',
+    map_view: 'Map View'
 };

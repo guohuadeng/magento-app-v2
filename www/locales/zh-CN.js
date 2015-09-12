@@ -83,5 +83,7 @@ var zh_CN = {
     other_information: '其他信息',
     get_position: '获取位置',
     current_position: '当前位置',
-    position_not_found: '没有找到，请检查GPS定位是否开启。\n或直接输入位置！'
+    position_not_found: '没有找到，请检查GPS定位是否开启。\n或直接输入位置！',
+    list_view: '列表模式',
+    map_view: '地图模式'
 };

@@ -1,12 +1,20 @@
 <ion-view view-title="{{'search_agent' | translate}}{{'colon' | translate}}{{titleText}}">
     <ion-content scroll="false" overflow-scroll="true">
         <ion-content style="height:100%" overflow-scroll="true" direction="y" locking="true">
-            <ul class="agents">
-                <li class="agent" ng-repeat="agent in agentList" ng-click="showAgent()">
-                    <h3>{{agent.store_name}}</h3>
-                    <p>{{agent.address}}<span class="distance">{{agent.distance | number:0}} km</span></p>
-                </li>
-            </ul>
+            <ion-tabs class="tabs-ligth tabs-standard">
+                <ion-tab title="{{'list_view' | translate}}" id="tab_agent_list">
+                    <ul class="agents">
+                        <li class="agent" ng-repeat="agent in agentList" ng-click="showAgent()">
+                            <h3>{{agent.store_name}}</h3>
+                            <p>{{agent.address}}<span class="distance">{{agent.distance | number:0}} km</span></p>
+                        </li>
+                    </ul>
+                </ion-tab>
+                <ion-tab title="{{'map_view' | translate}}" id="tab_agent_map">
+                    <div class="list padding">
+                    </div>
+                </ion-tab>
+            </ion-tabs>
         </ion-content>
     </ion-content>
 </ion-view>
