@@ -8,7 +8,7 @@
         <div class="homebanner-swiper-container">
             <ion-slide-box delegate-handle="image-viewer" show-pager="true" auto-play="true" does-continue="true">
                 <ion-slide ng-repeat="img in banner1" ng-init="updateSlider()">
-                    <img ng-src="{{img}}"><span></span>
+                    <img class="fullwidth" ng-src="{{img}}"><span></span>
                 </ion-slide>
             </ion-slide-box>
         </div>
