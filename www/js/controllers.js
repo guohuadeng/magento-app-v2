@@ -218,7 +218,7 @@ angular.module('app.controllers', [])
     })
 
     // 设置
-    .controller('settingCtrl', function ($scope, $rootScope, $translate) {
+    .controller('settingCtrl', function ($scope, $rootScope, $translate, $ionicHistory) {
         // 网站列表信息
         $scope.getWebsite = function () {
             $rootScope.service.get('website', function (website) {
@@ -236,6 +236,7 @@ angular.module('app.controllers', [])
             $scope.locale = this.language.store_code;
             $translate.use($scope.locale);
             Config.setLocale($scope.locale);
+            $ionicHistory.clearCache();
         };
     })
 
