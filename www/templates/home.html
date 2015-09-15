@@ -6,6 +6,7 @@
 
         <!-- img swiper -->
         <div class="homebanner-swiper-container">
+            <img class="loading-image" src="img/loading.gif">
             <ion-slide-box delegate-handle="image-viewer" show-pager="true" auto-play="true" does-continue="true">
                 <ion-slide ng-repeat="img in banner1" ng-init="updateSlider()">
                     <img class="fullwidth" ng-src="{{img}}"><span></span>

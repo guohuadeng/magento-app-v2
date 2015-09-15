@@ -480,9 +480,13 @@ angular.module('app.controllers', [])
     })
 
     // home中，取banner，快速搜索
-    .controller('HomeCtrl', function ($scope, $rootScope, $location) {
+    .controller('HomeCtrl', function ($scope, $rootScope, $location, $ionicSlideBoxDelegate) {
         $scope.searchData = {};
 
+        $('.homebanner-swiper-container').height($(window).width() * 4 / 9);
+        $scope.updateSlider = function () {
+            $ionicSlideBoxDelegate.$getByHandle('image-viewer').update();
+        };
         // 取首页第一个banner
         $rootScope.service.get('getBannerBlock', {block:'app_home_banner1'}, function (results) {
             $scope.banner1 = results;

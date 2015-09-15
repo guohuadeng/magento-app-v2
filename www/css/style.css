@@ -789,3 +789,15 @@ li.agent p .distance {
     top: 300px;
     position: relative;
 }
+
+.homebanner-swiper-container {
+    position: relative;
+}
+
+.loading-image {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+}
