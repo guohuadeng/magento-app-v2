@@ -52,7 +52,7 @@ angular.module('ionicLazyLoad')
                 }
 
                 if ($attributes.imageLazyLoader) {
-                    var loader = $compile('<div class="image-loader-container"><ion-spinner class="image-loader" icon="' + $attributes.imageLazyLoader + '"></ion-spinner></div>')($scope);
+                    var loader = $compile('<div class="image-loader-container"><img src="img/loading1.gif"></div>')($scope);
                     $element.after(loader);
                 }
 
