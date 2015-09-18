@@ -1,0 +1,25 @@
+<?php $items = $this->getLatestNewsItems() ?>
+<?php if (count($items)): ?>
+<div class="block news-categories">
+    <div class="head block-title">
+        <strong><span><?php echo $this->__(Mage::getStoreConfig('clnews/news/title'));?></span></strong>
+    </div>
+    <div class="block-content">
+        <div class="menu-categories">
+            <ul>
+                <?php foreach ($items as $item): ?>
+                <?php if ($item->getData('status') == 1):?>
+                    <li>
+                        <a href="<?php echo str_replace('clnews', $this->getAlias(), $item->getUrl()) ?>" ><?php echo $item->getTitle();?></a>
+                        <?php if (Mage::helper('clnews')->showDate()): ?>
+                            <span class="date"><?php echo Mage::helper('clnews')->formatDate($item->getNewsTime()) ?></span>
+                        <?php endif; ?>
+                    </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                <li><a href="<?php echo $this->getUrl(Mage::helper('clnews')->getRoute()) ?>">&gt;&gt;</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<?php endif ?>

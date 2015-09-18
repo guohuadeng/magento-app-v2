@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/print.css'); ?>" media="print">
+    <script type="text/javascript" src="<?php echo $this->getJsUrl(); ?>Sunpop/jquery-1.4.2.min.js"></script>
+    <style type="text/css">
+    body {font:9pt Arial, Helvetica, sans-serif;padding:15px;}
+    a {color:#2976c9;}
+    .print-head {height:50px;}
+    .logo {float:left;margin-right:150px;}
+    h4 {clear:both;font-size:10pt;}
+    .print {float:left;margin-top:15px;}
+    .print img {border:none;margin:2px 4px -2px 0;}
+    </style>
+</head>
+<body class="page-print<?php echo $this->getBodyClass()?$this->getBodyClass():'' ?>">
+<div>
+    <div class="print-head">
+        <img src="<?php echo $this->getPrintLogoUrl() ? $this->getPrintLogoUrl() : $this->getSkinUrl('images/logo_print.gif') ?>" class="logo" alt="" />
+        <?php if ($this->getPrintLogoText()):?>
+            <address><?php echo nl2br($this->htmlEscape($this->getPrintLogoText())) ?></address>
+        <?php endif;?>
+
+        <a href="javascript:window.print();" class="print"><img class="ic_print" height="16" width="16" alt="" title="" src="<? echo $this->getSkinUrl('images/i_print.gif'); ?>"><?php echo $this->__('Print') ?></a>
+    </div>
+
+    <?php $item = $this->getNewsitem(); ?>
+    <h4><?php echo $item->getTitle() ?></h4>
+    <?php if (Mage::helper('clnews')->showDate()): ?>
+        <span class="date"><?php echo Mage::helper('clnews')->formatDate($item->getNewsTime()) ?></span>
+    <?php endif; ?>
+    <?php if (Mage::helper('clnews')->showCategory() && ($this->getCategoryByNews($item->getID())->getData('title')!='')): ?>
+        <span class="date">&nbsp;|&nbsp; <?php echo $this->getCategoryByNews($item->getID())->getData('title'); ?></span>
+    <?php endif; ?>
+    <?php echo Mage::helper('clnews')->contentFilter($item->getFullContent()) ?>
+    <?php echo $this->getAbsoluteFooter(); ?>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<?php $categories = $this->getCategories() ?>
+<?php if (count($categories)): ?>
+<div class="block news-categories">
+    <div class="head block-title">
+        <strong><span><?php echo $this->__(Mage::getStoreConfig('clnews/news/title'));?></span></strong>
+    </div>
+    <div class="block-content">
+        <div id="Sunpop_categories_container" class="menu-categories">
+            <h5><?php echo $this->__('Categories');?></h5>
+            <ul id="Sunpop_categories_div">
+                <?php $count = 0; ?>
+                <?php $level = 0; ?>
+                <?php $children = 0; ?>
+                <?php foreach ($categories as $category): ?>
+                <?php if ($count == 0 && $category->getLevel() == 0): ?>
+                    <?php $level = $category->getLevel(); ?>
+                    <li><a href="<?php echo $category->getUrl() ?>" ><?php echo $category->getTitle();?></a>
+                <?php elseif ($count > 0 && $category->getLevel() == $level): ?>
+                    <?php $level = $category->getLevel(); ?>
+                    </li><li><a href="<?php echo $category->getUrl() ?>" ><?php echo $category->getTitle() ?></a>
+                <?php elseif ($count > 0 && $category->getLevel() != $level && $category->getLevel() > 0): ?>
+                    <?php $children++; ?>
+                    <?php $level = $category->getLevel(); ?>
+                    <ul><li><a href="<?php echo $category->getUrl() ?>" ><?php echo $category->getTitle();?></a>
+                <?php elseif ($count > 0 && $category->getLevel() != $level && $category->getLevel() == 0): ?>
+                    <?php for ($i = 0; $i < $children; $i++): ?>
+                        </ul></li>
+                    <?php endfor; ?>
+                    <?php $children = 0; ?>
+                    <?php $level = $category->getLevel(); ?>
+                        </li><li><a href="<?php echo $category->getUrl() ?>" ><?php echo $category->getTitle();?></a>
+                <?php endif; ?>
+                    <?php $count++; ?>
+                <?php endforeach; ?>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+</div>
+<?php endif ?>

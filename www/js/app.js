@@ -52,10 +52,11 @@ angular.module('app', [
                 }
             })
             .state('app.certDownload', {
-                url: '/certDownload', //附近经销商
+                url: '/certDownload', //证书下载，其实就是内容管理
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/certDownload.html'
+                        templateUrl: 'templates/certDownload.html',
+                        controller: 'certCtrl'
                     }
                 }
             })

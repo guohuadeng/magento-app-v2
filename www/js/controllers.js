@@ -593,6 +593,18 @@ angular.module('app.controllers', [])
         getList('refresh');
     })
 
+    // 证书下载
+    .controller('certCtrl', function ($scope, $rootScope) {
+        // 取证书列表选项
+        $rootScope.service.get('certGet', {}, function (results) {
+            var certList = [];
+
+            for (var key in results.articlelist) {
+                certList.push(results.articlelist[key]);
+            }
+            $scope.certList = certList;
+        });
+    })
     // 附近经销商
     .controller('SearchAgentCtrl', function ($scope, $rootScope, $location, $cordovaGeolocation) {
         $scope.searchData = {

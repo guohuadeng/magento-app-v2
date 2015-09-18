@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sunpop_News>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Sunpop_News>
+    </modules>
+</config> 

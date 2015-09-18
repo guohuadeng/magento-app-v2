@@ -130,17 +130,6 @@ class Sunpop_RestConnect_SearchController extends Mage_Core_Controller_Front_Act
 				
 				
 			$i = 1;
-// 			foreach ( $collection as $o ) {
-// 				echo "<strong>Product Order:" . $i . "</strong><br/>";
-// 				echo "Product Entity_Id: " . $o->getId () . "<br/>";
-// 				echo "Product Price: " . $o->getPrice () . "<br/>";
-// 				$i ++;
-// 				echo "----------------------------------<br/>";
-// 			}
-			// $this->loadLayout ();
-			// $this->_initLayoutMessages ( 'catalog/session' );
-			// $this->_initLayoutMessages ( 'checkout/session' );
-			// $this->renderLayout ();
 			$baseCurrency = Mage::app ()->getStore ()->getBaseCurrency ()->getCode ();
 		    $currentCurrency = Mage::app ()->getStore ()->getCurrentCurrencyCode ();
 			foreach($result as $product){

@@ -1,13 +1,13 @@
 <ion-view view-title="{{'cert_download' | translate}}">
     <ion-content>
-        <div class="list list-inset">
-            <label class="item item-input">
-		          <i class="icon ion-search placeholder-icon"></i>
-              <input type="text" placeholder="Please input the key word" id="search-input" ng-model="model.text">
-            </label>
-        </div>
-        <div class="padding">
-            <button class="button button-full button-assertive" ng-click="onSearch()">SEARCH</button>
+        <div class="list">
+            <a ng-repeat="cert in certList" class="item item-thumbnail-left" href="{{cert.full_path_document}}" target="_blank">
+                <img src="{{cert.image_short_content}}">
+                <h2>{{cert.title}}</h2>
+                <div ng-bind-html="cert.short_content | unsafe">
+
+                </div>
+            </a>
         </div>
     </ion-content>
 </ion-view>
