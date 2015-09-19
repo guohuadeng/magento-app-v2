@@ -44,7 +44,7 @@ angular.module('app.controllers', [])
                 buttons: [
                     {
                         text: $scope.translations.enter_app,
-                        type: 'button-energized'
+                        type: 'button-light'
                     }
                 ]
             });

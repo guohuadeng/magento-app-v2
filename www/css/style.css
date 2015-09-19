@@ -520,6 +520,17 @@ em {
     vertical-align:middle;
     height: auto;
 }
+.fullheight {
+    height: 100%!important;
+    vertical-align:middle;
+    width: auto;
+}
+.fullscreen {
+    height: 100%!important;
+    vertical-align:middle;
+    width: 100%!important;
+}
+
 
 .popupFullscreen .popup {
     width: 100% !important;
