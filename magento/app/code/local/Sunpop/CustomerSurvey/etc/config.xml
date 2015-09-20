@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Sunpop_CustomerSurvey>
+		  <version>1.0.0</version>
+		</Sunpop_CustomerSurvey>
+	</modules>
+	
+	<frontend>		 	
+        <translate>
+            <modules>
+                <Sunpop_CustomerSurvey>
+                    <files>
+                        <default>Sunpop_CustomerSurvey.csv</default>
+                    </files>
+                </Sunpop_CustomerSurvey>
+            </modules>
+        </translate>
+        <routers>
+            <customersurvey>
+                <use>standard</use>
+                <args>
+                    <module>Sunpop_CustomerSurvey</module>
+                    <frontName>customersurvey</frontName>
+                </args>
+            </customersurvey>
+        </routers>
+        <layout>
+            <updates>
+                <customersurvey>
+                    <file>customersurvey.xml</file>
+                </customersurvey>
+            </updates>
+        </layout>
+    </frontend>
+	
+	
+	<global>
+		<blocks>
+			<customersurvey>
+				<class>Sunpop_CustomerSurvey_Block</class>
+			</customersurvey>				
+		</blocks>
+		<helpers>
+			<CustomerSurvey>
+				<class>Sunpop_CustomerSurvey_Helper</class>
+			</CustomerSurvey>
+		</helpers>		
+		<models>
+            <customersurvey>
+                <class>Sunpop_CustomerSurvey_Model</class>
+				<resourceModel>survey_mysql4</resourceModel>
+            </customersurvey>
+			<survey_mysql4>
+				<class>Sunpop_CustomerSurvey_Model_Mysql4</class>
+				<entities>
+					<survey>
+						<table>survey</table>
+					</survey>
+					<questions>
+						<table>survey_questions</table>
+					</questions>
+					<results>
+						<table>survey_results</table>
+					</results>
+				</entities>
+			</survey_mysql4>
+		</models>
+	</global>
+		
+	<admin>
+        <routers>
+            <customersurvey>
+                <use>admin</use>
+                <args>
+                    <module>Sunpop_CustomerSurvey</module>
+                    <frontName>customersurvey</frontName>
+                </args>
+            </customersurvey>
+        </routers>
+    </admin>
+	
+	
+    
+    <adminhtml>    	
+        <translate>
+            <modules>
+                <Sunpop_CustomerSurvey>
+                    <files>
+                        <default>Sunpop_CustomerSurvey.csv</default>
+                    </files>
+                </Sunpop_CustomerSurvey>
+            </modules>
+        </translate>
+        
+        <menu>
+            <customersurvey translate="title" module="CustomerSurvey">
+                <title>Customer Survey</title>
+                <sort_order>81</sort_order>
+                <children>
+                    <menuitem1 module="CustomerSurvey">
+                        <title>Create Survey</title>
+                        <action>customersurvey/view/edit</action>
+                    </menuitem1>
+					<menuitem2 module="CustomerSurvey">
+                        <title>View Surveys</title>
+                        <action>customersurvey/view/index</action>
+                    </menuitem2>
+                </children>                
+            </customersurvey>
+        </menu>
+		
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <customersurvey translate="title" module="CustomerSurvey">
+							<title>Customer Survey</title>
+                			<sort_order>180</sort_order>
+                            <children>
+                                <menuitem1>
+                                    <title>Create Survey</title>
+                                </menuitem1>
+                            </children>
+                       </customersurvey>
+                   </children>
+               </admin>
+           </resources>
+        </acl>
+    </adminhtml>    
+    
+
+</config>

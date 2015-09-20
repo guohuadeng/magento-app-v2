@@ -1,0 +1,26 @@
+<div class="block block-compare">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('List of Surveys') ?></span></strong>
+    </div>
+    <div class="block-content">
+        <ol id="my-surveys">
+
+			<?php $counter = 1; ?>
+
+            <?php foreach($this->getSurveys() as $survey) { ?>
+
+				<?php if($survey->enabled == 1) { ?>
+                    <li class="item last <?php if($counter&1) { echo "odd"; } else { echo "even"; } ?>">
+                        <p class="product-name"><a href="<?php echo $this->getUrl('*/*/view/'); ?>id/<?php echo $survey->customersurvey_id; ?>"><?php echo $survey->title; ?></a></p>
+                    </li>
+                <?php } ?>
+
+                <?php $counter++; ?>
+            <?php } ?>
+        
+        </ol>
+        
+        <script type="text/javascript">decorateList('my-surveys');</script>
+        
+    </div>
+</div>

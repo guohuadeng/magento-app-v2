@@ -1,0 +1,197 @@
+<div class="survey_block">
+	<?php 
+    
+    $survey = $this->getCurrentSurvey();
+    
+    if($survey->title == '') {
+        echo 'invalid survey id';
+    }
+    else { ?>
+        
+        <div class="block block-compare">
+        <div class="block-title">
+            <strong><span><?php echo $this->__('Survey') ?>: <?php echo $survey->title ?></span></strong>
+        </div>
+        <div class="block-content">
+            <form id="survey_form" method="POST" action="<?php echo $this->getSaveUrl(); ?>">
+                <input type="hidden" name="survey_number" value="<?php echo $survey->customersurvey_id ?>" />
+            
+                <?php foreach($this->getMyQuestions() as $question) { ?>
+             
+                            <div style="padding: 10px;">                    
+                                <div>
+                                    <h6 style="display: inline; padding-bottom: 5px;"><?php echo $question->question ?>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+                                    
+                                    <?php switch($question->answer_type) { 
+                                         case "bubbles1": ?>
+                                            <br />
+                                                                                    
+                                            <input type="radio" name="question<?php echo $question->question_id ?>_answer" onchange="ChangeHidden(<?php echo $question->question_id ?>, this);" value="Very satisfied">  <?php echo $this->__('Very satisfied') ?> &nbsp;&nbsp;
+                                            <input type="radio" name="question<?php echo $question->question_id ?>_answer" value="Satisfied" onchange="ChangeHidden(<?php echo $question->question_id ?>, this);"><?php echo $this->__('Satisfied') ?>   &nbsp;&nbsp;
+                                            <input type="radio" name="question<?php echo $question->question_id ?>_answer" value="Neutral" onchange="ChangeHidden(<?php echo $question->question_id ?>, this);"><?php echo $this->__('Neutral') ?>   &nbsp;&nbsp;
+                                            <input type="radio" name="question<?php echo $question->question_id ?>_answer" value="Dissatisfied" onchange="ChangeHidden(<?php echo $question->question_id ?>, this);">  <?php echo $this->__('Dissatisfied') ?> &nbsp;&nbsp;
+                                            <input type="radio" name="question<?php echo $question->question_id ?>_answer" value="Very dissatisfied" onchange="ChangeHidden(<?php echo $question->question_id ?>, this);">  <?php echo $this->__('Very dissatisfied') ?>
+                                                                                    
+                                            <input type="hidden" class="input-text required-entry" name="question<?php echo $question->question_id ?>" id="question<?php echo $question->question_id ?>" />
+                                            
+                                            <?php break; ?>
+                                  <?php case "bubbles2": ?>
+                                            <br />
+                                            <input type="radio" name="question<?php echo $question->question_id ?>_answer" value="excellent" onchange="ChangeHidden(<?php echo $question->question_id ?>, this);">  <?php echo $this->__('Excellent') ?> &nbsp;&nbsp;
+                                            <input type="radio" name="question<?php echo $question->question_id ?>_answer" value="good" onchange="ChangeHidden(<?php echo $question->question_id ?>, this);">  <?php echo $this->__('Good') ?> &nbsp;&nbsp;
+                                            <input type="radio" name="question<?php echo $question->question_id ?>_answer" value="fair" onchange="ChangeHidden(<?php echo $question->question_id ?>, this);">  <?php echo $this->__('Fair') ?> &nbsp;&nbsp;
+                                            <input type="radio" name="question<?php echo $question->question_id ?>_answer" value="poor" onchange="ChangeHidden(<?php echo $question->question_id ?>, this);">  <?php echo $this->__('Poor') ?> &nbsp;&nbsp;
+                                            
+                                            <input type="hidden" class="input-text required-entry" name="question<?php echo $question->question_id ?>" id="question<?php echo $question->question_id ?>" />
+                                            
+                                            <?php break; ?>
+                                   <?php case "field": ?>
+                                            <input type="text" name="question<?php echo $question->question_id ?>" class="input-text required-entry" value="" />
+                                            <?php break; ?>
+                                   <?php case "area": ?>
+                                            <br />
+                                            <textarea name="question<?php echo $question->question_id ?>" style="width: 95%;height: 80px;" class=" required-entry required-entry textarea"></textarea>
+                                            <?php break; ?>
+                                   <?php case "star": ?>
+                                        <br />
+                                        <div style="height: 22px">
+                                            <img onmouseout="starLeave(<?php echo $question->question_id ?>);" onclick="starClick(1, <?php echo $question->question_id ?>);" onmouseover="StarHover(1, this, <?php echo $question->question_id ?>);" id="question<?php echo $question->question_id ?>_1" src="<?php echo $this->getSkinUrl('images/customersurvey/star.png'); ?>" style="float:left;" />
+                                            
+                                            <img onmouseout="starLeave(<?php echo $question->question_id ?>);" onclick="starClick(2, <?php echo $question->question_id ?>);" onmouseover="StarHover(2, this, <?php echo $question->question_id ?>);" id="question<?php echo $question->question_id ?>_2" src="<?php echo $this->getSkinUrl('images/customersurvey/star.png'); ?>" style="float:left;" />
+                                            
+                                            <img onmouseout="starLeave(<?php echo $question->question_id ?>);" onclick="starClick(3, <?php echo $question->question_id ?>);" onmouseover="StarHover(3, this, <?php echo $question->question_id ?>);" id="question<?php echo $question->question_id ?>_3" src="<?php echo $this->getSkinUrl('images/customersurvey/star.png'); ?>" style="float:left;" />
+                                            
+                                            <img onmouseout="starLeave(<?php echo $question->question_id ?>);" onclick="starClick(4, <?php echo $question->question_id ?>);" onmouseover="StarHover(4, this, <?php echo $question->question_id ?>);" id="question<?php echo $question->question_id ?>_4" src="<?php echo $this->getSkinUrl('images/customersurvey/unstar.png'); ?>" style="float:left;" />
+                                            
+                                            <img onmouseout="starLeave(<?php echo $question->question_id ?>);" onclick="starClick(5, <?php echo $question->question_id ?>);" onmouseover="StarHover(5, this, <?php echo $question->question_id ?>);" id="question<?php echo $question->question_id ?>_5" src="<?php echo $this->getSkinUrl('images/customersurvey/unstar.png'); ?>" style="float:left;" />
+                                            
+                                            <input type="hidden" name="question<?php echo $question->question_id ?>" id="question<?php echo $question->question_id ?>" value="3" />
+                                         </div>
+                                            <?php break; ?>
+                                   <?php case "yesno": ?>
+                                            <input type="radio" name="question<?php echo $question->question_id ?>_answer" value="Yes" onchange="ChangeHidden(<?php echo $question->question_id ?>, this);">  <?php echo $this->__('Yes') ?> &nbsp;&nbsp;
+                                            <input type="radio" name="question<?php echo $question->question_id ?>_answer" value="No" onchange="ChangeHidden(<?php echo $question->question_id ?>, this);">  <?php echo $this->__('No') ?>
+                                            
+                                            <input type="hidden" class="input-text required-entry" name="question<?php echo $question->question_id ?>" id="question<?php echo $question->question_id ?>" />
+                                            <?php break; ?>
+                                    <?php case "customradio": ?>
+                                    		<br />
+
+                                            <?php
+												
+												if($question->possible_answers) {
+													$possibleAnswers = explode('|||', $question->possible_answers);
+												}
+												else {
+													$possibleAnswers = array();
+												}
+											?>
+                                            
+											<?php foreach($possibleAnswers as $possibleAnswer) { ?>
+													
+                                                   <input style="padding-left:10px;padding-top:10px;" type="radio" name="question<?php echo $question->question_id ?>_answer" value="<?php echo $possibleAnswer; ?>" onchange="ChangeHidden(<?php echo $question->question_id ?>, this);"><?php echo $possibleAnswer; ?> &nbsp;&nbsp;
+                                                    
+											<?php } ?>
+                                            
+                                            		<input type="hidden" class="input-text required-entry" name="question<?php echo $question->question_id ?>" id="question<?php echo $question->question_id ?>" />
+                                            
+                                    		<?php break; ?>
+                                  <?php case "checkboxes": ?>
+                                    		<br />
+
+                                            <?php
+												
+												if($question->possible_answers) {
+													$possibleAnswers = explode('|||', $question->possible_answers);
+												}
+												else {
+													$possibleAnswers = array();
+												}
+											?>
+                                            
+                                            <?php $counterA = 0 ?>
+                                            
+											<?php foreach($possibleAnswers as $possibleAnswer) { ?>
+												<div style="padding-top:10px;">
+                                                   <input type="checkbox" name="question<?php echo $question->question_id ?>_answer" value="<?php echo $counterA; ?>" onchange="CheckBoxAction(<?php echo $question->question_id ?>, this);">&nbsp;&nbsp;<?php echo $possibleAnswer; ?> 
+                                                </div>  
+                                                
+                                                <?php $counterA++ ?>
+											<?php } ?>
+                                            
+                                            		<input type="hidden" class="input-text required-entry" name="question<?php echo $question->question_id ?>" id="question<?php echo $question->question_id ?>" />
+                                            
+                                    		<?php break; ?>
+                                    <?php } ?>
+                                </div>
+                             </div>
+            
+                    <?php } ?>
+                    
+                    <div class="actions">
+                        <button class="button" title="Submit" type="submit"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+                    </div>
+                    
+                </form>
+            </div>
+        
+        </div>
+        
+        <input type="hidden" value="<?php  echo $this->getSkinUrl('images/customersurvey/star.png'); ?>" id="goodstar" />
+        <input type="hidden" value="<?php  echo $this->getSkinUrl('images/customersurvey/unstar.png'); ?>" id="badstar" />
+        
+       <script type="text/javascript">
+            function StarHover(num, sender, questionID) {
+                var goodStar = document.getElementById('goodstar').value;
+                var badStar = document.getElementById('badstar').value;
+                
+                var nextStar;
+                
+                for(i = 1; i < 6; i++){
+                    nextStar = document.getElementById('question' + questionID + '_' + i);
+                    
+                    if(i <= num) {
+                        nextStar.src = goodStar;
+                    }
+                    else {
+                        nextStar.src = badStar;
+                    }
+                }
+            }
+            
+            function starClick(num, questionID) {
+                document.getElementById('question' + questionID).value = num;
+            }
+            
+            function starLeave(questionID) {
+                num = document.getElementById('question' + questionID).value;
+                
+                StarHover(num, null, questionID);
+            }
+            
+        </script>
+        
+        <script type="text/javascript">
+            function ChangeHidden(id, answer) {
+                document.getElementById('question' + id).value = answer.value;
+            }
+			
+			function CheckBoxAction(id, answer) {
+				var HiddenField = document.getElementById('question' + id);
+				
+				if(answer.checked == true) {
+					HiddenField.value += " " + answer.value + ",";
+				}
+				else {
+					HiddenField.value = HiddenField.value.replace(" " + answer.value + ",", "");
+				}
+
+            }
+        </script>
+        
+        <script type="text/javascript">
+            var customForm = new VarienForm('survey_form');
+        </script>
+      
+    <?php } ?>
+</div>

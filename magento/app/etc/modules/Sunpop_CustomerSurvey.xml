@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sunpop_CustomerSurvey>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Sunpop_CustomerSurvey>
+    </modules>
+</config> 

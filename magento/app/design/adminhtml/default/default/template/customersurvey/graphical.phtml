@@ -1,0 +1,115 @@
+
+<?php $survey = $this->getMyResponses(); ?>
+
+<?php foreach($this->getMyQuestions() as $question) { ?>
+	<div>
+       <h6 style="display: inline; padding-bottom: 5px;"><?php echo $question->question ?></h6>   
+      
+       <?php switch($question->answer_type) { 
+	   						 case "customradio":
+	   						 case "yesno": 
+	   						 case "bubbles1": 
+							 case "bubbles2": ?>
+                             	<br />
+                                
+                                <?php $results = $this->groupSimiliarResponsesReturnPercents($question->question_id);
+								
+								 ?>
+                                
+                                <?php								
+								//build a string of data
+								$AnswerNames = "";
+								$AnswerNumbers = "";
+								
+								$AnswerNames2 = "";
+								$AnswerNumbers2 = "";
+								
+								foreach(array_keys($results) as $key) {
+									$AnswerNames .= $key . "|";	
+									$AnswerNumbers .= round($results[$key], 2) . ",";
+									
+									$AnswerNames2 .= $key . " " . round($results[$key], 2) . "%|";	
+									$AnswerNumbers2 .= round($results[$key], 2) . "|";
+								}
+								
+								$AnswerNumbers = substr($AnswerNumbers,0,-1);
+								$AnswerNumbers2 = substr($AnswerNumbers2,0,-1);
+								$AnswerNames = substr($AnswerNames,0,-1);
+								$AnswerNames2 = substr($AnswerNames2,0,-1);
+	
+                                if(count($results) > 0) { ?>
+                               		<img src="http://chart.apis.google.com/chart?cht=p3&chco=485C8E&chd=t:<?php echo $AnswerNumbers; ?>&chs=250x120&chdl=<?php echo $AnswerNames; ?>&chp=0.367" width="250" height="120" />
+                                   
+  <img style="padding-left:40px;" src="http://chart.apis.google.com/chart?chxt=x&chbh=a&chs=600x120&cht=bhg&chco=224499,76A4FB,7a92cd,8da9f1,1851de&chd=t:<?php echo $AnswerNumbers2; ?>&chdl=<?php echo $AnswerNames2; ?>" width="600" height="120" />   
+   							   <?php } else { ?>
+                                	No graphical Data
+                            	<?php } break; ?>
+                       <?php case "field": ?>
+                       			No graphical data for this field type.
+                       			<?php break; ?>
+                       <?php case "area": ?>
+                       			<br />
+                       			No graphical data for this field type.
+                       			<?php break; ?>
+                       <?php case "checkboxes": ?>
+                       			<br />
+                       			No graphical data for this field type.
+                       			<?php break; ?>
+                       <?php case "star": ?>
+                       		<br />
+                            <div style="padding-left: 25px;">
+                                Average Response: 
+                                
+                                <?php $results = $this->groupSimiliarResponses($question->question_id); ?>
+                                
+                                <div style="height: 22px;">
+                                
+                                    <?php 
+                                    $runningTotal = 0;
+                                    $runningCount = 0;
+                                    
+                                    foreach(array_keys($results) as $key) { 
+                                        $runningTotal = $runningTotal + (intval($results[$key]) * intval($key));
+                                        
+                                        $runningCount++;
+                                    } 
+                                    
+                                    if($runningCount != 0) {
+                                    
+                                        $average = intval($runningTotal / $runningCount);
+                                    
+                                    }
+                                    else {
+                                        $average = 0;
+                                        $unfilledToPlace = 5;
+                                    }
+                                    
+                                    switch($average) {
+                                        case 5:
+                                            echo '<img src="' . $this->getSkinUrl('images/customersurvey/star.png') . '" style="float:left;" />';
+                                        case 4:
+                                            echo '<img src="' . $this->getSkinUrl('images/customersurvey/star.png') . '" style="float:left;" />';
+                                        case 3:
+                                            echo '<img src="' . $this->getSkinUrl('images/customersurvey/star.png') . '" style="float:left;" />';
+                                        case 2:
+                                            echo '<img src="' . $this->getSkinUrl('images/customersurvey/star.png') . '" style="float:left;" />';
+                                        case 1:
+                                            echo '<img src="' . $this->getSkinUrl('images/customersurvey/star.png') . '" style="float:left;" />';
+                                    }
+                                    
+                                    $unfilledToPlace = 5 - $average;
+                                    
+                                    for($i = 0; $i < $unfilledToPlace; $i++) {
+                                        echo '<img src="' . $this->getSkinUrl('images/customersurvey/unstar.png') . '" style="float:left;" />';
+                                    }
+                                    
+                                    ?>
+                                </div>
+                          </div>
+                             
+                       			<?php break; ?>
+
+          <?php } ?>
+       	<br/>
+    </div>
+<?php } ?>

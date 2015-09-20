@@ -1,0 +1,41 @@
+<style>
+
+	.surveyTable {
+		padding:7px 9px;
+	}
+
+</style>
+
+<div class="block block-compare">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Customer Surveys') ?></span></strong>
+    </div>
+    <div class="block-content">
+        
+        <table class="surveyTable" width="100%">
+        	
+            <thead>
+            	<th><h6>#</h6></th><th><h6><?php echo $this->__('Survey Name') ?></h6></th><th><h6><?php echo $this->__('Number of Questions') ?></h6></th><th><h6><?php echo $this->__('Promotional') ?></h6></th>
+            </thead>
+            
+            <?php $counter = 1; ?>
+
+            <?php foreach($this->getSurveys() as $survey) { ?>
+            
+                <tr width="100%">
+                        
+                    <?php if($survey->enabled == 1) { ?>
+                       
+                          <td width="10%"><?php echo $counter; ?>.</td><td width=""><a href="<?php echo $this->getUrl('*/*/view/'); ?>id/<?php echo $survey->customersurvey_id; ?>"><?php echo $survey->title; ?></a></td><td width="25%">  <?php echo $this->questionsForSurvey($survey->customersurvey_id);?></td><td width="20%"><?php if($survey->code == "") { echo $this->__('No'); } else { echo $this->__('Yes'); } ?></td>
+                        
+                    <?php } ?>
+                        
+                 </tr>
+                     
+                <?php $counter++; ?>
+            <?php } ?>
+
+        </table>
+        
+    </div>
+</div>

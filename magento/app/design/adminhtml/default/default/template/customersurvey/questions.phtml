@@ -1,0 +1,266 @@
+<div class="entry-edit custom-options product-custom-options">
+    <div class="entry-edit-head">
+        <h4><?php echo $this->__('Survey Questions') ?> </h4>
+        <div class="right"><button style="" onclick="addClick();" class="scalable " type="button" id="add_button11"><span><?php echo $this->__('Add Question') ?>  </span></button></div>
+    </div>
+
+    <div id="product_options_container" class="box">
+        <div id="product_options_container_top">
+            
+            <?php $counter = 1; ?>
+            <?php $list = ""; ?>
+            
+            <?php foreach($this->getMyQuestions() as $question) { ?>
+                <div id="question_<?php echo $counter ?>" class="option-box">
+                  <table cellspacing="0" cellpadding="0" class="option-header" id="product_option_2">                
+                    <thead>
+                      <tr>
+                        <th class="opt-title"><?php echo $this->__('Question') ?> 
+                          <span class="required">*
+                          </span>
+                        </th>
+                        <th class="opt-type"><?php echo $this->__('Answer Type') ?>  
+                          <span class="required">*
+                          </span>
+                        </th>
+                        <th class="opt-order"><?php echo $this->__('Sort Order') ?>  
+                        </th>
+                        <th class="a-right">
+                          <button style="" onclick="removeQuestion('<?php echo $counter ?>')" class="scalable delete delete-product-option " type="button" id="Delete_Question">
+                            <span><?php echo $this->__('Delete Question') ?>  </span>
+                          </button>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <input type="text" value="<?php echo $question->question ?>" name="question_title_<?php echo $counter ?>" id="product_option_2_title" class="required-entry input-text" style="width:400px; margin-right: 10px;">
+                        </td>
+                        <td>
+                          <select title="" class="select select-product-option-type required-option-select" id="question_type_<?php echo $counter ?>" name="question_type_<?php echo $counter ?>" onchange="optionChanged('<?php echo $counter ?>')">
+                            <option value="">-- Please select --</option>
+                            <option value="bubbles1" <?php if($question->answer_type == "bubbles1") { echo 'selected'; }?> ><?php echo $this->__('Satisfaction Bubbles') ?></option>
+                            <option value="bubbles2" <?php if($question->answer_type == "bubbles2") { echo 'selected'; }?> ><?php echo $this->__('Excellent-Poor Bubbles') ?></option>
+                            <option value="field" <?php if($question->answer_type == "field") { echo 'selected'; }?> ><?php echo $this->__('Text Field') ?></option>
+                            <option value="area" <?php if($question->answer_type == "area") { echo 'selected'; }?> ><?php echo $this->__('Text Area') ?></option>
+                            <option value="star" <?php if($question->answer_type == "star") { echo 'selected'; }?> ><?php echo $this->__('5 Star Rating') ?></option>
+                            <option value="yesno" <?php if($question->answer_type == "yesno") { echo 'selected'; }?> ><?php echo $this->__('Yes/No') ?></option>
+                            <option value="customradio" <?php if($question->answer_type == "customradio") { echo 'selected'; }?> ><?php echo $this->__('Custom Radio') ?></option>
+                            <option value="checkboxes" <?php if($question->answer_type == "checkboxes") { echo 'selected'; }?> ><?php echo $this->__('Check Boxes') ?></option>
+                          </select>
+                        </td>
+                        <td>
+                          <input type="text" value="<?php echo $question->sort_order ?>" name="question_sortorder_<?php echo $counter ?>" class="validate-zero-or-greater input-text" />
+                          <input type="hidden" value="<?php echo $question->question_id ?>" name="question_oldid_<?php echo $counter ?>" />
+                        </td>
+                        <td>&nbsp;
+                        </td>
+                      </tr>
+                      <tr>
+                      	<td>
+                        	<?php
+							
+							$possibleAnswers = array();
+							$possibleAnswersCount = 0;
+							
+							if($question->possible_answers) {
+								$possibleAnswers = explode('|||', $question->possible_answers);
+								$possibleAnswersCount = count($possibleAnswers);
+							}
+							
+							?>
+                        
+                        
+                            <input type="hidden" value="<?php echo $possibleAnswersCount; ?>" id="question_answers_total_ids_<?php echo $counter ?>" name="question_answers_total_ids_<?php echo $counter ?>" />
+                            
+                            <button onclick="addAnswer('<?php echo $counter ?>')" id="question_add_<?php echo $counter ?>" style="<?php if($possibleAnswersCount == 0){ ?>display:none;<?php } ?>  margin-bottom:25px;" class="scalable add" type="button">
+                                <span><?php echo $this->__('Add Possible Answer') ?></span>
+                            </button>
+                            
+                            <div id="question_answers_<?php echo $counter ?>">
+                            	<?php $answerCounter = 1; ?>
+                            
+    							<?php foreach($possibleAnswers as $possibleAnswer) { ?>
+   									<div id="question_<?php echo $counter ?>_answer_<?php echo $answerCounter ?>" style="padding-bottom:10px;">
+                                        <input value="<?php echo $possibleAnswer; ?>" type="text" style="width:250px; height: 20px" name="question_answer_<?php echo $counter ?>_<?php echo $answerCounter ?>"/> <button class="scalable delete" style="padding-left:10px;" onclick="answerDelete('question_<?php echo $counter ?>_answer_<?php echo $answerCounter ?>')" type="button"><span>Remove</span></button>
+                                    </div>
+                                    
+                                    <?php $answerCounter++; ?>
+                                <?php } ?>
+                                
+                                
+                            </div>
+                         </td>
+                      </tr>
+                    </tbody>
+                  </table>
+ 
+                </div>
+                
+                <?php $list .= " " . $counter . ","; ?>
+                <?php $counter++; ?>
+            <?php } ?>
+            
+        </div>
+        <input type="hidden" value="<?php echo ($counter - 1) ?>" name="highestID" id="highestID">
+        <input type="hidden" value="<?php echo $list; ?>" name="questionList" id="questionList">
+    </div>
+</div>
+
+<script type="text/javascript">
+function addClick() {
+	//get the highest ID
+	var highestID = document.getElementById('highestID').value;
+	var newQuestion = document.getElementById('super_secret').innerHTML;
+	var newID = parseInt(highestID) + 1;
+	
+	newQuestion = newQuestion.replace(/id111/g, newID);
+	newQuestion = newQuestion.replace(/fakevalue/g, "");
+	
+	var divTag = document.createElement("div");
+	 
+	divTag.id = "div" . newID;
+	
+	divTag.innerHTML = newQuestion;
+	
+	document.getElementById('product_options_container_top').appendChild(divTag);
+	
+	document.getElementById('highestID').value = newID;
+	
+	document.getElementById('questionList').value += " " + newID + ",";
+}
+
+function removeQuestion(id) {
+	var child = document.getElementById('question_' + id);
+	var parent = document.getElementById('product_options_container_top');
+	
+	parent.removeChild(child);
+	
+	var list = document.getElementById('questionList').value;
+	
+	document.getElementById('questionList').value = list.replace(" " + id + ",", "");
+}
+
+function optionChanged(id) {
+	var questionType = document.getElementById('question_type_' + id).value;
+	
+	if(questionType == 'customradio' || questionType == 'checkboxes') {
+		document.getElementById('question_add_' + id).style.display = '';
+	}
+	else {
+		document.getElementById('question_add_' + id).style.display = 'none';
+		document.getElementById('question_answers_total_ids_'+ id).value = 0;
+
+		var cell = document.getElementById('question_answers_' + id);
+
+		if ( cell.hasChildNodes() )
+		{
+			while ( cell.childNodes.length >= 1 )
+			{
+				cell.removeChild( cell.firstChild );       
+			} 
+		}
+
+	}
+	
+}
+
+function addAnswer(id) {
+	var newAnswer = document.getElementById('super_secret_answers').innerHTML;
+	var totalAnswers = document.getElementById('question_answers_total_ids_'+ id);
+	totalAnswers.value = parseInt(totalAnswers.value) + 1;
+	
+	newAnswer = newAnswer.replace(/id111/g, id);
+	newAnswer = newAnswer.replace(/id222/g, totalAnswers.value);
+	newAnswer = newAnswer.replace(/fakevalue/g, "");
+	
+	var divTag = document.createElement("div");
+	 
+	divTag.id = "div" . newID;
+	
+	divTag.innerHTML = newAnswer;
+
+	document.getElementById('question_answers_' + id).appendChild(divTag);
+}
+
+function answerDelete(id) {
+	document.getElementById(id).innerHTML = '';	
+	document.getElementById(id).style.paddingBottom = '';
+}
+
+</script>
+
+<div id="super_secret" style="display: none">
+
+<div id="question_id111" class="option-box">
+              <table cellspacing="0" cellpadding="0" class="option-header" id="product_option_2">                
+                <thead>
+                  <tr>
+                    <th class="opt-title"><?php echo $this->__('Question') ?> 
+                      <span class="required">*
+                      </span>
+                    </th>
+                    <th class="opt-type"><?php echo $this->__('Answer Type') ?> 
+                      <span class="required">*
+                      </span>
+                    </th>
+                    <th class="opt-order"><?php echo $this->__('Sort Order') ?>
+                    </th>
+                    <th class="a-right">
+                      <button style="" onclick="removeQuestion('id111')" class="scalable delete delete-product-option " type="button" id="Delete_Question">
+                        <span><?php echo $this->__('Delete Question') ?></span>
+                      </button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <input type="text" value="fakevalue" name="question_title_id111" id="product_option_2_title" class="required-entry input-text" style="width:400px; margin-right: 10px;">
+                    </td>
+                    <td>
+                      <select title="" class="select select-product-option-type required-option-select" id="question_type_id111" name="question_type_id111" onchange="optionChanged('id111')">
+                        <option value="">-- Please select --</option>
+                        <option value="bubbles1" selected><?php echo $this->__('Satisfaction Bubbles') ?></option>
+                        <option value="bubbles2" selected><?php echo $this->__('Excellent-Poor Bubbles') ?></option>
+                        <option value="field"><?php echo $this->__('Text Field') ?></option>
+                        <option value="area"><?php echo $this->__('Text Area') ?></option>
+                        <option value="star"><?php echo $this->__('5 Star Rating') ?></option>
+                        <option value="yesno"><?php echo $this->__('Yes/No') ?></option>
+                        <option value="customradio"><?php echo $this->__('Custom Radio') ?></option>
+                        <option value="checkboxes"><?php echo $this->__('Check Boxes') ?></option>
+                      </select>
+                    </td>
+                    <td>
+                      <input type="text" value="0" name="question_sortorder_id111" class="validate-zero-or-greater input-text">
+                    </td>
+                    <td>&nbsp;
+                    </td>
+                  </tr>
+                  <tr>
+                  	<td>
+                    	<input type="hidden" value="0" id="question_answers_total_ids_id111" name="question_answers_total_ids_id111" />
+                        
+                        <button onclick="addAnswer('id111')" id="question_add_id111" style="display:none; margin-bottom:25px;" class="scalable add" type="button">
+                        	<span><?php echo $this->__('Add Possible Answer') ?></span>
+                        </button>
+                        
+                  		<div id="question_answers_id111">
+
+            			</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+
+            
+</div>
+
+<div id="super_secret_answers" style="display: none">
+	<div id="question_id111_answer_id222" style="padding-bottom:10px;">
+    	<input type="text" style="width:250px; height: 20px" name="question_answer_id111_id222"/> <button class="scalable delete" style="padding-left:10px;" onclick="answerDelete('question_id111_answer_id222')" type="button"><span><?php echo $this->__('Remove') ?></span></button>
+    </div>
+</div>

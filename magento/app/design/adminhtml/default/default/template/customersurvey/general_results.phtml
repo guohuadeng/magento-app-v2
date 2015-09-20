@@ -1,0 +1,166 @@
+<?php 
+
+	$myQuestions = $this->getMyQuestions();
+	$myResponses = $this->getMyResponses();
+	
+	$i = 0;	
+	
+?>
+
+<br />
+
+<center>
+	<div style="width:700px;">
+		<?php if($this->myPage() > 1) { ?>
+			<h2 style="float:left"><a href="<?php echo $this->getUrl('*/*/*'); ?>id/<?php echo $this->myID(); ?>/page/<?php echo ($this->myPage() - 1); ?>">< Previous set of results</a></h2> 	
+		<?php } ?>
+	
+    	<?php if(ceil($this->totalResults() / 6) != $this->myPage()) { ?>
+			<h2 <?php if($this->myPage() > 1) { ?>style="float:left; padding-left:25px;"<?php } ?>><a href="<?php echo $this->getUrl('*/*/*'); ?>id/<?php echo $this->myID(); ?>/page/<?php echo ($this->myPage() + 1); ?>">Next set of results ></a></h2> 
+        <?php } ?>
+    </div>
+</center>
+
+<?php if($this->myPage() > 1) { ?>
+    <br clear="all" />
+<?php } ?>
+
+<br />
+
+<?php foreach($myResponses as $response) { ?>
+    <?php $i++; ?>
+	
+    <div class="entry-edit" style="width: 500px; float: left; margin-left: 15px;">
+    <div class="entry-edit-head">
+      <h4 class="icon-head head-edit-form fieldset-legend">Survey Result <?php echo (($this->myPage() - 1) * 6) + $i ?>
+      </h4>
+      <div class="form-buttons">
+      </div>
+    </div>
+    <div class="fieldset " id="customersurvey_form">
+    	<div id="question" style="background: none repeat scroll 0 0 #E7EFEF;">
+    	<?php foreach($myQuestions as $question) { ?>
+        		<?php 
+					//find out what they answered for this question
+				 if(array_key_exists($question->question_id, $response)) {
+                     $answer = $response[$question->question_id];
+                }
+                else
+                {
+                     $answer  = "";
+                }
+
+				?>
+
+            	<div style="padding: 10px;">                    
+                    <div>
+                    	<h6 style="display: inline; padding-bottom: 5px;"><?php echo $question->question ?>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+                    	
+                        <?php switch($question->answer_type) { 
+							case "bubbles1": ?>
+                            <br />
+                            <input disabled="disabled" type="radio" name="question<?php echo $question->question_id . "_" . $i ?>" <?php if($answer == "Very satisfied") { echo "checked"; } ?> value="Very satisfied">  Very satisfied &nbsp;&nbsp;
+                            <input disabled="disabled" type="radio" name="question<?php echo $question->question_id . "_" . $i ?>" <?php if($answer == "Satisfied") { echo "checked"; } ?> value="Satisfied">  Satisfied &nbsp;&nbsp;
+                            <input disabled="disabled" type="radio" name="question<?php echo $question->question_id . "_" . $i ?>" <?php if($answer == "Neutral") { echo "checked"; } ?> value="Neutral">  Neutral &nbsp;&nbsp;
+                            <input disabled="disabled" type="radio" name="question<?php echo $question->question_id . "_" . $i ?>" <?php if($answer == "Dissatisfied") { echo "checked"; } ?> value="Dissatisfied">  Dissatisfied &nbsp;&nbsp;
+                            <input disabled="disabled" type="radio" name="question<?php echo $question->question_id . "_" . $i ?>" <?php if($answer == "Very dissatisfied") { echo "checked"; } ?> value="Very dissatisfied">  Very dissatisfied
+                            <?php break; ?>
+						<?php case "bubbles2": ?>
+                             	<br />
+                            	<input disabled="disabled" type="radio" name="question<?php echo $question->question_id . "_" . $i ?>" <?php if($answer == "excellent") { echo "checked"; } ?> value="excellent" >  Excellent &nbsp;&nbsp;
+                                <input disabled="disabled" type="radio" name="question<?php echo $question->question_id . "_" . $i ?>" <?php if($answer == "good") { echo "checked"; } ?> value="good">  Good &nbsp;&nbsp;
+                                <input disabled="disabled" type="radio" name="question<?php echo $question->question_id . "_" . $i ?>" <?php if($answer == "fair") { echo "checked"; } ?> value="fair">  Fair &nbsp;&nbsp;
+                                <input disabled="disabled" type="radio" name="question<?php echo $question->question_id . "_" . $i ?>" <?php if($answer == "poor") { echo "checked"; } ?> value="poor">  Poor &nbsp;&nbsp;
+                            	<?php break; ?>
+                       <?php case "field": ?>
+                       			<input type="text" name="answer" value="<?php echo $answer ?>" disabled="disabled"/>
+                       			<?php break; ?>
+                       <?php case "area": ?>
+                       			<br />
+                       			<textarea disabled="disabled" name="answer" style="width: 440px;height: 80px;"><?php echo $answer ?></textarea>
+                       			<?php break; ?>
+                       <?php case "star": ?>
+                       		<br />
+                       		<div style="height: 22px">
+                            	<?php
+									
+									$fillerStars = ($answer - 5) * -1;
+									
+									for($loop = 1; $loop <= $answer; $loop++) {
+										echo '<img src="' . $this->getSkinUrl('images/customersurvey/star.png') . '" style="float:left;" />';
+									}
+									
+									for($loop = 1; $loop <= $fillerStars; $loop++) {
+										echo '<img src="' . $this->getSkinUrl('images/customersurvey/unstar.png') . '" style="float:left;" />';
+									}
+								
+								 ?>
+                             </div>
+                       			<?php break; ?>
+                       <?php case "yesno": ?>
+                       			<input disabled="disabled" type="radio" name="question<?php echo $question->question_id . "_" . $i ?>" value="Yes" <?php if($answer == "Yes") { echo "checked"; } ?>>  Yes &nbsp;&nbsp;
+                                <input disabled="disabled" type="radio" name="question<?php echo $question->question_id . "_" . $i ?>" value="No" <?php if($answer == "No") { echo "checked"; } ?>>  No
+                       			<?php break; ?>
+						<?php case "customradio": ?>
+                                <br />
+
+                                <?php
+                                    
+                                    if($question->possible_answers) {
+                                        $possibleAnswers = explode('|||', $question->possible_answers);
+                                    }
+                                    else {
+                                        $possibleAnswers = array();
+                                    }
+                                ?>
+                                
+                                <?php foreach($possibleAnswers as $possibleAnswer) { ?>
+                                        
+                                       <input disabled="disabled" <?php if($answer == $possibleAnswer) { echo "checked"; } ?> style="padding-left:10px;padding-top:10px;" type="radio" name="question<?php echo $question->question_id ?>_answer_<?php echo $i ?>" value="Yes" onchange="ChangeHidden(<?php echo $question->question_id ?>, this);"><?php echo $possibleAnswer; ?> &nbsp;&nbsp;
+                                        
+                                <?php } ?>
+                                
+                                        <input type="hidden" class="input-text required-entry" name="question<?php echo $question->question_id ?>" id="question<?php echo $question->question_id ?>" />
+                                
+                                <?php break; ?>
+						<?php case "checkboxes": ?>
+                                <br />
+
+                                <?php
+                                    
+                                    if($question->possible_answers) {
+                                        $possibleAnswers = explode('|||', $question->possible_answers);
+                                    }
+                                    else {
+                                        $possibleAnswers = array();
+                                    }
+                                ?>
+                                
+                                <?php $counterA = 0; ?>
+                                
+                                <?php foreach($possibleAnswers as $possibleAnswer) { ?>
+                                	
+                                    <div style="padding-top:10px;">
+                                    	<?php if(strpos($answer, " " . $counterA . ",") === false) { ?>
+                                        
+                                       		<input type="checkbox" disabled="true" name="question<?php echo $question->question_id ?>_answer" value="<?php echo $counterA; ?>">&nbsp;&nbsp;<?php echo $possibleAnswer; ?> 
+                                    	<?php } else { ?>
+                                        	<input type="checkbox" disabled="true" checked="checked" name="question<?php echo $question->question_id ?>_answer" value="<?php echo $counterA; ?>">&nbsp;&nbsp;<?php echo $possibleAnswer; ?> 
+                                        <?php } ?>
+                                    </div>  
+                                    
+                                    <?php $counterA++ ?>
+                                <?php } ?>
+                                
+                                        <input type="hidden" class="input-text required-entry" name="question<?php echo $question->question_id ?>" id="question<?php echo $question->question_id ?>" />
+                                
+                                <?php break; ?>
+                        <?php } ?>
+                    </div>
+                 </div>
+
+        <?php }?>
+        </div>
+    </div>
+    </div>
+<?php } ?>

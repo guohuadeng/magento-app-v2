@@ -1,0 +1,65 @@
+<?php $survey = $this->getSurvey(); ?>
+
+<div style="" id="customersurvey_tabs_form_section1_content">
+  <div class="entry-edit">
+    <div class="entry-edit-head">
+      <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('General') ?>
+      </h4>
+      <div class="form-buttons">
+      </div>
+    </div>
+    <div id="customersurvey_form" class="fieldset ">
+      <div class="hor-scroll">
+        <table cellspacing="0" class="form-list">
+          <tbody>
+            <tr>
+              <td class="label">
+                <label for="title"><?php echo $this->__('Title') ?> 
+                  <span class="required">*
+                  </span>
+                </label>
+              </td>
+              <td class="value">
+                <input type="text" class="required-entry required-entry input-text" value="<?php echo $survey->Title; ?>" name="Title" id="title">            
+              </td>
+            </tr>
+      		<tr>
+               <td class="label">
+                <label for="code"><?php echo $this->__('Coupon Code upon Completion') ?> 
+                </label>
+              </td>
+              <td class="value">
+                <input type="text" class="input-text" value="<?php echo $survey->code; ?>" name="code" id="code">            
+              </td>
+            </tr>
+            <tr>
+               <td class="label">
+                <label for="code_title"><?php echo $this->__('Coupon Code Title') ?>
+                </label>
+              </td>
+              <td class="value">
+                <input type="text" class="input-text" value="<?php echo $survey->code_title; ?>" name="code_title" id="code_title">            
+              </td>
+            </tr>
+            <tr>
+              <td class="label">
+                <label for="status"><?php echo $this->__('Status') ?>
+                </label>
+              </td>
+              <td class="value">
+                <select class=" select" name="status" id="status">
+                  <option <?php if($survey->enabled == 1) { echo 'selected="selected"'; } ?> value="1">Active
+                  </option>
+                  <option value="0" <?php if($survey->enabled == 0) { echo 'selected="selected"'; } ?>>Inactive
+                  </option>
+                </select>            
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <input type="hidden" value="<?php echo $this->getSurveyID(); ?>" name="id" />
+      </div>
+    </div>
+  </div>
+</div>
