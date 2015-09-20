@@ -3,7 +3,7 @@
 window.Config = {
     isRelease: true,
     baseUrl: 'http://w.sunpop.cn/',
-    baseSite: 'http://w.sunpop.cn/m',
+    baseSite: 'http://w.sunpop.cn/cn',
     getLocale: function () {
         return localStorage['locale'] || 'cn';
     },
@@ -11,6 +11,10 @@ window.Config = {
         localStorage['locale'] = locale;
     },
     frames: {
+        survey: {
+            title: 'Customer Survey',
+            src: '/customersurvey'
+        },
         personal: {
             title: 'Persional Infomation',
             src: '/customer/account/edit'

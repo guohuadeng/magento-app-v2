@@ -423,7 +423,7 @@ em {
 .price-box .price,
 .category-products .product .price-box .price {
     color: #e74c3c;
-    font-size: 100%;
+    font-size: 120%;
 }
 
 .price-box .old-price .price,
@@ -440,7 +440,7 @@ em {
 .price-box .old-price,
 .product .old-price {
     position: absolute;
-    font-size: 80%;
+    font-size: 100%;
     color: #8a8a8a;
     text-decoration: line-through;
 }
