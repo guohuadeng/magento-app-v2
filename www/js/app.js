@@ -172,5 +172,8 @@ angular.module('app', [
     });
 
 window.onerror = function (e, file, line) {
+    if (!Config.debug) {
+        return;
+    }
     alert([e, file, line].join(', '));
-}
+};

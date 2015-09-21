@@ -2,6 +2,7 @@
 
 window.Config = {
     isRelease: true,
+    debug: true,
     baseUrl: 'http://w.sunpop.cn/',
     getLocale: function () {
         return localStorage['locale'] || 'cn';
