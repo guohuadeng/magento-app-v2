@@ -6,8 +6,7 @@
                     on-refresh="doRefresh()">
             </ion-refresher>
             <ion-list class="products-grid {{lineClass}}">
-                <div class="product" collection-repeat="product in lists"
-                     collection-item-height="338">
+                <div class="product" collection-repeat="product in lists">
                     <div class="product-inner">
                         <a href="#app/productDetail/{{product.entity_id}}">
                             <div class="product-image">

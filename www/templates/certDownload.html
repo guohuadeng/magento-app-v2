@@ -2,8 +2,8 @@
     <ion-content>
         <div class="list">
             <a ng-repeat="cert in certList" class="item item-thumbnail-left"
-               onclick="window.open('{{cert.full_path_document}}', '_system', 'location=yes');"
-               href="javascript:">
+               href="{{cert.full_path_document}}"
+               onclick="window.open(this.href, '_blank', 'location=yes');return false;">
                 <img src="{{cert.image_short_content}}">
                 <h2>{{cert.title}}</h2>
                 <div ng-bind-html="cert.short_content | unsafe">

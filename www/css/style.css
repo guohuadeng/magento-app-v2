@@ -360,6 +360,7 @@ em {
 .products-grid .product .product-inner {
     position: relative;
     border-bottom: 1px solid #dddddd;
+    margin-bottom: 10px;
 }
 
 .products-grid .product .product-image {
