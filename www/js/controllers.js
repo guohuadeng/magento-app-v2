@@ -681,6 +681,6 @@ angular.module('app.controllers', [])
         };
 
         var frame = Config.frames[$stateParams.page];
-        $scope.title = frame.title;
-        $scope.src = Config.baseSite + frame.src;
+        $scope.title = $scope.translations[$stateParams.page];
+        $scope.src = Config.baseUrl + Config.getLocale() + frame.src;
     });

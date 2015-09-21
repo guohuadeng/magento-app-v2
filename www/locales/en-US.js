@@ -81,5 +81,11 @@ var en_US = {
     current_position: 'Current Position',
     position_not_found: 'Position not found!\nPlease check GPS.Or input position.',
     list_view: 'List View',
-    map_view: 'Map View'
+    map_view: 'Map View',
+    personal: 'Persional Infomation',
+    account: 'My Account',
+    order: 'My Order',
+    address: 'My Address Book',
+    wishlist: 'My Wish List',
+    cart: 'My Shopping Cart'
 };

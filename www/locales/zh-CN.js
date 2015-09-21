@@ -85,5 +85,11 @@ var zh_CN = {
     current_position: '当前位置',
     position_not_found: '没有找到，请检查GPS定位是否开启。\n或直接输入位置！',
     list_view: '列表模式',
-    map_view: '地图模式'
+    map_view: '地图模式',
+    personal: '个人信息',
+    account: '我的账号',
+    order: '我的订单',
+    address: '我的地址',
+    wishlist: '我的愿望单',
+    cart: '购物车'
 };
