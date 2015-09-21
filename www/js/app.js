@@ -170,3 +170,7 @@ angular.module('app', [
         }
 
     });
+
+window.onerror = function (e, file, line) {
+    alert([e, file, line].join(', '));
+}
