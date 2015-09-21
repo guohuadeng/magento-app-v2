@@ -156,12 +156,14 @@ angular.module('app.controllers', [])
                 okType: 'button-assertive',
                 buttons: [
                     {text: $scope.translations.cancel},
-                    {text: $scope.translations.ok}
+                    {
+                        text: $scope.translations.ok,
+                        onTap: function (e) {
+                            e.preventDefault();
+                            navigator.app.exitApp();
+                        }
+                    }
                 ]
-            }).then(function (res) {
-                if (res) {
-                    navigator.app.exitApp();
-                }
             });
         };
 
