@@ -3,7 +3,6 @@
 window.Config = {
     isRelease: true,
     baseUrl: 'http://w.sunpop.cn/',
-    baseSite: 'http://w.sunpop.cn/cn',
     getLocale: function () {
         return localStorage['locale'] || 'cn';
     },
@@ -12,31 +11,24 @@ window.Config = {
     },
     frames: {
         survey: {
-            title: 'Customer Survey',
             src: '/customersurvey'
         },
         personal: {
-            title: 'Persional Infomation',
             src: '/customer/account/edit'
         },
         account: {
-            title: 'My Account',
             src: '/customer/account'
         },
         order: {
-            title: 'My Orders',
             src: '/sales/order/history/'
         },
         address: {
-            title: 'My Address Book',
             src: '/customer/address'
         },
         wishlist: {
-            title: 'My Wishlist',
             src: '/wishlist'
         },
         cart: {
-            title: 'My Shopping Cart',
             src: '/checkout/cart/'
         }
     }
