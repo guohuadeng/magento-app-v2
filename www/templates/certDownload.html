@@ -1,11 +1,12 @@
 <ion-view view-title="{{'cert_download' | translate}}">
     <ion-content>
         <div class="list">
-            <a ng-repeat="cert in certList" class="item item-thumbnail-left" href="{{cert.full_path_document}}" target="_blank">
+            <a ng-repeat="cert in certList" class="item item-thumbnail-left"
+               onclick="window.open('{{cert.full_path_document}}', '_system');"
+               href="javascript:">
                 <img src="{{cert.image_short_content}}">
                 <h2>{{cert.title}}</h2>
                 <div ng-bind-html="cert.short_content | unsafe">
-
                 </div>
             </a>
         </div>
