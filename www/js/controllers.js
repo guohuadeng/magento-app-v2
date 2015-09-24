@@ -653,7 +653,7 @@ angular.module('app.controllers', [])
         };
     })
 
-    .controller('AgentsCtrl', function ($scope, $rootScope, $ionicPopup) {
+    .controller('AgentsCtrl', function ($scope, $rootScope, $ionicPopup, $timeout) {
         if (!$rootScope.agent) {
             return;
         }
@@ -673,6 +673,24 @@ angular.module('app.controllers', [])
                     text: $scope.translations.ok,
                     type: 'button-assertive',
                 }]
+            });
+        };
+
+        $scope.showMap = function () {
+            if (!$('#map').length) {
+                $timeout($scope.showMap, 100);
+                return;
+            }
+
+            var map = new BMap.Map('map'),
+                point = new BMap.Point($rootScope.agent.params.lng, $rootScope.agent.params.lat);
+
+            map.centerAndZoom(point, 15);
+            $scope.agentList.forEach(function (item) {
+                var point = new BMap.Point(item.lng, item.lat),
+                    marker = new BMap.Marker(point);
+
+                map.addOverlay(marker);
             });
         };
     })

@@ -1,7 +1,7 @@
 'use strict';
 
 window.Config = {
-    isRelease: true,
+    isRelease: false,
     debug: true,
     baseUrl: 'http://w.sunpop.cn/',
     getLocale: function () {

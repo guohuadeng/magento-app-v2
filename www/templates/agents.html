@@ -10,9 +10,8 @@
                         </li>
                     </ul>
                 </ion-tab>
-                <ion-tab title="{{'map_view' | translate}}" id="tab_agent_map">
-                    <div class="list padding">
-                    </div>
+                <ion-tab title="{{'map_view' | translate}}" id="tab_agent_map" on-select="showMap()">
+                    <div id="map" class="list padding"></div>
                 </ion-tab>
             </ion-tabs>
         </ion-content>
