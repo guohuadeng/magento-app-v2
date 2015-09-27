@@ -203,10 +203,10 @@
             <ion-tab title="{{'product_additional' | translate}}" id="tab_description_tabbed_attribute">
                 <div class="list padding">
                     <div class="row">
-                        <div class="col">Weight:</div>
-                        <div class="col col-75">{{product.weight}}&nbsp;g</div>
+                        <div class="col">{{'weight' | translate}}:</div>
+                        <div class="col col-75">{{product.weight}}<em ng-if="product.weight>0">&nbsp;g</em></div>
                     </div>
-                    <div class="row" ng-repeat="item in product.additional">
+                    <div class="row" ng-repeat="item in product.additional" ng-if="item.value<>'N/A'">
                         <div class="col">{{item.label}}:</div>
                         <div class="col col-75">{{item.value}}</div>
                     </div>

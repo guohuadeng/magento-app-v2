@@ -309,7 +309,7 @@ angular.module('app.controllers', [])
 
     // 产品详情
     .controller('productDetailCtrl', function ($scope, $rootScope, $timeout,
-                                               $stateParams, $ionicPopup,
+                                               $stateParams, $ionicPopup, $translate,
                                                $ionicSlideBoxDelegate, $ionicScrollDelegate,
                                                $cordovaSocialSharing, $ionicSideMenuDelegate) {
         $scope.showLoading();
@@ -473,7 +473,7 @@ angular.module('app.controllers', [])
                     return;
                 }
                 if (res.result == 'success') {
-                    $scope.showAlert('Success', res.items_qty + '&nbsp;items already in your cart.');
+                    $scope.showAlert('Success', res.items_qty + '&nbsp;'+ $scope.translations['items_in_cart']);
                     $scope.items_qty = res.items_qty;
                     return;
                 }
@@ -526,6 +526,19 @@ angular.module('app.controllers', [])
             }
             $scope.cat_field = cat_field;
         });
+        //重置
+        $scope.onReset = function () {
+            if (!$scope.searchData.text) {
+                return;
+            }
+            $rootScope.search = {
+                type: 'search',
+                params: {
+                    q: $scope.searchData.text
+                }
+            };
+            $location.path('app/searchResult');
+        };
 
         $scope.onSearch = function () {
             $rootScope.search = {
@@ -556,7 +569,6 @@ angular.module('app.controllers', [])
                 $scope.page = 1;
             }
             $rootScope.search.params.page = $scope.page;
-
             $rootScope.service.get($rootScope.search.type, $rootScope.search.params, function (results) {
                 if (func === 'load') {
                     if (Array.isArray(results.productlist) && results.productlist.length) {

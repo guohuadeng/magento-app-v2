@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<!--<meta name="keywords" content="新力,印章,专家,app" />a-->
+<meta name="baidu-site-verification" content="ZIejE9Qiva" />
+<title>新力印章专家，为您找到中国最好的印章</title>
+<link rel="icon" href="res/static/images/logo_32X32.ico" type="image/x-icon" /> 
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/jquery.fullPage.css">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.nav{position: fixed;}
+#menu { margin: 0; padding: 0;  list-style-type: none; z-index: 70;}
+#menu li { float: left; margin:  0 10px 0 0; font-size: 14px;}
+#menu a { float: left; padding: 0px 20px;color: #000; text-decoration: none; font-family:"微软雅黑"; font-size:16px;}
+#menu .active a { color: #fff; background: none repeat scroll 0 0 rgba(0, 97, 142, 0.4);}
+.section { text-align: center; font: 24px "Microsoft Yahei"; color: #fff;}
+</style>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.easings.min.js"></script>
+<script src="js/jquery.fullPage.min.js"></script>
+<script src="js/jquery.SuperSlide.js"></script>
+<script>
+$(function(){
+	$('#dowebok').fullpage({
+		sectionsColor: ['#25b5b7', '#0581b2', '#0581b2'],
+		anchors: ['page1', 'page2', 'page3'],
+		menu: '#menu'
+	});
+});
+</script>
+<script type="text/javascript">
+    //焦点图
+	$(function(){
+		jQuery('#ios_slide').slide({mainCell:".bd ul",titCell:".hd ul li",effect:"leftLoop",autoPlay:true});
+	});
+
+</script>
+</head>
+<body>
+<div class="nav">
+    <div class="nav_wrap">
+    	<a><img class="logo" src="img/logo.png" width="200" height="37"  alt=""/></a>
+        <ul id="menu">
+          <li data-menuanchor="page1" class="active"><a href="#page1">下载App</a></li>
+            <li data-menuanchor="page2"><a href="#page2">介绍</a></li>
+            <li data-menuanchor="page3"><a href="#page3">关于我们</a></li>
+        </ul>
+    </div>
+</div>
+<div id="dowebok" class="sections" style="height: 100%; position: relative; transform: translate3d(0px, 0px, 0px);">
+        <div class="section section1">
+            <div class="main">
+                <div class="phone"><img src="img/phone.png" width="414" height="725"  alt=""/></div>
+                <div class="downloads">
+                		<H3>中国最好的印章</h3>
+                    <div class="ad_text">优质印章大全<span style="margin-left:30px;">随时随地获取</span></div>
+                    <div class="app_ewm">
+                      <a href="xinliApp.apk" target="_blank"><img src="img/android_ewm.png" width="422" height="180"  alt=""/></a>
+ 											<a href="" target="_blank"><img class="ios_ewm" src="img/ios_ewm.png" width="422" height="180"  alt=""/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section section2" style="position:relative;">
+        	<div class="main" >
+                <div class="qssd_l">
+                <H3>新力印章</h3>
+                <p>&nbsp;</p>
+                    <p>&nbsp;&nbsp;新力印章品牌拥有世界最高水平的印章生产技术及设备，是世界三大印章品牌之一，其产品以优秀的质量享誉全球印章市场。</p>
+                    <p>&nbsp;&nbsp;虽然中国现阶段印章市场以低端产品如红胶牛角印章为主，但从沿海周边城市印章行业的发展历程可以看到，回墨印光敏印等高端印章产品逐步取代低端产品市场，而使用过新力系列产品的客户通常会给予该印章远超同侪的评价。</p></div>
+                <div class="qssd_r show_slide">
+                	<div id="ios_slide">
+						<div class="bd">
+							<ul>
+								<li><img src="img/ios_img01.png" /></li>
+								<li><img src="img/ios_img02.png" /></li>
+                                <li><img src="img/ios_img03.png" /></li>
+							</ul>
+						</div>
+						<div class="hd pr">
+							<ul class="clearfix pa">
+								<li class="on"></li>
+								<li></li>
+                                <li></li>
+							</ul>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+        <div class="section section3">
+            <p style="margin-bottom:50px;"><h3>关于我们</h3></p>
+            <p style="margin:40px 100px 40px 100px;text-align:left;">&nbsp;&nbsp;广州市文宝印章有限公司作为华南地区颇具规模的刻章、印章产品企业，成立于1996年5月8日。本公司长期致力于开发，引进国内外最新型刻章、印章材料及技术，是国际知名品牌新力印章的中国华南地区总代理。同时，广州市文宝印章有限公司是广州市工商局正式发证及广州市公安部机关特许经营的办公印章刻制企业。</p>
+            <p><img class="gfwx" src="img/gfwx.png" width="174" height="228"  alt=""/><img src="img/gzh.png" width="174" height="228"  alt=""/></p>
+            <div class="footer">
+           	  <p style="font-size:16px;"><a href="http://www.wenbaostamp.com" target="_blank">www.wenbaostamp.com</a> 2015 © All Rights Reserved <br>粤ICP备 号</p>
+            </div>
+        </div>
+</div>
+</html>

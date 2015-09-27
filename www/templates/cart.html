@@ -1,7 +1,14 @@
 <ion-view view-title="Cart">
-    <ion-nav-bar class="bar-stable">
-    </ion-nav-bar>
     <ion-content>
-        <h1>Detail</h1>
+        <div class="list">
+            <a ng-repeat="cert in certList" class="item item-thumbnail-left"
+               href="{{cert.full_path_document}}"
+               onclick="window.open(this.href, '_system', 'location=yes');return false;">
+                <img src="{{cert.image_short_content}}">
+                <h2>{{cert.title}}</h2>
+                <div ng-bind-html="cert.short_content | unsafe">
+                </div>
+            </a>
+        </div>
     </ion-content>
 </ion-view>
