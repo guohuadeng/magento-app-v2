@@ -62,7 +62,6 @@ var en_US = {
     enter_email: 'Enter your email',
     success: 'Success',
     alert: 'Alert',
-    confirm: 'Confirm',
     error_code: 'Error code',
     exit_tip: 'Are you sure to exit the App?',
     product_detail: 'Product Detail',

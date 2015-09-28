@@ -1,4 +1,4 @@
-<ion-view view-title="{{'product_detail' | translate}}">
+<ion-view cache-view="false" view-title="{{'product_detail' | translate}}">
     <ion-nav-bar class="bar-stable">
         <ion-nav-back-button class="button-icon ion-arrow-left-c">
         </ion-nav-back-button>
@@ -204,11 +204,11 @@
                 <div class="list padding">
                     <div class="row">
                         <div class="col">{{'weight' | translate}}:</div>
-                        <div class="col col-75">{{product.weight}}<em ng-if="product.weight>0">&nbsp;g</em></div>
+                        <div class="col col-50">{{product.weight}}<em ng-if="product.weight>0">&nbsp;g</em></div>
                     </div>
-                    <div class="row" ng-repeat="item in product.additional" ng-if="item.value<>'N/A'">
+                    <div class="row" ng-repeat="item in product.additional" ng-if="item.value!='N/A' || item.value!='No'">
                         <div class="col">{{item.label}}:</div>
-                        <div class="col col-75">{{item.value}}</div>
+                        <div class="col col-50">{{item.value}}</div>
                     </div>
                 </div>
             </ion-tab>
@@ -219,7 +219,7 @@
     </ion-content>
 
     <div class="bar bar-footer bar-stable add-to-cart">
-        <a class="add-to-cart-left button button-outline button-assertive ion-android-cart" href="#app/frame/cart">
+        <a class="add-to-cart-left button button-outline button-assertive ion-android-cart" href="#app/cart">
             &nbsp;{{items_qty}}</a>
         <button class="button add-to-cart-right button-assertive" type="submit" ng-click="doCartAdd()">
             {{'add_to_cart' | translate}}

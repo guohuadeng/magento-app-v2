@@ -280,6 +280,9 @@ angular.module('app.controllers', [])
                 } else {
                     $scope.hasInit = true;
                     $scope.lists = lists;
+                    if (!localStorage['symbol']) {
+                        localStorage['symbol'] = lists[0].symbol;
+                    }
                 }
                 if (typeof callback === 'function') {
                     callback();
@@ -617,6 +620,19 @@ angular.module('app.controllers', [])
                 certList.push(results.articlelist[key]);
             }
             $scope.certList = certList;
+        });
+    })
+    // 购物车
+    .controller('cartCtrl', function ($scope, $rootScope) {
+        // 取证书列表选项
+        $rootScope.service.get('cart', {}, function (results) {
+            var cartList = [];
+
+            for (var key in results.cart_items) {
+                cartList.push(results.cart_items[key]);
+            }
+            $scope.cartList = cartList;
+            $scope.symbol = localStorage['symbol'];
         });
     })
     // 附近经销商

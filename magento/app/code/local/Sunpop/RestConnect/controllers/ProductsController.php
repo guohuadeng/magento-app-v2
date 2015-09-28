@@ -3,10 +3,6 @@
  * * NOTICE OF LICENSE
  * * This source file is subject to the Open Software License (OSL 3.0)
  *
- * Author: Ivan Deng
- * QQ: 300883
- * Email: 300883@qq.com
- * @copyright  Copyright (c) 2008-2015 Sunpop Ltd. (http://www.sunpop.cn)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 class Sunpop_RestConnect_ProductsController extends Mage_Core_Controller_Front_Action {
@@ -61,6 +57,7 @@ class Sunpop_RestConnect_ProductsController extends Mage_Core_Controller_Front_A
 		echo json_encode ( $select );
 	}
 	public function getproductdetailAction() {
+		Mage::app ()->cleanCache ();
 		$productdetail = array ();
 		$baseCurrency = Mage::app ()->getStore ()->getBaseCurrency ()->getCode ();
 		$currentCurrency = Mage::app ()->getStore ()->getCurrentCurrencyCode ();
@@ -77,7 +74,7 @@ class Sunpop_RestConnect_ProductsController extends Mage_Core_Controller_Front_A
 			$has_custom_options = true;
 		else
 			$has_custom_options = false;
-		$addtionatt=$this->_getAditional();
+		$addtionatt=$this->getAdditional();
 		$productdetail = array (
 				'entity_id' => $product->getId (),
 				'sku' => $product->getSku (),
@@ -94,7 +91,7 @@ class Sunpop_RestConnect_ProductsController extends Mage_Core_Controller_Front_A
 				'final_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
 				'storeUrl' => $storeUrl,
 				'symbol' => Mage::app ()->getLocale ()->currency ( Mage::app ()->getStore ()->getCurrentCurrencyCode () )->getSymbol () ,
-				'weight'=>$product->getWeight(),
+				'weight'=>number_format($product->getWeight()),
 				'additional'=>$addtionatt,
 				'description' => $description
 		);
@@ -113,32 +110,33 @@ class Sunpop_RestConnect_ProductsController extends Mage_Core_Controller_Front_A
 		}
 		echo json_encode ( $images );
 	}
-	public function _getAditional(array $excludeAttr = array()) {
+	public function getAdditional(array $excludeAttr = array()) {
 		$data = array ();
 		$productId = ( int ) $this->getRequest ()->getParam ( 'productid' );
-		$product = Mage::getModel ( "catalog/product" )->load ( $productid );
+		$product = Mage::getModel('catalog/product')->load($productId);
 		$attributes = $product->getAttributes ();
+		
 		foreach ( $attributes as $attribute ) {
-			if ($attribute->getIsVisibleOnFront () && ! in_array ( $attribute->getAttributeCode (), $excludeAttr )) {
-				$value = $attribute->getFrontend ()->getValue ( $product );
-				
-				if (! $product->hasData ( $attribute->getAttributeCode () )) {
-					$value = Mage::helper ( 'catalog' )->__ ( 'N/A' );
-				} elseif (( string ) $value == '') {
-					$value = Mage::helper ( 'catalog' )->__ ( 'No' );
-				} elseif ($attribute->getFrontendInput () == 'price' && is_string ( $value )) {
-					$value = Mage::app ()->getStore ()->convertPrice ( $value, true );
-				}
-				
-				if (is_string ( $value ) && strlen ( $value )) {
-					$data [$attribute->getAttributeCode ()] = array (
-							'label' => $attribute->getStoreLabel (),
-							'value' => $value,
-							'code' => $attribute->getAttributeCode () 
-					);
-				}
-			}
-		}
-		return $data;
+            $value= $attribute->getFrontend()->getValue($product);
+			$code = $attribute->getAttributeCode();  
+            if ($attribute->getIsVisibleOnFront() && !in_array($attribute->getAttributeCode(), $excludeAttr)) {
+                if (!$product->hasData($attribute->getAttributeCode())) {
+                    $value = 'N/A';
+                } elseif ((string)$value == '') {
+                    $value = 'No';
+                } elseif ($attribute->getFrontendInput() == 'price' && is_string($value)) {
+                    $value = Mage::app()->getStore()->convertPrice($value, true);
+                }
+
+                if (is_string($value) && strlen($value)) {
+                    $data[$code] = array(
+                        'label' => $attribute->getStoreLabel(),
+                        'value' => $value,
+                        'code'  => $code
+                    );
+                }
+            }
+        }
+        return $data;
 	}
 } 

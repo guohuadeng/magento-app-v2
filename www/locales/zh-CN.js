@@ -66,7 +66,6 @@ var zh_CN = {
     enter_email: '输入您的邮箱',
     success: '成功',
     alert: '提示',
-    confirm: '确认',
     error_code: '错误码',
     exit_tip: '是否确定退出该应用？',
     product_detail: '商品详情',

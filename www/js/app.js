@@ -135,7 +135,8 @@ angular.module('app', [
                 url: '/cart',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/cart.html'
+                        templateUrl: 'templates/cart.html',
+                        controller: 'cartCtrl'
                     }
                 }
             })

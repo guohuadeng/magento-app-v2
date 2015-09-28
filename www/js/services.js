@@ -20,7 +20,9 @@ function Service($rootScope, $http) {
         productDetail: '/restconnect/products/getproductdetail',
         productImg: '/restconnect/products/getPicLists',
         productOption: '/restconnect/products/getcustomoption',
-        cartGetQty: '/restconnect/cart/getQty',	//直接post到这个接口就返回参数
+        cart: '/restconnect/cart/getCartInfo',	//获取购物车内容
+        cartGetQty: '/restconnect/cart/getQty',	//
+        cartGetTotal: '/restconnect/cart/getTotal',	//
         cartAdd: '/restconnect/cart/add/'	//直接post到这个接口就返回参数
     };
 

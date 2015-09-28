@@ -109,7 +109,7 @@ body{ background-color:#0581b2;}
     background:#0b3758;
 }
 .section4{ position:relative;}
-.footer{ position:absolute; bottom:0;left:0; width:100%; height:80px; text-align:center; background:#dedede; font-family:"微软雅黑"; color:#333333; font-size:12px; padding-top:15px; line-height:25px;}
+.footer{ position:absolute; bottom:0;left:0; width:100%; height:80px; text-align:center; background:#fefefe; font-family:"微软雅黑"; color:#333333; font-size:12px; padding-top:15px; line-height:25px;}
 .cpjs_ti{ margin-top:40px;}
 .gfwx{ margin-right:150px;}
 /*.section1 .float-icons{height:97px;bottom:140px;background:url(http://p8.qhimg.com/t0136af1f140cda405c.png) no-repeat center top}
