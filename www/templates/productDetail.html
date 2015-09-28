@@ -206,7 +206,7 @@
                         <div class="col">{{'weight' | translate}}:</div>
                         <div class="col col-50">{{product.weight}}<em ng-if="product.weight>0">&nbsp;g</em></div>
                     </div>
-                    <div class="row" ng-repeat="item in product.additional" ng-if="item.value!='N/A' || item.value!='No'">
+                    <div class="row" ng-repeat="item in product.additional" ng-if="item.value!='N/A' && item.value!='No'">
                         <div class="col">{{item.label}}:</div>
                         <div class="col col-50">{{item.value}}</div>
                     </div>
