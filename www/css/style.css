@@ -138,9 +138,9 @@ em {
 }
 
 .title img {
-    max-height: 28px;
-    height: 70%;
-    vertical-align: text-bottom
+    height: 100%;
+    max-width: 100%;
+    vertical-align: text-bottom;
 }
 
 .item-divider {
