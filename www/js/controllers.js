@@ -4,7 +4,7 @@ angular.module('app.controllers', [])
     .controller('AppCtrl', function ($scope, $rootScope,
                                      $ionicModal, $ionicSlideBoxDelegate,
                                      $ionicTabsDelegate, $ionicLoading,
-                                     $ionicPopup, $timeout, $location,
+                                     $ionicPopup, $timeout, $state,
                                      $ionicSideMenuDelegate, $translate) {
 
         $translate(Object.keys(zh_CN)).then(function (translations) {
@@ -180,7 +180,7 @@ angular.module('app.controllers', [])
     })
 
     // 注册
-    .controller('registerCtrl', function ($scope, $rootScope, $timeout, $location) {
+    .controller('registerCtrl', function ($scope, $rootScope, $timeout, $state) {
         $scope.registerData = {};
 
         $scope.validationCodeDisabled = false;
@@ -211,7 +211,7 @@ angular.module('app.controllers', [])
                 if (res[0]) {
                     $scope.showAlert('Success!', 'Welcome! User register success.');
                     $scope.getUser();
-                    $location.path('#app/register');
+                    $state.go('app.register');
                     return;
                 }
                 $scope.showAlert('Alert!', res[2]);
@@ -485,7 +485,7 @@ angular.module('app.controllers', [])
     })
 
     // home中，取banner，快速搜索
-    .controller('HomeCtrl', function ($scope, $rootScope, $location, $ionicSlideBoxDelegate) {
+    .controller('HomeCtrl', function ($scope, $rootScope, $state, $ionicSlideBoxDelegate) {
         $scope.searchData = {};
 
         $('.homebanner-swiper-container').height($(window).width() * 4 / 9);
@@ -513,12 +513,12 @@ angular.module('app.controllers', [])
                     q: $scope.searchData.text
                 }
             };
-            $location.path('app/searchResult');
+            $state.go('app.searchResult');
         };
     })
 
     // 高级搜索
-    .controller('SearchAdvCtrl', function ($scope, $rootScope, $location) {
+    .controller('SearchAdvCtrl', function ($scope, $rootScope, $state) {
         $scope.searchData = {};
         // 取目录选项
         $rootScope.service.get('menus', {}, function (results) {
@@ -540,7 +540,7 @@ angular.module('app.controllers', [])
                     q: $scope.searchData.text
                 }
             };
-            $location.path('app/searchResult');
+            $state.go('app.searchResult');
         };
 
         $scope.onSearch = function () {
@@ -548,7 +548,7 @@ angular.module('app.controllers', [])
                 type: 'searchAdv',
                 params: $('#searAdv').formParams()
             };
-            $location.path('app/searchResult');
+            $state.go('app.searchResult');
         };
     })
 
@@ -636,7 +636,7 @@ angular.module('app.controllers', [])
         });
     })
     // 附近经销商
-    .controller('SearchAgentCtrl', function ($scope, $rootScope, $location, $cordovaGeolocation) {
+    .controller('SearchAgentCtrl', function ($scope, $rootScope, $state, $cordovaGeolocation) {
         $scope.searchData = {
             //address: $scope.translations.current_position,
             address: '广州',
@@ -659,7 +659,7 @@ angular.module('app.controllers', [])
                                 lng: position.coords.longitude
                             })
                         };
-                        $location.path('app/agents');
+                        $state.go('app.agents');
                     }, function(err) {
                         alert($scope.translations.position_not_found);
                     });
@@ -674,7 +674,7 @@ angular.module('app.controllers', [])
                             radius: $scope.searchData.radius
                         }, point)
                     };
-                    $location.path('app/agents');
+                    $state.go('app.agents');
                 } else {
                     alert($scope.translations.position_not_found);
                 }
