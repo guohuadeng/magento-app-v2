@@ -118,12 +118,47 @@ class Sunpop_RestConnect_ProductsController extends Mage_Core_Controller_Front_A
 		
 		foreach ( $attributes as $attribute ) {
             $value= $attribute->getFrontend()->getValue($product);
-			$code = $attribute->getAttributeCode();  
+			$code = $attribute->getAttributeCode();
             if ($attribute->getIsVisibleOnFront() && !in_array($attribute->getAttributeCode(), $excludeAttr)) {
                 if (!$product->hasData($attribute->getAttributeCode())) {
                     $value = 'N/A';
                 } elseif ((string)$value == '') {
-                    $value = 'No';
+                    $value = 'N/A';
+                } elseif ($attribute->getFrontendInput() == 'price' && is_string($value)) {
+                    $value = Mage::app()->getStore()->convertPrice($value, true);
+                }
+             if ($attribute->usesSource() && $value == $this->__('No'))	{
+					$value = 'N/A';
+				}
+
+                if (is_string($value) && strlen($value)) {
+                    $data[$code] = array(
+                        'label' => $attribute->getStoreLabel(),
+                        'type' =>  $attribute->getBackend()->getType(),
+                        'value' => $value,
+                        'code'  => $code
+                    );
+                }
+            }
+        }
+        return $data;
+	}
+	public function testAction(array $excludeAttr = array()) {
+		$data = array ();
+		$productId = ( int ) $this->getRequest ()->getParam ( 'productid' );
+		$product = Mage::getModel('catalog/product')->load($productId);
+		$attributes = $product->getAttributes ();
+
+		foreach ( $attributes as $attribute ) {
+            $value= $attribute->getFrontend()->getValue($product);
+			$code = $attribute->getAttributeCode();
+			var_dump(get_class_methods($attribute));
+			break;
+            if ($attribute->getIsVisibleOnFront() && !in_array($attribute->getAttributeCode(), $excludeAttr)) {
+                if (!$product->hasData($attribute->getAttributeCode())) {
+                    $value = 'N/A';
+                } elseif ((string)$value == '') {
+                    $value = 'N/A';
                 } elseif ($attribute->getFrontendInput() == 'price' && is_string($value)) {
                     $value = Mage::app()->getStore()->convertPrice($value, true);
                 }

@@ -3,7 +3,7 @@
     <tabs>
         <clall translate="label" module="clnews">
             <label>Sunpop Extensions</label>
-            <sort_order>300</sort_order>
+            <sort_order>0</sort_order>
         </clall>
     </tabs>
     <sections>

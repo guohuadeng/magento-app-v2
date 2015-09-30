@@ -97,7 +97,7 @@
                 <a menu-toggle="left" href="#app/setting" class="item icon icon-left ion-ios-gear-outline">
                     <span class="padding-horizontal">{{'settings' | translate}}</span>
                 </a>
-                <a ng-click="menuClose()" ng-if="!!user" ng-click="doLogout()"
+                <a ng-if="!!user" ng-click="doLogout();menuClose()"
                    class="item icon icon-left ion-log-out">
                     <span class="padding-horizontal">{{'logout' | translate}}</span>
                 </a>
@@ -105,7 +105,7 @@
                    class="item icon icon-left ion-android-exit">
                     <span class="padding-horizontal">{{'exit' | translate}}</span>
                 </a>
-                <a ng-show="0" ng-click="menuClose()" ng-click="welcome()"
+                <a ng-show="0" ng-click="menuClose();welcome()"
                    class="item icon icon-left ion-android-exit">
                     <span class="padding-horizontal">{{'welcome' | translate}}</span>
                 </a>

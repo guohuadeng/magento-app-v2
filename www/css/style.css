@@ -16,7 +16,7 @@ ion-view.hide-menu-icon .buttons-left {
 }
 /* slider */
 .slider-pager {
-    bottom: 2px;
+    bottom: 4px;
     text-align: right;
     padding-right: 10px;
 }
@@ -30,45 +30,6 @@ ion-view.hide-menu-icon .buttons-left {
 /*end slider */
 
 /* tabs */
-.md-default-theme {
-    height: 100%;
-}
-
-.md-tabs-wrapper {
-    background-color: rgba(240, 240, 240, 0.1);
-    border-width: 0px;
-}
-
-md-tabs[md-border-bottom] md-tabs-wrapper {
-    border-width: 0px;
-}
-
-.md-tab {
-    height: 100%;
-    font-weight: 300;
-    padding: 6px 8px 0px 8px;
-}
-
-md-pagination-wrapper {
-    height: 32px;
-}
-
-md-tabs-canvas.md-paginated {
-    margin: 0 24px 0px 24px;
-}
-
-md-tabs-canvas {
-    height: 32px;
-}
-
-.md-tab.md-active, .md-tab.md-focused {
-    color: #000 !important;
-}
-
-md-tabs-content-wrapper {
-    top: 32px;
-}
-
 /*end  tabs */
 
 .container {
@@ -171,6 +132,15 @@ em {
     border-bottom: 0px solid #fff !important;
 }
 
+
+.product-container h3 {
+    background-color: #efefef !important;
+    border-left: 3px solid #ef473a !important;
+    border-bottom: 0px solid #fff !important;
+    font-size: 1.2em;
+    padding-left: 10px;
+    line-height: 1.4em;
+}
 .login-container  .popup {
     position: relative;
 	width: 100%;
@@ -240,8 +210,6 @@ em {
 }
 
 .login-container .popup-buttons {
-    top: 200px;
-    position: relative;
 }
 .login-container .tab-nav {
     top: 0px;
@@ -563,27 +531,34 @@ em {
     padding: 0;
 }
 
+.popup .popup-body {
+    height: 100%;
+    padding: 10px 10px 30px 10px;
+}
 .popupFullscreen .popup .popup-body {
     height: 100%;
-	padding: 10px 0 10px 0;
+	padding: 0px;
 }
 
 .popupFullscreen .popup-buttons {
     position: fixed;
-    bottom: 10px;
+    bottom: 0px;
     width: 100%;
+    padding: 0;
+    min-height: 45px;
+    z-index: 99;
 }
 
 .popupFullscreen .slider {
-    height: 90%;
+    height: 100%;
 }
 .popupFullscreen .slider-pager {
-    bottom: 30px;
+    bottom: 60px;
 }
 
 .popupFullscreen .slider-slide {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 .product-swiper-container .slider-pager {
     /*background: rgba(240,240,240, .2);*/

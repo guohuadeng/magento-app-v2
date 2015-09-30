@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Sunpop_Duplicate>
+      <version>0.1.0</version>
+    </Sunpop_Duplicate>
+  </modules>
+  <global>
+    <helpers>
+      <duplicate>
+        <class>Sunpop_Duplicate_Helper</class>
+      </duplicate>
+    </helpers>
+	<models>
+	  <duplicate>
+		<class>Sunpop_Duplicate_Model</class>
+		<resourceModel>duplicate_mysql4</resourceModel>
+	  </duplicate>
+	  <catalog>
+            <rewrite>
+               <!-- Override Mage_Catalog_Model_Product-->
+                <product>Sunpop_Duplicate_Model_Product</product>
+             </rewrite>
+       </catalog>
+	</models>
+    <events>
+	  <catalog_model_product_duplicate> <!-- identifier of the event we want to catch -->
+        <observers>
+          <catalog_model_product_duplicate_handler> <!-- identifier of the event handler -->
+            <type>singleton</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>duplicate/observer</class> <!-- observers class alias -->
+            <method>copyInventoryData</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </catalog_model_product_duplicate_handler>
+        </observers>
+      </catalog_model_product_duplicate>
+    </events>
+  </global>
+
+</config> 

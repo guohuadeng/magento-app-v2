@@ -10,7 +10,7 @@ function Service($rootScope, $http) {
         menus: '/restconnect/?cmd=menu',
         products: '/restconnect/',
         login: '/restconnect/customer/login',
-        logout: '/restconnect/customer/account/logout',
+        logout: '/restconnect/customer/logout',
         register: '/restconnect/customer/register',
         search: '/restconnect/search',
         certGet: '/clnews/api/article',

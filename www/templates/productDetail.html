@@ -194,26 +194,20 @@
             </form>
         </div>
         <!-- end product option-->
-        <!-- product descript-->
-        <ion-tabs class="tabs-ligth tabs-standard">
-            <ion-tab title="{{'product_description' | translate}}" id="tab_description_tabbed_contents">
-                <div class="list padding"  ng-bind-html="product.description | unsafe">
+    <!-- product descript-->
+        <div class="product-description padding-horizontal">
+            <h3>{{'product_description' | translate}}</h3>
+            <div class="list padding-horizontal"  ng-bind-html="product.description | unsafe">
+            </div>
+            <h3>{{'product_additional' | translate}}</h3>
+            <div class="list padding-horizontal">
+                <div class="row" ng-repeat="item in product.additional" ng-if="item.value!='N/A' && item.value!='No'">
+                    <div class="col">{{item.label}}:</div>
+                    <div class="col col-50">{{item.value}}</div>
                 </div>
-            </ion-tab>
-            <ion-tab title="{{'product_additional' | translate}}" id="tab_description_tabbed_attribute">
-                <div class="list padding">
-                    <div class="row">
-                        <div class="col">{{'weight' | translate}}:</div>
-                        <div class="col col-50">{{product.weight}}<em ng-if="product.weight>0">&nbsp;g</em></div>
-                    </div>
-                    <div class="row" ng-repeat="item in product.additional" ng-if="item.value!='N/A' && item.value!='No'">
-                        <div class="col">{{item.label}}:</div>
-                        <div class="col col-50">{{item.value}}</div>
-                    </div>
-                </div>
-            </ion-tab>
-        </ion-tabs>
-        <br><br>
+            </div>
+        </div>
+        <br><br><br>
         <!-- end product descript-->
 
     </ion-content>
