@@ -1,7 +1,14 @@
-<ion-view view-title="{{'search_agent' | translate}}{{'colon' | translate}}{{titleText}}">
+<ion-view view-title="{{titleText}}-{{'search_agent' | translate}}">
+    <!--
+    <ion-nav-buttons side="right">
+        <a href="#app/agents" class="button button-icon nav-clear menu-close ion-ios-list-outline"></a>
+        <a href="#app/agents" class="button button-icon nav-clear menu-close ion-android-globe"></a>
+        <a href="#app/home" class="button button-icon nav-clear menu-close ion-ios-home-outline"></a>
+    </ion-nav-buttons>
+    -->
     <ion-content scroll="false" overflow-scroll="true">
         <ion-content style="height:100%" overflow-scroll="true" direction="y" locking="true">
-            <ion-tabs class="tabs-ligth tabs-standard">
+            <ion-tabs class="tab-agents tabs-ligth tabs-standard">
                 <ion-tab title="{{'list_view' | translate}}" id="tab_agent_list">
                     <ul class="agents">
                         <li class="agent" ng-repeat="agent in agentList" ng-click="showAgent()">

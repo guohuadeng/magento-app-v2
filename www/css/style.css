@@ -14,6 +14,10 @@
 ion-view.hide-menu-icon .buttons-left {
     display: none;
 }
+.bar .title {
+    text-align: left;
+}
+/* end ionic */
 /* slider */
 .slider-pager {
     bottom: 4px;
@@ -30,6 +34,46 @@ ion-view.hide-menu-icon .buttons-left {
 /*end slider */
 
 /* tabs */
+
+.tabs,
+.product-container .tabs,
+.login-container .tabs {
+    border-top-width: 0px;
+    border-bottom-width: 0px !important;
+    background-color: #fff !important;
+}
+
+.tab-item,
+.product-container .tab-item,
+.login-container .tab-item {
+    background-color: #eee !important;
+    border-top: 1px solid #eee !important;
+    border-bottom: 1px solid #eee !important;
+    border-left: 1px solid #eee !important;
+    border-right: 0px solid #eee !important;
+    border-radius: 5px 5px 0 0;
+    margin-right: 0px;
+}
+
+.tab-item.tab-item-active,
+.login-container .tab-item.tab-item-active,
+.product-container .tab-item.tab-item-active {
+    background-color: #fff !important;
+    border-top: 3px solid #ef473a !important;
+    border-bottom: 0px solid #fff !important;
+}
+
+.tab-agents .tab-item {
+    max-width: 330px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.tab-agents .tab-item.tab-item-active {
+    max-width: 330px;
+    background-color: #fff !important;
+    border-bottom: 3px solid #ef473a !important;
+    border-top: 0px solid #fff !important;
+}
 /*end  tabs */
 
 .container {
@@ -103,35 +147,6 @@ em {
     min-height: 8px;
     padding-top: 0px;
 }
-
-.tabs,
-.product-container .tabs,
-.login-container .tabs {
-    border-top-width: 0px;
-    border-bottom-width: 0px !important;
-    background-color: #fff !important;
-}
-
-.tab-item,
-.product-container .tab-item,
-.login-container .tab-item {
-    background-color: #eee !important;
-    border-top: 1px solid #eee !important;
-    border-bottom: 1px solid #eee !important;
-    border-left: 1px solid #eee !important;
-    border-right: 0px solid #eee !important;
-    border-radius: 5px 5px 0 0;
-    margin-right: 0px;
-}
-
-.tab-item.tab-item-active,
-.login-container .tab-item.tab-item-active,
-.product-container .tab-item.tab-item-active {
-    background-color: #fff !important;
-    border-top: 3px solid #ef473a !important;
-    border-bottom: 0px solid #fff !important;
-}
-
 
 .product-container h3 {
     background-color: #efefef !important;
