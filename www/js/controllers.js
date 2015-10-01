@@ -39,7 +39,7 @@ angular.module('app.controllers', [])
             $ionicPopup.show({
                 templateUrl: 'templates/welcome.html',
                 title: '',
-                cssClass: 'popupFullscreen',
+                cssClass: 'popupWelcome',
                 scope: $scope,
                 buttons: [
                     {
@@ -384,6 +384,29 @@ angular.module('app.controllers', [])
             $scope.noZoom = function () {
                 $ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(1);
             };
+
+            //直接用template，会出现图片无法垂直居中的问题
+            var myt = '<ion-content overflow-scroll="true">'
+                +'<ion-slide-box delegate-handle="image-fullscreen-viewer" on-slide-changed="noZoom()" show-pager="true" active-slide="'
+                + $ionicSlideBoxDelegate.currentIndex()
+                + '"><ion-slide ng-repeat="img in productImg" ng-init="updateFullscreenSlider()">'
+                +'<ion-scroll overflow-scroll="true" delegate-handle="image-scroll" zooming="true" direction="xy" locking="false" scrollbar-x="false" scrollbar-y="false" min-zoom="1" id="scrolly"  style="width: 100%; height: 100%;">'
+                +'<img id="zoomImg" class="fullwidth" ng-src="{{img.url}}"  on-double-tap="zoomProductImg()">'
+                +'<span></span>'
+                +'</ion-scroll>'
+                +'</ion-slide></ion-slide-box>';
+            +'</ion-content>';
+            // An elaborate, custom popup
+            var myPopup = $ionicPopup.show({
+                template: myt,
+                cssClass: 'popupFullscreen',
+                scope: $scope,
+                buttons: [
+                    { text: 'X' ,
+                        type: 'button-dark',},
+                ]
+            });
+            /*
             $ionicPopup.show({
                 templateUrl: 'templates/productImg.html',
                 cssClass: 'popupFullscreen',
@@ -391,10 +414,11 @@ angular.module('app.controllers', [])
                 buttons: [
                     {
                         text: 'X',
-                        type: 'button-light'
+                        type: 'button-dark'
                     }
                 ]
             });
+            */
         };
 
         // 增减数量操作

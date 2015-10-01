@@ -11,7 +11,7 @@
     display: none;
 }
 
-ion-view.hide-menu-icon .buttons-left {
+ion-view .hide-menu-icon .buttons-left {
     display: none;
 }
 .bar .title {
@@ -503,17 +503,7 @@ em {
     width:0; 
     vertical-align:middle;
 }
-.popupFullscreen .scroll	{ 
-    height:100%; 
-    vertical-align:middle;
-}
 
-.popupFullscreen span	{
-    display:inline-block; 
-    height:100%; 
-    width:0; 
-    vertical-align:middle;
-}
 .fullwidth {
     width: 100%!important;
     vertical-align:middle;
@@ -527,6 +517,66 @@ em {
 .fullscreen {
     width: 100%!important;
     max-height: 100%;
+    vertical-align:middle;
+}
+
+.popup .popup-body {
+    height: 100%;
+    padding: 10px 10px 30px 10px;
+}
+
+.popupWelcome .popup {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100%;
+    background-color: #FFF;
+}
+
+.popupWelcome .has-header {
+    top: 0px;
+}
+
+.popupWelcome .popup-head {
+    border-bottom: 0px solid #eee;
+    padding: 0;
+}
+
+.popupWelcome .popup .popup-body {
+    height: 100%;
+    padding: 0px;
+}
+
+.popupWelcome .popup-buttons {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    padding: 0;
+    min-height: 45px;
+    z-index: 99;
+}
+
+.popupWelcome .slider {
+    height: 100%;
+}
+.popupWelcome .slider-pager {
+    bottom: 60px;
+}
+
+.popupWelcome .slider-slide {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+
+.popupFullscreen .scroll	{
+    height:100%;
+    vertical-align:middle;
+}
+
+.popupFullscreen span	{
+    display:inline-block;
+    height:100%;
+    width:0;
     vertical-align:middle;
 }
 
@@ -546,34 +596,27 @@ em {
     padding: 0;
 }
 
-.popup .popup-body {
-    height: 100%;
-    padding: 10px 10px 30px 10px;
-}
 .popupFullscreen .popup .popup-body {
     height: 100%;
-	padding: 0px;
+    padding: 10px 0 10px 0;
 }
 
 .popupFullscreen .popup-buttons {
     position: fixed;
-    bottom: 0px;
-    width: 100%;
-    padding: 0;
-    min-height: 45px;
-    z-index: 99;
+    bottom: 10px;
+    left: 5%;
 }
 
 .popupFullscreen .slider {
     height: 100%;
 }
 .popupFullscreen .slider-pager {
-    bottom: 60px;
+    bottom: 30px;
 }
 
 .popupFullscreen .slider-slide {
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .product-swiper-container .slider-pager {
