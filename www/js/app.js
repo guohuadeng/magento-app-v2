@@ -21,8 +21,8 @@ angular.module('app', [
 
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $translateProvider) {
 				$ionicConfigProvider.backButton.text('Back').icon('ion-chevron-left');
-				$ionicConfigProvider.scrolling.jsScrolling(true);
-				$ionicConfigProvider.tabs.position(top);
+				$ionicConfigProvider.scrolling.jsScrolling(false);
+				$ionicConfigProvider.tabs.position('bottom');
 				$ionicConfigProvider.form.checkbox('square');
 				$ionicConfigProvider.views.transition('none');  //('fade-in')
 				
