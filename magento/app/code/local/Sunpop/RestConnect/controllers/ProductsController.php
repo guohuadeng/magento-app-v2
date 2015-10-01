@@ -75,6 +75,13 @@ class Sunpop_RestConnect_ProductsController extends Mage_Core_Controller_Front_A
 		else
 			$has_custom_options = false;
 		$addtionatt=$this->getAdditional();
+		$regular_price_with_tax = number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' );
+		$final_price_with_tax = $product->getSpecialPrice ();
+		if (!is_null($final_price_with_tax))	{
+			$final_price_with_tax = number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' );
+			$discount = round (($regular_price_with_tax - $final_price_with_tax)/$regular_price_with_tax*100);
+			$discount = $discount.'%';
+			}
 		$productdetail = array (
 				'entity_id' => $product->getId (),
 				'sku' => $product->getSku (),
@@ -87,8 +94,9 @@ class Sunpop_RestConnect_ProductsController extends Mage_Core_Controller_Front_A
 				'url_key' => $product->getProductUrl (),
 				'is_in_stock' => $product->isAvailable (),
 				'has_custom_options' => $has_custom_options,
-				'regular_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
-				'final_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
+				'regular_price_with_tax' => $regular_price_with_tax,
+				'final_price_with_tax' => $final_price_with_tax,
+				'discount' => $discount,
 				'storeUrl' => $storeUrl,
 				'symbol' => Mage::app ()->getLocale ()->currency ( Mage::app ()->getStore ()->getCurrentCurrencyCode () )->getSymbol () ,
 				'weight'=>number_format($product->getWeight()),

@@ -148,7 +148,7 @@ em {
     padding-top: 0px;
 }
 
-.product-container h3 {
+.product-container h3,.search-container h3 {
     background-color: #efefef !important;
     border-left: 3px solid #ef473a !important;
     border-bottom: 0px solid #fff !important;
@@ -467,6 +467,7 @@ em {
 /*product detail swiper*/
 .product-container .card {
     margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .product-container img {
@@ -524,11 +525,10 @@ em {
     width: auto;
 }
 .fullscreen {
-    height: 100%!important;
-    vertical-align:middle;
     width: 100%!important;
+    max-height: 100%;
+    vertical-align:middle;
 }
-
 
 .popupFullscreen .popup {
     width: 100% !important;
@@ -575,6 +575,7 @@ em {
     padding-top: 0px;
     padding-bottom: 0px;
 }
+
 .product-swiper-container .slider-pager {
     /*background: rgba(240,240,240, .2);*/
     padding: 2px 0px 22px 0px;

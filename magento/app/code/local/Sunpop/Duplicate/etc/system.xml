@@ -25,7 +25,7 @@
 					  <show_in_store>1</show_in_store>
 				       <fields>
                           <duplicate translate="label">
-                            <label>duplicate</label>
+                            <label>Duplicate -- 选择"是"，在Duplicate(即使用副本)来创建商品时，会将status，库存等信息也复制，便于快速录入。</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>0</sort_order>

@@ -27,15 +27,23 @@
             <!-- end img swiper -->
             <h4>{{product.name}}</h4>
 
-            <div class="price-box">
-          <span class="special-price"><span class="price">{{product.symbol}}&nbsp;{{totalPrice | number:0}}</span>
-          </span>
-                <span class="old-price padding-horizontal">{{oldPrice | number:0}}</span>
-
-                <div ng-if="product.is_in_stock" class="availability in-stock"><span>{{'in_stock' | translate}}</span><em
-                        class="shipping">{{'free_shipping' | translate}}</em></div>
-                <div ng-if="!product.is_in_stock" class="availability out-of-stock">
-                    <span>{{'out_of_stock' | translate}}</span></div>
+          <div class="price-box">
+              <span ng-if="product.discount != null" class="special-price">
+                  <span class="price">{{product.symbol}}&nbsp;{{totalPrice | number:0}}</span>
+                  <span class="old-price padding-horizontal">{{oldPrice | number:0}}</span>
+              </span>
+              <span ng-if="product.discount == null" class="special-price">
+                  <span class="price">{{product.symbol}}&nbsp;{{oldPrice | number:0}}</span>
+              </span>
+              <!--当前项目不用
+              <div ng-if="product.is_in_stock" class="availability in-stock">
+                  <span>{{'in_stock' | translate}}</span>
+                  <em class="shipping">{{'free_shipping' | translate}}</em>
+              </div>
+              <div ng-if="!product.is_in_stock" class="availability out-of-stock">
+                  <span>{{'out_of_stock' | translate}}</span>
+              </div>
+              end 当前项目-->
             </div>
         </div>
         <!-- end product base card -->
@@ -46,23 +54,25 @@
                     <input type="hidden" name="product" value="{{product.entity_id}}">
                 </div>
                 <dl class="list product-option-container">
-                    <div class="qty-holder">
-                        <div class="item item-input-inset">
-                            <label class="item item-input">
-                                <span class="input-label">{{'quantity' | translate}}</span>
-                                <em class="assertive">*</em>
-                            </label>
+                    <!--当前项目不用
+                          <div class="qty-holder">
+                              <div class="item item-input-inset">
+                                  <label class="item item-input">
+                                      <span class="input-label">{{'quantity' | translate}}</span>
+                                      <em class="assertive">*</em>
+                                  </label>
 
-                            <span class="input-number-decrement" ng-click="qtyMinus()">–</span>
-                            <input class="input-number" type="text" name="qty" id="qty"
-                                   ng-model="qty" min="1" max="99"
-                                   title="Qty">
-                            <span class="input-number-increment" ng-click="qtyAdd()">+</span>
-                        </div>
-                    </div>
+                                  <span class="input-number-decrement" ng-click="qtyMinus()">–</span>
+                                  <input class="input-number" type="text" name="qty" id="qty"
+                                         ng-model="qty" min="1" max="99"
+                                         title="Qty">
+                                  <span class="input-number-increment" ng-click="qtyAdd()">+</span>
+                              </div>
+                          </div>
+                     end 当前项目-->
 
-                    <div ng-repeat="option in productOption" ng-switch on="option.custom_option_type">
-                        <!-- field option-->
+                        <div ng-repeat="option in productOption" ng-switch on="option.custom_option_type">
+                              <!-- field option-->
                         <div class="form__field" ng-switch-when="field">
                             <label class="item item-input">
                                 <span class="input-label">
@@ -212,11 +222,13 @@
 
     </ion-content>
 
+    <!--当前项目不用
     <div class="bar bar-footer bar-stable add-to-cart">
-        <a class="add-to-cart-left button button-outline button-assertive ion-android-cart" href="#app/cart">
-            &nbsp;{{items_qty}}</a>
-        <button class="button add-to-cart-right button-assertive" type="submit" ng-click="doCartAdd()">
-            {{'add_to_cart' | translate}}
-        </button>
+    <a class="add-to-cart-left button button-outline button-assertive ion-android-cart" href="#app/cart">
+      &nbsp;{{items_qty}}</a>
+    <button class="button add-to-cart-right button-assertive" type="submit" ng-click="doCartAdd()">
+      {{'add_to_cart' | translate}}
+    </button>
     </div>
+    end 当前项目-->
 </ion-view>

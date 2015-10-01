@@ -310,9 +310,15 @@ class Sunpop_RestConnect_IndexController extends Mage_Core_Controller_Front_Acti
 		foreach ( $products as $product ) {
 			if ($mod == 'catalog') {
 				$product = Mage::getModel ( 'catalog/product' )->load ( $product ['entity_id'] );
-				// $product = $_product;
 			}
-			// echo $product->getName ();
+
+			$regular_price_with_tax = number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' );
+			$final_price_with_tax = $product->getSpecialPrice ();
+			if (!is_null($final_price_with_tax))	{
+				$final_price_with_tax = number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' );
+				$discount = round (($regular_price_with_tax - $final_price_with_tax)/$regular_price_with_tax*100);
+				$discount = $discount.'%';
+				}
 			$productlist [] = array (
 					'entity_id' => $product->getId (),
 					'sku' => $product->getSku (),
@@ -325,8 +331,9 @@ class Sunpop_RestConnect_IndexController extends Mage_Core_Controller_Front_Acti
 					'image_cache_url' => Mage::getModel ( 'catalog/product_media_config' )->getMediaUrl( $product->getThumbnail() ),
 							//also use getSmallImage() or getThumbnail() 
 					'url_key' => $product->getProductUrl (),
-					'regular_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
-					'final_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
+					'regular_price_with_tax' => $regular_price_with_tax,
+					'final_price_with_tax' => $final_price_with_tax,
+					'discount' => $discount,
 					'symbol'=> Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol()
 			);
 		}

@@ -390,24 +390,8 @@ angular.module('app.controllers', [])
                 scope: $scope,
                 buttons: [
                     {
-                        text: '< ',
-                        type: 'button-light',
-                        onTap: function (e) {
-                            e.preventDefault();
-                            $ionicSlideBoxDelegate.previous();
-                        }
-                    },
-                    {
-                        text: 'Close',
+                        text: 'X',
                         type: 'button-light'
-                    },
-                    {
-                        text: '>',
-                        type: 'button-light',
-                        onTap: function (e) {
-                            e.preventDefault();
-                            $ionicSlideBoxDelegate.next();
-                        }
                     }
                 ]
             });

@@ -1,5 +1,5 @@
 <ion-view view-title="{{'product_searchadv' | translate}}">
-    <ion-content>
+    <ion-content class="search-container">
         <form id="searAdv">
             <dl class="list product-option-container">
                 <!-- category select option-->
@@ -16,9 +16,9 @@
                 </div>
                 <!-- end category select option-->
 
-                <div class="item item-divider">
+                <h3>
                     {{'must_select_one' | translate}}
-                </div>
+                </h3>
 
                 <div ng-repeat="field in searchFields" ng-switch on="field.attributeType">
                     <!-- field type: text,textarea,date,boolean,multiselect,select,price,media_image,weee-->
