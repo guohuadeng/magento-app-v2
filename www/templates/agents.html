@@ -6,18 +6,20 @@
         <a href="#app/home" class="button button-icon nav-clear menu-close ion-ios-home-outline"></a>
     </ion-nav-buttons>
     -->
-    <ion-content scroll="false" overflow-scroll="true">
-        <ion-content style="height:100%" overflow-scroll="true" direction="y" locking="true">
+    <ion-content>
+        <ion-content style="height:100%">
             <ion-tabs class="tab-agents tabs-ligth tabs-standard">
                 <ion-tab title="{{'list_view' | translate}}" id="tab_agent_list">
+                    <ion-scroll>
                     <ul class="agents">
                         <li class="agent" ng-repeat="agent in agentList" ng-click="showAgent()">
                             <h3>{{agent.store_name}}</h3>
                             <p>{{agent.address}}<span class="distance">{{agent.distance | number:0}} km</span></p>
                         </li>
                     </ul>
+                    </ion-scroll>
                 </ion-tab>
-                <ion-tab title="{{'map_view' | translate}}" id="tab_agent_map" on-select="showMap()">
+                <ion-tab  scroll="false" title="{{'map_view' | translate}}" id="tab_agent_map" on-select="showMap()">
                     <div id="map" class="list padding"></div>
                 </ion-tab>
             </ion-tabs>
