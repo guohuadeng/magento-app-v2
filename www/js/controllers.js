@@ -537,19 +537,6 @@ angular.module('app.controllers', [])
             }
             $scope.cat_field = cat_field;
         });
-        //重置
-        $scope.onReset = function () {
-            if (!$scope.searchData.text) {
-                return;
-            }
-            $rootScope.search = {
-                type: 'search',
-                params: {
-                    q: $scope.searchData.text
-                }
-            };
-            $state.go('app.searchResult');
-        };
 
         $scope.onSearch = function () {
             $rootScope.search = {
