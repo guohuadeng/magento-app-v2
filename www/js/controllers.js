@@ -537,17 +537,21 @@ angular.module('app.controllers', [])
             }
             $scope.cat_field = cat_field;
         });
-
+        $scope._xingzhuang = '';
         $scope.optionChange = function () {
             if (this.field.code === 'a_xingzhuang') {
                 var $shape = $('select[name="' + this.field.code + '"]'),
                     shape = $.trim($shape.find('option:selected').text());
-
+                    if (shape == $scope.translations.All)    {$scope._xingzhuang = '';}
+                        else    {$scope._xingzhuang = '('+shape+')';}
+                $('#a_guige').get(0).selectedIndex=0;
+                $('select[name="a_guige"]').get(0).options[0].selected = true;
+                /*
                 $('select[name="a_guige"]').val('').find('option').show();
                 if ($shape.val()) {
                     $('select[name="a_guige"]').find('option:not(:contains((' + shape + '))').hide();
                     $('select[name="a_guige"]').find('option[value=""]').show();
-                }
+                }*/
             }
         };
 

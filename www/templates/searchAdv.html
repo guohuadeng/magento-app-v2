@@ -45,7 +45,20 @@
 
                     <!-- select option-->
                     <div class="form__field" ng-switch-when="select">
-                        <label class="item item-input item-select">
+                        <label ng-if="field.code=='a_guige'" class="item item-input item-select">
+                            <span class="input-label">{{field.label}}</span>
+                            <select name="{{field.code}}" id="{{field.code}}"
+                                    class="select-dark"
+                                    title="{{field.label}}"
+                                    ng-model="searAdvData[field.label]"
+                                    ng-change="optionChange()">
+                                <option value="">{{'All' | translate}}</option>
+                                <option ng-repeat="item in field.attributeValue | filter:_xingzhuang" value="{{item.option_id}}">
+                                    {{item.value}}
+                                </option>
+                            </select>
+                        </label>
+                        <label ng-if="field.code!='a_guige'" class="item item-input item-select">
                             <span class="input-label">{{field.label}}</span>
                             <select name="{{field.code}}"
                                     class="select-dark"
