@@ -859,3 +859,8 @@ li.agent p .distance {
     margin-top: -50px;
     margin-left: -50px;
 }
+
+#map {
+    width: 100%;
+    height: 100%;
+}

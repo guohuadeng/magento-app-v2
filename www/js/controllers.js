@@ -715,38 +715,41 @@ angular.module('app.controllers', [])
 
         $scope.showMap = function () {
             if (!$('#map').length) {
-                $timeout($scope.showMap, 100);
+                setTimeout($scope.showMap, 100);
                 return;
             }
+            $('#map').parent().html('<div id="map"></div>');
 
-            var map = new BMap.Map('map'),
-                point = new BMap.Point($rootScope.agent.params.lng, $rootScope.agent.params.lat);
-            if ($rootScope.agent.params['radius']>0) {
-                $scope.zoomLevel =  13;
-            }
-            if ($rootScope.agent.params['radius']>10)    {
-                $scope.zoomLevel =  11;
-            }
-            if ($rootScope.agent.params['radius']>20)    {
-                $scope.zoomLevel =  9;
-            }
-            if ($rootScope.agent.params['radius']>50)    {
-                $scope.zoomLevel =  8;
-            }
-            if ($rootScope.agent.params['radius']>200)    {
-                $scope.zoomLevel =  6;
-            }
-            if ($rootScope.agent.params['radius']>500)    {
-                $scope.zoomLevel =  5;
-            }
+            setTimeout(function () {
+                var map = new BMap.Map('map'),
+                    point = new BMap.Point($rootScope.agent.params.lng, $rootScope.agent.params.lat);
+                if ($rootScope.agent.params['radius']>0) {
+                    $scope.zoomLevel =  13;
+                }
+                if ($rootScope.agent.params['radius']>10)    {
+                    $scope.zoomLevel =  11;
+                }
+                if ($rootScope.agent.params['radius']>20)    {
+                    $scope.zoomLevel =  9;
+                }
+                if ($rootScope.agent.params['radius']>50)    {
+                    $scope.zoomLevel =  8;
+                }
+                if ($rootScope.agent.params['radius']>200)    {
+                    $scope.zoomLevel =  6;
+                }
+                if ($rootScope.agent.params['radius']>500)    {
+                    $scope.zoomLevel =  5;
+                }
 
-            map.centerAndZoom(point, $scope.zoomLevel); //1000公里用5，500公里用5，200的用6，100公里用8，50公里用8，20公里用9，10公里用11，5公里内用13，
-            $scope.agentList.forEach(function (item) {
-                var point = new BMap.Point(item.lng, item.lat),
-                    marker = new BMap.Marker(point);
+                map.centerAndZoom(point, $scope.zoomLevel); //1000公里用5，500公里用5，200的用6，100公里用8，50公里用8，20公里用9，10公里用11，5公里内用13，
+                $scope.agentList.forEach(function (item) {
+                    var point = new BMap.Point(item.lng, item.lat),
+                        marker = new BMap.Marker(point);
 
-                map.addOverlay(marker);
-            });
+                    map.addOverlay(marker);
+                });
+            }, 100);
         };
     })
 
