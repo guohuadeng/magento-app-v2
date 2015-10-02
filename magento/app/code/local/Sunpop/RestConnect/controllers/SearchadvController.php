@@ -42,17 +42,15 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 					->addVisibleFilter();
 		$attributes->getSelect()->where(sprintf('(%s)',$where));
 		$attributes->load();
-	
+		$orderby = 'ASC';
 		foreach ($attributes as $attribute) {
-			//var_dump($attribute);
-			//break;
 			$datas = '';
 			$collection = Mage::getResourceModel('eav/entity_attribute_option_collection')
-			
 			->setAttributeFilter($attribute->getSource()->getAttribute()->getId())
-			->setStoreFilter($attribute->getSource()->getAttribute()->getStoreId())
-			->load();
-			 
+			->setStoreFilter($attribute->getSource()->getAttribute()->getStoreId());
+			
+			$collection->getSelect()->order('main_table.sort_order '.$orderby);
+			$collection->load();
 			$attributeType = $attribute->getSource()->getAttribute()->getFrontendInput();
 			$defaultValues = $attribute->getSource()->getAttribute()->getDefaultValue();
 			$_labels = $attribute->getSource()->getAttribute()->getStoreLabels();
@@ -64,7 +62,9 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 			} else {
 				$defaultValues = array();
 			}
+			
 			$options = $collection->getData();
+
 			$optionid = 0;
 			$datas['label'] = $_label;
 			$datas['attributeType'] = $attributeType;
@@ -75,9 +75,10 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 				$options[$optionid] = $option;
 				$optionid++;
 			}
+
 			$datas['key'] = $attribute->getAttributeCode();
 			$datas['code'] = $attribute->getAttributeCode();
-			$datas['position'] = $attribute["position"];
+			$datas['position'] = $attribute->getPosition();
 			$datas['label'] = $_label;
 			$datas['attributeType'] = $attributeType;
 			$datas['attributeValue'] = $options;	
