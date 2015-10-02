@@ -29,11 +29,11 @@
 
           <div class="price-box">
               <span ng-if="product.discount != null" class="special-price">
-                  <span class="price">{{product.symbol}}&nbsp;{{totalPrice | number:0}}</span>
-                  <span class="old-price padding-horizontal">{{oldPrice | number:0}}</span>
+                  <span class="price">{{product.symbol}}&nbsp;{{totalPrice}}</span>
+                  <span class="old-price padding-horizontal">{{oldPrice}}</span>
               </span>
               <span ng-if="product.discount == null" class="special-price">
-                  <span class="price">{{product.symbol}}&nbsp;{{oldPrice | number:0}}</span>
+                  <span class="price">{{product.symbol}}&nbsp;{{oldPrice}}</span>
               </span>
               <!--当前项目不用
               <div ng-if="product.is_in_stock" class="availability in-stock">
@@ -78,7 +78,7 @@
                                 <span class="input-label">
                                     {{option.custom_option_title}}
                                     <em ng-if="option.is_require" class="assertive">*</em>
-                                    <em ng-if="option.price > 0">+{{product.symbol}}&nbsp;{{option.price | number:0}}</em>
+                                    <em ng-if="option.price > 0">+{{product.symbol}}&nbsp;{{option.price}}</em>
                                 </span>
                                 <input type="text" class="form__textfield textfield product-custom-option"
                                        name="options[{{option.option_id}}]"
@@ -102,7 +102,7 @@
                                     <option ng-repeat="item in option.custom_option_value"
                                             value="{{item.option_type_id}}" data-price="{{item.price}}">
                                         {{item.title}}&nbsp;
-                                        <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price | number:0}}</em>
+                                        <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price}}</em>
                                     </option>
                                 </select>
                             </label>
@@ -124,7 +124,7 @@
                                                value="{{item.option_type_id}}" data-price="{{item.price}}">
                                     </label>
                                     {{item.title}}&nbsp;
-                                    <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price | number:0}}</em>
+                                    <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price}}</em>
                                 </li>
                             </ul>
                         </div>
@@ -146,9 +146,9 @@
                                           class="{{selectOptions['custom_option_value' +
                                           $parent.option.option_id] === item.option_type_id ? 'selected' : ''}}"
                                           ng-click="selectOption('custom_option_value')"
-                                          data-price="{{item.price | number:0}}">
+                                          data-price="{{item.price}}">
                                         {{item.title}}&nbsp;
-                                        <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price | number:0}}</em>
+                                        <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price}}</em>
                                   </span>
                             </div>
                         </div>
@@ -160,7 +160,7 @@
                                 <span class="input-label">
                                     {{option.custom_option_title}}
                                     <em ng-if="option.is_require==1" class="assertive">*</em>&nbsp;
-                                    <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price | number:0}}</em>
+                                    <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price}}</em>
                                 </span>
 
                                 <div class="item">

@@ -26,7 +26,7 @@
                                   <span ng-if="product.discount != null" class="special-price">
                                       <span class="special-price">
                                           <span class="price">
-                                              {{product.symbol}}{{product.final_price_with_tax | number:0}}
+                                              {{product.symbol}}{{product.final_price_with_tax}}
                                           </span>
                                           &nbsp;
                                           <span class="old-price">
@@ -37,7 +37,7 @@
                                   <span ng-if="product.discount == null" class="special-price">
                                       <span class="special-price">
                                           <span class="price">
-                                              {{product.symbol}}{{product.regular_price_with_tax | number:0}}
+                                              {{product.symbol}}{{product.regular_price_with_tax}}
                                           </span>
                                       </span>
                                   </span>
