@@ -585,7 +585,7 @@ em {
     width: 100% !important;
     height: 100% !important;
     max-height: 100%;
-    background-color: #FFF;
+    background-color: #000;
 }
 
 .popupFullscreen .has-header {
@@ -614,10 +614,13 @@ em {
 .popupFullscreen .slider-pager {
     bottom: 30px;
 }
+.popupFullscreen .slider-pager .slider-pager-page {
+    color: #fff;
+}
 
 .popupFullscreen .slider-slide {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .product-swiper-container .slider-pager {
