@@ -38,12 +38,14 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 		//$where = $is_searchable_where .' '. $andor1 .' '. $is_visible_in_advanced_search_where .' '. $andor2 .' '. $used_for_sort_by_where;
 		$where = $is_visible_in_advanced_search_where;
 		$attributes = Mage::getResourceModel('catalog/product_attribute_collection')
-					->setOrder('main_table.attribute_id', 'asc')
+					->setOrder('position', 'asc')
 					->addVisibleFilter();
 		$attributes->getSelect()->where(sprintf('(%s)',$where));
 		$attributes->load();
 	
 		foreach ($attributes as $attribute) {
+			//var_dump($attribute);
+			//break;
 			$datas = '';
 			$collection = Mage::getResourceModel('eav/entity_attribute_option_collection')
 			
@@ -75,6 +77,7 @@ class Sunpop_RestConnect_SearchadvController extends Mage_Core_Controller_Front_
 			}
 			$datas['key'] = $attribute->getAttributeCode();
 			$datas['code'] = $attribute->getAttributeCode();
+			$datas['position'] = $attribute["position"];
 			$datas['label'] = $_label;
 			$datas['attributeType'] = $attributeType;
 			$datas['attributeValue'] = $options;	
