@@ -38,6 +38,7 @@ ion-view .hide-menu-icon .buttons-left {
 .tabs,
 .product-container .tabs,
 .login-container .tabs {
+    padding-top: 0px;
     border-top-width: 0px;
     border-bottom-width: 0px !important;
     background-color: #fff !important;
