@@ -527,7 +527,7 @@ angular.module('app.controllers', [])
 
     // 高级搜索
     .controller('SearchAdvCtrl', function ($scope, $rootScope, $state) {
-        $scope.searchData = {};
+        $scope.searAdvData = {};
         // 取目录选项
         $rootScope.service.get('menus', {}, function (results) {
             var cat_field = [];
@@ -537,6 +537,19 @@ angular.module('app.controllers', [])
             }
             $scope.cat_field = cat_field;
         });
+
+        $scope.optionChange = function () {
+            if (this.field.code === 'a_xingzhuang') {
+                var $shape = $('select[name="' + this.field.code + '"]'),
+                    shape = $.trim($shape.find('option:selected').text());
+
+                $('select[name="a_guige"]').val('').find('option').show();
+                if ($shape.val()) {
+                    $('select[name="a_guige"]').find('option:not(:contains((' + shape + '))').hide();
+                    $('select[name="a_guige"]').find('option[value=""]').show();
+                }
+            }
+        };
 
         $scope.onSearch = function () {
             $rootScope.search = {
