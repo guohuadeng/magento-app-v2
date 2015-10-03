@@ -23,22 +23,29 @@
 
                             <div class="product-price">
                                 <div class="price-box">
-                                    <span class="special-price">
-                                        <span class="special-price">
-                                            <span class="price">
-                                                {{product.symbol}}{{product.final_price_with_tax | price}}
-                                            </span>
-                                            &nbsp;
-                                            <span class="old-price">
-                                                {{product.symbol}}{{product.regular_price_with_tax | price}}
-                                            </span>
-                                        </span>
-                                    </span>
-                                    <span class="discount {{price_percent_class}}">
-                                        <span class="price">
-                                            {{product | discount}}
-                                        </span>
-                                    </span>
+                                  <span ng-if="product.discount != null" class="special-price">
+                                      <span class="special-price">
+                                          <span class="price">
+                                              {{product.symbol}}{{product.final_price_with_tax}}
+                                          </span>
+                                          &nbsp;
+                                          <span class="old-price">
+                                              {{product.regular_price_with_tax | number:0}}
+                                          </span>
+                                      </span>
+                                  </span>
+                                  <span ng-if="product.discount == null" class="special-price">
+                                      <span class="special-price">
+                                          <span class="price">
+                                              {{product.symbol}}{{product.regular_price_with_tax}}
+                                          </span>
+                                      </span>
+                                  </span>
+                                  <span ng-if="product.discount!=null" class="discount {{price_percent_class}}">
+                                      <span class="price">
+                                          {{product.discount}}
+                                      </span>
+                                  </span>
                                 </div>
                             </div>
                         </div>

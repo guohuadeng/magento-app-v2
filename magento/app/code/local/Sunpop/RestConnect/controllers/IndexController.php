@@ -319,6 +319,9 @@ class Sunpop_RestConnect_IndexController extends Mage_Core_Controller_Front_Acti
 				$discount = round (($regular_price_with_tax - $final_price_with_tax)/$regular_price_with_tax*100);
 				$discount = $discount.'%';
 				}
+			else {
+				$discount = null;
+			}
 			$productlist [] = array (
 					'entity_id' => $product->getId (),
 					'sku' => $product->getSku (),
@@ -328,7 +331,8 @@ class Sunpop_RestConnect_IndexController extends Mage_Core_Controller_Front_Acti
 					'special_from_date' => $product->getSpecialFromDate (),
 					'special_to_date' => $product->getSpecialToDate (),
 					'image_url' => $product->getImageUrl (),
-					'image_cache_url' => Mage::getModel ( 'catalog/product_media_config' )->getMediaUrl( $product->getThumbnail() ),
+					'image_thumbnail_url' => Mage::getModel ( 'catalog/product_media_config' )->getMediaUrl( $product->getThumbnail() ),
+					'image_small_url' => Mage::getModel ( 'catalog/product_media_config' )->getMediaUrl( $product->getSmallImage() ),
 							//also use getSmallImage() or getThumbnail() 
 					'url_key' => $product->getProductUrl (),
 					'regular_price_with_tax' => $regular_price_with_tax,

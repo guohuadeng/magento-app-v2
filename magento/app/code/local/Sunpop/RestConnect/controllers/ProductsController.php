@@ -91,6 +91,8 @@ class Sunpop_RestConnect_ProductsController extends Mage_Core_Controller_Front_A
 				'special_from_date' => $product->getSpecialFromDate (),
 				'special_to_date' => $product->getSpecialToDate (),
 				'image_url' => $product->getImageUrl (),
+				'image_thumbnail_url' => Mage::getModel ( 'catalog/product_media_config' )->getMediaUrl( $product->getThumbnail() ),
+				'image_small_url' => Mage::getModel ( 'catalog/product_media_config' )->getMediaUrl( $product->getSmallImage() ),
 				'url_key' => $product->getProductUrl (),
 				'is_in_stock' => $product->isAvailable (),
 				'has_custom_options' => $has_custom_options,
