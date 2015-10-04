@@ -758,9 +758,11 @@ angular.module('app.controllers', [])
                 map.centerAndZoom(point, $scope.zoomLevel); //1000公里用5，500公里用5，200的用6，100公里用8，50公里用8，20公里用9，10公里用11，5公里内用13，
                 $scope.agentList.forEach(function (item) {
                     var point = new BMap.Point(item.lng, item.lat),
-                        marker = new BMap.Marker(point);
+                        marker = new BMap.Marker(point),
+                        label = new BMap.Label(item.store_name, {offset: new BMap.Size(20, -10)});
 
                     map.addOverlay(marker);
+                    marker.setLabel(label);
                 });
             }, 100);
         };
