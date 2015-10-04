@@ -13,6 +13,7 @@ var zh_CN = {
     common_products: '常用产品',
     cert_download: '证书下载',
     search_agent: '附近商家',
+    phone_call: '电话',
     input_address: '位置',
     input_radius: '距离(公里)',
     input_address_hint: '输入城市或地址',

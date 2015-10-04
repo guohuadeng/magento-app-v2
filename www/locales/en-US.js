@@ -9,6 +9,7 @@ var en_US = {
     common_products: 'Common Products',
     cert_download: 'Cert Download',
     search_agent: 'Near Agents',
+    phone_call: 'Call',
     input_address: 'City or Address',
     input_radius: 'Radius(KM)',
     input_address_hint: 'Input the city or address',

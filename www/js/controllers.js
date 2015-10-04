@@ -726,7 +726,7 @@ angular.module('app.controllers', [])
                 buttons: [{
                     text: $scope.translations.ok,
                     type: 'button-assertive',
-                }]
+                },]
             });
         };
 
