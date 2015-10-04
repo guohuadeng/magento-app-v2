@@ -15,11 +15,13 @@
         </div>
         <!-- end img swiper -->
         <div class="list list-inset">
+            <form id="search" ng-submit="onSearch()">
             <label class="item item-input">
                 <i class="icon ion-search placeholder-icon"></i>
                 <input autofocus type="text" placeholder="{{'enter_the_key' | translate}}" ng-model="searchData.text">
             </label>
-            <button class="button button-full button-assertive" ng-click="onSearch()">{{'quick_search' | translate}}</button>
+            <button  type="submit" class="button button-full button-assertive">{{'quick_search' | translate}}</button>
+            </form>
         </div>
 
         <div class="padding-horizontal">
