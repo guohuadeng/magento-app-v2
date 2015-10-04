@@ -5,7 +5,8 @@ angular.module('app.controllers', [])
                                      $ionicModal, $ionicSlideBoxDelegate,
                                      $ionicTabsDelegate, $ionicLoading,
                                      $ionicPopup, $timeout, $state,
-                                     $ionicSideMenuDelegate, $translate) {
+                                     $ionicSideMenuDelegate, $translate,
+                                     $ionicPlatform, $ionicHistory) {
 
         $translate(Object.keys(zh_CN)).then(function (translations) {
             $scope.translations = translations;
@@ -166,6 +167,14 @@ angular.module('app.controllers', [])
                 ]
             });
         };
+
+        $ionicPlatform.registerBackButtonAction(function () {
+            if ($ionicHistory.currentStateName() === 'app.home') {
+                $scope.showExit();
+            } else {
+                navigator.app.backHistory();
+            }
+        }, 100);
 
         // 取搜索选项
         //text,textarea,date,boolean,multiselect,select,price,media_image,weee
