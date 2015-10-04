@@ -551,8 +551,12 @@ angular.module('app.controllers', [])
             if (this.field.code === 'a_xingzhuang') {
                 var $shape = $('select[name="' + this.field.code + '"]'),
                     shape = $.trim($shape.find('option:selected').text());
-                    if (shape == $scope.translations.All)    {$scope._xingzhuang = '';}
-                        else    {$scope._xingzhuang = '('+shape+')';}
+
+                if (shape == $scope.translations.All)    {
+                    $scope._xingzhuang = '';
+                } else {
+                    $scope._xingzhuang = '('+shape+')';
+                }
                 $('#a_guige').get(0).selectedIndex=0;
                 $('select[name="a_guige"]').get(0).options[0].selected = true;
                 /*
@@ -755,7 +759,16 @@ angular.module('app.controllers', [])
                     $scope.zoomLevel =  5;
                 }
 
-                map.centerAndZoom(point, $scope.zoomLevel); //1000公里用5，500公里用5，200的用6，100公里用8，50公里用8，20公里用9，10公里用11，5公里内用13，
+                //1000公里用5，500公里用5，200的用6，100公里用8，50公里用8，20公里用9，10公里用11，5公里内用13，
+                map.centerAndZoom(point, $scope.zoomLevel);
+
+                var point = new BMap.Point($rootScope.agent.params.lng, $rootScope.agent.params.lat),
+                    icon = new BMap.Icon('img/position.png', new BMap.Size(32, 32)),
+                    label = new BMap.Label($rootScope.agent.title, {offset: new BMap.Size(20, -10)}),
+                    marker = new BMap.Marker(point, {icon: icon});
+                map.addOverlay(marker);
+                marker.setLabel(label);
+
                 $scope.agentList.forEach(function (item) {
                     var point = new BMap.Point(item.lng, item.lat),
                         marker = new BMap.Marker(point),
