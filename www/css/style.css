@@ -840,7 +840,7 @@ li.agent p {
     margin: 0;
 }
 
-li.agent p .distance {
+.distance {
     float: right;
 }
 

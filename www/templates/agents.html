@@ -11,12 +11,20 @@
             <ion-tabs class="tab-agents tabs-ligth tabs-standard">
                 <ion-tab title="{{'list_view' | translate}}" id="tab_agent_list">
                     <ion-scroll>
-                    <ul class="agents">
-                        <li class="agent" ng-repeat="agent in agentList" ng-click="showAgent()">
-                            <h3>{{agent.store_name}}</h3>
-                            <p>{{agent.address}}<span class="distance">{{agent.distance | number:0}} km</span></p>
-                        </li>
-                    </ul>
+                        <div class="list padding-horizontal">
+                            <div class="row" ng-repeat="agent in agentList">
+                                <div class="col col-20">
+                                    <a class="button icon-left ion-ios-telephone-outline" href="tel:{{agent.telephone}}"></a>
+                                </div>
+                                <div class="col" ng-click="showAgent()">
+                                    <h3>{{agent.store_name}}</h3>
+                                    <div class="row">
+                                        <div class="col-75">{{agent.address}}</div>
+                                        <div class="col distance">{{agent.distance | number:0}} km</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </ion-scroll>
                 </ion-tab>
                 <ion-tab  scroll="false" title="{{'map_view' | translate}}" id="tab_agent_map" on-select="showMap()">
