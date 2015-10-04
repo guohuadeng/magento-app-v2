@@ -21,7 +21,8 @@
     "org.apache.cordova.splashscreen",
     "cordova-plugin-whitelist",
     "cordova-plugin-inappbrowser",
-    "org.apache.cordova.geolocation"
+    "org.apache.cordova.geolocation",
+    "cordova-plugin-x-socialsharing"
   ],
   "cordovaPlatforms": [
     "ios",
