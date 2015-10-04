@@ -509,6 +509,14 @@ angular.module('app.controllers', [])
         $scope.updateSlider = function () {
             $ionicSlideBoxDelegate.$getByHandle('image-viewer').update();
         };
+
+        $scope.goFirst = function ($index) {
+            if ($index == $ionicSlideBoxDelegate.$getByHandle('image-viewer').slidesCount()-1)  {
+                setTimeout(function() {
+                        $ionicSlideBoxDelegate.$getByHandle('image-viewer').slide(0);
+                    },3000);
+            }
+        };
         // 取首页第一个banner
         $rootScope.service.get('getBannerBlock', {block:'app_home_banner1'}, function (results) {
             $scope.banner1 = results;
