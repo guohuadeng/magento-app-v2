@@ -1,0 +1,47 @@
+<div class="ambase-debug-header"><?php echo $this->__("General")?></div>
+<div class="ambase-debug-section">
+    <table cellspacing="0">
+        <tr>
+            <td><?php echo $this->__("Compilation")?></td>
+            <td>
+                <?php if ($this->isCompilationEnabled()) { ?>
+                    <span class="red"><?php echo $this->__("On")?></span>
+                <?php } else { ?>
+                    <span class="green"><?php echo $this->__("Off")?></span>
+                <?php }?>
+            </td>
+        </tr>
+        <tr>
+            <td><?php echo $this->__("Disabled output")?></td>
+            <td>
+                <?php if (count($this->getDisableModulesOutput()) > 0) {?>
+                <div class="red"><?php 
+                    foreach($this->getDisableModulesOutput() as $module){
+                       echo $module['name']."<br/>";
+                    }
+                ?></div>
+                <?php } else { ?>
+                <span class="green"><?php echo $this->__("No")?></span>
+                
+                <?php } ?>           
+            </td>
+        </tr>
+        <tr>
+            <td><?php echo $this->__("Cron")?></td>
+            <td><?php
+            $crontabConfig = $this->getCrontabConfig();
+            if ($crontabConfig === null){
+                echo '<div class="red">';
+                echo $this->__('No cron jobs found') . "</div>";
+                echo "<a target='_blank' href='https://support.amasty.com/index.php?/Knowledgebase/Article/View/72/24/magento-cron'>" . $this->__("Learn more") . "</a>";
+            } else {
+                if (is_array($crontabConfig)){
+                    echo implode("<br/>", $crontabConfig);
+                } else {
+                    echo $crontabConfig;
+                }
+            }
+            ?></td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,55 @@
+<div class="ambase-debug-header ambase-debug-header-click" onclick="$('ambase-debug-section').toggle();"><?php echo $this->__("Rewrites");?></div>
+<div class="ambase-debug-section" id="ambase-debug-section" style="display:none;">
+    <table cellspacing="0">
+        
+
+<?php 
+$_finalResult = $this->getRewritesList();
+foreach(array_keys($_finalResult) as $groupType) {
+
+    foreach(array_keys($_finalResult[$groupType]) as $key) {
+        // remove some repeating elements after merging all parents 
+        foreach($_finalResult[$groupType][$key]['rewrite'] as $key1 => $value) {
+            $codePool = $_finalResult[$groupType][$key]["codePool"][$key1];
+            
+            $_classes = array();
+            if(is_array($value)) {
+                $_classes = array_unique($value);
+            } else {
+                $value = array($value);
+                $_classes = $value;
+                $codePool = array($codePool);
+            }            
+?>
+        <tr>
+            <td><?php 
+                echo uc_words($key, " ") . " ";
+                echo uc_words($key1, " ");
+            ?></td>
+            <td>
+                <?php
+                foreach($_classes as $_class){
+                    $_index = array_search($_class, $value);
+                    
+                    $_classParts = explode("_", $_class);
+                            
+                    foreach(array_slice($_classParts, 0, 2) as $classPart){
+                        echo ucfirst($classPart) . " ";
+                        
+                    }
+                    echo "<div class='ambase-file'>";
+                    echo $this->getClassPath($value, $codePool, $_index);
+                    echo "</div>";
+                            
+                    
+                }
+                ?>
+            </td>
+        </tr>
+<?php
+        }
+    }
+}
+?>
+    </table>
+</div>

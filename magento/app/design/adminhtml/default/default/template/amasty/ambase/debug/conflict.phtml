@@ -1,0 +1,111 @@
+<?php
+    $conflictsList = $this->getPossibleConflictsList();
+    foreach($conflictsList as $objectKey => $objectsList){
+?>
+<div class="ambase-debug-header"><?php echo ucfirst($objectKey);?></div>
+<div class="ambase-debug-section">
+<table cellspacing="0">
+<?php 
+        foreach($objectsList as $moduleKey => $conflicts) {
+            if (isset($conflicts["rewrite"]))
+            foreach($conflicts["rewrite"] as $rewriteKey => $rewrites){
+                $codePool = $conflicts["codePool"][$rewriteKey];
+                
+                ;
+                
+?>
+            <tr>
+                <td><?php 
+                    echo uc_words($moduleKey, " ") . " ";
+                    echo uc_words($rewriteKey, " ");
+//                    foreach(explode("_", $rewriteKey) as $rewritePartKey){
+//                        echo ucfirst($rewritePartKey) . " ";
+//                    }
+                ?></td>
+                <td>
+                    <?php
+                        foreach($rewrites as $rewriteIndex => $rewrite){
+                            $rewriteParts = explode("_", $rewrite);
+                            
+                            foreach(array_slice($rewriteParts, 0, 2) as $rewritePart){
+                                echo ucfirst($rewritePart) . " ";
+                            }
+                            echo "<br/>";
+                        }
+                        
+                        
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    
+                        
+                        if ($this->hasConflict($rewrites)){
+                            
+                            if ( ! $this->conflictResolved($codePool, $rewrites)){
+                    ?>
+                    <button type="button" class="scalable save" onclick="document.location.href='<?php echo $this->getFixUrl($objectKey, $moduleKey, $rewriteKey); ?>'" style="">
+                        <span><span><span><?php echo $this->__("Fix")?></span></span></span>
+                    </button>
+                    <?php
+                            } else {
+                    ?>
+                    <button type="button" class="scalable" onclick="document.location.href='<?php echo $this->getRollbackUrl($objectKey, $moduleKey, $rewriteKey); ?>'" style="">
+                        <span><span><span><?php echo $this->__("Rollback")?></span></span></span>
+                    </button>
+                    <?php
+                            }
+                            $instructionId = uniqid("ambase_instr");
+                            krsort($rewrites);
+                            $extends = $rewrites;
+                            
+                    ?>
+                    <div onclick="$(<?php print $instructionId?>).toggleClassName('ambase-hidden', true);" class="ambase-show-instruction"><?php echo $this->__("Show instructions")?></div>
+                    <div class="ambase-instruction ambase-hidden" id="<?php echo $instructionId;?>">
+                        <ul>
+                            <?php foreach($rewrites as $rewriteIndex => $rewriteClass){ 
+                                unset($extends[$rewriteIndex]);
+                                $extendsValues = array_values($extends);
+                                
+                                $parentClasses = Mage::helper("ambase")->getParentClasses($rewriteClass);
+                                if (count($extendsValues) > 0) {
+                            ?>
+                            <li><?php 
+                                echo $this->__("Open file");
+                                echo "&nbsp;<b>";
+                                echo $this->getClassPath($rewrites, $codePool, $rewriteIndex);
+                                echo "</b>";
+                                ?></li>
+                            <li><?php 
+                                echo $this->__("Replace");
+                                echo "&nbsp;<b>" . $parentClasses[0];                                
+                                echo "</b>&nbsp;";
+                                echo $this->__("to");
+                                echo "&nbsp;<b>" . $extendsValues[0];
+                                echo "</b>";
+                            ?></li>
+                            <?php } 
+                            
+                            }?>
+                            <li style="text-decoration: underline;"><?php echo $this->__("Clear magento cache and all external caches like APC (if any).")?></li>
+                        </ul>
+                    </div>
+                    <?php
+                        } else {
+                    ?>
+                    <div class="green"><?php echo $this->__("No actions required")?></div>
+                    <?php
+                        }
+                    ?>
+                </td>
+            </tr>
+<?php
+            }
+        }
+?>
+</table>
+</div>
+<?php
+    }
+?>
+

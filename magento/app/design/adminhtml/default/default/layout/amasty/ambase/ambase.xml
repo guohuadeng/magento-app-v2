@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addCss">
+                <name>css/amasty/ambase/style.css</name>
+            </action>
+            <action method="addJs">
+                <name>amasty/ambase/store.js</name>
+            </action>
+        </reference>
+    </adminhtml_system_config_edit>
+    <ambase_adminhtml_base_ajax>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>empty.phtml</template>
+            </action>
+        </reference>
+    </ambase_adminhtml_base_ajax>
+</layout>

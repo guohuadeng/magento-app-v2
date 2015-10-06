@@ -1,0 +1,315 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2008-2012 Amasty (http://www.amasty.com)
+* @package Amasty_Customerattr
+*/
+-->
+<config>
+    <sections>
+        <amcustomerattr translate="label" module="amcustomerattr">
+            <label>Customer Attributes</label>
+            <tab>amasty</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>3211</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+            	<general translate="label">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <select_grid translate="label comment">
+                            <label>Display customer attributes on the select customer grid</label>
+                            <comment>This applies to the customers grid which is used to select a customer during order creation at the backend</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </select_grid> 
+                        <allow_change_group translate="label">
+                            <label>Allow customer to change his group</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allow_change_group>
+                        <check_file_type translate="label comment">
+                            <label>Check upload file type</label>
+                            <comment>Check MIME content type of upload file</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </check_file_type>
+                        <address_enabled translate="label">
+                            <label>Show address fields on the Registration page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </address_enabled>
+                        <front_auto_output translate="label comment">
+                            <label>Try to output on Frontend</label>
+                            <comment>Without modifications in templates</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </front_auto_output>
+                    </fields>
+                </general>
+                <login translate="label">
+                    <label>Login Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <login_field translate="label comment">
+                            <label>Use for customer login</label>
+                            <comment>The attribute chosen here will be used for customer login together with or instead of email.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amcustomerattr/system_config_source_attributes</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </login_field>
+                        <disable_email translate="label comment">
+                            <label>Disable email login</label>
+                            <comment>If set to `Yes`, customers will be able to login only by the custom attribute chosen above. If set to `No`, customers will be able to login using either the custom attribute or email.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </disable_email>
+                        <modify_title translate="label">
+                            <label>Modify field title on the login page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </modify_title>
+                    </fields>
+                </login>
+                <forgot translate="label">
+                    <label>Forgot Password Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <forgot_field translate="label comment">
+                            <label>Use for forgot password</label>
+                            <comment>The attribute chosen here will be used for forgot password together with or instead of email.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amcustomerattr/system_config_source_attributes</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </forgot_field>
+                        <field_title translate="label comment">
+                            <label>Field Title</label>
+                            <comment>If leave empty, then will be used the `Email Address` title.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </field_title>
+                        <disable_email translate="label comment">
+                            <label>Disable email for forgot password</label>
+                            <comment>If set to `Yes`, customers will be able to retrieve his password only by the custom attribute chosen above. If set to `No`, customers will be able to retrieve his password using either the custom attribute or email.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </disable_email>
+                        <text translate="label comment">
+                            <label>Text</label>
+                            <comment>If leave empty, then will be used standard text.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </text>
+                    </fields>
+                </forgot>
+
+                <activation translate="label">
+                    <label>Customer Account Activation Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <activation_required translate="label comment">
+                            <label>New Customers Require Activation</label>
+                            <comment>All new customers will be not activated after registration.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </activation_required>
+                        <notify_admin translate="label comment">
+                            <label>Notify Admin on New Registration</label>
+                            <comment>Site Administrator will retrieve a email after every new registaration.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </notify_admin>
+                        <admin_email translate="label comment">
+                            <label>Admin Email Address</label>
+                            <comment>Site Administrator email type right here (more than one separated by comma).</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <notify_admin>1</notify_admin>
+                            </depends>
+                        </admin_email>
+                        <admin_sender translate="label">
+                            <label>Admin Notification Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <notify_admin>1</notify_admin>
+                            </depends>
+                        </admin_sender>
+                        <email_template_admin translate="label comment">
+                            <label>Admin Notification Email Template</label>
+                            <comment>Specify email template for notification letters.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <notify_admin>1</notify_admin>
+                            </depends>
+                        </email_template_admin>
+                        <notify_customer translate="label comment">
+                            <label>Notify Customer Upon Activation</label>
+                            <comment><![CDATA[Choose `Yes` if you want send emails to customer after profile activation.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </notify_customer>
+                        <customer_sender translate="label">
+                            <label>Customer Notification Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>53</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <notify_customer>1</notify_customer>
+                            </depends>
+                        </customer_sender>
+                        <email_template_customer translate="label comment">
+                            <label>Customer Notification E-mail Template</label>
+                            <comment>Specify email template for notification letters to users upon activation.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <notify_customer>1</notify_customer>
+                            </depends>
+                        </email_template_customer>
+                        <registration_notice translate="label comment">
+                            <label>Activation Note</label>
+                            <comment>Notification text to display to customer after registration.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </registration_notice>
+                        <auto_activation translate="label comment">
+                            <label>Activate New Customers Automatically</label>
+                            <comment>This option will activate new customers automatically and apply all options above.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </auto_activation>
+                        <enabled_customer_groups translate="label">
+                            <label>Activation by Customer Group</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <auto_activation>1</auto_activation>
+                            </depends>
+                        </enabled_customer_groups>
+                        <customer_groups translate="label">
+                            <label>Customer Groups</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>amcustomerattr/source_group</source_model>
+                            <sort_order>85</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <auto_activation>1</auto_activation>
+                                <enabled_customer_groups>1</enabled_customer_groups>
+                            </depends>
+                        </customer_groups>
+                    </fields>
+                </activation>
+            </groups>
+        </amcustomerattr>
+    </sections>
+</config>

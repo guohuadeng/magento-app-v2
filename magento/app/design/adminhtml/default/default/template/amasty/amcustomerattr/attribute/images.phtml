@@ -1,0 +1,51 @@
+<form method="post" enctype="multipart/form-data" action="<?php echo $this->getSubmitUrl(); ?>">
+<?php echo $this->getBlockHtml('formkey')?> 
+
+<div class="entity-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('amcustomerattr')->__('Manage Images') ?></h4>
+        
+        <div class="form-buttons">
+            <button style="" type="submit" class="scalable save" type="button"><span><?php echo Mage::helper('amcustomerattr')->__('Update Images') ?></span></button>
+        </div>
+    </div>
+    <div class="box">
+            <div class="hor-scroll">
+            <table cellspacing="5">
+                <tr>
+                    <th width="200"><?php echo Mage::helper('amcustomerattr')->__('Status Label') ?></th>
+                    <th width="10"></th>
+                    <th><?php echo Mage::helper('amcustomerattr')->__('Upload icon image') ?></th>
+                    <th width="10"></th>
+                    <th><?php echo Mage::helper('amcustomerattr')->__('Preview') ?></th>
+                    <th width="10"></th>
+                    <th><?php echo Mage::helper('amcustomerattr')->__('Delete') ?></th>
+                </tr>
+                
+                <?php foreach ($this->getOptionsCollection() as $option): ?>
+                <tr>
+                    <td><?php echo $option->getData('value'); ?></td>
+                    <td></td>
+                    <td><input type="file" name="amcustomerattr_icon[<?php echo $option->getData('option_id'); ?>]"></td>
+                    <td></td>
+                    <td align="center">
+                        <?php
+                        $iconUrl = $this->getIcon($option);
+                        if ($iconUrl):
+                        ?>
+                            <img src="<?php echo $iconUrl; ?>" alt="">
+                        <?php else: ?>
+                            <?php echo Mage::helper('amcustomerattr')->__('[none]') ?>
+                        <?php endif; ?>
+                    </td>
+                    <td></td>
+                    <td align="center"><input type="checkbox" value="1" name="amcustomerattr_icon_delete[<?php echo $option->getData('option_id'); ?>]"></td>
+                </tr>
+                <?php endforeach; ?>
+                
+            </table>
+            </div>
+    </div>
+</div>
+
+</form>

@@ -1,0 +1,76 @@
+#amasty_store
+{
+    border: none;
+    height: 1700px; /* fallback */
+    width: 100%;
+}
+
+.amasty-store-tab
+{
+    position: relative;
+}
+
+.amasty-store-tab span:after
+{
+    top: 0;
+    right: 3px;
+    position: absolute;
+    content: " ";
+    display: block;
+    background: url(../../../images/ambase/shop.png) no-repeat;
+    width: 55px;
+    height: 23px;
+}
+
+.ambase-debug-section{
+    background: #FFF;
+    padding: 10px;
+    border: 1px solid #d6d6d6;
+}
+
+.ambase-debug-section table td{
+    padding: 5px 10px;
+    vertical-align: top;
+}
+
+.ambase-debug-section .green{
+    color: green;
+}
+
+.ambase-debug-section .red{
+    color: red;
+}
+
+.ambase-debug-header{
+    font-weight: bold;
+    padding: 10px 0px;
+    font-size: 1.3em;
+}
+
+.ambase-show-instruction{
+    color: grey;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.ambase-instruction{
+    font-size: 0.8em;
+}
+
+.ambase-instruction li{
+    margin: 0;
+}
+
+.ambase-file{
+    font-size: 0.8em;
+    color: grey;
+}
+
+.ambase-debug-header-click{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.ambase-hidden{
+    visibility: hidden;
+}

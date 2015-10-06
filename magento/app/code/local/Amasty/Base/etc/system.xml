@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <amasty translate="label" module="ambase">
+            <label><![CDATA[<div style="position: absolute;"><img id="amasty_block" src="" alt="" border="0" /></div>&nbsp;<script>
+            var n = SKIN_URL.indexOf("adminhtml");
+            $('amasty_block').src = SKIN_URL.substring(0, n) + "adminhtml/default/default/images/ambase/amasty.png";
+            </script>]]></label>
+            <sort_order>400</sort_order>
+        </amasty>
+    </tabs>
+    <sections>
+        <amstore>
+            <label><![CDATA[Extensions Store]]></label>
+            <tab>amasty</tab>
+            <class>amasty-store-tab</class>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <extensions translate="label">
+                    <label>Amasty Extensions Store</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>ambase/store</frontend_model>
+                    <sort_order>999</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </extensions>
+            </groups>
+        </amstore>
+        <ambase translate="label" module="ambase">
+            <label><![CDATA[Extensions &amp; Notifications]]></label>
+            <tab>amasty</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>110</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <extensions translate="label">
+                    <label>Installed Extensions</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>ambase/extensions</frontend_model>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </extensions>
+                <feed>
+                    <label>Notifications</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>90</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <interests translate="label">
+                            <label>I'd like to be informed by Amasty about:</label>
+                            <comment></comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                            <source_model>ambase/source_updates_type</source_model>
+                        </interests>
+                    </fields>
+                </feed>
+            <conflicts translate="label">
+                    <label><![CDATA[Troubleshooter<script>
+                        function ambaseShow(url){
+                            new Ajax.Request(url, {
+                                onSuccess: function(response) {
+                                    $("ambase_conflicts_container").update(response.transport.response)
+                                }
+                            });
+                        }
+                    </script>]]></label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>ambase/conflicts</frontend_model>
+                    <sort_order>200</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </conflicts>
+            </groups>
+        </ambase>
+    </sections>
+</config>
