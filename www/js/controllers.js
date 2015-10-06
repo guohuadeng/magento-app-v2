@@ -218,9 +218,9 @@ angular.module('app.controllers', [])
                 $scope.hideLoading();
 
                 if (res[0]) {
-                    $scope.showAlert('Success!', 'Welcome! User register success.');
+                    $scope.showAlert('Success!',$scope.translations.register_success);
                     $scope.getUser();
-                    $state.go('app.register');
+                    $state.go('app.home');
                     return;
                 }
                 $scope.showAlert('Alert!', res[2]);
