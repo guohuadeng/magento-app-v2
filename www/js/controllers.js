@@ -158,7 +158,7 @@ angular.module('app.controllers', [])
         $scope.validationCodeDisabled = false;
         $scope.getValidationCode = function () {
             $scope.validationCodeDisabled = true;
-            $scope.validationCode = ~~(Math.random() * 8999) + 1000;
+            $scope.validationCode = String(~~(Math.random() * 8999) + 1000);
             $scope.validateSeconds = 30;
             //发送验证码短信
             $scope.valiData = {};
@@ -188,7 +188,11 @@ angular.module('app.controllers', [])
 
         $scope.doRegister = function () {
             if ($scope.registerData.password !== $scope.registerData.confirmation) {
-                $scope.showAlert('Alert!', 'Please confirm you password!');
+                $scope.showAlert('Alert!',$scope.translations.need_confirm_pwd );
+                return;
+            }
+            if ($scope.validationCode !== $scope.registerData.validation_Code) {
+                $scope.showAlert('Alert!', $scope.translations.need_confirm_vali );
                 return;
             }
 

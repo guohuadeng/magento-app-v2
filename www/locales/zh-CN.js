@@ -68,6 +68,8 @@ var zh_CN = {
     enter_app: '进入应用',
     wait_tip: '这需要一点时间，请稍候……',
     enter_email: '输入您的邮箱',
+    need_confirm_pwd: '请检查两次输入的密码',
+    need_confirm_vali: '请检查输入的手机验证码',
     success: '成功',
     fail: '失败',
     alert: '提示',

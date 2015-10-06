@@ -64,6 +64,8 @@ var en_US = {
     enter_app: 'Enter App',
     wait_tip: 'This would take a little longer. Please wait...',
     enter_email: 'Enter your email',
+    need_confirm_pwd: 'Please confirm your password!',
+    need_confirm_vali: 'Please confirm your Validation code!',
     success: 'Success',
     fail: 'fail',
     alert: 'Alert',
