@@ -69,7 +69,7 @@ angular.module('app.controllers', [])
         $scope.showLogin = function () {
             $scope.loginData = {};
 
-            var popup = $ionicPopup.show({
+            var popupLogin = $ionicPopup.show({
                 templateUrl: 'templates/login.html',
                 title: $scope.translations.login_title,
                 cssClass: 'login-container',
@@ -94,52 +94,15 @@ angular.module('app.controllers', [])
                                     return;
                                 }
                                 $scope.user = res;
-                                popup.close();
+                                $scope.hideLogin();
                             });
                         }
                     }
                 ]
             });
             $scope.hideLogin = function () {
-                popup.close();
+                popupLogin.close();
             };
-        };
-
-        // 忘记密码
-        $scope.showPopupForgotPwd = function () {
-            $scope.pwdData = {};
-
-            var popup = $ionicPopup.show({
-                templateUrl: 'templates/forgotPwd.html',
-                title: $scope.translations.enter_email,
-                cssClass: 'forgot-pwd-container',
-                scope: $scope,
-                buttons: [
-                    {text: $scope.translations.cancel},
-                    {
-                        text: $scope.translations.submit,
-                        type: 'button-assertive',
-                        onTap: function (e) {
-                            e.preventDefault();
-                            if (!$scope.pwdData.email) {
-                                return;
-                            }
-
-                            $scope.showLoading();
-                            $rootScope.service.get('forgotpwd', $scope.pwdData, function (res) {
-                                $scope.hideLoading();
-                                if (res.code == '0x0000') {
-                                    $scope.showAlert($scope.translations.success, res.message);
-                                    popup.close();
-                                    return;
-                                }
-                                $scope.showAlert($scope.translations.alert, $scope.translations.error_code +
-                                    res.code + '</br>' + res.message);
-                            });
-                        }
-                    }
-                ]
-            });
         };
 
         // 退出登录
@@ -197,6 +160,22 @@ angular.module('app.controllers', [])
             $scope.validationCodeDisabled = true;
             $scope.validationCode = ~~(Math.random() * 8999) + 1000;
             $scope.validateSeconds = 30;
+            //发送验证码短信
+            $scope.valiData = {};
+            $scope.valiData.mobile = $scope.registerData.default_mobile_number;
+            $scope.valiData.validation = $scope.validationCode;
+            $scope.valiData.timeout = '60';
+            $scope.valiData.template = '1';
+            $rootScope.service.sendSms($scope.valiData, function (res) {
+                if (res.statusCode == 0) {
+                    $scope.registerData.valiinfo = $scope.translations.success;
+                }
+                else  {
+                    $scope.registerData.valiinfo = res.statusMsg ? res.statusMsg:$scope.translations.fail;
+                    alert(res.statusMsg ? res.statusMsg:$scope.translations.fail );
+                }
+            });
+
             var update = function () {
                 if ($scope.validateSeconds-- > 0) {
                     $timeout(update, 1000);
@@ -224,6 +203,35 @@ angular.module('app.controllers', [])
                     return;
                 }
                 $scope.showAlert('Alert!', res[2]);
+            });
+        };
+    })
+
+    // 忘记密码
+    .controller('forgotPwdCtrl', function ($scope, $rootScope, $timeout, $state) {
+        $scope.pwdData = {};;
+        $scope.hideLogin;
+
+        $scope.myBack = function () {
+            $state.go('app.home');
+            $scope.showLogin();
+        };
+
+        $scope.getPwd = function () {
+            if (!$scope.pwdData.email) {
+                alert($scope.translations.enter_email);
+                return;
+            }
+            $scope.showLoading();
+            $rootScope.service.get('forgotpwd', $scope.pwdData, function (res) {
+                $scope.hideLoading();
+                if (res.code == '0x0000') {
+                    $scope.showAlert($scope.translations.success, res.message);
+                    popupForgotPwd.close();
+                    return;
+                }
+                $scope.showAlert($scope.translations.alert, $scope.translations.error_code +
+                    res.code + '</br>' + res.message);
             });
         };
     })

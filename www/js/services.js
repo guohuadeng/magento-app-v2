@@ -23,7 +23,7 @@ function Service($rootScope, $http) {
         cart: '/restconnect/cart/getCartInfo',	//获取购物车内容
         cartGetQty: '/restconnect/cart/getQty',	//
         cartGetTotal: '/restconnect/cart/getTotal',	//
-        cartAdd: '/restconnect/cart/add/'	//直接post到这个接口就返回参数
+        cartAdd: '/restconnect/cart/add'	//直接post到这个接口就返回参数
     };
 
     $rootScope.service = {
@@ -51,6 +51,20 @@ function Service($rootScope, $http) {
             var url = Config.baseUrl + Config.getLocale() + api[key];
 
             $.post(url, {
+                params: params
+            }).then(function (res) {
+                success(res.data);
+            }, error);
+        },
+        sendSms : function (params, success, error) {
+            if (typeof params === 'function') {
+                error = success;
+                success = params;
+                params = null;
+            }
+
+            var url = Config.baseUrl + 'smsapi/SendTemplateSMS.php';
+            $http.get(url, {
                 params: params
             }).then(function (res) {
                 success(res.data);

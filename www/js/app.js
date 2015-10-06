@@ -95,6 +95,15 @@ angular.module('app', [
                     }
                 }
             })
+            .state('app.forgotPwd', {
+                url: '/forgotPwd',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/forgotPwd.html',
+                        controller: 'forgotPwdCtrl'
+                    }
+                }
+            })
             .state('app.setting', {
                 url: '/setting',
                 views: {

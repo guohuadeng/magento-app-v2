@@ -14,7 +14,8 @@
                     <input type="text" placeholder="{{'validation_code' | translate}}"
                            ng-model="registerData.validation_Code">
                 </label>
-                <label class="item">
+                <label class="item getVali">
+                    <span>{{registerData.valiinfo}}</span>
                     <button class="button button-outline button-assertive"
                             value="{{'get_validation_code' | translate}}"
                             ng-click="getValidationCode()"
@@ -82,11 +83,9 @@
                            ng-model="registerData.confirmation">
                 </label>
 
-                <label class="item">
-                    <button class="button button-full button-assertive"
-                            type="submit"> {{'submit' | translate}}
-                    </button>
-                </label>
+                <button class="button button-full button-assertive"
+                        type="submit"> {{'submit' | translate}}
+                </button>
             </div>
         </form>
     </ion-content>

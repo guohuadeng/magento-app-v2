@@ -1,15 +1,22 @@
-<ion-content overflow-scroll="false">
-    <div class="list padding">
-        <h3> &nbsp; </h3>
-
-        <form>
-            <label class="item item-input">
-                <span class="input-label">{{'email' | translate}}*</span>
-                <input autofocus class="padding-left" type="email" ng-model="pwdData.email">
-            </label>
-            <div class="padding">
-                {{'wait_tip' | translate}}
+<ion-view cache-view="false" view-title="{{'forgot_password' | translate}}">
+    <ion-content overflow-scroll="false">
+        <div class="list padding">
+            <h3> &nbsp; </h3>
+            <form>
+                <label class="item item-input">
+                    <span class="input-label">{{'email' | translate}}*</span>
+                    <input autofocus class="padding-left" type="email" ng-model="pwdData.email">
+                </label>
+                <div class="padding">
+                    {{'wait_tip' | translate}}
+                </div>
+            </form>
+        </div>
+        <div class="padding">
+            <div class="button-bar">
+                <button type="reset" class="button button-outline button-assertive" ng-click="myBack()">{{'back' | translate}}</button>
+                <button type="submit" class="button  button-assertive" ng-click="getPwd()">{{'submit' | translate}}</button>
             </div>
-        </form>
-    </div>
-</ion-content>
+        </div>
+    </ion-content>
+</ion-view>

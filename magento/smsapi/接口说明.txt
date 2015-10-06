@@ -1,0 +1,52 @@
+接口说明
+
+ /**
+	 * 初始化
+	 * @param serverIP    必选参数	服务器地址
+	 * @param serverPort	必选参数	服务器端口
+	 * @param softVersion	必选参数	REST版本号
+	 */
+	 REST($serverIP,$serverPort,$softVersion)
+  
+  
+   /**
+    * 设置主帐号
+    * 
+    * @param AccountSid 主帐号
+    * @param AccountToken 主帐号Token
+    */    
+    function setAccount($AccountSid,$AccountToken)
+	
+	
+	 /**
+    * 设置应用ID
+    * 
+    * @param AppId 应用ID
+    */
+    function setAppId($AppId)
+	
+	
+   /**
+    * 打印日志
+    * 
+    * @param log 日志内容
+    */
+    function showlog($log)
+    
+    
+    /**
+     * 发起HTTPS请求
+     * @param url 请求地址
+     * @param data 请求包体
+     * @param header 请求包头
+     * @param post 请求方式 默认为1 1：post，0：get
+     */
+     function curl_post($url,$data,$header,$post=1)
+  
+   /**
+    * 发送模板短信
+    * @param to 短信接收彿手机号码集合,用英文逗号分开
+    * @param datas 内容数据 格式为数组 例如：array('Marry','Alon')，如不需替换请填 null
+    * @param $tempId 模板Id,测试应用和未上线应用使用测试模板请填写1，正式应用上线后填写已申请审核通过的模板ID
+    */       
+    function sendTemplateSMS($to,$datas,$tempId)

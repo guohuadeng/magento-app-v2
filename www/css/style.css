@@ -240,9 +240,12 @@ em {
 }
 
 .register-container .item-radio .item-content {
-    padding: 6px 34px 16px 16px
+    padding: 6px 34px 16px 16px;
 }
 
+.register-container .getVali{
+    padding: 3px;
+}
 .forgot-pwd-container .popup {
     width: 90%;
     height: 250px;
