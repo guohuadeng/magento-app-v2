@@ -14,7 +14,8 @@
                         <div class="list padding-horizontal">
                             <div class="row" ng-repeat="agent in agentList">
                                 <div class="col col-20">
-                                    <a class="button button-balanced icon-left ion-ios-telephone-outline" href="tel:{{agent.telephone}}"></a>
+                                    <a class="button button-balanced icon-left ion-ios-telephone-outline" href="tel:{{agent.telephone}}"
+                                       onclick="window.open(this.href, '_system', 'location=yes');return false;"></a>
                                 </div>
                                 <div class="col" ng-click="showAgent()">
                                     <h3>{{agent.store_name}}</h3>
