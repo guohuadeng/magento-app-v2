@@ -102,11 +102,18 @@ class Sunpop_RestConnect_CustomerController extends Mage_Core_Controller_Front_A
 		}
 		$customer->getGroupId ();
 		try {
+			//中文姓名处理，如果有 chinesename字段
+			if ( $params ['chinesename'] == null  )	{
+				$customer->setData ( 'firstname', $params ['firstname'] );
+				$customer->setData ( 'lastname', $params ['lastname'] );
+				}
+			else	{
+				$customer->setData ( 'lastname', mb_substr($params ['chinesename'], 0, 1, 'utf-8') );
+				$customer->setData ( 'firstname', mb_substr($params ['chinesename'], 1, mb_strlen($params ['chinesename'])-1, 'utf-8') );
+				}
 			$customer->setPassword ( $params ['password'] );
 			$customer->setConfirmation ( $this->getRequest ()->getPost ( 'confirmation', $params ['password'] ) );
 			$customer->setData ( 'email', $params ['email'] );
-			$customer->setData ( 'firstname', $params ['firstname'] );
-			$customer->setData ( 'lastname', $params ['lastname'] );
 			$customer->setData ( 'gender', $params ['gender'] );
 			$customer->setData ( 'default_mobile_number', $params ['default_mobile_number'] );
 			$validationResult = count ( $errors ) == 0;
