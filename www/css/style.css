@@ -526,6 +526,7 @@ em {
 
 .popup .popup-body {
     padding: 10px;
+    min-height: 90px;
     height: 100%;
 }
 .login-container .popup .popup-body {
