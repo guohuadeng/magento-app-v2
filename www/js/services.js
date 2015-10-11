@@ -1,4 +1,4 @@
-function Service($rootScope, $http) {
+function Service($rootScope, $http, $ionicPopup) {
 
     var api = {
         website: '/restconnect/store/websiteinfo',
@@ -24,7 +24,7 @@ function Service($rootScope, $http) {
         cartGetQty: '/restconnect/cart/getQty',	//
         cartGetTotal: '/restconnect/cart/getTotal',	//
         cartAdd: '/restconnect/cart/add'	//直接post到这个接口就返回参数
-    };
+    }, showError = false;
 
     $rootScope.service = {
         get: function (key, params, success, error) {
@@ -37,10 +37,11 @@ function Service($rootScope, $http) {
             var url = Config.baseUrl + Config.getLocale() + api[key];
 
             $http.get(url, {
-                params: params
+                params: params,
+                timeout: 20000
             }).then(function (res) {
                 success(res.data);
-            }, error);
+            }, handleError(error));
         },
         post: function (key, params, success, error) {
             if (typeof params === 'function') {
@@ -51,12 +52,13 @@ function Service($rootScope, $http) {
             var url = Config.baseUrl + Config.getLocale() + api[key];
 
             $.post(url, {
-                params: params
+                params: params,
+                timeout: 20000
             }).then(function (res) {
                 success(res.data);
-            }, error);
+            }, handleError(error));
         },
-        sendSms : function (params, success, error) {
+        sendSms: function (params, success, error) {
             if (typeof params === 'function') {
                 error = success;
                 success = params;
@@ -68,7 +70,27 @@ function Service($rootScope, $http) {
                 params: params
             }).then(function (res) {
                 success(res.data);
-            }, error);
+            }, handleError(error));
         }
+    };
+
+    function handleError(error) {
+        return function (err) {
+            if (error) error(err);
+            if (showError) {
+                return;
+            }
+            showError = true;
+            $ionicPopup.alert({
+                title: $rootScope.translations.network_error,
+                template: $rootScope.translations.check_network,
+                buttons: [{
+                    text: $rootScope.translations.ok,
+                    onTap: function () {
+                        showError = false;
+                    }
+                }]
+            });
+        };
     }
 }

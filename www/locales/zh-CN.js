@@ -100,5 +100,7 @@ var zh_CN = {
     order: '我的订单',
     address: '我的地址',
     wishlist: '我的愿望单',
-    cart: '购物车'
+    cart: '购物车',
+    network_error: '网络错误',
+    check_network: '请检查网络连接！'
 };

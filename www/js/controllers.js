@@ -10,6 +10,7 @@ angular.module('app.controllers', [])
 
         $translate(Object.keys(zh_CN)).then(function (translations) {
             $scope.translations = translations;
+            $rootScope.translations = $scope.translations;
         });
 
         // Loading

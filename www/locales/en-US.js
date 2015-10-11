@@ -96,5 +96,7 @@ var en_US = {
     order: 'My Order',
     address: 'My Address Book',
     wishlist: 'My Wish List',
-    cart: 'My Shopping Cart'
+    cart: 'My Shopping Cart',
+    network_error: 'Network Error',
+    check_network: 'Please check your network connection!'
 };
