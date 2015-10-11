@@ -573,26 +573,24 @@ angular.module('app.controllers', [])
                 var $shape = $('select[name="' + this.field.code + '"]'),
                     shape = $.trim($shape.find('option:selected').text());
 
-                if (shape == $scope.translations.All)    {
+                if (shape == $scope.translations.All) {
                     $scope._xingzhuang = '';
                 } else {
                     $scope._xingzhuang = '('+shape+')';
                 }
-                $('#a_guige').get(0).selectedIndex=0;
-                $('select[name="a_guige"]').get(0).options[0].selected = true;
-                /*
-                $('select[name="a_guige"]').val('').find('option').show();
-                if ($shape.val()) {
-                    $('select[name="a_guige"]').find('option:not(:contains((' + shape + '))').hide();
-                    $('select[name="a_guige"]').find('option[value=""]').show();
-                }*/
             }
         };
 
+        $scope.onReset = function () {
+            $scope._xingzhuang = '';
+        };
+
         $scope.onSearch = function () {
+            var params = $('#searAdv').formParams();
+            params['a_guige'] = params['a_guige'].substring(7);
             $rootScope.search = {
                 type: 'searchAdv',
-                params: $('#searAdv').formParams()
+                params: params
             };
             $state.go('app.searchResult');
         };

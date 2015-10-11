@@ -51,11 +51,9 @@
                                     class="select-dark"
                                     title="{{field.label}}"
                                     ng-model="searAdvData[field.label]"
+                                    ng-options="item.option_id as item.value for item in field.attributeValue | filter:_xingzhuang"
                                     ng-change="optionChange()">
                                 <option value="">{{'All' | translate}}</option>
-                                <option ng-repeat="item in field.attributeValue | filter:_xingzhuang" value="{{item.option_id}}">
-                                    {{item.value}}
-                                </option>
                             </select>
                         </label>
                         <label ng-if="field.code!='a_guige'" class="item item-input item-select">
@@ -112,7 +110,7 @@
 
                 <div class="padding">
                     <div class="button-bar">
-                        <button type="reset" class="button button-outline button-assertive">{{'reset' | translate}}</button>
+                        <button type="reset" class="button button-outline button-assertive" ng-click="onReset()">{{'reset' | translate}}</button>
                         <button type="submit" class="button  button-assertive" ng-click="onSearch()">{{'search' | translate}}</button>
                     </div>
                 </div>
