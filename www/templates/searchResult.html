@@ -1,4 +1,4 @@
-<ion-view cache-view="false" view-title="{{searchTitle}}">
+<ion-view view-title="{{searchTitle}}">
     <ion-content scroll="false" overflow-scroll="true">
         <ion-content lazy-scroll style="height:100%" overflow-scroll="true" direction="y" locking="true">
             <ion-refresher
@@ -21,7 +21,11 @@
                                 {{product.name}}
                             </div>
 
-                            <div class="product-price">
+                            <div ng-if="!user"  class="get_price" ng-click="showLogin()">
+                                {{'reg_get_price' | translate}}
+                            </div>
+
+                            <div  ng-if="!!user" class="product-price">
                                 <div class="price-box">
                                   <span ng-if="product.discount != null" class="special-price">
                                       <span class="special-price">

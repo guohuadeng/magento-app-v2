@@ -20,12 +20,13 @@
                                 <div class="col" ng-click="showAgent()">
                                     <h3>{{agent.store_name}}</h3>
                                     <div class="row">
-                                        <div class="col-80">{{agent.address}}({{agent.telephone}})</div>
+                                        <div class="col-75">{{agent.address}}({{agent.telephone}})</div>
                                         <div class="col distance">{{agent.distance | number:0}} km</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <br><br>
                     </ion-scroll>
                 </ion-tab>
                 <ion-tab  scroll="false" title="{{'map_view' | translate}}" id="tab_agent_map" on-select="showMap()">

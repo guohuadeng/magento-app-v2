@@ -226,6 +226,8 @@ em {
 }
 
 .login-container .popup-buttons {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .login-container .tab-nav {
     top: 0px;
@@ -421,6 +423,11 @@ em {
 }
 
 /*-------for price---------*/
+
+.get_price  {
+    color: #e74c3c;
+    font-size: 120%;
+}
 
 .price-box .price,
 .category-products .product .price-box .price {

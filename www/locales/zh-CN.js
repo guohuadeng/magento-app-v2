@@ -14,6 +14,7 @@ var zh_CN = {
     common_products: '常用产品',
     cert_download: '证书下载',
     search_agent: '附近商家',
+    reg_get_price: '登录查看最优价',
     phone_call: '电话',
     input_address: '位置',
     input_radius: '距离(公里)',

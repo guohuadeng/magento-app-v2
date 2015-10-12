@@ -10,6 +10,7 @@ var en_US = {
     common_products: 'Common Products',
     cert_download: 'Cert Download',
     search_agent: 'Near Agents',
+    reg_get_price: 'Login to get the best price',
     phone_call: 'Call',
     input_address: 'City or Address',
     input_radius: 'Radius(KM)',
