@@ -21,13 +21,8 @@ class Sunpop_RestConnect_IndexController extends Mage_Core_Controller_Front_Acti
 				$_categorylist = array ();
 				if (count ( $_categories ) > 0) {
 					foreach ( $_categories as $_category ) {
-						//有关虚拟产品目录的处理，暂时只能写死了
+						//有关虚拟产品目录的处理
 						$is_virtual = $_category->getData('a_cat_virtual');
-						if ($_category->getName() == '证书下载')	{
-							$is_virtual = 1;
-							}
-						else
-							$is_virtual = '0';
 
 						$_helper->getCategoryUrl ( $_category );
 						$_categorylist [] = array (
@@ -243,12 +238,10 @@ class Sunpop_RestConnect_IndexController extends Mage_Core_Controller_Front_Acti
 				$dateTomorrow = date ( 'm/d/y', $tomorrow );
 				// $collection = Mage::getResourceModel ( 'catalog/product_collection' );
 				$collection = Mage::getModel ( 'catalog/product' )->getCollection ();
-				$collection->/* addStoreFilter ()-> */addAttributeToSelect ( '*' )->addAttributeToFilter ( 'visibility', array (
-
-						'neq' => 1 
-
+				$collection->addAttributeToSelect ( '*' )->addAttributeToFilter ( 'visibility', array (
+						'neq' => 1
 				) )->addAttributeToFilter ( 'status', 1 )->addAttributeToFilter ( 'special_price', array (
-						'neq' => "0" 
+						'notnull' => true
 				) )->addAttributeToFilter ( 'special_from_date', array (
 						'date' => true,
 						'to' => $todayDate 
