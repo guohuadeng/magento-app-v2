@@ -16,7 +16,7 @@
             <li class="item">
                 {{'about' | translate}}
             </li>
-            <li class="item">
+            <li ng-if="!ionic.Platform.isIOS()" class="item">
                 {{'check_update' | translate}}
             </li>
             <li class="item">
