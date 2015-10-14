@@ -91,7 +91,7 @@ angular.module('app.controllers', [])
                                 $scope.hideLoading();
 
                                 if (res.code || res.message) {
-                                    $scope.showAlert('Alert!', res.message || res.code);
+                                    alert(res.message || res.code);
                                     return;
                                 }
                                 $scope.user = res;
@@ -189,11 +189,11 @@ angular.module('app.controllers', [])
 
         $scope.doRegister = function () {
             if ($scope.registerData.password !== $scope.registerData.confirmation) {
-                $scope.showAlert('Alert!',$scope.translations.need_confirm_pwd );
+                alert($scope.translations.need_confirm_pwd );
                 return;
             }
             if ($scope.validationCode !== $scope.registerData.validation_Code) {
-                $scope.showAlert('Alert!', $scope.translations.need_confirm_vali );
+                alert( $scope.translations.need_confirm_vali );
                 return;
             }
 
@@ -202,12 +202,12 @@ angular.module('app.controllers', [])
                 $scope.hideLoading();
 
                 if (res[0]) {
-                    $scope.showAlert('Success!',$scope.translations.register_success);
+                    alert($scope.translations.register_success);
                     $scope.getUser();
                     $state.go('app.home');
                     return;
                 }
-                $scope.showAlert('Alert!', res[2]);
+                alert( res[2]);
             });
         };
     })
@@ -231,12 +231,11 @@ angular.module('app.controllers', [])
             $rootScope.service.get('forgotpwd', $scope.pwdData, function (res) {
                 $scope.hideLoading();
                 if (res.code == '0x0000') {
-                    $scope.showAlert($scope.translations.success, res.message);
+                    alert($scope.translations.success+'\n\r'+ res.message);
                     popupForgotPwd.close();
                     return;
                 }
-                $scope.showAlert($scope.translations.alert, $scope.translations.error_code +
-                    res.code + '</br>' + res.message);
+                alert($scope.translations.error_code + res.code + '\n\r' + res.message);
             });
         };
     })
@@ -502,11 +501,11 @@ angular.module('app.controllers', [])
             }
             $rootScope.service.get('cartAdd', queryString, function (res) {
                 if (res.result == 'error') {
-                    $scope.showAlert('Alert!', res.message);
+                    alert( res.message);
                     return;
                 }
                 if (res.result == 'success') {
-                    $scope.showAlert('Success', res.items_qty + '&nbsp;'+ $scope.translations['items_in_cart']);
+                    alert($scope.translations.success+'\n\r'+ res.items_qty + ' '+ $scope.translations['items_in_cart']);
                     $scope.items_qty = res.items_qty;
                     return;
                 }

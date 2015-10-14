@@ -81,6 +81,8 @@ function Service($rootScope, $http, $ionicPopup) {
                 return;
             }
             showError = true;
+            alert($rootScope.translations.network_error+'\r\n'+$rootScope.translations.check_network);
+            /*
             $ionicPopup.alert({
                 title: $rootScope.translations.network_error,
                 template: $rootScope.translations.check_network,
@@ -91,6 +93,7 @@ function Service($rootScope, $http, $ionicPopup) {
                     }
                 }]
             });
+            */
         };
     }
 }
