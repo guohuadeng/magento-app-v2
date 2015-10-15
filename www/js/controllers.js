@@ -186,7 +186,13 @@ angular.module('app.controllers', [])
             };
             update();
         };
-
+        //姓氏得到焦点时自动设置一个随机email
+        $scope.mobileChange = function () {
+            if ($scope.registerData.email == '' || !$scope.registerData.email) {
+                if ($scope.registerData.default_mobile_number !== '' && $scope.registerData.default_mobile_number)
+                    $scope.registerData.email = $scope.registerData.default_mobile_number + '@shinystamp.com';
+            }
+        };
         $scope.doRegister = function () {
             if ($scope.registerData.password !== $scope.registerData.confirmation) {
                 alert($scope.translations.need_confirm_pwd );

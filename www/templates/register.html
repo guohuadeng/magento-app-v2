@@ -33,15 +33,15 @@
                 <div class="item item-divider">
                 </div>
                 <label class="item item-input">
-                    <span class="input-label">{{'email' | translate}}*</span>
-                    <input type="text" placeholder="{{'email' | translate}}"
+                    <span class="input-label">{{'email' | translate}}</span>
+                    <input type="text" placeholder="{{'email_reg' | translate}}"
                            ng-model="registerData.email">
                 </label>
 
                 <label class="item item-input">
                     <span class="input-label">{{'last_name' | translate}}*</span>
                     <input type="text" placeholder="{{'last_name' | translate}}"
-                           ng-model="registerData.lastname">
+                           ng-model="registerData.lastname" ng-focus="mobileChange()">
                 </label>
 
                 <label class="item item-input">

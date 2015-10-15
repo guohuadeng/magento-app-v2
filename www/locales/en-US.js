@@ -30,6 +30,7 @@ var en_US = {
     register_success:'Welcome! User register success.',
     login_title: 'User Login',
     email: 'Email',
+    email_reg: 'Email. Leave blank for a random address we assign.',
     email_or_mobile: 'Email/Mobile',
     password: 'Password',
     forgot_password: 'Forgot Your Password?',

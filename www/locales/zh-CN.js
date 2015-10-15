@@ -34,6 +34,7 @@ var zh_CN = {
     register_success:'注册成功！欢迎使用新力印章专家',
     login_title: '用户登录',
     email: '邮箱',
+    email_reg: '邮箱地址，不填则系统自动分配。',
     email_or_mobile: '邮箱/手机号',
     password: '密码',
     forgot_password: '忘记密码？',
