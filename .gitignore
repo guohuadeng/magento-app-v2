@@ -3,6 +3,8 @@
 # 自定义的不公开文件
 s.*
 ~*.*
+SendTemplateSMS.php
+
 node_modules/
 platforms/
 plugins/
