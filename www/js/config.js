@@ -3,7 +3,7 @@
 window.Config = {
     isRelease: true,
     debug: true,
-    baseUrl: 'http://w.sunpop.cn/',
+    baseUrl: 'http://shiny.sunpop.cn/',
     getLocale: function () {
         return localStorage['locale'] || 'cn';
     },
