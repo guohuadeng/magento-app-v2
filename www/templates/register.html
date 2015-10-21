@@ -15,13 +15,13 @@
                            ng-model="registerData.validation_Code">
                 </label>
                 <label class="item getVali">
-                    <span>{{registerData.valiinfo}}</span>
+                    <span class="padding-left">{{registerData.valiinfo}}</span>
                     <button class="button button-outline button-assertive"
                             value="{{'get_validation_code' | translate}}"
                             ng-click="getValidationCode()"
                             ng-disabled="validationCodeDisabled">
                         <em ng-if="validationCodeDisabled">
-                            [{{validationCode}}]{{'wait' | translate}}({{validateSeconds}}{{'second' | translate}})
+                            {{'wait' | translate}}({{validateSeconds}}{{'second' | translate}})
                         </em>
                         <em ng-if="!validationCodeDisabled">
                             {{'get_validation_code' | translate}}

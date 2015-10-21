@@ -4,7 +4,7 @@
 "Royalty Card Number","Royalty Card Number"
 "Sorry, that is not a valid card number","对不起，信用卡号码格式不正确"
 "- Magento Default (E-mail) -","- Magento Default (E-mail) -"
-"Please specify different value for ""%s"" attribute. Customer with such value already exists.","Please specify different value for ""%s"" attribute. Customer with such value already exists."
+"Please specify different value for ""%s"" attribute. Customer with such value already exists.","指定信息 ""%s"" 已存在，请输入一个新值."
 "Default option value is not defined.","Default option value is not defined."
 "Customer website ID must be specified when using the website scope.","Customer website ID must be specified when using the website scope."
 "Customers","客户列表"

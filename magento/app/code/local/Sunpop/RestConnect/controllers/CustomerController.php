@@ -153,20 +153,24 @@ class Sunpop_RestConnect_CustomerController extends Mage_Core_Controller_Front_A
 				$message = $this->__ ( 'There is already an account with this email address. If you are sure that it is your email address, <a href="%s">click here</a> to get your password and access your account.', $url );
 				$session->setEscapeMessages ( false );
 			} else {
-				$message = $e->getMessage ();
+				$message = $this->__( $e->getMessage () );
+				//中文翻译有问题，故手工代码
+				$message = str_replace("Please specify different value for","存在相同的注册信息，请输入一个不同的值", $message);
+				$message = str_replace("attribute. Customer with such value already exists.","。", $message);
+
 			}
 			echo json_encode ( array (
 					false,
 					'0x1000',
 					array (
-							$message 
+							$message
 					) 
 			) );
 		} catch ( Exception $e ) {
 			echo json_encode ( array (
 					false,
 					'0x1000',
-					$e->getMessage () 
+					$this->__( $e->getMessage () )
 			) );
 		}
 	}

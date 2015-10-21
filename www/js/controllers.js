@@ -166,7 +166,7 @@ angular.module('app.controllers', [])
             $scope.valiData.mobile = $scope.registerData.default_mobile_number;
             $scope.valiData.validation = $scope.validationCode;
             $scope.valiData.timeout = '60';
-            $scope.valiData.template = '1';
+            $scope.valiData.template = '43210';
             $rootScope.service.sendSms($scope.valiData, function (res) {
                 if (res.statusCode == 0) {
                     $scope.registerData.valiinfo = $scope.translations.success;
