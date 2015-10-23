@@ -31,15 +31,16 @@ body{ background-color:#0581b2;}
     position: relative;
     width: 1000px;
 }
-.phone, .downloads {
-    position: fixed;
-    margin-left:50px;
-}
 .phone {
-    bottom: 3.942%;
-    left: 21px;
+    top: 10%;
+    left: 2%;
+    width: 40%;
+}
+.phone, .downloads {
+    right:2%;
 }
 .downloads {
+    position: absolute;
     right: 50px;
     text-align: center;
     top: 20.595%;
@@ -393,6 +394,7 @@ a.download2pcBeta:hover {
 .phone img {
     width: 80%;
 	height:80%;
+    margin-top: 100px;
 }
 .section2 h2 {
     top: 100px;
