@@ -17,6 +17,9 @@ ion-view .hide-menu-icon .buttons-left {
 .bar .title {
     text-align: left;
 }
+.popup-container .popup {
+    background-color: rgba(255, 255, 255, 1);
+}
 /* end ionic */
 /* slider */
 .slider-pager {
@@ -244,7 +247,6 @@ em {
 .register-container .item-radio .item-content {
     padding: 6px 34px 16px 16px;
 }
-
 .register-container .getVali{
     padding: 3px;
 }
@@ -253,12 +255,26 @@ em {
     height: 250px;
     background-color: #FFF;
 }
-
+.register-container .privacy {
+    border-bottom: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+.checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
+    background: #e42012;
+    border-color: #e42012;
+}
 .forgot-pwd-container .popup-buttons {
     top: 110px;
     position: relative;
 }
-
+.privacy-container .popup {
+    width: 100%;
+    height: 100%;
+}
+.privacy-container .scroll-content {
+    max-height: 400px;
+}
 /* end login and register */
 /* iframe */
 .frame .scroll {

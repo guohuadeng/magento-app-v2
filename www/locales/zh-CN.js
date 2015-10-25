@@ -39,6 +39,8 @@ var zh_CN = {
     password: '密码',
     forgot_password: '忘记密码？',
     new_account: '新用户？创建账号。',
+    read_agree: '我已阅读并同意 ',
+    term_privacy: '请阅读使用与隐私条款',
     ok: '确定',
     cancel: '取消',
     new_customer: '新用户',

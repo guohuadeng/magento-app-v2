@@ -35,6 +35,8 @@ var en_US = {
     password: 'Password',
     forgot_password: 'Forgot Your Password?',
     new_account: 'New Customers? Create an Account.',
+    read_agree: 'I agree to ',
+    term_privacy: 'the XinLi Terms of Use and Privacy Policy',
     ok: 'OK',
     cancel: 'Cancel',
     new_customer: 'New Customer',

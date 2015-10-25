@@ -81,9 +81,17 @@
                     <input type="password" placeholder="{{'confirm_password' | translate}}"
                            ng-model="registerData.confirmation">
                 </label>
-
+                <li class="privacy item">
+                    <a ng-click="showPrivacy();">{{'term_privacy' | translate}}</a>
+                 </li>
+                <li class="privacy item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="registerData.agreePrivacy">
+                    </label>
+                    {{'read_agree' | translate}}
+                </li>
                 <button class="button button-full button-assertive"
-                        type="submit"> {{'submit' | translate}}
+                        type="submit" ng-disabled='!(registerData.agreePrivacy)'> {{'submit' | translate}}
                 </button>
             </div>
         </form>

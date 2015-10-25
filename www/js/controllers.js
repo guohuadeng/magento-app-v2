@@ -153,7 +153,7 @@ angular.module('app.controllers', [])
     })
 
     // 注册
-    .controller('registerCtrl', function ($scope, $rootScope, $timeout, $state) {
+    .controller('registerCtrl', function ($scope, $rootScope,$ionicPopup, $timeout, $state) {
         $scope.registerData = {};
 
         $scope.validationCodeDisabled = false;
@@ -176,7 +176,6 @@ angular.module('app.controllers', [])
                     alert(res.statusMsg ? res.statusMsg:$scope.translations.fail );
                 }
             });
-
             var update = function () {
                 if ($scope.validateSeconds-- > 0) {
                     $timeout(update, 1000);
@@ -193,6 +192,20 @@ angular.module('app.controllers', [])
                     $scope.registerData.email = $scope.registerData.default_mobile_number + '@shinystamp.com';
             }
         };
+        // 隐私
+        $scope.showPrivacy = function () {
+            var popupPrivacy = $ionicPopup.show({
+                templateUrl: 'templates/privacy.html',
+                title: $scope.translations.term_privacy,
+                cssClass: 'privacy-container',
+                scope: $scope,
+                buttons: [
+                    {text: $scope.translations.ok,
+                        type: 'button-assertive'},
+                ]
+            });
+        };
+        //end 隐私
         $scope.doRegister = function () {
             if ($scope.registerData.password !== $scope.registerData.confirmation) {
                 alert($scope.translations.need_confirm_pwd );
