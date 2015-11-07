@@ -11,6 +11,12 @@
                 <span class="input-label">{{'password' | translate}}</span>
                 <input type="password" placeholder="{{'password' | translate}}" ng-model="loginData.password">
             </label>
+            <li class="item item-checkbox">
+                <label class="checkbox">
+                    <input type="checkbox" ng-model="loginData.rememberme">
+                </label>
+                {{'remember_me' | translate}}
+            </li>
 
             <div class="list">
                 <div class="row">

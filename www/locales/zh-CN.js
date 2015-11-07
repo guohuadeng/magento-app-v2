@@ -37,6 +37,7 @@ var zh_CN = {
     email_reg: '邮箱地址，不填则系统自动分配。',
     email_or_mobile: '邮箱/手机号',
     password: '密码',
+    remember_me: '记住登录信息，以后自动登录',
     forgot_password: '忘记密码？',
     new_account: '新用户？创建账号。',
     read_agree: '我已阅读并同意 ',

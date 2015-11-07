@@ -33,6 +33,7 @@ var en_US = {
     email_reg: 'Email. Leave blank for a random address we assign.',
     email_or_mobile: 'Email/Mobile',
     password: 'Password',
+    remember_me: 'Remember Me',
     forgot_password: 'Forgot Your Password?',
     new_account: 'New Customers? Create an Account.',
     read_agree: 'I agree to ',

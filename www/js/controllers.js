@@ -55,20 +55,17 @@ angular.module('app.controllers', [])
             localStorage['first-use'] = true;
             $timeout(function () {
                 $scope.welcome();
-            }, 50);
+            }, 1);
         }
-
-        // 获取用户信息
-        $scope.getUser = function () {
-            $rootScope.service.get('user', function (user) {
-                $scope.user = typeof user === 'object' ? user : null;
-            });
-        };
-        $scope.getUser();
 
         // 登录
         $scope.showLogin = function () {
             $scope.loginData = {};
+            if (Config.getRememberme()) {
+                $scope.loginData.rememberme = true;
+                $scope.loginData.username = Config.getUsername();
+                $scope.loginData.password = Config.getPassword();
+            }
 
             var popupLogin = $ionicPopup.show({
                 templateUrl: 'templates/login.html',
@@ -95,6 +92,15 @@ angular.module('app.controllers', [])
                                     return;
                                 }
                                 $scope.user = res;
+                                Config.setRememberme($scope.loginData.rememberme);
+                                if ($scope.loginData.rememberme) {
+                                    Config.setUsername($scope.loginData.username);
+                                    Config.setPassword($scope.loginData.password);
+                                }
+                                else{
+                                    Config.setUsername('');
+                                    Config.setPassword('');
+                                }
                                 $scope.hideLogin();
                             });
                         }
@@ -105,11 +111,41 @@ angular.module('app.controllers', [])
                 popupLogin.close();
             };
         };
+        // 自动登录
+        $scope.autoLogin = function () {
+            $scope.loginData = {};
+            var $username = Config.getUsername();
+            if (Config.getRememberme() && $username.length>0) {
+                $scope.loginData.username = Config.getUsername();
+                $scope.loginData.password = Config.getPassword();
+                $scope.showLoading();
+                $rootScope.service.get('login', $scope.loginData, function (res) {
+                    $scope.hideLoading();
+                    if (res.code || res.message) {
+                        //alert(res.message || res.code);
+                        return;
+                    }
+                    $scope.user = res;
+                });
+            }
+        };
 
+        // 获取用户信息
+        $scope.getUser = function () {
+            $rootScope.service.get('user', function (user) {
+                $scope.user = typeof user === 'object' ? user : null;
+            });
+        };
+        $scope.getUser();
+        if (!$scope.user) {
+            $scope.autoLogin();
+        };
         // 退出登录
         $scope.doLogout = function () {
             $scope.showLoading();
             $rootScope.service.get('logout', $scope.getUser);
+            Config.setUsername('');
+            Config.setPassword('');
             $timeout($scope.hideLoading(), 1000);
         };
 

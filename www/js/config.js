@@ -4,6 +4,25 @@ window.Config = {
     isRelease: true,
     debug: true,
     baseUrl: 'http://shiny.sunpop.cn/',
+
+    getRememberme: function () {
+        return localStorage['rememberme'] || true;
+    },
+    setRememberme: function (rememberme) {
+        localStorage['rememberme'] = rememberme;
+    },
+    getUsername: function ()    {
+        return localStorage['username']|| '';
+    },
+    setUsername: function (username)    {
+        localStorage['username'] = username;
+    },
+    getPassword: function ()    {
+        return localStorage['password']|| '';
+    },
+    setPassword: function (password)    {
+        localStorage['password'] = password;
+    },
     getLocale: function () {
         return localStorage['locale'] || 'cn';
     },
