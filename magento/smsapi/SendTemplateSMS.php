@@ -27,8 +27,8 @@ $appId='8a48b5515018a0f401503d54b0713a16';
 //请求地址
 //沙盒环境（用于应用开发调试）：sandboxapp.cloopen.com
 //生产环境（用户应用上线使用）：app.cloopen.com
-//$serverIP='app.cloopen.com';
-$serverIP='sandboxapp.cloopen.com';
+$serverIP='app.cloopen.com';
+//$serverIP='sandboxapp.cloopen.com';
 
 
 //请求端口，生产环境和沙盒环境一致
@@ -85,6 +85,7 @@ function sendTemplateSMS($to,$datas,$tempId)
 $mobile = $_GET[mobile];
 $validation = $_GET[validation];
 $timeout = $_GET[timeout]?$_GET[timeout]:'60';
-$template = $_GET[template];
+//$template = $_GET[template];
+$template = '44150';
 sendTemplateSMS($mobile,array($validation,$timeout),$template);//手机号码，替换内容数组，模板ID
 ?>
