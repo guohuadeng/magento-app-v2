@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.xinli.android" version="3.1.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.xinli.XINI" version="3.1.9" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>新力印章专家</name>
     <description>新力印章专家</description>
     <author email="support@sunpop.cn" href="http://www.sunpop.cn">Zhixin Wen</author>
