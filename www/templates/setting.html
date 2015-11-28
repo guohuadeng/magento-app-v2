@@ -13,11 +13,8 @@
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
             </li>
-            <li class="item">
-                {{'about' | translate}}
-            </li>
-            <li ng-if="!ionic.Platform.isIOS()" class="item">
-                {{'check_update' | translate}}
+            <li class="item" ng-click="$root.welcome()">
+                {{'welcome' | translate}}
             </li>
             <li class="item">
                 {{'version' | translate}}{{'colon' | translate}} v3.1.6

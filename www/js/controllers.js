@@ -51,6 +51,7 @@ angular.module('app.controllers', [])
                 ]
             });
         };
+        $rootScope.welcome = $scope.welcome;
         if (!localStorage['first-use']) {
             localStorage['first-use'] = true;
             $timeout(function () {
