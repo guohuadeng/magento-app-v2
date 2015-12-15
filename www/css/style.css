@@ -880,6 +880,9 @@ li.agent p {
     height: 440px;
 }
 
+.agent-container .popup .list {
+    width: 100%;
+}
 .agent-container .popup-buttons {
 }
 
