@@ -735,7 +735,7 @@ angular.module('app.controllers', [])
         });
     })
     // 附近经销商
-    .controller('SearchAgentCtrl', function ($scope, $rootScope, $state, $cordovaGeolocation) {
+    .controller('SearchAgentCtrl', function ($scope, $rootScope, $state) {
         $scope.searchData = {
             //address: $scope.translations.current_position,
             address: '广州',
@@ -744,24 +744,6 @@ angular.module('app.controllers', [])
 
         $scope.onSearch = function () {
             if (!$scope.searchData.address) {
-                return;
-            }
-            if ($scope.searchData.address === $scope.translations.current_position) {
-                $cordovaGeolocation.getCurrentPosition({timeout: 10000, enableHighAccuracy: false})
-                    .then(function (position) {
-                        $rootScope.agent = {
-                            title: $scope.searchData.address,
-                            params: $.extend({}, {
-                                radius: $scope.searchData.radius
-                            }, {
-                                lat: position.coords.latitude,
-                                lng: position.coords.longitude
-                            })
-                        };
-                        $state.go('app.agents');
-                    }, function(err) {
-                        alert($scope.translations.position_not_found);
-                    });
                 return;
             }
             var myGeo = new BMap.Geocoder();
