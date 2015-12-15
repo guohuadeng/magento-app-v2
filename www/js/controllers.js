@@ -13,6 +13,8 @@ angular.module('app.controllers', [])
             $rootScope.translations = $scope.translations;
         });
 
+        $scope.isIOS = ionic.Platform.isIPad() ||  ionic.Platform.isIOS();
+
         // Loading
         $scope.showLoading = function () {
             $ionicLoading.show({
