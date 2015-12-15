@@ -21,8 +21,7 @@
             <form id="search" ng-submit="onSearch()">
             <label class="item item-input">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input ng-if="ionic.Platform.isIOS()" type="text" placeholder="{{'enter_the_key' | translate}}" ng-model="searchData.text">
-                <input ng-if="!ionic.Platform.isIOS()" autofocus type="text" placeholder="{{'enter_the_key' | translate}}" ng-model="searchData.text">
+                <input  type="text" placeholder="{{'enter_the_key' | translate}}" ng-model="searchData.text">
             </label>
             <button  type="submit" class="button button-full button-assertive">{{'quick_search' | translate}}</button>
             </form>
