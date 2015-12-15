@@ -101,7 +101,7 @@
                    class="item icon icon-left ion-log-out">
                     <span class="padding-horizontal">{{'logout' | translate}}</span>
                 </a>
-                <a ng-click="showExit()"
+                <a ng-if="!ionic.Platform.isIOS()" ng-click="showExit()"
                    class="item icon icon-left ion-android-exit">
                     <span class="padding-horizontal">{{'exit' | translate}}</span>
                 </a>
