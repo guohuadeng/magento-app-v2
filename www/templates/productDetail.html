@@ -173,22 +173,35 @@
                         </div>
                         <!--end area option-->
 
-                        <!-- multiple option--,因为不美观，暂时不用
-                        <div class="form__field"  ng-switch-when="multiple">
-                          <label class="item">{{option.custom_option_title}}</label>
-                              <div class="input-box">
-                                <select name="options[{{option.option_id}}][]" id="select_{{option.option_id}}" class="multiselect product-custom-option" title="" multiple="multiple" onchange="opConfig.reloadPrice()">
-                                <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">{{item.title}} +{{product.symbol}}&nbsp;{{item.price}}</option>
-                                </select>
-                              </div>
+                        <!-- Date option-->
+                        <div class="form__field" ng-switch-when="date">
+                            <label class="item item-input">
+                                <span class="input-label">
+                                    {{option.custom_option_title}}
+                                    <em ng-if="option.is_require" class="assertive">*</em>
+                                    <em ng-if="option.price > 0">+{{product.symbol}}&nbsp;{{option.price}}</em>
+                                </span>
+                                <input type="date" class="form__textfield textfield product-custom-option"
+                                       placeholder="yyyy-MM-dd"
+                                       name="options[{{option.option_id}}][date]"
+                                       data-price="{{option.price}}">
+                            </label>
                         </div>
-                        <!--end multiple option-->
+                        <!--end Date option-->
+
+                            <!-- multiple option--,因为不美观，暂时不用
+                            <div class="form__field"  ng-switch-when="multiple">
+                              <label class="item">{{option.custom_option_title}}</label>
+                                  <div class="input-box">
+                                    <select name="options[{{option.option_id}}][]" id="select_{{option.option_id}}" class="multiselect product-custom-option" title="" multiple="multiple" onchange="opConfig.reloadPrice()">
+                                    <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">{{item.title}} +{{product.symbol}}&nbsp;{{item.price}}</option>
+                                    </select>
+                                  </div>
+                            </div>
+                            <!--end multiple option-->
 
                         <div class="item input-box" ng-switch-when="multiple">
                             Multiple option not support, Please use check option
-                        </div>
-                        <div class="item input-box" ng-switch-when="date">
-                            Date option not support
                         </div>
                         <div class="item input-box" ng-switch-when="date_time">
                             DateTime option not support
@@ -222,7 +235,7 @@
 
     </ion-content>
 
-    <!--当前项目不用
+
     <div class="bar bar-footer bar-stable add-to-cart">
     <a class="add-to-cart-left button button-outline button-assertive ion-android-cart" href="#app/cart">
       &nbsp;{{items_qty}}</a>
@@ -230,5 +243,4 @@
       {{'add_to_cart' | translate}}
     </button>
     </div>
-    end 当前项目-->
 </ion-view>
