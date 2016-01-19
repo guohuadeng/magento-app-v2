@@ -54,7 +54,6 @@
                     <input type="hidden" name="product" value="{{product.entity_id}}">
                 </div>
                 <dl class="list product-option-container">
-                    <!--当前项目不用
                           <div class="qty-holder">
                               <div class="item item-input-inset">
                                   <label class="item item-input">
@@ -69,7 +68,6 @@
                                   <span class="input-number-increment" ng-click="qtyAdd()">+</span>
                               </div>
                           </div>
-                     end 当前项目-->
 
                         <div ng-repeat="option in productOption" ng-switch on="option.custom_option_type">
                               <!-- field option-->
