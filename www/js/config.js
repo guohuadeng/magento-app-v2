@@ -3,7 +3,7 @@
 window.Config = {
     isRelease: true,
     debug: true,
-    baseUrl: 'http://58stamp.sunpop.cn/',
+    baseUrl: 'http://shiny.sunpop.cn/',
 
     getRememberme: function () {
         return localStorage['rememberme'] || true;

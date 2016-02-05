@@ -2,93 +2,7 @@
 //安装2，生成属性
 require_once('app/Mage.php');
 Mage::app()->setCurrentStore(Mage::getModel('core/store')->load(Mage_Core_Model_App::ADMIN_STORE_ID));
-$installer = new Mage_Sales_Model_Mysql4_Setup; //Mage_Eav_Model_Entity_Setup,Mage_Catalog_Model_Resource_Setup, 
-/*
-测试增加自定义的商品属性，样例
-$installer = new Mage_Catalog_Model_Resource_Setup();
-$installer->startSetup();
-
-$installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, $tradeCode, array(
-        'group' => $profileGroupName,
-        'sort_order' => 1,
-        'type' => 'varchar',
-        'input' => 'text',
-        'label' => $tradeLabel,
-        'note' => $tradeNote,
-        'required' => 1,
-        'unique' => 0,
-        'user_defined' => 1,
-        'default' => '',
-        # Additional attribute data - forntend
-        'frontend_input_renderer' => '',
-        'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_STORE,
-        'visible' => 1,
-        'searchable' => 1,
-        'filterable' => 1,
-        'comparable' => 1,
-        'visible_on_front' => 1,
-        'wysiwyg_enabled' => 0,
-        'is_html_allowed_on_front' => 0,
-        'visible_in_advanced_search' => 1,
-        'filterable_in_search' => 1,
-        'used_in_product_listing' => 1,
-        'used_for_sort_by' => 1,
-        'apply_to' => '',
-        'position' => '',
-        'is_configurable' => 0,
-        'used_for_promo_rules' => 0,
-    ));
-
-$installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'price_view', array(
-        'group'             => 'Prices',
-        'type'              => 'int', //varchar,decimal,text,static,datetime
-                        'sort_order'                 => 1,
-        'backend'           => '',
-        'frontend'          => '',
-        'label'             => 'Price View',
-        'input'             => 'select', //text,textarea,date,boolean,multiselect,select,price,media_image,weee
-        'class'             => '',
-        'source'            => 'eav/entity_attribute_source_table',
-        'global'            => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_STORE, //SCOPE_STORE,SCOPE_WEBSITE
-        'visible'           => 1,
-        'required'          => 1,
-        'user_defined'      => 0,
-        'default'           => '',
-        'searchable'        => 0,
-        'filterable'        => 0,
-        'comparable'        => 0,
-        'visible_on_front'  => 0,
-        'used_in_product_listing' => 1,
-        'unique'            => 0,
-        'apply_to'          => 'simple,configurable,virtual',
-        'is_configurable'   => 0,
-
-    'option' => array(
-        'value' => array( 
-            'optionone'   => array( 'O','1' ),
-            'optiontwo'   => array( 'P','2' ),
-            'optionthree' => array( 'Kein Angabe','3' ),
-        )
-    ),
-    ));
-
-$installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'msrp', array(
-    'group'         => 'Prices',
-    'backend'       => 'catalog/product_attribute_backend_price',
-    'frontend'      => '',
-    'label'         => 'Manufacturer\'s Suggested Retail Price',
-    'type'          => 'decimal',
-    'input'         => 'price',
-    'global'        => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_WEBSITE,
-    'visible'       => 1,
-    'required'      => 0,
-    'user_defined'  => 0,
-    'apply_to'      => $productTypes,
-    'visible_on_front' => 0,
-    'used_in_product_listing' => true
-));
-
-*/
+$installer = new Mage_Sales_Model_Mysql4_Setup; //Mage_Eav_Model_Entity_Setup,Mage_Catalog_Model_Resource_Setup,
 
 //型号
 $a_xinghao  = array(
@@ -507,20 +421,22 @@ $installer->removeAttribute('catalog_product', 'a_yanse');
 $installer->removeAttribute('catalog_product', 'a_caizhi');	
 //end 清理属性
 //生成属性
-$installer->addAttribute('catalog_product', 'a_xinghao',$a_xinghao);	
-$installer->addAttribute('catalog_product', 'a_xingzhuang',$a_xingzhuang);	
-$installer->addAttribute('catalog_product', 'a_guige',$a_guige);	
-$installer->addAttribute('catalog_product', 'a_chang',$a_chang);		 
-$installer->addAttribute('catalog_product', 'a_kuan',$a_kuan);		 
-$installer->addAttribute('catalog_product', 'a_riqi',$a_riqi);		 
-$installer->addAttribute('catalog_product', 'a_leixing',$a_leixing);		 
-$installer->addAttribute('catalog_product', 'a_zigao',$a_zigao);		 
-$installer->addAttribute('catalog_product', 'a_geshi',$a_geshi);		 
-$installer->addAttribute('catalog_product', 'a_weishu',$a_weishu);		 
-$installer->addAttribute('catalog_product', 'a_yongtu',$a_yongtu);		 
-$installer->addAttribute('catalog_product', 'a_baozhuang',$a_baozhuang);		 
-$installer->addAttribute('catalog_product', 'a_yanse',$a_yanse);		 	 
-$installer->addAttribute('catalog_product', 'a_caizhi',$a_caizhi);	
+/*
+$installer->addAttribute('catalog_product', 'a_xinghao',$a_xinghao);
+$installer->addAttribute('catalog_product', 'a_xingzhuang',$a_xingzhuang);
+$installer->addAttribute('catalog_product', 'a_guige',$a_guige);
+$installer->addAttribute('catalog_product', 'a_chang',$a_chang);
+$installer->addAttribute('catalog_product', 'a_kuan',$a_kuan);
+$installer->addAttribute('catalog_product', 'a_riqi',$a_riqi);
+$installer->addAttribute('catalog_product', 'a_leixing',$a_leixing);
+$installer->addAttribute('catalog_product', 'a_zigao',$a_zigao);
+$installer->addAttribute('catalog_product', 'a_geshi',$a_geshi);
+$installer->addAttribute('catalog_product', 'a_weishu',$a_weishu);
+$installer->addAttribute('catalog_product', 'a_yongtu',$a_yongtu);
+$installer->addAttribute('catalog_product', 'a_baozhuang',$a_baozhuang);
+$installer->addAttribute('catalog_product', 'a_yanse',$a_yanse);
+$installer->addAttribute('catalog_product', 'a_caizhi',$a_caizhi);
+*/
 //end生成属性
 /*
 
